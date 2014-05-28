@@ -62,3 +62,9 @@ QueryResult.htm
 build/ApiDocs/*
 build/ApiDocs/Output/*
 
+#NuGet
+packages
+!packages/repositories.config
+src/packages
+!src/packages/repositories.config
+

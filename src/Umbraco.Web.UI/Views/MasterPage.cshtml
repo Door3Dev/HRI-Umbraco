@@ -31,9 +31,16 @@
 </head>
 <body lang="en" class="hri hri-common hri-newyork">    
     <div class="container">
-		<div id="MasterPageHeader">@Html.Partial("Header")</div>
-		<div id="MasterPageContent">@Html.Partial("Home")</div>													
-        <div id="MasterPageFooter">@Html.Partial("Footer")</div>
+		@Html.Partial("TopBar.LoggedOut")
+		<div class="row-fluid">
+  			<div class="span12">
+    			<div id="main">
+					  @Html.Partial("Header.LoggedOut")
+					  @Html.Partial("Home")											
+        	  @Html.Partial("Footer.LoggedOut")
+				</div>
+			</div>
+		</div>
     </div>
     <!-- body -->
     <script src="Scripts/jquery-1.9.1.js"></script>
