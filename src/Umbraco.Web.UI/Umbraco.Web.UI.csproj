@@ -308,6 +308,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\BrokersController.cs" />
+    <Compile Include="Controllers\ProvidersController.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Umbraco\Install\Legacy\LoadStarterKits.ascx.cs">
       <DependentUpon>loadStarterKits.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2075,6 +2078,12 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\AboutUs\WeAreDifferent.cshtml" />
+    <Content Include="Views\AboutUs\OurStaff.cshtml" />
+    <Content Include="Views\AboutUs\OurBoard.cshtml" />
+    <Content Include="Views\AboutUs\Careers.cshtml" />
+    <Content Include="Views\Providers\Index.cshtml" />
+    <Content Include="Views\Brokers\Index.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>

@@ -1408,13 +1408,13 @@ body {
 
 .hri-common .navigation ul.nav-site > li > a {
     border-left: 1px solid #752b8f;
-    width: 80px;
+    width: 90px;
     display: table-cell;
     height: 24px;
     vertical-align: middle;
     text-transform: uppercase;
 }
-.hri-common .navigation ul.nav-site li.home > a {
+.hri-common .navigation ul.nav-site li.short > a {
     width: 60px;
 }
 
@@ -1982,6 +1982,10 @@ body {
 }
 
 /* navigation list wrapper */
+.hri-common .footer .nav {
+  margin-left: 30px;
+}
+
 .hri-common .footer .nav > div {
     border-left: 1px solid #363334;
     display: table-cell!important;
