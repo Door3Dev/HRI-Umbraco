@@ -308,9 +308,6 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\BrokersController.cs" />
-    <Compile Include="Controllers\ProvidersController.cs" />
-    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ValuesController1.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -545,6 +542,9 @@
     <Compile Include="Umbraco\TreeInit.aspx.designer.cs">
       <DependentUpon>treeInit.aspx</DependentUpon>
     </Compile>
+    <Content Include="Css\bootstrap.css" />
+    <Content Include="Css\fonts.css" />
+    <Content Include="Css\styles.css" />
     <Content Include="Umbraco\Install\Legacy\loadStarterKits.ascx" />
     <Content Include="Umbraco\ClientRedirect.aspx" />
     <Content Include="Umbraco\create.aspx" />
@@ -2083,14 +2083,24 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\AboutUs\WeAreDifferent.cshtml" />
-    <Content Include="Views\AboutUs\OurStaff.cshtml" />
-    <Content Include="Views\AboutUs\OurBoard.cshtml" />
-    <Content Include="Views\AboutUs\Careers.cshtml" />
-    <Content Include="Views\Providers\Index.cshtml" />
-    <Content Include="Views\Brokers\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Partials\ContactForm.cshtml" />
+    <Content Include="Views\HomePage.cshtml" />
+    <Content Include="Views\MasterPage.cshtml" />
+    <Content Include="Views\provider.cshtml" />
+    <Content Include="Views\producer.cshtml" />
+    <Content Include="Views\aboutus.cshtml" />
+    <Content Include="Views\board.cshtml" />
+    <Content Include="Views\careers.cshtml" />
+    <Content Include="Views\team.cshtml" />
+    <Content Include="Views\Partials\Footer.LoggedIn.cshtml" />
+    <Content Include="Views\Partials\Footer.LoggedOut - Copy.cshtml" />
+    <Content Include="Views\Partials\Footer.LoggedOut.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Partials\Header.LoggedIn.cshtml" />
+    <Content Include="Views\Partials\Header.LoggedOut.cshtml" />
+    <Content Include="Views\Partials\TopBar.LoggedOut.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>
@@ -2516,7 +2526,6 @@
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Plugins\" />
-    <Folder Include="Css\" />
     <Folder Include="Fonts\" />
     <Folder Include="MasterPages\" />
     <Folder Include="Media\" />
