@@ -36,7 +36,7 @@
       <div class="span12">
         <div id="main">
           @Html.Partial("Header.LoggedOut")
-          @Html.Partial("Home.Content")
+          @RenderBody();
           @Html.Partial("Footer.LoggedOut")
         </div>
       </div>

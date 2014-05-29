@@ -1,0 +1,15 @@
+﻿@model Umbraco.Web.UI.Models.ContactFormViewModel
+@{
+    Layout = null;
+}
+
+<form>
+    <div>
+        @Html.TextBoxFor(n => n.Name, new { @class="span3", placeholder="Name"})
+        @Html.TextBoxFor(e => e.Email, new { @class = "span3", placeholder = "Email Address" })
+        @Html.TextAreaFor(m => m.Message, new { @class = "span3", placeholder = "Your Message" })
+    </div>
+    <div>
+        <button id="contact-submit" type="submit">Submit</button>
+    </div>
+</form>
