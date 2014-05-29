@@ -2083,7 +2083,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Partials\ContactForm.cshtml" />
     <Content Include="Views\HomePage.cshtml" />
     <Content Include="Views\MasterPage.cshtml" />
@@ -2094,7 +2093,6 @@
     <Content Include="Views\careers.cshtml" />
     <Content Include="Views\team.cshtml" />
     <Content Include="Views\Partials\Footer.LoggedIn.cshtml" />
-    <Content Include="Views\Partials\Footer.LoggedOut - Copy.cshtml" />
     <Content Include="Views\Partials\Footer.LoggedOut.cshtml">
       <SubType>Code</SubType>
     </Content>
