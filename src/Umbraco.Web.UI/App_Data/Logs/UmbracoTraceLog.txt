@@ -1650,3 +1650,358 @@ System.FormatException: Input string was not in a correct format.
 2014-05-29 07:47:24,112 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
 2014-05-29 07:47:56,113 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
 2014-05-29 07:48:28,097 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:49:00,146 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:49:32,108 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:50:04,124 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:50:36,108 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:50:52,635 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:51:08,111 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:51:33,660 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/views/common/dialogs/mediaPicker.html.
+2014-05-29 07:51:34,187 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/views/directives/html/umb-control-group.html.
+2014-05-29 07:51:34,240 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/views/directives/html/umb-pane.html.
+2014-05-29 07:51:34,269 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/views/directives/html/umb-photo-folder.html.
+2014-05-29 07:51:34,290 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Media/GetChildren?id=-1&pageNumber=0&pageSize=0&orderBy=SortOrder&orderDirection=Ascending&filter=.
+2014-05-29 07:51:37,202 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1058&type=media.
+2014-05-29 07:51:37,205 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Media/GetChildren?id=1058&pageNumber=0&pageSize=0&orderBy=SortOrder&orderDirection=Ascending&filter=.
+2014-05-29 07:51:39,081 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Media/GetChildren?id=-1&pageNumber=0&pageSize=0&orderBy=SortOrder&orderDirection=Ascending&filter=.
+2014-05-29 07:51:40,164 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1058&type=media.
+2014-05-29 07:51:40,166 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Media/GetChildren?id=1058&pageNumber=0&pageSize=0&orderBy=SortOrder&orderDirection=Ascending&filter=.
+2014-05-29 07:51:44,276 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1004%2Fhri-logo-sm.png.
+2014-05-29 07:51:44,276 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1010%2Fnav-user.png.
+2014-05-29 07:51:44,276 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1006%2Ficon_facebook.png.
+2014-05-29 07:51:44,330 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1007%2Fcarousel3.png.
+2014-05-29 07:51:44,335 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1003%2Fflowbar-stripes.png.
+2014-05-29 07:51:44,347 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1008%2Ficon_linkedin.png.
+2014-05-29 07:51:44,564 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1009%2Ficon_twitter.png.
+2014-05-29 07:51:44,580 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 26] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1002%2Fcarousel1.png.
+2014-05-29 07:51:44,591 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1005%2Fcarousel2.png.
+2014-05-29 07:51:48,819 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:51:50,585 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 36] Content 'Home' with Id '1081' has been published.
+2014-05-29 07:51:52,124 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:51:52,128 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:52,128 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:52,156 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 29] Index created for node, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:53,412 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:51:53,539 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:51:53,546 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:53,546 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:53,548 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:51:53,548 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:51:53,572 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 29] Index created for node, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:51:53,576 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:51:54,092 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.0277204
+2014-05-29 07:51:54,253 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1081&type=document.
+2014-05-29 07:51:54,302 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:52:06,111 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Begin request: http://localhost:7130/.
+2014-05-29 07:52:06,118 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:52:06,118 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindDomain: Matches no domain
+2014-05-29 07:52:06,119 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindDomain: Culture="en-US"
+2014-05-29 07:52:06,119 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:52:06,119 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindPublishedContent: Begin finders
+2014-05-29 07:52:06,119 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 18] Test route "/"
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 18] Got content, id=1081
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindPublishedContent: End finders, a document was found (took 9ms)
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] HandlePublishedContent: Begin
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] HandlePublishedContent: End
+2014-05-29 07:52:06,128 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindTemplate: Look for template id=1080
+2014-05-29 07:52:06,132 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 07:52:06,132 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 07:52:06,132 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 07:52:06,132 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 18] HandleWildcardDomains: No match.
+2014-05-29 07:52:06,132 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:52:08,015 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 18] Item: Image1
+2014-05-29 07:52:08,042 [6] DEBUG umbraco.item - [Thread 18] Start parsing Image1
+2014-05-29 07:52:08,042 [6] DEBUG umbraco.item - [Thread 18] Complete (took 0ms)
+2014-05-29 07:52:08,043 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 18] Complete (took 27ms)
+2014-05-29 07:52:08,099 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Total milliseconds for umbraco request to process: 1988.3888
+2014-05-29 07:52:08,134 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/images/carousel3.png.
+2014-05-29 07:52:08,134 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Begin request: http://localhost:7130/css/bootstrap.css.
+2014-05-29 07:52:08,137 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/images/carousel2.png.
+2014-05-29 07:52:08,140 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/css/fonts.css.
+2014-05-29 07:52:08,143 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/css/styles.css.
+2014-05-29 07:52:08,147 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/1061.
+2014-05-29 07:52:08,237 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Begin request: http://localhost:7130/images/icon_twitter.png.
+2014-05-29 07:52:08,241 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/Scripts/jquery-1.9.1.js.
+2014-05-29 07:52:08,242 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindDomain: Uri="http://localhost:7130/1061"
+2014-05-29 07:52:08,242 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindDomain: Matches no domain
+2014-05-29 07:52:08,242 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindDomain: Culture="en-US"
+2014-05-29 07:52:08,242 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindPublishedContentAndTemplate: Path="/1061"
+2014-05-29 07:52:08,243 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindPublishedContent: Begin finders
+2014-05-29 07:52:08,248 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 19] Test route "/1061"
+2014-05-29 07:52:08,248 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 19] No match.
+2014-05-29 07:52:08,249 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 19] Id=1061
+2014-05-29 07:52:08,249 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 19] Not a node id
+2014-05-29 07:52:08,249 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Running for legacy url='1061'.
+2014-05-29 07:52:08,249 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Handler 'umbraco.SearchForAlias'.
+2014-05-29 07:52:08,249 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Replace handler 'umbraco.SearchForAlias' by new finder 'Umbraco.Web.Routing.ContentFinderByUrlAlias'.
+2014-05-29 07:52:08,250 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Handler 'umbraco.SearchForTemplate'.
+2014-05-29 07:52:08,250 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Replace handler 'umbraco.SearchForTemplate' by new finder 'Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate'.
+2014-05-29 07:52:08,259 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/images/icon_linkedin.png.
+2014-05-29 07:52:08,269 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/images/icon_facebook.png.
+2014-05-29 07:52:08,306 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/Scripts/custom.js.
+2014-05-29 07:52:08,331 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate - [Thread 19] Not a valid template: "1061"
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Handler 'umbraco.SearchForProfile'.
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 19] Replace handler 'umbraco.SearchForProfile' by new finder 'Umbraco.Web.Routing.ContentFinderByProfile'.
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.ContentFinderByProfile - [Thread 19] Not the profile path
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] FindPublishedContent: End finders, no document was found (took 112ms)
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] HandlePublishedContent: Begin
+2014-05-29 07:52:08,355 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] HandlePublishedContent: No document, try last chance lookup
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 19] Running for legacy url='1061'.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 19] Handler 'umbraco.handle404'.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 19] Replace handler 'umbraco.handle404' by new finder 'Umbraco.Web.Routing.ContentFinderByLegacy404'.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 19] Looking for a page to handle 404.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 19] Got id=1.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 19] Could not find content with that id.
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] HandlePublishedContent: Failed to find a document, give up
+2014-05-29 07:52:08,356 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 19] HandlePublishedContent: End
+2014-05-29 07:52:08,357 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Response status: Redirect=none, Is404=true, StatusCode=0
+2014-05-29 07:52:08,366 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:08,376 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://localhost:7130/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:08,376 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 16] Begin request: http://localhost:7130/images/hri-logo-sm.png.
+2014-05-29 07:52:08,376 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/images/nav-user.png.
+2014-05-29 07:52:08,519 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Total milliseconds for umbraco request to process: 371.2466
+2014-05-29 07:52:08,546 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:11,208 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/__browserLink/requestData/00c6967202194fd1865a43d73048a3f0.
+2014-05-29 07:52:25,732 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/.
+2014-05-29 07:52:25,739 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:52:25,739 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindDomain: Matches no domain
+2014-05-29 07:52:25,739 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindDomain: Culture="en-US"
+2014-05-29 07:52:25,739 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:52:25,739 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindPublishedContent: Begin finders
+2014-05-29 07:52:25,740 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 35] Test route "/"
+2014-05-29 07:52:25,746 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 35] Got content, id=1081
+2014-05-29 07:52:25,746 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindPublishedContent: End finders, a document was found (took 7ms)
+2014-05-29 07:52:25,747 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] HandlePublishedContent: Begin
+2014-05-29 07:52:25,747 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:52:25,747 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] HandlePublishedContent: End
+2014-05-29 07:52:25,747 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindTemplate: Look for template id=1080
+2014-05-29 07:52:25,751 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 07:52:25,751 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 07:52:25,751 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 07:52:25,751 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 35] HandleWildcardDomains: No match.
+2014-05-29 07:52:25,751 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:52:25,767 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 35] Item: Image1
+2014-05-29 07:52:25,768 [6] DEBUG umbraco.item - [Thread 35] Start parsing Image1
+2014-05-29 07:52:25,769 [6] DEBUG umbraco.item - [Thread 35] Complete (took 0ms)
+2014-05-29 07:52:25,769 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 35] Complete (took 1ms)
+2014-05-29 07:52:25,814 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Total milliseconds for umbraco request to process: 81.0535
+2014-05-29 07:52:25,888 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/css/bootstrap.css.
+2014-05-29 07:52:25,894 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/css/fonts.css.
+2014-05-29 07:52:25,895 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/1061.
+2014-05-29 07:52:25,902 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/css/styles.css.
+2014-05-29 07:52:25,910 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/images/carousel3.png.
+2014-05-29 07:52:25,917 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindDomain: Uri="http://localhost:7130/1061"
+2014-05-29 07:52:25,917 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindDomain: Matches no domain
+2014-05-29 07:52:25,917 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindDomain: Culture="en-US"
+2014-05-29 07:52:25,917 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindPublishedContentAndTemplate: Path="/1061"
+2014-05-29 07:52:25,917 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindPublishedContent: Begin finders
+2014-05-29 07:52:25,924 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 29] Test route "/1061"
+2014-05-29 07:52:25,924 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 29] No match.
+2014-05-29 07:52:25,924 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 29] Id=1061
+2014-05-29 07:52:25,924 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 29] Not a node id
+2014-05-29 07:52:25,924 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Running for legacy url='1061'.
+2014-05-29 07:52:25,925 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Handler 'umbraco.SearchForAlias'.
+2014-05-29 07:52:25,925 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Replace handler 'umbraco.SearchForAlias' by new finder 'Umbraco.Web.Routing.ContentFinderByUrlAlias'.
+2014-05-29 07:52:25,925 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Handler 'umbraco.SearchForTemplate'.
+2014-05-29 07:52:25,925 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Replace handler 'umbraco.SearchForTemplate' by new finder 'Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate'.
+2014-05-29 07:52:25,952 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/Scripts/jquery-1.9.1.js.
+2014-05-29 07:52:25,958 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/images/carousel2.png.
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate - [Thread 29] Not a valid template: "1061"
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Handler 'umbraco.SearchForProfile'.
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 29] Replace handler 'umbraco.SearchForProfile' by new finder 'Umbraco.Web.Routing.ContentFinderByProfile'.
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.ContentFinderByProfile - [Thread 29] Not the profile path
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] FindPublishedContent: End finders, no document was found (took 107ms)
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] HandlePublishedContent: Begin
+2014-05-29 07:52:26,025 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] HandlePublishedContent: No document, try last chance lookup
+2014-05-29 07:52:26,036 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 29] Running for legacy url='1061'.
+2014-05-29 07:52:26,036 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 29] Handler 'umbraco.handle404'.
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 29] Replace handler 'umbraco.handle404' by new finder 'Umbraco.Web.Routing.ContentFinderByLegacy404'.
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 29] Looking for a page to handle 404.
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 29] Got id=1.
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 29] Could not find content with that id.
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] HandlePublishedContent: Failed to find a document, give up
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 29] HandlePublishedContent: End
+2014-05-29 07:52:26,037 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Response status: Redirect=none, Is404=true, StatusCode=0
+2014-05-29 07:52:26,077 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/images/icon_twitter.png.
+2014-05-29 07:52:26,148 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 16] Begin request: http://localhost:7130/images/icon_linkedin.png.
+2014-05-29 07:52:26,152 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:26,162 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/Scripts/custom.js.
+2014-05-29 07:52:26,166 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/images/icon_facebook.png.
+2014-05-29 07:52:26,269 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Total milliseconds for umbraco request to process: 374.2491
+2014-05-29 07:52:26,338 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:26,662 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:26,693 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://localhost:7130/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:28,105 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:52:29,075 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/__browserLink/requestData/dfe58dfdf7b842488de8a91631ad6cbe.
+2014-05-29 07:52:51,626 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/.
+2014-05-29 07:52:51,636 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:52:51,636 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Matches no domain
+2014-05-29 07:52:51,637 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Culture="en-US"
+2014-05-29 07:52:51,637 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:52:51,637 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContent: Begin finders
+2014-05-29 07:52:51,637 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 36] Test route "/"
+2014-05-29 07:52:51,644 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 36] Got content, id=1081
+2014-05-29 07:52:51,644 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContent: End finders, a document was found (took 7ms)
+2014-05-29 07:52:51,645 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandlePublishedContent: Begin
+2014-05-29 07:52:51,645 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:52:51,645 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandlePublishedContent: End
+2014-05-29 07:52:51,645 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Look for template id=1080
+2014-05-29 07:52:51,648 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 07:52:51,649 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 07:52:51,649 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 07:52:51,649 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandleWildcardDomains: No match.
+2014-05-29 07:52:51,649 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:52:53,667 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 36] Item: mage1
+2014-05-29 07:52:53,667 [6] DEBUG umbraco.item - [Thread 36] Start parsing mage1
+2014-05-29 07:52:53,667 [6] DEBUG umbraco.item - [Thread 36] Complete (took 0ms)
+2014-05-29 07:52:53,667 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 36] Complete (took 0ms)
+2014-05-29 07:52:53,711 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Total milliseconds for umbraco request to process: 2085.392
+2014-05-29 07:52:53,745 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/css/bootstrap.css.
+2014-05-29 07:52:53,756 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/css/styles.css.
+2014-05-29 07:52:53,765 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/images/carousel2.png.
+2014-05-29 07:52:53,787 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/css/fonts.css.
+2014-05-29 07:52:53,804 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/images/carousel3.png.
+2014-05-29 07:52:53,900 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/images/icon_facebook.png.
+2014-05-29 07:52:53,915 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/Scripts/jquery-1.9.1.js.
+2014-05-29 07:52:53,923 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/images/icon_linkedin.png.
+2014-05-29 07:52:53,932 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/images/icon_twitter.png.
+2014-05-29 07:52:53,974 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/Scripts/custom.js.
+2014-05-29 07:52:54,045 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:54,048 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7130/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:54,053 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/images/hri-logo-sm.png.
+2014-05-29 07:52:54,066 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:54,090 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/images/nav-user.png.
+2014-05-29 07:52:54,284 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 07:52:56,906 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/__browserLink/requestData/eef8f91fcbd44421ab93b69f1aa629a8.
+2014-05-29 07:53:00,114 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:53:32,100 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:54:04,127 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:54:36,114 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:54:45,362 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=settings&tree=&isDialog=false.
+2014-05-29 07:54:47,143 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=20139b76614f4688b33e8f993866c8c1&id=-1&treeType=nodeTypes&contextMenu=true&isDialog=false.
+2014-05-29 07:54:49,372 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/settings/editNodeTypeNew.aspx?id=1071.
+2014-05-29 07:54:56,672 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/__browserLink/requestData/f28f3da455344b5098a6b7810a471995.
+2014-05-29 07:55:20,126 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 26] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:55:52,109 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:55:52,639 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:56:24,116 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 17] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:56:56,111 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 32] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:57:28,107 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 32] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:57:58,481 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:58:30,111 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:59:02,109 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:59:34,106 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:00:06,112 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:00:38,101 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:00:52,640 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 41] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 08:01:09,928 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://localhost:7130/.
+2014-05-29 08:01:09,955 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 08:01:09,955 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindDomain: Matches no domain
+2014-05-29 08:01:09,955 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindDomain: Culture="en-US"
+2014-05-29 08:01:09,955 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 08:01:09,955 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindPublishedContent: Begin finders
+2014-05-29 08:01:09,956 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 40] Test route "/"
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 40] Got content, id=1081
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindPublishedContent: End finders, a document was found (took 7ms)
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] HandlePublishedContent: Begin
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] HandlePublishedContent: End
+2014-05-29 08:01:09,963 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindTemplate: Look for template id=1080
+2014-05-29 08:01:10,064 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 08:01:10,064 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 08:01:10,064 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 08:01:10,065 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 40] HandleWildcardDomains: No match.
+2014-05-29 08:01:10,065 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 08:01:10,174 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:01:13,194 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 40] Item: Image1
+2014-05-29 08:01:13,194 [6] DEBUG umbraco.item - [Thread 40] Start parsing Image1
+2014-05-29 08:01:13,194 [6] DEBUG umbraco.item - [Thread 40] Complete (took 0ms)
+2014-05-29 08:01:13,194 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 40] Complete (took 0ms)
+2014-05-29 08:01:13,195 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 40] Item: Image1
+2014-05-29 08:01:13,195 [6] DEBUG umbraco.item - [Thread 40] Start parsing Image1
+2014-05-29 08:01:13,195 [6] DEBUG umbraco.item - [Thread 40] Complete (took 0ms)
+2014-05-29 08:01:13,195 [6] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 40] Complete (took 0ms)
+2014-05-29 08:01:13,245 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Total milliseconds for umbraco request to process: 3316.9141
+2014-05-29 08:01:13,281 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://localhost:7130/css/bootstrap.css.
+2014-05-29 08:01:13,287 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 41] Begin request: http://localhost:7130/css/styles.css.
+2014-05-29 08:01:13,290 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Begin request: http://localhost:7130/1061.
+2014-05-29 08:01:13,300 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost:7130/images/icon_facebook.png.
+2014-05-29 08:01:13,302 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 43] Begin request: http://localhost:7130/media/1005/carousel2.png.
+2014-05-29 08:01:13,323 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/Scripts/jquery-1.9.1.js.
+2014-05-29 08:01:13,337 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 46] Begin request: http://localhost:7130/Scripts/custom.js.
+2014-05-29 08:01:13,367 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindDomain: Uri="http://localhost:7130/1061"
+2014-05-29 08:01:13,367 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindDomain: Matches no domain
+2014-05-29 08:01:13,367 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindDomain: Culture="en-US"
+2014-05-29 08:01:13,368 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindPublishedContentAndTemplate: Path="/1061"
+2014-05-29 08:01:13,368 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindPublishedContent: Begin finders
+2014-05-29 08:01:13,376 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/images/icon_linkedin.png.
+2014-05-29 08:01:13,408 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 42] Test route "/1061"
+2014-05-29 08:01:13,410 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 42] No match.
+2014-05-29 08:01:13,410 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 42] Id=1061
+2014-05-29 08:01:13,410 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 42] Not a node id
+2014-05-29 08:01:13,411 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Running for legacy url='1061'.
+2014-05-29 08:01:13,411 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Handler 'umbraco.SearchForAlias'.
+2014-05-29 08:01:13,411 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Replace handler 'umbraco.SearchForAlias' by new finder 'Umbraco.Web.Routing.ContentFinderByUrlAlias'.
+2014-05-29 08:01:13,411 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Handler 'umbraco.SearchForTemplate'.
+2014-05-29 08:01:13,411 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Replace handler 'umbraco.SearchForTemplate' by new finder 'Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate'.
+2014-05-29 08:01:13,428 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/css/fonts.css.
+2014-05-29 08:01:13,428 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 41] Begin request: http://localhost:7130/images/icon_twitter.png.
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate - [Thread 42] Not a valid template: "1061"
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Handler 'umbraco.SearchForProfile'.
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 42] Replace handler 'umbraco.SearchForProfile' by new finder 'Umbraco.Web.Routing.ContentFinderByProfile'.
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.ContentFinderByProfile - [Thread 42] Not the profile path
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] FindPublishedContent: End finders, no document was found (took 142ms)
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] HandlePublishedContent: Begin
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] HandlePublishedContent: No document, try last chance lookup
+2014-05-29 08:01:13,511 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 42] Running for legacy url='1061'.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 42] Handler 'umbraco.handle404'.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 42] Replace handler 'umbraco.handle404' by new finder 'Umbraco.Web.Routing.ContentFinderByLegacy404'.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 42] Looking for a page to handle 404.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 42] Got id=1.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 42] Could not find content with that id.
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] HandlePublishedContent: Failed to find a document, give up
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 42] HandlePublishedContent: End
+2014-05-29 08:01:13,512 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Response status: Redirect=none, Is404=true, StatusCode=0
+2014-05-29 08:01:13,539 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 43] Begin request: http://localhost:7130/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:01:13,719 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Total milliseconds for umbraco request to process: 428.284
+2014-05-29 08:01:13,876 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Begin request: http://localhost:7130/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:01:14,191 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:01:14,251 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 41] Begin request: http://localhost:7130/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:01:16,412 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/__browserLink/requestData/8993adcb85f740b68d4b723d762aa153.
+2014-05-29 08:01:42,106 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:02:12,670 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost:7130/.
+2014-05-29 08:02:12,676 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 08:02:12,676 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindDomain: Matches no domain
+2014-05-29 08:02:12,677 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindDomain: Culture="en-US"
+2014-05-29 08:02:12,677 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 08:02:12,677 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindPublishedContent: Begin finders
+2014-05-29 08:02:12,678 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 45] Test route "/"
+2014-05-29 08:02:12,684 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 45] Got content, id=1081
+2014-05-29 08:02:12,684 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindPublishedContent: End finders, a document was found (took 6ms)
+2014-05-29 08:02:12,684 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] HandlePublishedContent: Begin
+2014-05-29 08:02:12,684 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 08:02:12,685 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] HandlePublishedContent: End
+2014-05-29 08:02:12,685 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindTemplate: Look for template id=1080
+2014-05-29 08:02:12,688 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 08:02:12,688 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 08:02:12,688 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 08:02:12,688 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 45] HandleWildcardDomains: No match.
+2014-05-29 08:02:12,689 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 08:02:14,107 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 08:02:15,772 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Total milliseconds for umbraco request to process: 3102.2774
+2014-05-29 08:02:15,799 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/images/icon_twitter.png.
+2014-05-29 08:02:15,811 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/css/styles.css.
+2014-05-29 08:02:15,816 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 46] Begin request: http://localhost:7130/css/bootstrap.css.
+2014-05-29 08:02:15,823 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/images/icon_facebook.png.
+2014-05-29 08:02:15,884 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/css/fonts.css.
+2014-05-29 08:02:15,895 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/media/1005/carousel2.png.
+2014-05-29 08:02:15,907 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 46] Begin request: http://localhost:7130/Scripts/jquery-1.9.1.js.
+2014-05-29 08:02:15,914 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost:7130/images/icon_linkedin.png.
+2014-05-29 08:02:15,938 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/Scripts/custom.js.
+2014-05-29 08:02:15,994 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:02:16,145 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7130/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:02:16,325 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost:7130/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:02:16,325 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost:7130/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-05-29 08:02:18,450 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost:7130/__browserLink/requestData/4ca736c471b34cc0bfdd38718d1f10b1.

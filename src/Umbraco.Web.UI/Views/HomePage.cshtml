@@ -16,8 +16,12 @@
                             Learn more <span class="caret"></span>
                         </a>
                     </div>
-                    <img src="images/carousel3.png">
-
+                    @{
+                        if (CurrentPage.HasValue("Image1")){
+                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
+                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
+                        }
+                    }
                 </div>
                 <div class="item">
                     <div class="slide">
@@ -26,8 +30,13 @@
                             Learn more <span class="caret"></span>
                         </a>
                     </div>
-                    <img src="images/carousel1.png">
-
+                    @{
+                        if (CurrentPage.HasValue("Image1"))
+                        {
+                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
+                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
+                        }
+                    }
                 </div>
 
                 <div class="item active">
@@ -37,8 +46,13 @@
                             Learn more <span class="caret"></span>
                         </a>
                     </div>
-                    <img src="images/carousel2.png">
-
+                    @{
+                        if (CurrentPage.HasValue("Image1"))
+                        {
+                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
+                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
+                        }
+                    }
                 </div>
             </div>
 
