@@ -1054,3 +1054,599 @@ System.FormatException: Input string was not in a correct format.
 2014-05-29 07:07:09,423 [15] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Begin request: http://localhost:7130/install/InstallerRestService.aspx?feed=sitebuildervids.
 2014-05-29 07:07:09,454 [15] DEBUG Umbraco.Web.UmbracoModule - [Thread 6] Begin request: http://localhost:7130/install/InstallerRestService.aspx?feed=developervids.
 2014-05-29 07:07:12,837 [15] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/__browserLink/requestData/d161c621f3bc4cf0a74664575e3de85f.
+2014-05-29 07:22:48,054 [6] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application starting
+2014-05-29 07:22:48,246 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Determining hash of code files on disk
+2014-05-29 07:22:48,289 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Hash determined (took 39ms)
+2014-05-29 07:22:48,315 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2014-05-29 07:22:48,371 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types umbraco.interfaces.IApplicationStartupHandler with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,373 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type umbraco.interfaces.IApplicationStartupHandler and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,376 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 34 (took 58ms)
+2014-05-29 07:22:48,783 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2014-05-29 07:22:48,785 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,786 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,786 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 2ms)
+2014-05-29 07:22:48,787 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2014-05-29 07:22:48,791 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Core.PropertyEditors.IPropertyValueConverter with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,791 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyValueConverter and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,791 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 14 (took 4ms)
+2014-05-29 07:22:48,876 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2014-05-29 07:22:48,882 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Web.Mvc.SurfaceController with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,884 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Mvc.SurfaceController and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,884 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 8 (took 7ms)
+2014-05-29 07:22:48,886 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2014-05-29 07:22:48,897 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Web.WebApi.UmbracoApiController with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,897 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.WebApi.UmbracoApiController and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,897 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 30 (took 11ms)
+2014-05-29 07:22:48,921 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2014-05-29 07:22:48,924 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Core.Media.IThumbnailProvider with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,924 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IThumbnailProvider and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,924 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 3 (took 2ms)
+2014-05-29 07:22:48,925 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2014-05-29 07:22:48,927 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Core.Media.IImageUrlProvider with resolution FindAllTypes from persisted cache
+2014-05-29 07:22:48,928 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IImageUrlProvider and resolution FindAllTypes was successful = True
+2014-05-29 07:22:48,928 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 1 (took 2ms)
+2014-05-29 07:22:50,771 [6] DEBUG Umbraco.Core.ObjectResolution.Resolution - [Thread 1] Freezing resolution
+2014-05-29 07:22:50,840 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplication
+2014-05-29 07:22:50,842 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types umbraco.interfaces.IApplication with resolution FindTypesWithAttribute from persisted cache
+2014-05-29 07:22:50,842 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplication, found 7 (took 2ms)
+2014-05-29 07:22:50,949 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-05-29 07:22:50,951 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types Umbraco.Web.Trees.TreeController with resolution FindTypesWithAttribute from persisted cache
+2014-05-29 07:22:50,951 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Trees.TreeController and resolution FindTypesWithAttribute was successful = True
+2014-05-29 07:22:50,951 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 1ms)
+2014-05-29 07:22:50,985 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.ITree
+2014-05-29 07:22:50,990 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Loaded plugin types umbraco.interfaces.ITree with resolution FindTypesWithAttribute from persisted cache
+2014-05-29 07:22:50,990 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.ITree, found 19 (took 5ms)
+2014-05-29 07:22:51,027 [6] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Initializing Examine and binding to business logic events
+2014-05-29 07:22:51,060 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalIndexer indexer initializing, Provider=InternalIndexer, NodeId=-1
+2014-05-29 07:22:51,879 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalMemberIndexer indexer initializing, Provider=InternalMemberIndexer, NodeId=-1
+2014-05-29 07:22:51,915 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] ExternalIndexer indexer initializing, Provider=ExternalIndexer, NodeId=-1
+2014-05-29 07:22:52,061 [6] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Adding examine event handlers for index providers: 3
+2014-05-29 07:22:52,122 [6] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application startup complete (took 3974ms)
+2014-05-29 07:22:54,335 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/Views/Home.cshtml.
+2014-05-29 07:23:50,669 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:24:50,002 [6] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application starting
+2014-05-29 07:24:50,178 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Determining hash of code files on disk
+2014-05-29 07:24:50,209 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Hash determined (took 28ms)
+2014-05-29 07:24:50,253 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2014-05-29 07:24:50,255 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.IApplicationStartupHandler for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,088 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type umbraco.interfaces.IApplicationStartupHandler and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,090 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 34 (took 834ms)
+2014-05-29 07:24:51,275 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2014-05-29 07:24:51,276 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,290 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,290 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 15ms)
+2014-05-29 07:24:51,291 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2014-05-29 07:24:51,291 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyValueConverter for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,305 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyValueConverter and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,305 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 14 (took 14ms)
+2014-05-29 07:24:51,375 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2014-05-29 07:24:51,376 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.Mvc.SurfaceController for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,408 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Mvc.SurfaceController and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,408 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 8 (took 33ms)
+2014-05-29 07:24:51,411 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2014-05-29 07:24:51,412 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.WebApi.UmbracoApiController for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,434 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.WebApi.UmbracoApiController and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,434 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 30 (took 23ms)
+2014-05-29 07:24:51,457 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2014-05-29 07:24:51,457 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.Media.IThumbnailProvider for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,479 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IThumbnailProvider and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,479 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 3 (took 21ms)
+2014-05-29 07:24:51,481 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2014-05-29 07:24:51,482 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.Media.IImageUrlProvider for resolution FindAllTypes by assembly scan
+2014-05-29 07:24:51,507 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IImageUrlProvider and resolution FindAllTypes was successful = True
+2014-05-29 07:24:51,507 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 1 (took 25ms)
+2014-05-29 07:24:52,720 [6] DEBUG Umbraco.Core.ObjectResolution.Resolution - [Thread 1] Freezing resolution
+2014-05-29 07:24:52,763 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplication
+2014-05-29 07:24:52,764 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.IApplication for resolution FindTypesWithAttribute by assembly scan
+2014-05-29 07:24:52,790 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplication, found 7 (took 26ms)
+2014-05-29 07:24:52,845 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-05-29 07:24:52,846 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.Trees.TreeController for resolution FindTypesWithAttribute by assembly scan
+2014-05-29 07:24:52,858 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Trees.TreeController and resolution FindTypesWithAttribute was successful = True
+2014-05-29 07:24:52,858 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 12ms)
+2014-05-29 07:24:52,872 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.ITree
+2014-05-29 07:24:52,873 [6] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.ITree for resolution FindTypesWithAttribute by assembly scan
+2014-05-29 07:24:52,895 [6] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.ITree, found 19 (took 22ms)
+2014-05-29 07:24:52,907 [6] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Initializing Examine and binding to business logic events
+2014-05-29 07:24:52,924 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalIndexer indexer initializing, Provider=InternalIndexer, NodeId=-1
+2014-05-29 07:24:53,641 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalMemberIndexer indexer initializing, Provider=InternalMemberIndexer, NodeId=-1
+2014-05-29 07:24:53,654 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] ExternalIndexer indexer initializing, Provider=ExternalIndexer, NodeId=-1
+2014-05-29 07:24:53,771 [6] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Adding examine event handlers for index providers: 3
+2014-05-29 07:24:53,787 [6] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application startup complete (took 3702ms)
+2014-05-29 07:24:54,535 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/Views/Home1.cshtml.
+2014-05-29 07:24:58,986 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/.
+2014-05-29 07:24:59,053 [6] DEBUG umbraco.content - [Thread 7] Initializing content on thread '' (Threadpool? True)
+2014-05-29 07:24:59,060 [6] INFO  umbraco.content - [Thread 7] Loading content from disk cache...
+2014-05-29 07:24:59,065 [6] DEBUG umbraco.content - [Thread 7] Content initialized (loaded)
+2014-05-29 07:24:59,075 [6] WARN  Umbraco.Web.UmbracoModule - [Thread 7] Umbraco has no content
+2014-05-29 07:25:01,552 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/install/InstallerRestService.aspx?feed=sitebuildervids.
+2014-05-29 07:25:01,608 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/install/InstallerRestService.aspx?feed=developervids.
+2014-05-29 07:25:06,465 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco.
+2014-05-29 07:25:06,690 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/__browserLink/requestData/114143adfa434740a84f4a411ec977e6.
+2014-05-29 07:25:09,432 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/Application?umb__rnd=ffffffffa85b4f88.
+2014-05-29 07:25:09,461 [6] DEBUG Umbraco.Core.ObjectResolution.Resolution+DirtyBackdoor - [Thread 8] Creating back door for resolution
+2014-05-29 07:25:09,463 [6] DEBUG Umbraco.Core.ObjectResolution.Resolution+DirtyBackdoor - [Thread 8] Disposing back door for resolution
+2014-05-29 07:25:09,949 [6] INFO  Umbraco.Core.PluginManager - [Thread 8] Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2014-05-29 07:25:09,953 [6] DEBUG Umbraco.Core.PluginManager - [Thread 8] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IParameterEditor for resolution FindAllTypes by assembly scan
+2014-05-29 07:25:10,007 [6] DEBUG Umbraco.Core.PluginManager - [Thread 8] Caching of typelist for type Umbraco.Core.PropertyEditors.IParameterEditor and resolution FindAllTypes was successful = True
+2014-05-29 07:25:10,007 [6] INFO  Umbraco.Core.PluginManager - [Thread 8] Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 43 (took 56ms)
+2014-05-29 07:25:11,148 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated.
+2014-05-29 07:25:11,313 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,027 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 14] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,037 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,043 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,075 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,719 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 14] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:12,729 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/js/language.aspx.
+2014-05-29 07:25:13,994 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/__browserLink/requestData/d21c831695c44e28b719d3f154d629a0.
+2014-05-29 07:25:14,023 [6] ERROR Umbraco.Core.UmbracoApplicationBase - [Thread 7] An unhandled exception occurred
+System.FormatException: Input string was not in a correct format.
+   at System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(String format, Object arg0)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsWorker(IEnumerable`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateGlobalScopeSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.ProcessDataIntoJsonObjects(IEnumerable`1 renderedOutputList)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.Tracing.RequestDataHttpHandler.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2014-05-29 07:25:22,698 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/PostLogin.
+2014-05-29 07:25:22,738 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2014-05-29 07:25:22,740 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Assembly changes detected, loading types Umbraco.Core.Persistence.Mappers.BaseMapper for resolution FindTypesWithAttribute by assembly scan
+2014-05-29 07:25:22,802 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Caching of typelist for type Umbraco.Core.Persistence.Mappers.BaseMapper and resolution FindTypesWithAttribute was successful = True
+2014-05-29 07:25:22,802 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 22 (took 63ms)
+2014-05-29 07:25:24,717 [6] INFO  Umbraco.Web.Security.WebSecurity - [Thread 13] User Id: 0 logged in
+2014-05-29 07:25:25,079 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/ServerVariables?umb__rnd=ffffffffa85b4f88.
+2014-05-29 07:25:25,217 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-05-29 07:25:25,219 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Existing typeList found for Umbraco.Web.Trees.TreeController with resolution type FindTypesWithAttribute
+2014-05-29 07:25:25,219 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 1ms)
+2014-05-29 07:25:25,360 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/UpdateCheck/GetCheck.
+2014-05-29 07:25:25,548 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 14] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Section/GetSections.
+2014-05-29 07:25:25,753 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=content&tree=&isDialog=false.
+2014-05-29 07:25:25,804 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Dashboard/GetDashboard?section=content.
+2014-05-29 07:25:29,330 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=settings&tree=&isDialog=false.
+2014-05-29 07:25:29,363 [6] INFO  Umbraco.Core.PluginManager - [Thread 13] Starting resolution types of umbraco.interfaces.ITree
+2014-05-29 07:25:29,363 [6] DEBUG Umbraco.Core.PluginManager - [Thread 13] Assembly changes detected, loading types umbraco.interfaces.ITree for resolution FindAllTypes by assembly scan
+2014-05-29 07:25:29,455 [6] DEBUG Umbraco.Core.PluginManager - [Thread 13] Caching of typelist for type umbraco.interfaces.ITree and resolution FindAllTypes was successful = True
+2014-05-29 07:25:29,455 [6] INFO  Umbraco.Core.PluginManager - [Thread 13] Completed resolution of types of umbraco.interfaces.ITree, found 35 (took 91ms)
+2014-05-29 07:25:31,729 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=e204e353edde4600bab50938c061c5bc&id=-1&treeType=nodeTypes&contextMenu=true&isDialog=false.
+2014-05-29 07:25:39,550 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=8e0bde3f52f34aad834a253888b09691&id=-1&treeType=templates&contextMenu=true&isDialog=false.
+2014-05-29 07:25:44,806 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=c1c88ba5d10944e4aee0a51960c65ef6&id=1046&treeType=templates&contextMenu=true&isDialog=false.
+2014-05-29 07:25:52,637 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:26:17,085 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:26:49,094 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:27:21,088 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:27:53,077 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:28:25,086 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:28:57,088 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:29:29,093 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:30:01,098 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:30:33,082 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:30:52,601 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:31:05,080 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 18] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:31:37,081 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:32:09,093 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:32:41,090 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 25] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:33:13,084 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:33:45,079 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:34:17,080 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:34:17,186 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:34:17,733 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/ContentType/GetAllowedChildren?contentId=-1.
+2014-05-29 07:34:21,272 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/.
+2014-05-29 07:34:21,375 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/Application?umb__rnd=5c8de282.
+2014-05-29 07:34:23,017 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated.
+2014-05-29 07:34:23,293 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/ServerVariables?umb__rnd=5c8de282.
+2014-05-29 07:34:23,318 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-05-29 07:34:23,318 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Existing typeList found for Umbraco.Web.Trees.TreeController with resolution type FindTypesWithAttribute
+2014-05-29 07:34:23,318 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 0ms)
+2014-05-29 07:34:23,453 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 19] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser.
+2014-05-29 07:34:23,614 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/UpdateCheck/GetCheck.
+2014-05-29 07:34:23,738 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=content&tree=&isDialog=false.
+2014-05-29 07:34:23,786 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Section/GetSections.
+2014-05-29 07:34:23,926 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetEmpty?contentTypeAlias=Home&parentId=-1.
+2014-05-29 07:34:27,376 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/__browserLink/requestData/502fc0a08c504436bc36a95c47900d19.
+2014-05-29 07:34:27,398 [6] ERROR Umbraco.Core.UmbracoApplicationBase - [Thread 20] An unhandled exception occurred
+System.FormatException: Input string was not in a correct format.
+   at System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(String format, Object arg0)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsWorker(IEnumerable`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateGlobalScopeSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.ProcessDataIntoJsonObjects(IEnumerable`1 renderedOutputList)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.Tracing.RequestDataHttpHandler.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2014-05-29 07:34:55,682 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 26] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:35:08,426 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:35:12,228 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Starting resolution types of umbraco.interfaces.ICacheRefresher
+2014-05-29 07:35:12,229 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Assembly changes detected, loading types umbraco.interfaces.ICacheRefresher for resolution FindAllTypes by assembly scan
+2014-05-29 07:35:12,279 [6] DEBUG Umbraco.Core.PluginManager - [Thread 7] Caching of typelist for type umbraco.interfaces.ICacheRefresher and resolution FindAllTypes was successful = True
+2014-05-29 07:35:12,279 [6] INFO  Umbraco.Core.PluginManager - [Thread 7] Completed resolution of types of umbraco.interfaces.ICacheRefresher, found 20 (took 50ms)
+2014-05-29 07:35:12,356 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 7] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:35:12,426 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 7] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:35:12,429 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 7] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:35:12,959 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 28] Index created for node, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:35:26,787 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:35:35,504 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 26] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:35:35,925 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 26] Content 'HomePage' with Id '0' has been published.
+2014-05-29 07:35:37,502 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 26] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:35:38,412 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 26] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:35:38,552 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 26] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:35:38,575 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 26] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:35:38,575 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 26] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:35:38,577 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 26] ReIndexNode with type: content, Provider=ExternalIndexer, NodeId=1079
+2014-05-29 07:35:38,577 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 26] AddSingleNodeToIndex with type: content, Provider=ExternalIndexer, NodeId=1079
+2014-05-29 07:35:38,606 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 7] Index created for node, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:35:38,668 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 28] Index created for node, Provider=ExternalIndexer, NodeId=1079
+2014-05-29 07:35:39,665 [6] DEBUG umbraco.content - [Thread 26] Xml saved in 00:00:00.0349207
+2014-05-29 07:35:39,750 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 26] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:35:40,690 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1079.
+2014-05-29 07:35:41,736 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:35:41,750 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1079&type=document.
+2014-05-29 07:35:52,607 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:35:53,777 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 24] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1078.
+2014-05-29 07:35:54,444 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1078&type=document.
+2014-05-29 07:36:02,052 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/.
+2014-05-29 07:36:02,074 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:36:02,094 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindDomain: Matches no domain
+2014-05-29 07:36:02,244 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindDomain: Culture="en-US"
+2014-05-29 07:36:02,246 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:36:02,250 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindPublishedContent: Begin finders
+2014-05-29 07:36:02,264 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 7] Test route "/"
+2014-05-29 07:36:02,273 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 7] Got content, id=1079
+2014-05-29 07:36:02,277 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindPublishedContent: End finders, a document was found (took 22ms)
+2014-05-29 07:36:02,284 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] HandlePublishedContent: Begin
+2014-05-29 07:36:02,306 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:36:02,307 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] HandlePublishedContent: End
+2014-05-29 07:36:02,320 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindTemplate: Look for template id=1046
+2014-05-29 07:36:02,330 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindTemplate: Got template id=1046 alias="MasterPage"
+2014-05-29 07:36:02,332 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] FindTemplate: Running with template id=1046 alias="MasterPage"
+2014-05-29 07:36:02,339 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] HandleWildcardDomains: Path="-1,1079"
+2014-05-29 07:36:02,343 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 7] HandleWildcardDomains: No match.
+2014-05-29 07:36:02,366 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:36:24,681 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Total milliseconds for umbraco request to process: 22628.8304
+2014-05-29 07:36:26,508 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:36:58,334 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:37:30,101 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:38:01,912 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:38:33,665 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 23] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:39:05,461 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:39:37,280 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 28] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:39:46,058 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/.
+2014-05-29 07:39:46,063 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:39:46,063 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindDomain: Matches no domain
+2014-05-29 07:39:46,063 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindDomain: Culture="en-US"
+2014-05-29 07:39:46,064 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:39:46,064 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindPublishedContent: Begin finders
+2014-05-29 07:39:46,067 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 15] Test route "/"
+2014-05-29 07:39:46,074 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 15] Got content, id=1079
+2014-05-29 07:39:46,074 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindPublishedContent: End finders, a document was found (took 10ms)
+2014-05-29 07:39:46,074 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] HandlePublishedContent: Begin
+2014-05-29 07:39:46,075 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:39:46,075 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] HandlePublishedContent: End
+2014-05-29 07:39:46,075 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindTemplate: Look for template id=1046
+2014-05-29 07:39:46,079 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindTemplate: Got template id=1046 alias="MasterPage"
+2014-05-29 07:39:46,079 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] FindTemplate: Running with template id=1046 alias="MasterPage"
+2014-05-29 07:39:46,079 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] HandleWildcardDomains: Path="-1,1079"
+2014-05-29 07:39:46,079 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 15] HandleWildcardDomains: No match.
+2014-05-29 07:39:46,079 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:39:58,328 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Total milliseconds for umbraco request to process: 12270.8912
+2014-05-29 07:40:05,032 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/Home.
+2014-05-29 07:40:05,039 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindDomain: Uri="http://localhost:7130/home"
+2014-05-29 07:40:05,039 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindDomain: Matches no domain
+2014-05-29 07:40:05,039 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindDomain: Culture="en-US"
+2014-05-29 07:40:05,039 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindPublishedContentAndTemplate: Path="/home"
+2014-05-29 07:40:05,039 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindPublishedContent: Begin finders
+2014-05-29 07:40:05,040 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 9] Test route "/home"
+2014-05-29 07:40:05,041 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 9] No match.
+2014-05-29 07:40:05,044 [6] DEBUG Umbraco.Web.Routing.ContentFinderByIdPath - [Thread 9] Not a node id
+2014-05-29 07:40:05,062 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Registering custom handlers.
+2014-05-29 07:40:05,066 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Configured: 'umbraco.SearchForAlias,umbraco'.
+2014-05-29 07:40:05,067 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Registering 'umbraco.SearchForAlias'.
+2014-05-29 07:40:05,067 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Configured: 'umbraco.SearchForTemplate,umbraco'.
+2014-05-29 07:40:05,068 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Registering 'umbraco.SearchForTemplate'.
+2014-05-29 07:40:05,068 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Configured: 'umbraco.SearchForProfile,umbraco'.
+2014-05-29 07:40:05,068 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Registering 'umbraco.SearchForProfile'.
+2014-05-29 07:40:05,068 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Configured: 'umbraco.handle404,umbraco'.
+2014-05-29 07:40:05,069 [6] DEBUG Umbraco.Web.Routing.NotFoundHandlerHelper - [Thread 9] Registering 'umbraco.handle404' as "last chance" handler.
+2014-05-29 07:40:05,073 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Running for legacy url='home'.
+2014-05-29 07:40:05,079 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Handler 'umbraco.SearchForAlias'.
+2014-05-29 07:40:05,082 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Replace handler 'umbraco.SearchForAlias' by new finder 'Umbraco.Web.Routing.ContentFinderByUrlAlias'.
+2014-05-29 07:40:05,096 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Handler 'umbraco.SearchForTemplate'.
+2014-05-29 07:40:05,097 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Replace handler 'umbraco.SearchForTemplate' by new finder 'Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate'.
+2014-05-29 07:40:05,220 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrlAndTemplate - [Thread 9] Not a valid template: "home"
+2014-05-29 07:40:05,220 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Handler 'umbraco.SearchForProfile'.
+2014-05-29 07:40:05,221 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNotFoundHandlers - [Thread 9] Replace handler 'umbraco.SearchForProfile' by new finder 'Umbraco.Web.Routing.ContentFinderByProfile'.
+2014-05-29 07:40:05,225 [6] DEBUG Umbraco.Web.Routing.ContentFinderByProfile - [Thread 9] Not the profile path
+2014-05-29 07:40:05,225 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] FindPublishedContent: End finders, no document was found (took 185ms)
+2014-05-29 07:40:05,225 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] HandlePublishedContent: Begin
+2014-05-29 07:40:05,226 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] HandlePublishedContent: No document, try last chance lookup
+2014-05-29 07:40:05,235 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 9] Running for legacy url='home'.
+2014-05-29 07:40:05,237 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 9] Handler 'umbraco.handle404'.
+2014-05-29 07:40:05,238 [6] DEBUG Umbraco.Web.Routing.ContentLastChanceFinderByNotFoundHandlers - [Thread 9] Replace handler 'umbraco.handle404' by new finder 'Umbraco.Web.Routing.ContentFinderByLegacy404'.
+2014-05-29 07:40:05,241 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 9] Looking for a page to handle 404.
+2014-05-29 07:40:05,254 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 9] Got id=1.
+2014-05-29 07:40:05,255 [6] DEBUG Umbraco.Web.Routing.ContentFinderByLegacy404 - [Thread 9] Could not find content with that id.
+2014-05-29 07:40:05,256 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] HandlePublishedContent: Failed to find a document, give up
+2014-05-29 07:40:05,256 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 9] HandlePublishedContent: End
+2014-05-29 07:40:05,256 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Response status: Redirect=none, Is404=true, StatusCode=0
+2014-05-29 07:40:05,317 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Total milliseconds for umbraco request to process: 285.0494
+2014-05-29 07:40:08,070 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:40:28,665 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1079.
+2014-05-29 07:40:29,232 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1079&type=document.
+2014-05-29 07:40:31,250 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=1079&application=content&tree=&isDialog=false.
+2014-05-29 07:40:34,031 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1079.
+2014-05-29 07:40:34,178 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 15] Content 'HomePage (1)' with Id '1079' has been unpublished.
+2014-05-29 07:40:36,034 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RemoveById
+2014-05-29 07:40:36,147 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:40:36,826 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] DeleteFromIndex with query: __Path:\-1\,*1079\,* (found 0 results), Provider=ExternalIndexer, NodeId=1079
+2014-05-29 07:40:36,836 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:36,837 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:36,849 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 16] Index deleted for term: __NodeId with value 1079, Provider=ExternalIndexer, NodeId=-1
+2014-05-29 07:40:36,918 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 12] Index created for node, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:38,261 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:40:38,265 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:38,265 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:38,290 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 12] Index created for node, Provider=InternalIndexer, NodeId=1079
+2014-05-29 07:40:38,394 [6] DEBUG umbraco.content - [Thread 15] Xml saved in 00:00:00.0236836
+2014-05-29 07:40:40,281 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1078.
+2014-05-29 07:40:40,784 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1078&type=document.
+2014-05-29 07:40:47,489 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:40:48,069 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 15] Content 'HomePage' with Id '1078' has been published.
+2014-05-29 07:40:49,520 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:40:50,435 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:40:50,564 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 15] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:40:50,567 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:40:50,567 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:40:50,569 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] ReIndexNode with type: content, Provider=ExternalIndexer, NodeId=1078
+2014-05-29 07:40:50,569 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 15] AddSingleNodeToIndex with type: content, Provider=ExternalIndexer, NodeId=1078
+2014-05-29 07:40:50,593 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 10] Index created for node, Provider=ExternalIndexer, NodeId=1078
+2014-05-29 07:40:50,593 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 16] Index created for node, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:40:51,129 [6] DEBUG umbraco.content - [Thread 15] Xml saved in 00:00:00.0200133
+2014-05-29 07:40:51,197 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:40:51,237 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 16] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1078&type=document.
+2014-05-29 07:40:52,623 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 16] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:40:58,830 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/.
+2014-05-29 07:40:58,835 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:40:58,835 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindDomain: Matches no domain
+2014-05-29 07:40:58,835 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindDomain: Culture="en-US"
+2014-05-29 07:40:58,835 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:40:58,835 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindPublishedContent: Begin finders
+2014-05-29 07:40:58,836 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 10] Test route "/"
+2014-05-29 07:40:58,839 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 10] Got content, id=1078
+2014-05-29 07:40:58,839 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindPublishedContent: End finders, a document was found (took 3ms)
+2014-05-29 07:40:58,839 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] HandlePublishedContent: Begin
+2014-05-29 07:40:58,839 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:40:58,839 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] HandlePublishedContent: End
+2014-05-29 07:40:58,840 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindTemplate: Look for template id=1046
+2014-05-29 07:40:58,842 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindTemplate: Got template id=1046 alias="MasterPage"
+2014-05-29 07:40:58,842 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] FindTemplate: Running with template id=1046 alias="MasterPage"
+2014-05-29 07:40:58,842 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] HandleWildcardDomains: Path="-1,1078"
+2014-05-29 07:40:58,842 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 10] HandleWildcardDomains: No match.
+2014-05-29 07:40:58,842 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:41:05,550 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Total milliseconds for umbraco request to process: 6719.8404
+2014-05-29 07:41:15,728 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=settings&tree=&isDialog=false.
+2014-05-29 07:41:17,735 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=e8abc132fee7479ebb3e63184d813934&id=-1&treeType=templates&contextMenu=true&isDialog=false.
+2014-05-29 07:41:20,996 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=90bf456c6b404b818e0ce4b9ccb9c083&id=1046&treeType=templates&contextMenu=true&isDialog=false.
+2014-05-29 07:41:49,818 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetMenu?id=1075&treeType=templates&parentId=1046&section=settings&rnd=90bf456c6b404b818e0ce4b9ccb9c083&contextMenu=true&isDialog=false.
+2014-05-29 07:41:59,795 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Dashboard/GetDashboard?section=settings.
+2014-05-29 07:42:00,122 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/views/dashboard/settings/settingsdashboardintro.html.
+2014-05-29 07:42:02,393 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/settings/views/editView.aspx?treeType=templates&templateID=1075.
+2014-05-29 07:42:08,741 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/webservices/codeEditorSave.asmx/jsdebug.
+2014-05-29 07:42:08,748 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/webservices/legacyAjaxCalls.asmx/jsdebug.
+2014-05-29 07:42:15,615 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/__browserLink/requestData/15f5d7f182804633b6e315795536f89b.
+2014-05-29 07:42:26,502 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetMenu?id=1075&treeType=templates&parentId=1046&section=settings&rnd=90bf456c6b404b818e0ce4b9ccb9c083&contextMenu=true&isDialog=false.
+2014-05-29 07:42:30,531 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Legacy/DeleteLegacyItem?nodeId=1075&nodeType=templates&alias=Home.
+2014-05-29 07:42:33,229 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 10] Invoking refresher Umbraco.Web.Cache.UserPermissionsCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:42:33,423 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 10] Invoking refresher Umbraco.Web.Cache.TemplateCacheRefresher on single server instance, message type RemoveById
+2014-05-29 07:42:35,483 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 32] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetMenu?id=-1&treeType=templates&parentId=-1&section=settings&application=settings&tree=&isDialog=false.
+2014-05-29 07:42:36,744 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/create.aspx?nodeId=init&nodeType=inittemplates&nodeName=Templates&rnd=635369713555187727.
+2014-05-29 07:42:46,972 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/__browserLink/requestData/79ad5f4c69c94f06bbbb856d3399e3c6.
+2014-05-29 07:42:48,929 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/create.aspx?nodeId=init&nodeType=inittemplates&nodeName=Templates&rnd=635369713555187727.
+2014-05-29 07:42:52,210 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=e8abc132fee7479ebb3e63184d813934&id=-1&treeType=templates&contextMenu=true&isDialog=false.
+2014-05-29 07:42:52,438 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/settings/views/editView.aspx?templateID=1080.
+2014-05-29 07:42:53,819 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/webservices/legacyAjaxCalls.asmx/jsdebug.
+2014-05-29 07:42:53,822 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 32] Begin request: http://localhost:7130/umbraco/webservices/codeEditorSave.asmx/jsdebug.
+2014-05-29 07:42:54,978 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=8e3f44cece6c415993e3ff1bbad09569&id=-1&treeType=partialViews&contextMenu=true&isDialog=false.
+2014-05-29 07:42:58,601 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/__browserLink/requestData/a0bb07106dce4327bcec80b337386dde.
+2014-05-29 07:43:07,878 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/RestServices/SaveFile/SaveTemplate.
+2014-05-29 07:43:10,336 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 21] Invoking refresher Umbraco.Web.Cache.TemplateCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:43:10,450 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=8e3f44cece6c415993e3ff1bbad09569&id=-1&treeType=partialViews&contextMenu=true&isDialog=false.
+2014-05-29 07:43:17,306 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=72a26925e810428f94673c837c9fd6c8&id=-1&treeType=nodeTypes&contextMenu=true&isDialog=false.
+2014-05-29 07:43:19,989 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/settings/editNodeTypeNew.aspx?id=1071.
+2014-05-29 07:43:25,025 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1078.
+2014-05-29 07:43:29,464 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1078&type=document.
+2014-05-29 07:43:34,977 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=1078&application=content&tree=&isDialog=false.
+2014-05-29 07:43:39,935 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1078.
+2014-05-29 07:43:40,057 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 36] Content 'HomePage' with Id '1078' has been unpublished.
+2014-05-29 07:43:41,830 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RemoveById
+2014-05-29 07:43:41,930 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:43:42,330 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] DeleteFromIndex with query: __Path:\-1\,*1078\,* (found 0 results), Provider=ExternalIndexer, NodeId=1078
+2014-05-29 07:43:42,335 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:42,336 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:42,343 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 10] Index deleted for term: __NodeId with value 1078, Provider=ExternalIndexer, NodeId=-1
+2014-05-29 07:43:42,398 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 21] Index created for node, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:43,729 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:43:43,731 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:43,731 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:43,751 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 29] Index created for node, Provider=InternalIndexer, NodeId=1078
+2014-05-29 07:43:43,844 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.0111521
+2014-05-29 07:43:45,451 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 10] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:43:45,612 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/ContentType/GetAllowedChildren?contentId=-1.
+2014-05-29 07:43:53,704 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/settings/editNodeTypeNew.aspx?id=1071.
+2014-05-29 07:43:57,053 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/RestServices/CoreStrings/ServicesJavaScript?cdv=807913565.
+2014-05-29 07:43:58,914 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetMenu?id=-1&treeType=nodeTypes&parentId=-1&section=settings&application=settings&tree=&isDialog=false.
+2014-05-29 07:44:02,299 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/__browserLink/requestData/7712f1ed58e94cbf873bab82944482fc.
+2014-05-29 07:44:10,570 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/RestServices/CoreStrings/ToSafeAlias?value=HomePage&_=1401374650560.
+2014-05-29 07:44:11,778 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/umbraco/RestServices/CoreStrings/ToSafeAlias?value=HomePage&_=1401374651770.
+2014-05-29 07:44:26,941 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/settings/editNodeTypeNew.aspx?id=1071.
+2014-05-29 07:44:29,701 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:44:32,075 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 30] Invoking refresher Umbraco.Web.Cache.ContentTypeCacheRefresher on single server instance, message type RefreshByJson
+2014-05-29 07:44:32,112 [6] DEBUG Umbraco.Core.Models.PublishedContent.PublishedContentType - [Thread 30] Clear content type w/id 1071.
+2014-05-29 07:44:32,165 [6] INFO  umbraco.content - [Thread 36] Loading content from database...
+2014-05-29 07:44:32,165 [6] DEBUG umbraco.content - [Thread 36] Republishing starting
+2014-05-29 07:44:33,590 [6] DEBUG umbraco.content - [Thread 36] Xml Pages loaded
+2014-05-29 07:44:33,593 [6] DEBUG umbraco.content - [Thread 36] Done republishing Xml Index
+2014-05-29 07:44:33,708 [6] DEBUG umbraco.content - [Thread 30] Xml saved in 00:00:00.0205293
+2014-05-29 07:44:33,746 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.0155762
+2014-05-29 07:44:36,617 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost:7130/umbraco/RestServices/CoreStrings/ServicesJavaScript?cdv=807913565.
+2014-05-29 07:44:37,760 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/LegacyTree/GetNodes?rnd=72a26925e810428f94673c837c9fd6c8&id=-1&treeType=nodeTypes&contextMenu=true&isDialog=false.
+2014-05-29 07:44:41,218 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:44:41,343 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/ContentType/GetAllowedChildren?contentId=-1.
+2014-05-29 07:44:41,415 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost:7130/__browserLink/requestData/9c6aed8de5e04c469f53a51c48dda645.
+2014-05-29 07:44:42,860 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetEmpty?contentTypeAlias=HomePage&parentId=-1.
+2014-05-29 07:44:50,109 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:44:51,877 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:44:51,879 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:44:51,879 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:44:51,897 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:45:01,662 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:45:01,841 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 36] Content 'Home' with Id '0' has been published.
+2014-05-29 07:45:03,345 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:45:04,240 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:45:04,342 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:45:04,347 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:04,347 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:04,348 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=ExternalIndexer, NodeId=1082
+2014-05-29 07:45:04,348 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=ExternalIndexer, NodeId=1082
+2014-05-29 07:45:04,415 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:05,081 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=ExternalIndexer, NodeId=1082
+2014-05-29 07:45:05,313 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.1622421
+2014-05-29 07:45:05,479 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:45:05,987 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1082.
+2014-05-29 07:45:06,535 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1082&type=document.
+2014-05-29 07:45:08,394 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:45:12,459 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=1081&application=content&tree=&isDialog=false.
+2014-05-29 07:45:13,091 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/ContentType/GetAllowedChildren?contentId=1081.
+2014-05-29 07:45:17,120 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetMenu?id=1082&application=content&tree=&isDialog=false.
+2014-05-29 07:45:21,224 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1082.
+2014-05-29 07:45:21,321 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 36] Content 'Home (1)' with Id '1082' has been unpublished.
+2014-05-29 07:45:23,014 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RemoveById
+2014-05-29 07:45:23,109 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:45:23,211 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] DeleteFromIndex with query: __Path:\-1\,*1082\,* (found 0 results), Provider=ExternalIndexer, NodeId=1082
+2014-05-29 07:45:23,213 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:23,213 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:23,216 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 30] Index deleted for term: __NodeId with value 1082, Provider=ExternalIndexer, NodeId=-1
+2014-05-29 07:45:23,236 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:24,544 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:45:24,546 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:24,546 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:24,554 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 30] Index created for node, Provider=InternalIndexer, NodeId=1082
+2014-05-29 07:45:24,662 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.0131609
+2014-05-29 07:45:27,185 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1081.
+2014-05-29 07:45:27,558 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1081&type=document.
+2014-05-29 07:45:31,863 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/.
+2014-05-29 07:45:31,942 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/Application?umb__rnd=fffffffff1c1bc3e.
+2014-05-29 07:45:31,943 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco_client/tree/treeicons.css?cdv=807913565.
+2014-05-29 07:45:31,959 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/assets/css/umbraco.css?cdv=807913565.
+2014-05-29 07:45:31,987 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/lib/lazyload/lazyload.min.js.
+2014-05-29 07:45:32,182 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/assets/fonts/opensans/OpenSans-Regular-webfont.eot.
+2014-05-29 07:45:32,217 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/lib/underscore/underscore.js.
+2014-05-29 07:45:32,269 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/lib/angular/1.1.5/angular.min.js.
+2014-05-29 07:45:32,279 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/assets/fonts/opensans/OpenSans-Semibold-webfont.eot.
+2014-05-29 07:45:32,287 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/lib/angular/1.1.5/angular-cookies.min.js.
+2014-05-29 07:45:32,357 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/lib/angular/1.1.5/angular-mobile.js.
+2014-05-29 07:45:32,357 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery-2.0.3.min.js.
+2014-05-29 07:45:32,358 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery-ui-1.10.3.custom.min.js.
+2014-05-29 07:45:32,362 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/lib/angular/1.1.5/angular-sanitize.min.js.
+2014-05-29 07:45:32,367 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/lib/angular/angular-ui-sortable.js.
+2014-05-29 07:45:32,410 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload.js.
+2014-05-29 07:45:32,429 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery.upload/js/load-image.min.js.
+2014-05-29 07:45:32,478 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-process.js.
+2014-05-29 07:45:32,490 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-angular.js.
+2014-05-29 07:45:32,494 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/lib/umbraco/Extensions.js.
+2014-05-29 07:45:32,504 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-image.js.
+2014-05-29 07:45:32,505 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/lib/bootstrap/js/bootstrap.2.3.2.min.js.
+2014-05-29 07:45:32,526 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/lib/umbraco/NamespaceManager.js.
+2014-05-29 07:45:32,600 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/js/umbraco.filters.js.
+2014-05-29 07:45:32,619 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/lib/umbraco/LegacySpeechBubble.js.
+2014-05-29 07:45:32,627 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/lib/umbraco/LegacyUmbClientMgr.js.
+2014-05-29 07:45:32,708 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/js/umbraco.resources.js.
+2014-05-29 07:45:32,710 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/js/umbraco.directives.js.
+2014-05-29 07:45:32,715 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/js/app.js.
+2014-05-29 07:45:32,727 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/js/umbraco.controllers.js.
+2014-05-29 07:45:32,741 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/js/umbraco.services.js.
+2014-05-29 07:45:32,803 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/js/umbraco.security.js.
+2014-05-29 07:45:32,823 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/js/init.js.
+2014-05-29 07:45:32,833 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/js/routes.js.
+2014-05-29 07:45:32,871 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/developer/RelationTypes/TreeMenu/ActionDeleteRelationType.js.
+2014-05-29 07:45:32,874 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/developer/RelationTypes/TreeMenu/ActionNewRelationType.js.
+2014-05-29 07:45:32,889 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/App_Plugins/SimpleEditor/PropertyEditors/Js/SimpleEditor.js.
+2014-05-29 07:45:32,894 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/App_Plugins/SirTrevor/SirTrevor.controller.js.
+2014-05-29 07:45:33,436 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated.
+2014-05-29 07:45:33,621 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/ServerVariables?umb__rnd=fffffffff1c1bc3e.
+2014-05-29 07:45:33,634 [6] INFO  Umbraco.Core.PluginManager - [Thread 9] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-05-29 07:45:33,634 [6] DEBUG Umbraco.Core.PluginManager - [Thread 9] Existing typeList found for Umbraco.Web.Trees.TreeController with resolution type FindTypesWithAttribute
+2014-05-29 07:45:33,634 [6] INFO  Umbraco.Core.PluginManager - [Thread 9] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 0ms)
+2014-05-29 07:45:36,029 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser.
+2014-05-29 07:45:36,161 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 9] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/UpdateCheck/GetCheck.
+2014-05-29 07:45:36,218 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 30] Begin request: http://localhost:7130/__browserLink/requestData/ea5f3a210f594d83be8b9b4f0175fdf1.
+2014-05-29 07:45:36,253 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ApplicationTree/GetApplicationTrees?application=content&tree=&isDialog=false.
+2014-05-29 07:45:36,321 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/GetById?id=1081.
+2014-05-29 07:45:36,325 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Section/GetSections.
+2014-05-29 07:45:36,376 [6] ERROR Umbraco.Core.UmbracoApplicationBase - [Thread 30] An unhandled exception occurred
+System.FormatException: Input string was not in a correct format.
+   at System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(IFormatProvider provider, String format, Object[] args)
+   at System.String.Format(String format, Object arg0)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsForElementsWithTagName(List`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods, Int32 startIndex)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectorsWorker(IEnumerable`1 elements, String selectorFormatString, SelectorGroupFunction[] groupMethods)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateGlobalScopeSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.GenerateSelectors(IEnumerable`1 elements)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.MappingData.MappingDataUtilities.ProcessDataIntoJsonObjects(IEnumerable`1 renderedOutputList)
+   at Microsoft.VisualStudio.Web.PageInspector.Runtime.Tracing.RequestDataHttpHandler.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2014-05-29 07:45:37,504 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1081&type=document.
+2014-05-29 07:45:43,002 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Content/PostSave.
+2014-05-29 07:45:43,274 [6] INFO  Umbraco.Core.Publishing.PublishingStrategy - [Thread 36] Content 'Home' with Id '1081' has been published.
+2014-05-29 07:45:44,727 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.UnpublishedPageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:45:45,632 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.PageCacheRefresher on single server instance, message type RefreshById
+2014-05-29 07:45:45,735 [6] DEBUG Umbraco.Core.Sync.DefaultServerMessenger - [Thread 36] Invoking refresher Umbraco.Web.Cache.MacroCacheRefresher on single server instance, message type RefreshAll
+2014-05-29 07:45:45,743 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:45:45,743 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:45:45,745 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] ReIndexNode with type: content, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:45:45,745 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 36] AddSingleNodeToIndex with type: content, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:45:45,771 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 30] Index created for node, Provider=InternalIndexer, NodeId=1081
+2014-05-29 07:45:45,956 [6] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 9] Index created for node, Provider=ExternalIndexer, NodeId=1081
+2014-05-29 07:45:46,518 [6] DEBUG umbraco.content - [Thread 36] Xml saved in 00:00:00.1138890
+2014-05-29 07:45:46,636 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoTrees/ContentTree/GetNodes?id=-1&application=content&tree=&isDialog=false.
+2014-05-29 07:45:46,666 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Entity/GetAncestors?id=1081&type=document.
+2014-05-29 07:45:51,823 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/.
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Uri="http://localhost:7130/"
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Matches no domain
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindDomain: Culture="en-US"
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContentAndTemplate: Path="/"
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContent: Begin finders
+2014-05-29 07:45:51,827 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 36] Test route "/"
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 36] Got content, id=1081
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindPublishedContent: End finders, a document was found (took 3ms)
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandlePublishedContent: Begin
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] EnsurePublishedContentAccess: Page is not protected
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandlePublishedContent: End
+2014-05-29 07:45:51,830 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Look for template id=1080
+2014-05-29 07:45:51,833 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Got template id=1080 alias="HomePage"
+2014-05-29 07:45:51,834 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] FindTemplate: Running with template id=1080 alias="HomePage"
+2014-05-29 07:45:51,834 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandleWildcardDomains: Path="-1,1081"
+2014-05-29 07:45:51,834 [6] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 36] HandleWildcardDomains: No match.
+2014-05-29 07:45:51,834 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-05-29 07:45:52,668 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost:7130/umbraco/ping.aspx.
+2014-05-29 07:45:53,554 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Total milliseconds for umbraco request to process: 1731.154
+2014-05-29 07:45:55,654 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost:7130/__browserLink/requestData/9a97225552f045fd93df86b7963a4f18.
+2014-05-29 07:46:20,151 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:46:52,101 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:47:24,112 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:47:56,113 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-05-29 07:48:28,097 [6] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://localhost:7130/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
