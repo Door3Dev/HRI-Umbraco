@@ -123,6 +123,17 @@ h5 {
     line-height: 1;
 }
 
+a:hover, a:focus {
+  color: #752b8f;
+  text-decoration: underline;
+}
+a {
+  color: #752b8f;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
 .avenir-heavy {
     font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
 }
@@ -180,6 +191,7 @@ body {
     background: 0;
     background-color: #d2d2d2;
     font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    color: #555555;
 }
 
 strong {
@@ -1560,7 +1572,6 @@ body {
 }
 
 .hri-common .main-lead {
-    color: #752b8f;
     font-size: 15px;
     font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
     padding: 40px 80px;
@@ -1714,7 +1725,7 @@ body {
 
 .hri-common ul.expand-list h3 span {
     font-size: 15px;
-    color: #5a8cac;
+    color: #752b8f;
     vertical-align: middle;
 }
 
@@ -2462,4 +2473,31 @@ body {
 
 .hri-newyork .rbn-right:after {
     content: "";
+}
+
+.hri-login {
+  color: #555555;
+}
+
+.hri-login h3 {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.hri-login input {
+  width: 245px;
+}
+
+.hri-login .btn {
+  text-transform: none;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  height: 39px;
+  background-color: #752b8f;
+  width: 100%;
+  border: 0;
+}
+
+.hri-login .btn:hover {
+  background-color: #451d5c;
 }
