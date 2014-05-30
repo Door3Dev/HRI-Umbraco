@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+<div id="hri-content" class="hri-login">
+  <div class="row-fluid">
+
+    <div class="span4 offset4 well">
+
+      <h3 class="dark-purple">Member Login</h3>
+
+      <form id="login_form" method="POST" action="" data-validate="parsley">
+
+        <label>
+          Username<br>
+          <input data-trigger="focusout" id="id_username" maxlength="254" name="username" type="text">
+
+        </label>
+        <label>
+          Password<br>
+          <input data-trigger="focusout" id="id_password" name="password" type="password">
+
+        </label>
+        <input id="login_submit" type="submit" class="btn hri-btn" value="Submit">
+      </form>
+
+
+      Enrolled in a Health Republic Plan? <a href="/user/register">Register for an account.</a>
+      <br><br>
+      Forgot <a href="/user/forgot/username">Username?</a> <span>|</span>
+      Forgot <a href="/user/forgot/password">Password?</a><br>
+      Resend <a href="/user/re-send-email-verification-link">Email Verification Link</a>
+      <br><br>
+      If you are having trouble logging in or registering, call us at <b>888.990.5702</b>.
+
+    </div>
+  </div>
+</div>
