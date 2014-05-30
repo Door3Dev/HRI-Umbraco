@@ -2130,6 +2130,7 @@
     <Content Include="Views\Partials\Header.LoggedOut.cshtml" />
     <Content Include="Views\Partials\TopBar.LoggedOut.cshtml" />
     <Content Include="Views\login.cshtml" />
+    <Content Include="Views\contactus.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>

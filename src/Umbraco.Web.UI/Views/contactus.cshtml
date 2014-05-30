@@ -1,0 +1,91 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+<div class="hri-contact-us">
+  <h4>
+    Send us a message and we'll get back to you usually within two business days. Or give us a call to speak
+    with someone immediately.
+  </h4>
+
+  <div class="row-fluid">
+    <form class="span6">
+      <label>
+        Message Topic<br>
+        <select>
+          <option>Please choose a topic</option>
+          <option>Billing Questions</option>
+          <option>ID cards</option>
+          <option>Benefits Questions</option>
+          <option>Provider</option>
+          <option>Network</option>
+          <option>Technical Issues</option>
+          <option>Claims option on our website</option>
+          <option>Cancellation</option>
+          <option>Update information</option>
+          <option>Pharmacy</option>
+        </select>
+      </label>
+
+      <div class="row-fluid">
+        <label class="span6 name">
+          First Name<br>
+          <input type="password">
+        </label>
+
+        <label class="span6">
+          Last Name<br>
+          <input type="text">
+        </label>
+      </div>
+
+      <label>
+        Email<br>
+        <input type="text">
+      </label>
+
+      <label>
+        Phone Number<br>
+        <input type="text">
+      </label>
+
+      <label>
+        Type Your Message<br>
+        <textarea rows="6"></textarea>
+      </label>
+
+
+      <input type="submit" class="btn hri-btn" value="Submit">
+    </form>
+
+    <div class="span6 help">
+      <div class="row">
+        <div class="span1"></div>
+        <div class="span8">
+          <b>1-888-990-5702</b><br>
+          Mon. &mdash; Fri. 8:30 am to 5:30 pm ET<br><br>
+
+          <p>
+            Health Republic Insurance<br>
+            30 Broad Street, 34th Floor<br>
+            New York, NY, 1004
+          </p><br><br>
+
+          <b>Broker Inquiries</b>
+          <br>
+          <a href="mailto:brokers@newyork.healthrepublic.us">brokers@newyork.healthrepublic.us</a><br><br>
+
+          <b>Provider Relations</b>
+          <a href="mailto:ProviderRelations@newyork.healthrepublic.us">ProviderRelations@newyork.healthrepublic.us</a><br><br>
+
+          For eligibility and benefit questions, call 1-888-990-5702 and select prompt 3 (provider), then prompt 1
+          (claims and eligibility)<br><br>
+
+          <b>Press Inquiries</b><br>
+          <a href="mailto:press@newyork.healthrepublic.us">press@newyork.healthrepublic.us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

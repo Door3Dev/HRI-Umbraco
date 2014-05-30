@@ -1715,7 +1715,7 @@ body {
     cursor: pointer;
     font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
     font-size: 15px;
-    color: #7ab8e1;
+    color: #752b8f;
 }
 
 .hri-common ul.expand-list h3 {
@@ -2475,9 +2475,7 @@ body {
     content: "";
 }
 
-.hri-login {
-  color: #555555;
-}
+/* ------------ LOGIN ------------ */
 
 .hri-login h3 {
   font-size: 25px;
@@ -2488,7 +2486,8 @@ body {
   width: 245px;
 }
 
-.hri-login .btn {
+.hri-login .btn,
+.hri-contact-us .btn {
   text-transform: none;
   font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -2498,6 +2497,44 @@ body {
   border: 0;
 }
 
-.hri-login .btn:hover {
+.hri-login .btn:hover,
+.hri-contact-us .btn:hover {
   background-color: #451d5c;
+}
+
+/* ------------ CONTACT US ------------ */
+
+.hri-contact-us h4 {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 30px 125px;
+  text-align: center;
+}
+
+.hri-contact-us form {
+  padding: 30px 55px;
+}
+
+.hri-contact-us label {
+  padding-top: 10px;
+}
+
+.hri-contact-us label.name {
+  padding-right: 14px;
+}
+
+.hri-contact-us input,
+.hri-contact-us textarea,
+.hri-contact-us select {
+  width: 100%;
+}
+
+.hri-contact-us .help div {
+  /*padding: 40px;*/
+}
+
+.hri-contact-us .help div {
+  background-color: #f5f5f5;
+  /*margin: 25px 30px 25px 0;*/
 }
