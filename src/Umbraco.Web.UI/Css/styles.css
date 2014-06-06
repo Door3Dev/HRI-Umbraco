@@ -1,0 +1,2540 @@
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.collapse {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 0.35s ease;
+    -moz-transition: height 0.35s ease;
+    -o-transition: height 0.35s ease;
+    transition: height 0.35s ease;
+}
+
+.collapse.in {
+    height: auto;
+}
+
+.purple {
+    color: #752b8f;
+}
+
+.purple-bg {
+    background: 0 !important;
+    background-color: #752b8f !important;
+}
+
+.dark-purple {
+    color: #451d5c;
+}
+
+.dark-purple-bg {
+    background: 0 !important;
+    background-color: #451d5c !important;
+}
+
+.black {
+    color: #231f20;
+}
+
+.black-bg {
+    background: 0;
+    background-color: #231f20;
+    color: #ffffff;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.white-bg {
+    background: 0;
+    background-color: #ffffff;
+}
+
+.teal {
+    color: #7ac8aa;
+}
+
+.sky {
+    color: #7ab8e1;
+}
+
+.sky-bg {
+    background: 0;
+    background-color: #7ab8e1;
+}
+
+.blue {
+    color: #5a8cac;
+}
+
+.blue-bg {
+    background: 0;
+    background-color: #5a8cac;
+}
+
+.teal-bg {
+    background: 0;
+    background-color: #7ac8aa;
+}
+
+.gray {
+    color: #d2d2d2;
+}
+
+.gray-bg {
+    background: 0;
+    background-color: #d2d2d2;
+}
+
+.ltblue {
+    color: #7dbce5;
+}
+
+.ltblue-bg {
+    background-color: #7dbce5;
+}
+
+.green {
+    color: #79c8aa;
+}
+
+.green-bg {
+    background-color: #79c8aa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+a:hover, a:focus {
+  color: #752b8f;
+  text-decoration: underline;
+}
+a {
+  color: #752b8f;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.avenir-heavy {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+}
+
+.avenir-cond {
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+}
+
+.avenir-cond-bold {
+    font-family: 'AvenirNextLTW01-BoldCn', Helvetica, Arial, sans-serif;
+}
+
+.avenir-black {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.avenir-book {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.hri-btn {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    background: 0;
+    background-color: #451d5c;
+}
+
+.hri-btn:hover,
+.hri-btn:focus {
+    color: #fff;
+    background: 0;
+    background-color: #752b8f;
+}
+
+/*
+	#!SF: Shop Form
+	#!ET: Edge Tab
+	#!TX: Textify
+	#!MD: Modal
+	#!TC: Tab-Carousel
+	#!PE: ParselyError
+	#!ACC: Accordion 
+	#!SO: Spinner Overlay
+	#!HIF: Iframe
+	#!FLB: Flow Bar
+*/
+
+body {
+    background: 0;
+    background-color: #d2d2d2;
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    color: #555555;
+}
+
+strong {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+b {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+}
+
+form ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+form .alert.form-success {
+    color: #441C5A;
+    background: none;
+    border: 1px solid #752b91;
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+}
+
+table.cols.cols-2 thead th {
+    width: 50%;
+}
+
+table.cols.cols-3 thead th {
+    width: 30%;
+}
+
+table.cols.cols-4 thead th {
+    width: 25%;
+}
+
+table.cols.cols-5 thead th {
+    width: 20%;
+}
+
+table.cols.cols-6 thead th {
+    width: 16.67%;
+}
+
+#main {
+    min-height: 540px;
+    background-color: #fff;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+#header {
+    margin: 20px 0;
+}
+
+#header #search input {
+    font-size: 11px;
+    float: right;
+    height: 15px;
+    margin: 10px;
+    width: 80%;
+}
+
+#header #usermeta {
+    text-align: right;
+    color: #fff;
+    padding-right: 5px;
+}
+
+#header #usermeta a {
+    color: #fff;
+    font-size: 11px;
+    padding: 0 5px;
+}
+
+#topnav .nav > li {
+    float: left;
+}
+
+#topnav .nav > li > a {
+    padding: 8px;
+    text-transform: uppercase;
+}
+
+#content {
+    padding-top: 20px;
+}
+
+/* #!SF: Shop Form */
+
+#shop-form {
+    position: relative;
+}
+
+#shop-zipcode {
+    position: relative;
+}
+
+.shop-form label {
+    display: inline-block;
+}
+
+.shop-form .shop-block {
+    border-bottom: 1px solid #999;
+    padding: 30px 0 22px;
+}
+
+.shop-form .step-title {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    color: #231f20;
+    display: block;
+    margin: 5px 0;
+}
+
+.shop-form .shop-btn {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+}
+
+.shop-form .shop-btn.shop-edit {
+    display: none;
+}
+
+.shop-form .shop-link {
+    display: inline-block;
+    margin: 25px 0 0;
+}
+
+.shop-form .shop-link i {
+    padding-right: 5px;
+}
+
+.shop-form .shop-block-inactive .step-title {
+    color: #d2d2d2;
+}
+
+.shop-form .shop-block-inactive .step-optional {
+    color: #d2d2d2;
+}
+
+.shop-form .shop-block-inactive .field-block {
+    display: none;
+}
+
+.shop-form .shop-block-inactive .btn-block {
+    display: none;
+}
+
+.shop-form .children-block {
+    border-bottom: 1px solid #d2d2d2;
+    padding: 15px 0;
+}
+
+.shop-form .children-block .pull-left {
+    margin: 0;
+    /* This is a Bootstrap modifier */
+
+}
+
+.shop-form .shop-form-submit {
+    border-bottom: 0 none;
+}
+
+.shop-form .non-field-ul {
+    list-style-type: disc;
+    margin: 0 0 10px 25px;
+}
+
+.shop-form #shop-submit {
+    border-bottom: 0 none;
+}
+
+.shop-form #shop-submit .btn-block {
+    display: block;
+    /* Submit button is displayed at all times */
+
+}
+
+.shop-form #shop-systemmessaging .systemmessage {
+    color: #752b8f;
+}
+
+.shop-form #shop-systemmessaging.system-invalid .btn-block {
+    display: none;
+}
+
+.shop-form #shop-systemmessaging.system-invalid .systemmessage {
+    color: #b94a48;
+}
+
+table#shop-summary {
+    border: 0 none;
+    margin-bottom: 0;
+}
+
+table#shop-summary tbody th,
+table#shop-summary tbody td {
+    border: 0 none;
+}
+
+table#shop-summary tbody th {
+    padding-left: 0;
+}
+
+table#shop-summary tbody td {
+    color: #451d5c;
+}
+
+div.plan-summary-section {
+    padding-top: 30px;
+}
+
+.plan-header {
+    display: inline-block;
+}
+
+p.plan-title {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    color: #231f20;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+table.plan-summary {
+    border: 0 none;
+    margin-bottom: 0;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+    /* Plan summary table has one header column that is not accounted in the cols-<number of cols> class generated by python */
+
+}
+
+table.plan-summary form.selectplan input {
+    font-family: 'AvenirNextLTW01-BoldCn', Helvetica, Arial, sans-serif;
+}
+
+table.plan-summary th,
+table.plan-summary td {
+    vertical-align: top;
+}
+
+table.plan-summary thead th {
+    font-family: 'AvenirNextLTW01-BoldCn', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    padding-top: 8px;
+    line-height: 1.9em;
+    border-right: 1px solid #752b8f;
+    border-top: 1px dashed #752b8f !important;
+    /* Used !important to override Bootstrap CSS that is extremely specific */
+
+}
+
+table.plan-summary thead th:first-child {
+    color: #752b8f;
+    padding-left: 0;
+}
+
+table.plan-summary thead th:last-child {
+    border-right: 0 none;
+}
+
+table.plan-summary thead th form {
+    margin: 0;
+    display: inline-block;
+}
+
+table.plan-summary.cols-2 thead th {
+    width: 33%;
+}
+
+table.plan-summary.cols-3 thead th {
+    width: 25%;
+}
+
+table.plan-summary.cols-4 thead th {
+    width: 20%;
+}
+
+table.plan-summary.cols-5 thead th {
+    width: 16.67%;
+}
+
+table.plan-summary tbody th,
+table.plan-summary tbody td {
+    border-top: 1px dashed #752b8f;
+    border-bottom: 1px dashed #752b8f;
+    border-right: 1px solid #752b8f;
+}
+
+table.plan-summary tbody th {
+    font-weight: normal;
+    padding-left: 0;
+    text-transform: uppercase;
+    color: #752b8f;
+}
+
+table.plan-summary tbody td {
+    word-break: break-word;
+}
+
+table.plan-summary tbody td:last-child {
+    border-right: 0 none;
+}
+
+table.plan-summary tbody form {
+    margin: 0;
+}
+
+table#userinfo {
+    font-size: 26px;
+}
+
+table#userinfo td {
+    width: 50%;
+}
+
+table#userinfo span {
+    padding: 5px 0;
+}
+
+table#userinfo span.userinfo-label {
+    text-transform: uppercase;
+    color: #d2d2d2;
+    display: block;
+    text-align: right;
+}
+
+table#userinfo span.userinfo-value {
+    padding: 5px 5px;
+}
+
+ul.plan-fineprint {
+    padding-left: 0;
+    padding-top: 30px;
+    margin-left: 0;
+}
+
+ul.plan-fineprint li {
+    list-style-type: none;
+    color: #752b8f;
+    font-size: 12px;
+}
+
+ul.plan-fineprint li span {
+    display: inline-block;
+    float: left;
+    width: 15px;
+}
+
+ul.plan-fineprint li p {
+    padding-left: 15px;
+}
+
+/* END Shop Form */
+
+/* #!ET: Edge Tab */
+
+.edge-tab-container p {
+    margin-bottom: 0;
+}
+
+.edge-tab-container p.edge-tab-content {
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.edge-tab-container.edge-tab-right {
+    position: relative;
+    float: right;
+    right: -20px;
+}
+
+.edge-tab-container.edge-tab-right .edge-tab {
+    -webkit-box-shadow: -1px -1px 9px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: -1px -1px 9px 1px rgba(0, 0, 0, 0.25);
+}
+
+.edge-tab-container.edge-tab-left {
+    position: relative;
+    float: left;
+    left: -20px;
+    text-align: right;
+}
+
+.edge-tab-container.edge-tab-left .edge-tab {
+    -webkit-box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.25);
+}
+
+.edge-tab-container .edge-tab {
+    background-color: #fff;
+    display: inline-block;
+    padding: 15px 20px;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif !important;
+    font-size: 16px;
+    min-width: 200px;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.edge-tab-container .edge-tab a {
+    color: white;
+}
+
+/* END Edge Tab */
+
+/* #!TX: Textify */
+
+.textify-block p {
+    color: #752b8f;
+    margin-top: 5px;
+}
+
+/* END Textify */
+
+/* #!MD: Modal */
+
+.modal {
+    color: #444;
+}
+
+.modal .modal-header h3 {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #441c5a;
+}
+
+.modal .btn-submit {
+    background: none;
+    background-color: #441c5a;
+}
+
+/* END Modal */
+
+/* #!TC: Tab-Carousel */
+
+.tab-carousel.carousel {
+    margin-bottom: 0;
+}
+
+.tab-carousel .carousel-indicators {
+    top: 30px;
+    right: 0;
+    z-index: 5;
+    width: 100%;
+}
+
+.tab-carousel .carousel-indicators li {
+    text-indent: 0;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 0;
+    height: 100%;
+}
+
+/* END Tab-Carousel */
+
+/* #!PE: ParselyError */
+
+.parsley-error-list li,
+.parsley-error-list-server li,
+.errorlist li {
+    color: #b94a48;
+}
+
+.errorlist {
+    margin: 0;
+}
+
+.errorlist li {
+    list-style-type: none;
+}
+
+/* END ParselyError */
+
+/* #!FO: Footer */
+
+#footer {
+    background-color: #231f20;
+    color: #fff;
+    text-align: center;
+    min-height: 80px;
+}
+
+#footer ul {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#footer ul li {
+    float: left;
+    list-style: none;
+    text-align: center;
+}
+
+#footer ul li a {
+    color: #fff;
+    font-size: 12px;
+    padding: 0 20px;
+    text-transform: uppercase;
+}
+
+/* END Footer */
+
+/* #!ACC: Accordion */
+
+.hri-accordion {
+    border-bottom: 1px dashed #752b8f;
+}
+
+.hri-accordion .hri-accordion-header {
+    cursor: pointer;
+}
+
+.hri-accordion .hri-accordion-header .hri-accordion-icon {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.6em;
+    width: 30px;
+}
+
+.hri-accordion .hri-accordion-header .hri-accordion-icon .hri-accordion-icon-expand {
+    display: block;
+}
+
+.hri-accordion .hri-accordion-header .hri-accordion-icon .hri-accordion-icon-collapse {
+    display: none;
+}
+
+.hri-accordion .hri-accordion-header:hover {
+    background-color: #f8f8f8;
+    color: #752b8f !important;
+}
+
+.hri-accordion .hri-accordion-header:hover .plan-title {
+    color: #752b8f !important;
+}
+
+.hri-accordion.hri-accordion-state-expanded {
+    border-bottom: 0 none;
+}
+
+.hri-accordion.hri-accordion-state-expanded .hri-accordion-header {
+    color: #752b8f !important;
+}
+
+.hri-accordion.hri-accordion-state-expanded .hri-accordion-header .plan-title {
+    color: #752b8f !important;
+}
+
+.hri-accordion.hri-accordion-state-expanded .hri-accordion-icon .hri-accordion-icon-expand {
+    display: none;
+}
+
+.hri-accordion.hri-accordion-state-expanded .hri-accordion-icon .hri-accordion-icon-collapse {
+    display: block;
+}
+
+.hri-accordion.hri-accordion-state-expanded .hri-accordion-content {
+    display: block !important;
+}
+
+.hri-accordion .hri-accordion-content {
+    display: none;
+}
+
+/* END Accordion */
+
+/* #!SO: Spinner Overlay */
+
+#hri-spinner-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    float: left;
+    z-index: 39999;
+    top: 0;
+    background-color: rgba(204, 204, 204, 0.6);
+}
+
+/* END Spinner Overlay */
+
+/* #!HIF: Iframe*/
+
+.hri-iframe {
+    border: 0 none;
+}
+
+/* END Iframe */
+
+/* #!FLB: Flow Bar */
+
+.flowbar {
+    background: 0;
+    background: url("../images/flowbar-stripes.png") repeat center;
+    display: block;
+    position: relative;
+    border-bottom: 3px solid #fff;
+    display: none;
+}
+
+.flowbar .container p {
+    background-color: #752b8f;
+    color: #fff;
+    line-height: 2em;
+    margin: 2px 0;
+    text-align: center;
+}
+
+/* END Flow Bar */
+
+li.dashlink {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding: 5px 9px;
+    background-color: #752b8f;
+    display: inline-block;
+}
+
+li.dashlink a {
+    color: #fff;
+}
+
+li.dashlink form {
+    margin: 0;
+}
+
+li.dashlink form button {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: 0;
+    border: 0;
+    color: #fff;
+}
+
+#member-center .lead {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+#member-center li a {
+    color: #0088cc;
+}
+
+#member-center form {
+    margin: 0;
+}
+
+#member-center button {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #0088cc;
+    line-height: 1.3em;
+    padding: 3px 10px;
+    text-transform: normal;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+#member-center button:hover {
+    color: #005580;
+    background: none;
+}
+
+/* 0. Variables */
+
+/* END Variables */
+
+/* 1. Padding */
+
+.pad10 {
+    padding: 10px;
+}
+
+.pad20 {
+    padding: 20px;
+}
+
+.pad30 {
+    padding: 30px;
+}
+
+.pad10vertical {
+    padding: 10px inherit;
+}
+
+.pad20vertical {
+    padding: 20px inherit;
+}
+
+.pad30vertical {
+    padding: 30px inherit;
+}
+
+.pad10horizontal {
+    padding: inherit 10px;
+}
+
+.pad20horizontal {
+    padding-top: inherit;
+    padding-bottom: inherit;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.pad30horizontal {
+    padding: inherit 30px;
+}
+
+.pad40horizontal {
+    padding-top: inherit;
+    padding-bottom: inherit;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+/* END Padding */
+
+/* 2. margin */
+
+.mar10 {
+    margin: 10px;
+}
+
+.mar20 {
+    margin: 20px;
+}
+
+.mar30 {
+    margin: 30px;
+}
+
+.mar10vertical {
+    margin: 10px inherit;
+}
+
+.mar20vertical {
+    margin: 20px inherit;
+}
+
+.mar30vertical {
+    margin: 30px inherit;
+}
+
+.mar10horizontal {
+    margin: inherit 10px;
+}
+
+.mar20horizontal {
+    margin-top: inherit;
+    margin-bottom: inherit;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+}
+
+.mar30horizontal {
+    margin: inherit 30px;
+}
+
+.mar40horizontal {
+    margin-top: inherit;
+    margin-bottom: inherit;
+    margin-left: 40px !important;
+    margin-right: 40px !important;
+}
+
+/* END Padding */
+
+/* 4. Borders */
+
+.border-right {
+    border-right: 1px solid #999;
+}
+
+/* END Borders */
+
+.centered {
+    text-align: center;
+}
+
+/* 5. Display */
+
+.hri-show {
+    display: block !important;
+}
+
+.hri-hide {
+    display: none !important;
+}
+
+/* END Borders */
+
+.purple {
+    color: #752b8f;
+}
+
+.purple-bg {
+    background: 0 !important;
+    background-color: #752b8f !important;
+}
+
+.dark-purple {
+    color: #451d5c;
+}
+
+.dark-purple-bg {
+    background: 0 !important;
+    background-color: #451d5c !important;
+}
+
+.black {
+    color: #231f20;
+}
+
+.black-bg {
+    background: 0;
+    background-color: #231f20;
+    color: #ffffff;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.white-bg {
+    background: 0;
+    background-color: #ffffff;
+}
+
+.teal {
+    color: #7ac8aa;
+}
+
+.sky {
+    color: #7ab8e1;
+}
+
+.sky-bg {
+    background: 0;
+    background-color: #7ab8e1;
+}
+
+.blue {
+    color: #5a8cac;
+}
+
+.blue-bg {
+    background: 0;
+    background-color: #5a8cac;
+}
+
+.teal-bg {
+    background: 0;
+    background-color: #7ac8aa;
+}
+
+.gray {
+    color: #d2d2d2;
+}
+
+.gray-bg {
+    background: 0;
+    background-color: #d2d2d2;
+}
+
+.ltblue {
+    color: #7dbce5;
+}
+
+.ltblue-bg {
+    background-color: #7dbce5;
+}
+
+.green {
+    color: #79c8aa;
+}
+
+.green-bg {
+    background-color: #79c8aa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.avenir-heavy {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+}
+
+.avenir-cond {
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+}
+
+.avenir-cond-bold {
+    font-family: 'AvenirNextLTW01-BoldCn', Helvetica, Arial, sans-serif;
+}
+
+.avenir-black {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.avenir-book {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.hri-btn {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    background: 0;
+    background-color: #451d5c;
+}
+
+.hri-btn:hover,
+.hri-btn:focus {
+    color: #fff;
+    background: 0;
+    background-color: #752b8f;
+}
+
+body {
+    background-color: #f1efed;
+}
+
+#main {
+    padding-bottom: 20px;
+}
+
+.hri-common {
+    line-height: 1.5;
+    /* Base styles */
+
+    /* Masthead - Plan Badge styling */
+
+    /* Static Ribbon styling */
+
+    /* "Hero" lead styling */
+
+    /* Homepage styles */
+
+    /* Expandable list */
+
+    /* Plans styling */
+
+    /* Board and Team styling */
+
+    /* FAQ styling */
+
+    /* Careers styling */
+
+    /* FIne print styling */
+
+    /* Footer styling */
+
+}
+
+.hri-common h1,
+.hri-common h2,
+.hri-common h3,
+.hri-common h4,
+.hri-common h5 {
+    line-height: 1.2;
+}
+
+.hri-common h1 {
+    font-size: 60px;
+    color: #231f20;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    margin-bottom: 30px;
+}
+
+.hri-common h2 {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+.hri-common h3 {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.hri-common h4 {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+}
+
+.hri-common h5 {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    font-family: 15px;
+}
+
+.hri-common a.cta {
+    color: #ffffff;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    background: 0 !important;
+    background-color: #451d5c !important;
+    padding: 2px 25px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    position: relative;
+    display: inline-block;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.hri-common a.cta.cta-centered {
+    margin: 30px auto;
+    max-width: 200px;
+    display: block;
+}
+
+.hri-common a.cta-arrow:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #d2d2d2;
+    position: absolute;
+    top: 70px;
+    left: 42%;
+    vertical-align: middle;
+}
+
+.hri-common a.cta:hover {
+    background: 0;
+    background-color: #231f20;
+    color: #ffffff;
+}
+
+.hri-common strong {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.hri-common #logo {
+    text-align: center;
+    margin-top: 20px;
+    background: url("../images/hri-main-logo.png") no-repeat center;
+    width: 100%;
+    height: 132px;
+}
+
+.hri-common #logo h1 {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 132px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.hri-common .logo-sm {
+    background: url("../images/hri-logo-sm.png") no-repeat center;
+    width: 190px;
+    height: 90px;
+    float: left;
+    padding: 0 20px;
+}
+
+.hri-common .logo-sm h1 {
+    text-indent: -9999px;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 132px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.hri-common h5.topnav-heading {
+    font-size: 12px;
+    color: #555555;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    padding: 15px 0;
+}
+
+/****************** NAVIGATION *********************/
+
+.hri-common .navigation {
+    font-size: 13px;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.hri-common .navigation .nav-site {
+    top: 60px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.hri-common .navigation a {
+    color: #752b8f;
+    text-decoration: none;
+    transition: color 0.4s ease-in-out;
+}
+
+.hri-common .navigation a:hover {
+    color: #451d5c;
+    text-decoration: none;
+}
+
+.hri-common .navigation ul {
+    list-style: none;
+}
+
+.hri-common .navigation ul.nav-user {
+    margin-left: 10px;
+    margin-top: 13px;
+}
+
+.hri-common .navigation ul.nav-user li {
+    display: inline;
+}
+
+.hri-common .navigation ul.nav-user li a {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #752b8f;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+}
+
+.hri-common .navigation ul.nav-user li a.dropdown-toggle {
+    background-color: #752b8f;
+}
+
+.hri-common .navigation ul.nav-user li a.nav-link {
+    color: #752b8f;
+    text-decoration: underline;
+}
+
+.hri-common .navigation ul.nav-user ul.dropdown-menu {
+    border-radius: 0;
+    width: 265px;
+    /* Overrides Bootstrap; this is to make sure that the submenu overlaps the parent menu appropriately */
+
+}
+
+.hri-common .navigation ul.nav-user ul.dropdown-menu li {
+    display: block;
+}
+
+.hri-common .navigation ul.nav-user ul.dropdown-menu li.divider {
+    margin: 3px 0;
+}
+
+.hri-common .navigation ul.nav-user ul.dropdown-menu li a {
+    color: #451d5c;
+    font-size: 0.8em;
+    line-height: 1.3em;
+    padding: 3px 10px;
+    text-transform: uppercase;
+}
+
+.hri-common .navigation ul.nav-user ul.dropdown-menu li a:hover {
+    color: #752b8f;
+    background: none !important;
+    background-color: #fff !important;
+}
+
+.hri-common .nav-user {
+    padding: 15px 0;
+    text-align: right;
+}
+
+.hri-common .nav-user a {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #752b8f;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.hri-common .nav-user span.icon {
+    background: url('../images/nav-user.png') center top no-repeat;
+    width: 15px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.hri-common .navigation ul.nav-site {
+    margin-right: 25px;
+}
+
+.hri-common .navigation ul.nav-site span.caret {
+    border-top: 4px solid #752b8f;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.hri-common .navigation ul.nav-site > li a {
+    border-left: 0;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding: 0 4px;
+    line-height: 12px;
+}
+
+.hri-common .navigation ul.nav-site > li > a {
+    border-left: 1px solid #752b8f;
+    width: 90px;
+    display: table-cell;
+    height: 24px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+.hri-common .navigation ul.nav-site li.short > a {
+    width: 60px;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu {
+    border-radius: 0;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu li {
+    display: block;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu li.divider {
+    margin: 3px 0;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu li form {
+    margin-bottom: 0;
+    padding: 3px 10px;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu li a {
+    font-size: 12px!important;
+    line-height: 21px;
+    padding: 3px 17px;
+    text-transform: uppercase;
+}
+
+.hri-common .navigation ul.nav-site ul.dropdown-menu li a:hover {
+    background: none;
+    background-color: #fff;
+    color: #752b8f;
+    text-decoration: underline;
+}
+
+.hri-common .navigation .menu-item {
+    position: relative;
+}
+
+.hri-common .navigation .menu-item:last-child {
+    padding-right: 0;
+}
+
+.hri-common .navigation .menu-item .drop-arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #451d5c;
+    right: -2px;
+    position: absolute;
+    top: 8px;
+}
+
+.hri-common #masthead {
+    padding: 15px 0;
+}
+
+.hri-common #masthead .plan-begin-badge {
+    background: url("../img/state-static/HRI_common_Website_Homepage_PlansGraphic.651717524c18.jpg") top left no-repeat;
+    width: 135px;
+    height: 135px;
+    margin: 20px auto 0 auto;
+}
+
+.hri-common .rbn {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    max-width: 225px;
+    display: inline-block;
+}
+
+.hri-common .rbn a {
+    text-decoration: underline;
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.hri-common .rbn a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.hri-common .rbn-purple {
+    background: 0 !important;
+    background-color: #752b8f !important;
+}
+
+.hri-common .rbn-left {
+    left: -25px;
+    position: absolute;
+}
+
+.hri-common .rbn-left:before {
+    /* content: "A healthier life begins Oct 1"; */
+
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    right: -3px;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+    font-size: 14px;
+}
+
+.hri-common .rbn-left:after {
+    content: "";
+    border-bottom: 13px solid transparent;
+    border-left: 25px solid transparent;
+    border-top: 25px solid #451d5c;
+    top: 31px;
+    position: absolute;
+    left: 0;
+}
+
+.hri-common .rbn-right {
+    right: -25px;
+    position: absolute;
+    top: 125px;
+    z-index: 2;
+}
+
+.hri-common .rbn-right:before {
+    /* content: "A healthier life begins Oct 1"; */
+
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    left: 1px;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+    font-size: 14px;
+}
+
+.hri-common .rbn-right:after {
+    content: "";
+    border-bottom: 13px solid transparent;
+    border-right: 25px solid transparent;
+    border-left: 25px solid #451d5c;
+    top: 31px;
+    position: absolute;
+    right: -25px;
+}
+
+.hri-common .main-lead {
+    font-size: 15px;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    padding: 40px 80px;
+    margin-bottom: 10px;
+    display: inline-block;
+    /* float: left; */
+
+}
+
+.hri-common .main-lead a {
+    color: #752b8f;
+    text-decoration: underline;
+}
+
+.hri-common .main-lead a:hover {
+    color: #451d5c;
+    text-decoration: underline;
+}
+
+.hri-common .main-lead p {
+    font-size: 18px;
+    padding-bottom: 20px;
+}
+
+.hri-common .main-lead .breadcrumbs {
+    font-style: italic;
+}
+
+.hri-common .main-lead .breadcrumbs li:first-child {
+    padding-left: 0 !important;
+}
+
+.hri-common .main-lead h3 {
+    margin-top: 0;
+    text-transform: uppercase;
+    color: #451d5c;
+    line-height: 1;
+}
+
+.hri-common .hri-common-hp .carousel-control {
+    display: none;
+}
+
+.hri-common .hri-common-hp .carousel-indicators {
+    position: absolute;
+    top: 380px;
+    right: 50px;
+    margin: 0 15px;
+}
+
+.hri-common .hri-common-hp .carousel {
+    vertical-align: middle;
+    position: relative;
+}
+
+.hri-common .hri-common-hp .carousel a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.hri-common .hri-common-hp .carousel .slide {
+    position: absolute;
+    top: 5%;
+    left: 20px;
+    width: 450px;
+}
+
+.hri-common .hri-common-hp .carousel .slide h1 {
+    font-size: 43px;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    color: #752b8f;
+    vertical-align: top;
+    line-height: 0.9em;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
+
+.hri-common .hri-common-hp .carousel .slide h4 {
+    color: #ffffff;
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hri-common .hri-common-hp .hp-plan-columns {
+    position: relative;
+    min-height: 300px;
+}
+
+.hri-common .hri-common-hp .widgets {
+    padding-left: 10px;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc {
+    padding: 15px 20px;
+    margin-top: 10px;
+    display: block;
+}
+
+.hp-plan-desc:hover,
+.hp-plan-desc:active {
+    text-decoration: none;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.first {
+    margin-top: 0;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc p{
+    padding: 0 30px 0 0;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc h3 {
+    color: #ffffff;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.green {
+    background-color: #79c8aa;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.green p {
+    color: #e4f3ed;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.purple {
+    background-color: #451d5c;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.purple p {
+    color: #b597c6;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.blue {
+    background-color: #7dbce5;
+}
+
+.hri-common .hri-common-hp .hp-plan-desc.blue p {
+    color: #3d6a8a;
+}
+
+.hri-common .expand-all {
+    cursor: pointer;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    color: #752b8f;
+}
+
+.hri-common ul.expand-list h3 {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.hri-common ul.expand-list h3 span {
+    font-size: 15px;
+    color: #752b8f;
+    vertical-align: middle;
+}
+
+.hri-common ul.expand-list li.expand-group {
+    border-top: 1px dotted #752b8f;
+    padding: 10px 0 10px 34px;
+}
+
+.hri-common ul.expand-list li.expand-group .expand-link {
+    line-height: 1.3;
+}
+
+.hri-common ul.expand-list li.expand-group .expand-toggle {
+    display: block;
+    float: left;
+    margin-left: -33px;
+    padding-top: 4px;
+    width: 30px;
+}
+
+.hri-common ul.expand-list li.expand-group .expand-content {
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.hri-common .hri-common-plans-providers {
+    /*
+		.border-col{
+			border-top: 2px dotted #be9bcb;
+		}
+*/
+
+}
+
+.hri-common .hri-common-plans-providers .main-lead {
+    text-align: center;
+    padding: 0;
+}
+
+.hri-common .hri-common-plans-providers .find-a-plan {
+    /* text-align: center; */
+
+    color: #231f20;
+    border-top: 2px dotted #be9bcb;
+    /* border-bottom: 2px dotted #be9bcb; */
+
+    padding: 20px 0;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.hri-common .hri-common-plans-providers h3,
+.hri-common .hri-common-plans-providers h4 {
+    margin: 10px 0;
+    /* text-align: center; */
+
+}
+
+.hri-common .hri-common-plans-providers .inline-list {
+    margin-bottom: 20px;
+    float: left;
+    border-top: 2px dotted #be9bcb;
+    padding-top: 20px;
+}
+
+.hri-common .hri-common-plans-providers .inline-list h3,
+.hri-common .hri-common-plans-providers .inline-list h4 {
+    text-align: left;
+}
+
+.hri-common .hri-common-plans-providers .inline-list li .left {
+    border-right: 2px dotted #be9bcb;
+    padding-right: 30px;
+}
+
+.hri-common .hri-common-plans-providers .inline-list li .right {
+    border-left: 2px dotted #be9bcb;
+    padding-left: 30px;
+}
+
+.hri-common .hri-common-plans-providers .plans-block-copy {
+    border-top: 2px dotted #be9bcb;
+    padding: 30px 10px;
+    text-align: center;
+}
+
+.hri-common .hri-common-plans-providers .plans-block-copy ul {
+    padding: 30px 0;
+    float: left;
+}
+
+.hri-common .hri-common-plans-providers .plans-block-copy ul li p {
+    color: #752b8f;
+    font-size: 12px;
+}
+
+.hri-common .hri-common-plans-providers .plans-sprite {
+    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    width: 260px;
+    display: block;
+    margin: 20px 0;
+}
+
+.hri-common .hri-common-plans-providers .magnacare-logo {
+    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    width: 260px;
+    display: block;
+    margin: 20px 0;
+    background-position: 0 0;
+    height: 48px;
+}
+
+.hri-common .hri-common-plans-providers .fairhealth-logo {
+    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    width: 260px;
+    display: block;
+    margin: 20px 0;
+    background-position: 0 -81px;
+    height: 82px;
+    margin: 20px auto;
+}
+
+.hri-common .hri-common-plans-providers .healthways-logo {
+    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    width: 260px;
+    display: block;
+    margin: 20px 0;
+    background-position: 0 -188px;
+    height: 45px;
+    margin: 20px auto;
+}
+
+.hri-common .hri-common-plans-providers .usscript-logo {
+    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    width: 260px;
+    display: block;
+    margin: 20px 0;
+    background-position: 0 -257px;
+    height: 50px;
+    width: 110px;
+}
+
+.hri-common .hri-common-plans-providers-legacy {
+    text-align: left;
+}
+
+.hri-common .hri-common-plans-providers-legacy .plans-providers-row {
+    border-top: 1px dashed #752b8f;
+    padding: 40px 0;
+}
+
+.hri-common .hri-common-plans-providers-legacy .plans-providers-row h3 {
+    margin-left: 18px;
+}
+
+.hri-common .hri-common-plans-providers-legacy .plans-providers-row ul li {
+    margin-bottom: 20px;
+}
+
+.hri-common .hri-common-staff,
+.hri-common .hri-common-board,
+.hri-common .hri-common-team {
+    text-align: left;
+    position: relative;
+}
+
+.hri-common .hri-common-staff .board-member,
+.hri-common .hri-common-board .board-member,
+.hri-common .hri-common-team .board-member,
+.hri-common .hri-common-staff .team-member,
+.hri-common .hri-common-board .team-member,
+.hri-common .hri-common-team .team-member,
+.hri-common .hri-common-staff .staff-member,
+.hri-common .hri-common-board .staff-member,
+.hri-common .hri-common-team .staff-member,
+.hri-common .hri-common-staff .generic-block,
+.hri-common .hri-common-board .generic-block,
+.hri-common .hri-common-team .generic-block {
+    border-top: 1px dashed #752b8f;
+    padding: 20px 0;
+}
+
+.hri-common .hri-common-staff .board-member h3,
+.hri-common .hri-common-board .board-member h3,
+.hri-common .hri-common-team .board-member h3,
+.hri-common .hri-common-staff .team-member h3,
+.hri-common .hri-common-board .team-member h3,
+.hri-common .hri-common-team .team-member h3,
+.hri-common .hri-common-staff .staff-member h3,
+.hri-common .hri-common-board .staff-member h3,
+.hri-common .hri-common-team .staff-member h3,
+.hri-common .hri-common-staff .generic-block h3,
+.hri-common .hri-common-board .generic-block h3,
+.hri-common .hri-common-team .generic-block h3 {
+    line-height: 1;
+    margin: 0 0 10px 0;
+}
+
+.hri-common .hri-common-staff .board-member h4.job-title,
+.hri-common .hri-common-board .board-member h4.job-title,
+.hri-common .hri-common-team .board-member h4.job-title,
+.hri-common .hri-common-staff .team-member h4.job-title,
+.hri-common .hri-common-board .team-member h4.job-title,
+.hri-common .hri-common-team .team-member h4.job-title,
+.hri-common .hri-common-staff .staff-member h4.job-title,
+.hri-common .hri-common-board .staff-member h4.job-title,
+.hri-common .hri-common-team .staff-member h4.job-title,
+.hri-common .hri-common-staff .generic-block h4.job-title,
+.hri-common .hri-common-board .generic-block h4.job-title,
+.hri-common .hri-common-team .generic-block h4.job-title,
+.hri-common .hri-common-staff .board-member h4.subtitle,
+.hri-common .hri-common-board .board-member h4.subtitle,
+.hri-common .hri-common-team .board-member h4.subtitle,
+.hri-common .hri-common-staff .team-member h4.subtitle,
+.hri-common .hri-common-board .team-member h4.subtitle,
+.hri-common .hri-common-team .team-member h4.subtitle,
+.hri-common .hri-common-staff .staff-member h4.subtitle,
+.hri-common .hri-common-board .staff-member h4.subtitle,
+.hri-common .hri-common-team .staff-member h4.subtitle,
+.hri-common .hri-common-staff .generic-block h4.subtitle,
+.hri-common .hri-common-board .generic-block h4.subtitle,
+.hri-common .hri-common-team .generic-block h4.subtitle {
+    margin: 0 0 20px 0;
+    font-style: italic;
+    color: #752b8f;
+    line-height: 1;
+}
+
+.hri-common .hri-common-faqs .faq-banner {
+    background: url("../img/state-static/hri-common-faqs-banner.22d49e1df1da.png") no-repeat center top;
+    height: 315px;
+    position: relative;
+}
+
+.hri-common .hri-common-faqs .main-lead {
+    width: 85%;
+}
+
+.hri-common .hri-common-careers ul.listing li {
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.hri-common .fine-print {
+    background: 0;
+    background-color: #ffffff;
+    padding: 30px 90px;
+    text-align: center;
+}
+
+.hri-common .footer {
+    bottom: 0;
+    position: relative;
+    color: #b7b6b6;
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    background: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 25px;
+    background: 0;
+    background-color: #231f20;
+    margin-left: 0;
+}
+
+/* navigation list wrapper */
+.hri-common .footer .nav {
+  margin-left: 30px;
+}
+
+.hri-common .footer .nav > div {
+    border-left: 1px solid #363334;
+    display: table-cell!important;
+    height: 100%;
+}
+
+.hri-common .footer ul {
+    list-style-type: none;
+    text-align: left;
+    padding: 0 30px 0px 10px;
+    margin: 0 20px 0 0;
+}
+
+
+.hri-common .footer ul li:first-child {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    line-height: 1.1em;
+    padding-bottom: 10px;
+}
+
+.hri-common .footer ul li {
+    padding: 5px 0;
+    line-height: 1.4em;
+}
+
+.hri-common .footer a {
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #b7b6b6;
+    text-decoration: none;
+}
+
+.hri-common .footer ul li a:hover,
+.hri-common .footer .disclaimer p a:hover{
+    text-decoration: underline;
+}
+
+.hri-common .footer .disclaimer {
+    margin-top: 50px;
+}
+
+.hri-common .footer .disclaimer p {
+    margin-top: 20px;
+}
+
+.hri-common .footer .disclaimer p a {
+    margin: 0 10px;
+}
+
+.hri-common .footer .contacts {
+    margin-bottom: 30px;
+}
+
+.hri-common .footer .questions h5 {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    line-height: 1.5em;
+}
+
+.hri-common .bottom-cta {
+    background: #ffffff;
+}
+.hri-common .bottom-cta div {
+    padding: 25px;
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.4em;
+}
+
+.hri-common .bottom-cta h4 {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 0.2em;
+}
+
+.hri-common .bottom-cta a {
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    color: #752b8f;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.hri-common .exchangelinking {
+    padding-left: 50px;
+}
+
+.hri-common .exchangelinking form input {
+    width: 145px;
+}
+
+/* Sign up modal styling *copy* */
+
+#hri-subscribe-modal {
+    width: 300px;
+    margin-left: -150px;
+}
+
+#hri-subscribe-modal .btn-submit {
+    width: 154px;
+}
+
+#hri-subscribe-modal form {
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    #hri-subscribe-modal {
+        margin-left: 0;
+    }
+}
+
+/* Oregon CO=OP styling */
+
+.hri-common #header {
+    margin-top: 0;
+}
+
+.hri-common #header #hri-subscribe-modal {
+    width: 300px;
+    margin-left: -150px;
+}
+
+.hri-common #header #hri-subscribe-modal .btn-submit {
+    width: 154px;
+}
+
+.hri-common #topnav {
+    font-size: 13px;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    padding: 15px 0 0;
+    float: right;
+}
+
+.hri-common #topnav a {
+    color: #231f20;
+    text-decoration: none;
+    transition: color 0.4s ease-in-out;
+}
+
+.hri-common #topnav a:hover {
+    color: #752b8f;
+    text-decoration: none;
+}
+
+.hri-common #topnav ul {
+    text-transform: uppercase;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.hri-common span.page-breadcrumbs {
+    color: #752b8f;
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+
+.hri-common span.page-breadcrumbs a {
+    color: #752b8f;
+    text-decoration: underline;
+}
+
+.hri-common span.page-breadcrumbs a:hover {
+    color: #451d5c;
+}
+
+.hri-common span.page-breadcrumbs.breadcrumb-end {
+    color: #888;
+}
+
+.hri-common h2.page-title {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Legacy Homepage styles */
+
+.hri-oregon {
+    /* Static Ribbon styling */
+
+}
+
+.hri-oregon .hri-oregon-hp {
+    text-align: center;
+}
+
+.hri-oregon .lg-heading {
+    padding: 30px 80px;
+}
+
+.hri-oregon .lg-heading p {
+    font-size: 20px;
+}
+
+.hri-oregon .lg-heading span {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+}
+
+.hri-oregon .wiam-banner {
+    background: url("../img/state-static/hri-common-wiam-banner.b220d7db2a7f.png") no-repeat center top;
+    min-height: 480px;
+    position: relative;
+}
+
+.hri-oregon .what-we-are {
+    background: url("../img/state-static/hri-common-what-we-are-banner.bf5c7692a3b1.jpg") center no-repeat;
+    min-height: 450px;
+    position: relative;
+    padding: 40px 0;
+}
+
+.hri-oregon .our-purpose {
+    background: url("../img/state-static/hri-common-our-purpose-banner.9b18e915220c.jpg") no-repeat top;
+    min-height: 450px;
+    position: relative;
+}
+
+.hri-oregon .bubble {
+    border-radius: 300px;
+    width: 230px;
+    height: 200px;
+    padding: 50px 40px;
+    position: relative;
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.hri-oregon .bubble h4 {
+    line-height: 1.4;
+    font-size: 18px;
+    margin: 40px 0;
+}
+
+.hri-oregon .bubble .bubble-inner-blue span {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.hri-oregon .bubble .bubble-inner-teal {
+    margin: 8px;
+}
+
+.hri-oregon .bubble .bubble-inner-teal h5 {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.hri-oregon .bubble .bubble-inner-teal span {
+    color: #ffffff;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.hri-oregon .bubble-teal {
+    background-color: rgba(122, 200, 170, 0.95);
+    background-color: #73c6a6\9;
+    *background-color: #73c6a6;
+    color: #387c62;
+    float: right;
+    margin: 70px 45px 0 0;
+}
+
+.hri-oregon .bubble-blue {
+    background-color: rgba(123, 186, 227, 0.95);
+    *background-color: #74b8e4;
+    color: #5185aa;
+    float: left;
+    margin: 70px 0 0 45px;
+}
+
+.hri-oregon #news-wheel {
+    padding: 20px 90px;
+    position: relative;
+}
+
+.hri-oregon #news-wheel p {
+    color: #231f20;
+    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+}
+
+.hri-oregon #news-wheel .carousel-inner {
+    min-height: 410px;
+}
+
+
+.hri-common .hri-common-hp .carousel .hri-btn {
+    background: #752b8f;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 6px 30px;
+    text-decoration: none;
+    border: 0;
+    text-transform: none;
+    font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
+}
+
+.hri-common .hri-common-hp .carousel .hri-btn span.caret {;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #ffffff;
+    display: inline-block;
+    height: 0;
+    vertical-align: top;
+    width: 0;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+.hri-oregon #news-wheel .carousel-nav-left,
+.hri-oregon #news-wheel .carousel-nav-right {
+    position: absolute;
+    font-size: 110px;
+    text-align: center;
+    height: 70px;
+    line-height: 1;
+    outline: none;
+    z-index: 5;
+    text-decoration: none;
+    top: 25%;
+    color: #d2d2d2;
+}
+
+.hri-oregon #news-wheel .carousel-nav-left:hover,
+.hri-oregon #news-wheel .carousel-nav-right:hover {
+    color: #451d5c;
+}
+
+.hri-oregon #news-wheel .carousel-nav-left {
+    left: -30px;
+    right: 100%;
+}
+
+.hri-oregon #news-wheel .carousel-nav-right {
+    right: -30px;
+    left: 100%;
+}
+
+.hri-oregon .carousel {
+    line-height: 1.5;
+}
+
+.hri-oregon .carousel p {
+    font-size: 14px;
+}
+
+.hri-oregon .title-heading {
+    padding: 40px 0;
+}
+
+.hri-oregon .hp-heading {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+}
+
+.hri-oregon .rbn {
+    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 13px 12px;
+    max-width: 225px;
+    display: inline-block;
+}
+
+.hri-oregon .rbn a {
+    text-decoration: underline;
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.hri-oregon .rbn a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.hri-oregon .rbn-purple {
+    background: 0 !important;
+    background-color: #752b8f !important;
+}
+
+.hri-oregon .rbn-left-legacy {
+    left: -25px;
+    position: absolute;
+}
+
+.hri-oregon .rbn-left-legacy:before {
+    content: "A healthier life begins now";
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    right: -3px;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+    font-size: 14px;
+}
+
+.hri-oregon .rbn-left-legacy:after {
+    content: "";
+    border-bottom: 25px solid transparent;
+    border-left: 25px solid transparent;
+    border-top: 25px solid #451d5c;
+    top: 46px;
+    position: absolute;
+    left: 0;
+}
+
+.hri-oregon .rbn-right-legacy {
+    right: -25px;
+    *right: 20px;
+    position: absolute;
+}
+
+.hri-oregon .rbn-right-legacy:before {
+    content: "A healthier life begins now";
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    left: -10px;
+    font-family: 'AvenirNextLTW01-DemiCn', Helvetica, Arial, sans-serif;
+    color: #451d5c;
+    font-size: 14px;
+}
+
+.hri-oregon .rbn-right-legacy:after {
+    content: "";
+    border-bottom: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-left: 25px solid #451d5c;
+    top: 46px;
+    position: absolute;
+    right: -25px;
+}
+
+.hri-oregon .navigation .nav-site {
+    top: 2px;
+}
+
+.hri-oregon .plan-begin-badge {
+    background: url("../img/state-static/HRI_common_Website_Homepage_PlansGraphic.651717524c18.jpg") top left no-repeat;
+    width: 135px;
+    height: 135px;
+    margin: 20px auto 0 auto;
+}
+
+.hri-newyork .rbn-left {
+    left: -25px;
+    position: absolute;
+}
+
+.hri-newyork .rbn-left:before {
+    /*content: "Not-for-Profit. For People.";*/
+
+}
+
+.hri-newyork .rbn-left:after {
+    content: "";
+}
+
+.hri-newyork .rbn-right {
+    right: -25px;
+    position: absolute;
+}
+
+.hri-newyork .rbn-right:before {
+    /*content: "Not-for-Profit. For People.";*/
+
+}
+
+.hri-newyork .rbn-right:after {
+    content: "";
+}
+
+/* ------------ LOGIN ------------ */
+
+.hri-login h3 {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.hri-login input {
+  width: 245px;
+}
+
+.hri-login .btn,
+.hri-contact-us .btn {
+  text-transform: none;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  height: 39px;
+  background-color: #752b8f;
+  width: 100%;
+  border: 0;
+}
+
+.hri-login .btn:hover,
+.hri-contact-us .btn:hover {
+  background-color: #451d5c;
+}
+
+/* ------------ CONTACT US ------------ */
+
+.hri-contact-us h4 {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 30px 125px;
+  text-align: center;
+}
+
+.hri-contact-us form {
+  padding: 30px 55px;
+}
+
+.hri-contact-us label {
+  padding-top: 10px;
+}
+
+.hri-contact-us label.name {
+  padding-right: 14px;
+}
+
+.hri-contact-us input,
+.hri-contact-us textarea,
+.hri-contact-us select {
+  width: 100%;
+}
+
+.hri-contact-us .help div {
+  /*padding: 40px;*/
+}
+
+.hri-contact-us .help div {
+  background-color: #f5f5f5;
+  /*margin: 25px 30px 25px 0;*/
+}

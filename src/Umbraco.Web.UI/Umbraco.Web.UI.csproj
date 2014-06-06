@@ -537,6 +537,11 @@
     <Compile Include="Umbraco\TreeInit.aspx.designer.cs">
       <DependentUpon>treeInit.aspx</DependentUpon>
     </Compile>
+    <Content Include="Css\bootstrap.css" />
+    <Content Include="Css\fonts.css" />
+    <Content Include="Css\styles.css" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Umbraco\Install\Legacy\loadStarterKits.ascx" />
     <Content Include="Umbraco\ClientRedirect.aspx" />
     <Content Include="Umbraco\create.aspx" />
@@ -2501,10 +2506,8 @@
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Plugins\" />
-    <Folder Include="Css\" />
     <Folder Include="MasterPages\" />
     <Folder Include="Media\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Umbraco\PartialViews\Templates\" />
     <Folder Include="Umbraco_Client\FolderBrowser\Images\" />
     <Folder Include="Umbraco_Client\Tags\images\" />
