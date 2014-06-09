@@ -1316,3 +1316,5 @@ System.FormatException: Input string was not in a correct format.
    at Umbraco.Core.Persistence.Database.<Query>d__1c`1.MoveNext() in c:\GitHub\HRI-Umbraco\src\Umbraco.Core\Persistence\PetaPoco.cs:line 1081
 2014-06-09 08:30:03,626 [31] DEBUG Umbraco.Web.UmbracoModule - [Thread 32] Begin request: http://localhost:7140/umbraco/views/common/dialogs/ysod.html.
 2014-06-09 08:30:18,016 [31] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7140/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-06-09 08:30:50,022 [31] DEBUG Umbraco.Web.UmbracoModule - [Thread 38] Begin request: http://localhost:7140/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.
+2014-06-09 08:31:22,018 [31] DEBUG Umbraco.Web.UmbracoModule - [Thread 47] Begin request: http://localhost:7140/umbraco/backoffice/UmbracoApi/Authentication/GetRemainingTimeoutSeconds.

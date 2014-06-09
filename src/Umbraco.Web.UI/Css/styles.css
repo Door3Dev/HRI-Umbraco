@@ -839,10 +839,6 @@ li.dashlink form button {
     font-size: 15px;
 }
 
-#member-center li a {
-    color: #0088cc;
-}
-
 #member-center form {
     margin: 0;
 }
@@ -1607,7 +1603,6 @@ body {
 .hri-common .main-lead h3 {
     margin-top: 0;
     text-transform: uppercase;
-    color: #451d5c;
     line-height: 1;
 }
 
@@ -1730,7 +1725,6 @@ body {
 }
 
 .hri-common ul.expand-list li.expand-group {
-    border-top: 1px dotted #752b8f;
     padding: 10px 0 10px 34px;
 }
 
@@ -1769,7 +1763,6 @@ body {
 .hri-common .hri-common-plans-providers .find-a-plan {
     /* text-align: center; */
 
-    color: #231f20;
     border-top: 2px dotted #be9bcb;
     /* border-bottom: 2px dotted #be9bcb; */
 
@@ -1808,9 +1801,9 @@ body {
 }
 
 .hri-common .hri-common-plans-providers .plans-block-copy {
-    border-top: 2px dotted #be9bcb;
-    padding: 30px 10px;
-    text-align: center;
+  border-top: 2px dotted #be9bcb;
+  padding: 30px 10px;
+  text-align: center;
 }
 
 .hri-common .hri-common-plans-providers .plans-block-copy ul {
@@ -1956,7 +1949,7 @@ body {
 }
 
 .hri-common .hri-common-faqs .faq-banner {
-    background: url("../img/state-static/hri-common-faqs-banner.22d49e1df1da.png") no-repeat center top;
+    background: url("../images/faqs-banner.png") no-repeat center top;
     height: 315px;
     position: relative;
 }
@@ -2149,14 +2142,12 @@ body {
 }
 
 .hri-common span.page-breadcrumbs {
-    color: #752b8f;
     font-family: 'Avenir LT W01 85 Heavy', Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
 .hri-common span.page-breadcrumbs a {
     color: #752b8f;
-    text-decoration: underline;
 }
 
 .hri-common span.page-breadcrumbs a:hover {
@@ -2165,11 +2156,11 @@ body {
 
 .hri-common span.page-breadcrumbs.breadcrumb-end {
     color: #888;
+  font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
 }
 
 .hri-common h2.page-title {
     font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
-    color: #451d5c;
     font-size: 25px;
     margin-top: 0;
     margin-bottom: 10px;
@@ -2258,8 +2249,7 @@ body {
 
 .hri-oregon .bubble-teal {
     background-color: rgba(122, 200, 170, 0.95);
-    background-color: #73c6a6\9;
-    *background-color: #73c6a6;
+    background-color: #73c6a6;
     color: #387c62;
     float: right;
     margin: 70px 45px 0 0;
@@ -2504,10 +2494,20 @@ body {
 
 /* ------------ CONTACT US ------------ */
 
-.hri-contact-us h4 {
+.hri-contact-us h4,
+.hri-contact-us .help .address,
+.hri-contact-us .help .phone span {
   font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
+}
+
+.hri-contact-us .help b {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+.hri-contact-us h4 {
   padding: 30px 125px;
   text-align: center;
 }
@@ -2525,16 +2525,134 @@ body {
 }
 
 .hri-contact-us input,
-.hri-contact-us textarea,
-.hri-contact-us select {
+.hri-contact-us textarea {
   width: 100%;
 }
 
-.hri-contact-us .help div {
-  /*padding: 40px;*/
+.hri-contact-us select,
+.hri-contact-us .btn{
+  width: 104%;
 }
 
-.hri-contact-us .help div {
+.hri-contact-us .help > div {
   background-color: #f5f5f5;
-  /*margin: 25px 30px 25px 0;*/
+  margin: 25px 60px 25px 0;
+  padding: 30px 40px;
 }
+
+.hri-contact-us .help .phone:before,
+.hri-contact-us .help .address:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin-left: -20px;
+}
+.hri-contact-us .help .phone:before {
+  background: url("../images/phone.png") left no-repeat;
+}
+.hri-contact-us .help .address:before {
+  background: url("../images/pin.png") left no-repeat;
+}
+
+/* ------------ REGULAR FORM ------------ */
+
+.regular-form h3 {
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  line-height: 22px;
+}
+
+.regular-form input {
+  width: 245px;
+}
+
+.regular-form .btn {
+  text-transform: none;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  height: 39px;
+  background-color: #752b8f;
+  width: 100%;
+  border: 0;
+}
+
+.regular-form .btn:hover {
+  background-color: #451d5c;
+}
+
+/* ------------ MEMBER CENTER ------------ */
+
+.hri-member-center ul.expand-list li.expand-group .expand-link {
+  color: #752b8f;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-link:hover {
+  text-decoration: underline;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-toggle {
+  padding-top: 0;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-content {
+  font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding: 0;
+}
+
+.hri-member-center .navigation {
+  padding: 60px 30px 30px 0;
+  margin-left: 0;
+}
+
+.hri-member-center .navigation a:hover {
+  text-decoration: underline;
+}
+
+.hri-member-center .navigation > ul {
+  background: #f5f5f5;
+  padding: 30px;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-content ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-toggle {
+  margin-left: 0;
+  float: none;
+  display: inline-block;
+}
+
+.hri-member-center ul.expand-list li.expand-group {
+  padding-left: 0;
+}
+
+.hri-member-center ul.expand-list li.expand-group .expand-content ul li:before {
+  content: "• ";
+  color: #752b8f;
+}
+
+/* ------------ REGISTER ------------ */
+
+.hri-register .already-member {
+  border-bottom: 1px dashed #848484;
+  text-align: right;
+}
+
+/*
+input[type="radio"] + label::before {
+  content: url("../images/radio.png");
+}
+
+input[type="radio"]:checked + label::before {
+  content: url("../images/radio-checked.png");
+}
+*/

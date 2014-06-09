@@ -648,6 +648,25 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Umbraco\Install\Views\Index.cshtml" />
+    <Content Include="Fonts\07690b8a-c348-4c53-8de3-59f7cfef9ee8.eot" />
+    <Content Include="Fonts\435f931d-7af1-4f3a-a084-3d7aed6cd568.ttf" />
+    <Content Include="Fonts\4f32268f-fd86-4960-b72c-4bb1ba75ec6f.eot" />
+    <Content Include="Fonts\5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff" />
+    <Content Include="Fonts\60f1dfd0-eea9-448c-84a0-e4e8d5ba7516.ttf" />
+    <Content Include="Fonts\6b0725b6-26e5-4bcf-8174-4d4b4d4217b9.woff" />
+    <Content Include="Fonts\7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff" />
+    <Content Include="Fonts\849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf" />
+    <Content Include="Fonts\8e7f81d1-94dd-47e6-94ce-9c278d5d1ecc.eot" />
+    <Content Include="Fonts\939cba03-5b40-4d01-9bc5-7589eca863db.woff" />
+    <Content Include="Fonts\a24b3f55-c8c8-41a1-a77e-7cdf417d82f6.eot" />
+    <Content Include="Fonts\add96dac-4679-4981-9390-74fd5a5bf61f.woff" />
+    <Content Include="Fonts\c33278bc-988e-440b-b4be-6acc095e6044.ttf" />
+    <Content Include="Fonts\cdd2cecb-bd0e-41e5-9ecd-ef60f52a35be.ttf" />
+    <Content Include="Fonts\d1dc54b2-878d-4693-8d6e-b442e99fef68.ttf" />
+    <Content Include="Fonts\f61bf0f6-c193-4100-b940-12a1a01dcee5.eot" />
+    <Content Include="Fonts\fe4d96a8-3161-4f0c-ac51-ed6a5df15918.eot" />
+    <Content Include="Fonts\ff039068-be8b-415c-b1a9-24eedee1c3ab.woff" />
+    <Content Include="Fonts\ff039068-be8b-415c-b1a9-24eedee1c3ab.woffcurl" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
