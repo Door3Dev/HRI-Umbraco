@@ -315,7 +315,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Umbraco\Install\Legacy\LoadStarterKits.ascx.cs">
       <DependentUpon>loadStarterKits.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

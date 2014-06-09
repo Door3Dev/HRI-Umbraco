@@ -3,4 +3,4 @@
     Layout = "MasterPage.cshtml";
 }
 
-@Html.Partial("RegisterForm", new Umbraco.Web.UI.Models.RegisterViewModel { RegistrationSuccessPage = Model.Content.GetPropertyValue<int>("RegistrationSuccess") })
+@Html.Partial("RegisterForm", new Umbraco.Web.UI.Models.RegisterFormViewModel { RegistrationSuccessPage = Model.Content.GetPropertyValue<int>("RegistrationSuccess") })

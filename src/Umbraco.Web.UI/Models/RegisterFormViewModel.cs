@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Umbraco.Web.UI.Models
 {
-    public class RegisterViewModel
+    public class RegisterFormViewModel
     {
         [Required]
         public string Username { get; set; }
