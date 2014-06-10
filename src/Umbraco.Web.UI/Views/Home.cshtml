@@ -11,61 +11,38 @@
             <div class="carousel-inner">
                 <div class="item">
                     <div class="slide">
-                        @{
-                            if(CurrentPage.HasValue("Image1Caption"))
-                            {
-                                <h1>@Umbraco.Field("Image1Caption")</h1>
-                            }
-                        }                       
+                        <h1>@Umbraco.Field("Image1Caption")</h1>                      
                         <a href='@Umbraco.Field("Image1Href")' class="btn btn-small hri-btn">
                             @Umbraco.Field("Image1ButtonText")<span class="caret"></span>
                         </a>
                     </div>
                     @{
-                        if (CurrentPage.HasValue("Image1")){
-                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
-                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
-                        }
+                      var dynamicMediaItem1 = Umbraco.Media(CurrentPage.Image1);
+                      <img src="@dynamicMediaItem1.umbracoFile" alt="@dynamicMediaItem1.Name" />
                     }
                 </div>
                 <div class="item">
-                    <div class="slide">
-                        @{
-                            if (CurrentPage.HasValue("Image2Caption"))
-                            {
-                                <h1>@Umbraco.Field("Image2Caption")</h1>
-                            }
-                        }
+                    <div class="slide">    
+                        <h1>@Umbraco.Field("Image2Caption")</h1>
                         <a href='@Umbraco.Field("Image2Href")' class="btn btn-small hri-btn">
                             @Umbraco.Field("Image2ButtonText")<span class="caret"></span>
                         </a>
                     </div>
                     @{
-                        if (CurrentPage.HasValue("Image2"))
-                        {
-                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
-                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
-                        }
+                      var dynamicMediaItem2 = Umbraco.Media(CurrentPage.Image2);
+                      <img src="@dynamicMediaItem2.umbracoFile" alt="@dynamicMediaItem2.Name" />
                     }
                 </div>
                 <div class="item">
                     <div class="slide">
-                        @{
-                            if (CurrentPage.HasValue("Image3Caption"))
-                            {
-                                <h1>@Umbraco.Field("Image3Caption")</h1>
-                            }
-                        }
+                        <h1>@Umbraco.Field("Image3Caption")</h1>   
                         <a href='@Umbraco.Field("Image3Href")' class="btn btn-small hri-btn">
                             @Umbraco.Field("Image3ButtonText")<span class="caret"></span>
                         </a>
                     </div>
                     @{
-                        if (CurrentPage.HasValue("Image3"))
-                        {
-                            var dynamicMediaItem = Umbraco.Media(CurrentPage.Image1);
-                            <img src="@dynamicMediaItem.umbracoFile" alt="@dynamicMediaItem.Name" />
-                        }
+                      var dynamicMediaItem3 = Umbraco.Media(CurrentPage.Image3);
+                      <img src="@dynamicMediaItem3.umbracoFile" alt="@dynamicMediaItem3.Name" />
                     }
                 </div>                
             </div>
@@ -80,29 +57,29 @@
 
     <div class="span4 widgets">
         <div class="row">
-            <a href="#" class="hp-plan-desc blue first">
+            <a href="@Umbraco.Field("Plan1Url")" class="hp-plan-desc blue first">
 
-                <h3>Individual and Family</h3>
+                <h3>@Umbraco.Field("Plan1Caption")</h3>
 
-                <p>New Yorkers can select from several options to get lower... &gt;</p>
-
-            </a>
-        </div>
-        <div class="row">
-            <a href="#" class="hp-plan-desc purple">
-
-                <h3>Small Group</h3>
-
-                <p>Now you can ensure competitive health care benefits and get the... &gt;</p>
+                <p>@Umbraco.Field("Plan1Text") &gt;</p>
 
             </a>
         </div>
         <div class="row">
-            <a href="#" class="hp-plan-desc green">
+            <a href="@Umbraco.Field("Plan2Url")" class="hp-plan-desc purple">
 
-                <h3>Broker</h3>
+                <h3>@Umbraco.Field("Plan2Caption")</h3>
 
-                <p>Find out why brokers appreciate our health care plans, which are... &gt;</p>
+                <p>@Umbraco.Field("Plan2Text") &gt;</p>
+
+            </a>
+        </div>
+        <div class="row">
+            <a href="@Umbraco.Field("Plan3Url")" class="hp-plan-desc green">
+
+                <h3>@Umbraco.Field("Plan3Caption")</h3>
+
+                <p>@Umbraco.Field("Plan3Text") &gt;</p>
             </a>
         </div>
     </div>
@@ -110,29 +87,14 @@
 
 <div class="bottom-cta row-fluid">
     <div class="span4">
-        <h4>Find a provider</h4>
-
-        <p>
-            We're proud to be using the MagnaCare Extra network, with access to thousands of doctors, specialists,
-            hospitals and other healthcare providers.
-        </p>
-        <a href="#">Search Provider Network &gt;</a>
+        @Umbraco.Field("Highlight1")
     </div>
 
     <div class="span4">
-        <h4>Medication coverage</h4>
-
-        <p>We’ve partnered with US Script to ensure access to the medications you need, when you need them. </p>
-        <a href="#">Download Formulary (PDF) &gt;</a>
+        @Umbraco.Field("Highlight2")
     </div>
 
     <div class="span4">
-        <h4>Special announcement</h4>
-
-        <p>
-            Lorem ipsum dolor sit amet, consectet adipiscing elit. Nulla et viverra ipsum, ut condimentum magna. Lorem
-            ipsum.
-        </p>
-        <a href="#">Lorem Ipsum Dolar Septa &gt;</a>
+        @Umbraco.Field("Highlight3")
     </div>
 </div>
