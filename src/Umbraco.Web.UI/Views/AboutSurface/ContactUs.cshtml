@@ -1,8 +1,8 @@
 ﻿@using Umbraco.Web.UI.Models
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    Layout = null;
+    Layout = "../MasterPage.cshtml";
 }
 
 
-@Html.Partial("ContactForm", new ContactFormViewModel())
+@Html.Action("ContactUs", "AboutSurface")

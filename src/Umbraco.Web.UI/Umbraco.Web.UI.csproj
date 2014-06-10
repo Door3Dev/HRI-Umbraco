@@ -314,6 +314,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\AboutSurfaceController.cs" />
     <Compile Include="Controllers\ContactFormSurfaceController.cs" />
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Models\ContactFormViewModel.cs" />
@@ -2110,7 +2111,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Partials\ContactForm.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>
@@ -2542,7 +2542,9 @@
     <Folder Include="Umbraco_Client\FolderBrowser\Images\" />
     <Folder Include="Umbraco_Client\Tags\images\" />
     <Folder Include="UserControls\" />
+    <Folder Include="Views\AboutSurface\" />
     <Folder Include="Views\MacroPartials\" />
+    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
