@@ -2545,6 +2545,7 @@
     <Folder Include="Views\AboutSurface\" />
     <Folder Include="Views\MacroPartials\" />
     <Folder Include="Views\Partials\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
