@@ -1,0 +1,46 @@
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+
+@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web
+@using Umbraco.Web.UI.Models
+@using Umbraco.Web.UI.Controllers
+
+@{
+    var loginModel = new LoginViewModel();
+    
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+}
+
+@* NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed *@
+@Html.RenderJsHere()
+
+@using (Html.BeginUmbracoForm<AuthenticationSurfaceController>("login"))
+{
+    <fieldset>
+        <legend>Login</legend>
+        
+        @Html.ValidationSummary("loginModel", true)
+
+        @Html.LabelFor(m => loginModel.Username)
+        @Html.TextBoxFor(m => loginModel.Username)
+        @Html.ValidationMessageFor(m => loginModel.Username)
+        <br />
+
+        @Html.LabelFor(m => loginModel.Password)
+        @Html.PasswordFor(m => loginModel.Password)
+        @Html.ValidationMessageFor(m => loginModel.Password)
+        <br />
+
+        @Html.LabelFor(m => loginModel.RememberMe)
+        @Html.CheckBoxFor(m => loginModel.RememberMe)        
+
+
+        <button>Login</button>
+    </fieldset>  
+}

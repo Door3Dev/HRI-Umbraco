@@ -1,0 +1,8 @@
+﻿@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+
+@{Html.RenderPartial("LoginForm", Model.Content);}
+
