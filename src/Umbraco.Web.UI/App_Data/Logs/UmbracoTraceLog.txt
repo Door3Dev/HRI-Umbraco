@@ -1,2 +1,3 @@
 ﻿2014-06-13 09:15:45,186 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 43] Begin request: http://localhost:7140/umbraco/ping.aspx.
 2014-06-13 09:20:45,200 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-13 09:25:45,196 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7140/umbraco/ping.aspx.
