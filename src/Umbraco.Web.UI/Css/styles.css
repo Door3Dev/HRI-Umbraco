@@ -2656,3 +2656,96 @@ input[type="radio"]:checked + label::before {
   content: url("../images/radio-checked.png");
 }
 */
+
+/* ------------ COMPARE PLANS ------------ */
+
+.hri-compare-plans h3 {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.hri-compare-plans .block {
+  border-top: 1px dashed #848484;
+  margin: 50px;
+  padding-top: 10px;
+  width: 90%;
+}
+
+.hri-compare-plans .block h3 {
+  margin: 0;
+}
+
+.hri-compare-plans .block div.desc {
+  padding-right: 100px;
+}
+
+.hri-compare-plans .block span.desc {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.hri-compare-plans label {
+  margin-bottom: 0;
+}
+
+.hri-compare-plans .expand-group .expand-link {
+  color: #752b8f;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.hri-compare-plans .expand-group .expand-link .link:hover {
+  text-decoration: underline;
+}
+
+.hri-compare-plans .expand-group .expand-content {
+  font-size: 12px;
+}
+
+.hri-compare-plans .county {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  display: none;
+}
+
+.hri-compare-plans .cover {
+  display: none;
+  padding: 10px 0;
+}
+
+.hri-compare-plans .child {
+  padding: 10px 0;
+}
+
+.hri-compare-plans .template {
+  display: none;
+}
+
+.hri-compare-plans .add-child i,
+.hri-compare-plans .remove-child i {
+  font-size: 20px;
+  padding-right: 3px;
+  margin-top: 3px;
+}
+
+.hri-compare-plans .checkbox.pad {
+  padding-left: 40px;
+}
+
+/* --------- AUTOCOMPLETE ----------- */
+.autocomplete-suggestions {
+  background: #fff;
+  border: 1px solid #cacaca;
+  box-shadow: 2px 2px 5px #cacaca;
+}
+
+.autocomplete-suggestion {
+  padding: 10px 20px;
+}
+
+.autocomplete-selected {
+  background: #f0f0f0;
+}

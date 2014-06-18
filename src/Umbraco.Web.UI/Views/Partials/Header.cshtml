@@ -27,11 +27,11 @@
           @foreach (var item in menuItems)
           {
             <li class="dropdown">
-            <a href="" data-toggle="dropdown" class="dropdown-toggle">@item.Name<span class="caret"></span></a>
+            <a href="" data-toggle="dropdown" class="dropdown-toggle">@Html.Raw(item.menuItemName)<span class="caret"></span></a>
             <ul class="dropdown-menu">
                     @foreach (var subpage in item.Children)
                     {
-                        <li class="sub-link"><a href="@subpage.Url">@subpage.Name</a></li>
+                        <li class="sub-link"><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
                     }
             </ul>
             </li>                   

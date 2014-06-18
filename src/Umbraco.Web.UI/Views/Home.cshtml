@@ -61,7 +61,7 @@
 
                 <h3>@Umbraco.Field("Plan1Caption")</h3>
 
-                <p>@Umbraco.Field("Plan1Text") &gt;</p>
+                <p>@Umbraco.Field("Plan1Text").ToString().Substring(0, 60) &gt;</p>
 
             </a>
         </div>
@@ -70,7 +70,7 @@
 
                 <h3>@Umbraco.Field("Plan2Caption")</h3>
 
-                <p>@Umbraco.Field("Plan2Text") &gt;</p>
+                <p>@Umbraco.Field("Plan2Text").ToString().Substring(0, 60) &gt;</p>
 
             </a>
         </div>
@@ -79,7 +79,7 @@
 
                 <h3>@Umbraco.Field("Plan3Caption")</h3>
 
-                <p>@Umbraco.Field("Plan3Text") &gt;</p>
+                <p>@Umbraco.Field("Plan3Text").ToString().Substring(0, 60) &gt;</p>
             </a>
         </div>
     </div>
