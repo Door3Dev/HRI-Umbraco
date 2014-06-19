@@ -1,0 +1,100 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+
+<div class="hri-common-hp row-fluid">
+    <div class="span8">
+
+        <div id="hri-carousel" class="carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="item">
+                    <div class="slide">
+                        <h1>@Umbraco.Field("Image1Caption")</h1>                      
+                        <a href='@Umbraco.Field("Image1Href")' class="btn btn-small hri-btn">
+                            @Umbraco.Field("Image1ButtonText")<span class="caret"></span>
+                        </a>
+                    </div>
+                    @{
+                      var dynamicMediaItem1 = Umbraco.Media(CurrentPage.Image1);
+                      <img src="@dynamicMediaItem1.umbracoFile" alt="@dynamicMediaItem1.Name" />
+                    }
+                </div>
+                <div class="item">
+                    <div class="slide">    
+                        <h1>@Umbraco.Field("Image2Caption")</h1>
+                        <a href='@Umbraco.Field("Image2Href")' class="btn btn-small hri-btn">
+                            @Umbraco.Field("Image2ButtonText")<span class="caret"></span>
+                        </a>
+                    </div>
+                    @{
+                      var dynamicMediaItem2 = Umbraco.Media(CurrentPage.Image2);
+                      <img src="@dynamicMediaItem2.umbracoFile" alt="@dynamicMediaItem2.Name" />
+                    }
+                </div>
+                <div class="item">
+                    <div class="slide">
+                        <h1>@Umbraco.Field("Image3Caption")</h1>   
+                        <a href='@Umbraco.Field("Image3Href")' class="btn btn-small hri-btn">
+                            @Umbraco.Field("Image3ButtonText")<span class="caret"></span>
+                        </a>
+                    </div>
+                    @{
+                      var dynamicMediaItem3 = Umbraco.Media(CurrentPage.Image3);
+                      <img src="@dynamicMediaItem3.umbracoFile" alt="@dynamicMediaItem3.Name" />
+                    }
+                </div>                
+            </div>
+
+            <ol class="carousel-indicators">
+                <li data-target="#hri-carousel" data-slide-to="0" class=""></li>
+                <li data-target="#hri-carousel" data-slide-to="1" class=""></li>
+                <li data-target="#hri-carousel" data-slide-to="2" class="active"></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="span4 widgets">
+        <div class="row">
+            <a href="@Umbraco.Field("Plan1Url")" class="hp-plan-desc blue first">
+
+                <h3>@Umbraco.Field("Plan1Caption")</h3>
+
+                <p>@Umbraco.Field("Plan1Text").ToString().Substring(0, 60) &gt;</p>
+
+            </a>
+        </div>
+        <div class="row">
+            <a href="@Umbraco.Field("Plan2Url")" class="hp-plan-desc purple">
+
+                <h3>@Umbraco.Field("Plan2Caption")</h3>
+
+                <p>@Umbraco.Field("Plan2Text").ToString().Substring(0, 60) &gt;</p>
+
+            </a>
+        </div>
+        <div class="row">
+            <a href="@Umbraco.Field("Plan3Url")" class="hp-plan-desc green">
+
+                <h3>@Umbraco.Field("Plan3Caption")</h3>
+
+                <p>@Umbraco.Field("Plan3Text").ToString().Substring(0, 60) &gt;</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-cta row-fluid">
+    <div class="span4">
+        @Umbraco.Field("Highlight1")
+    </div>
+
+    <div class="span4">
+        @Umbraco.Field("Highlight2")
+    </div>
+
+    <div class="span4">
+        @Umbraco.Field("Highlight3")
+    </div>
+</div>

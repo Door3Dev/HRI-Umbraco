@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+
+<div class="hri-common-careers">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="faq-banner"></div>
+    </div>
+    <div class="main-lead">
+      <div class="span3">
+        <h3>Careers</h3>
+        <ul class="unstyled inline breadcrumbs">
+          <li><a href="/">Home</a></li> ›
+          <li>Careers</li>
+        </ul>
+      </div>
+      <div class="span7">
+        <p>@Umbraco.Field("Header")</p>
+      </div>
+
+      <div class="span2">
+        <div class="pull-right expand-all">[ + ] Expand all</div>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span10 offset1">
+      @Umbraco.Field("Content")
+    </div>
+  </div>
+</div>
