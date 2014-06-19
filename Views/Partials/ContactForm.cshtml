@@ -17,20 +17,81 @@
 }
 else
 {
-    using (Html.BeginUmbracoForm<ContactFormSurfaceController>("HandleContactForm"))
+  using (Html.BeginUmbracoForm<ContactFormSurfaceController>("HandleContactForm", null, new { @class = "span6" }))
     {
         @Html.ValidationSummary(true)
         @Html.AntiForgeryToken()
+  
+        @Html.Label("Message Topic")
+        @Html.DropDownList(model => model.MessageTopic)
+  
+        @Html.Label("First Name")
+        @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Your Name" })
 
-        @Html.TextBoxFor(model => model.Name, new { placeholder = "Your Name" })
-        @Html.ValidationMessageFor(model => model.Name)
+        @Html.Label("Last Name")
+        @Html.TextBoxFor(model => model.LastName, new { placeholder = "Your Surname" })
 
+        @Html.Label("Email")
         @Html.TextBoxFor(model => model.Email, new { placeholder = "Email Address" })
         @Html.ValidationMessageFor(model => model.Email)
+  
+        @Html.Label("Phone Number")
+        @Html.TextBoxFor(model => model.Phone, new { placeholder = "Email Address" })
+        @Html.ValidationMessageFor(model => model.Phone)
 
+        @Html.Label("Type Your Message")
         @Html.TextBoxFor(model => model.Message, new { placeholder = "Your Message" })
         @Html.ValidationMessageFor(model => model.Message)
 
         <input type="submit" value="Send" />
     }
 }
+
+<form class="span6">
+  <label>
+    Message Topic<br>
+    <select>
+      <option>Please choose a topic</option>
+      <option>Billing Questions</option>
+      <option>ID cards</option>
+      <option>Benefits Questions</option>
+      <option>Provider</option>
+      <option>Network</option>
+      <option>Technical Issues</option>
+      <option>Claims option on our website</option>
+      <option>Cancellation</option>
+      <option>Update information</option>
+      <option>Pharmacy</option>
+    </select>
+  </label>
+
+  <div class="row-fluid">
+    <label class="span6 name">
+      First Name<br>
+      <input type="password">
+    </label>
+
+    <label class="span6">
+      Last Name<br>
+      <input type="text">
+    </label>
+  </div>
+
+  <label>
+    Email<br>
+    <input type="text">
+  </label>
+
+  <label>
+    Phone Number<br>
+    <input type="text">
+  </label>
+
+  <label>
+    Type Your Message<br>
+    <textarea rows="6"></textarea>
+  </label>
+
+
+  <input type="submit" class="btn hri-btn" value="Submit">
+</form>
