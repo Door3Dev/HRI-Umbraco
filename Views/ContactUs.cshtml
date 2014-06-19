@@ -3,5 +3,26 @@
 @{
     Layout = "MasterPage.cshtml";
 }
+<div class="hri-contact-us">
+  <h4>
+    Send us a message and we'll get back to you usually within two business days. Or give us a call to speak
+    with someone immediately.
+  </h4>
 
-@Html.Partial("ContactForm", new ContactFormViewModel())
+  <div class="row-fluid">
+    @Html.Partial("ContactForm", new ContactFormViewModel()))
+
+    <div class="span6 help">
+      <div class="row">
+        <p class="phone">
+          <span>@Umbraco.Field("Phone")</span><br>
+          @Umbraco.Field("Schedule")</p><br>
+
+        @Umbraco.Field("Address")<br>
+        
+        @Umbraco.Field("AdditionalInformation")
+
+      </div>
+    </div>
+  </div>
+</div>
