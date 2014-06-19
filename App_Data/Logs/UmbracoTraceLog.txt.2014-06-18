@@ -1,0 +1,729 @@
+﻿2014-06-13 09:15:45,186 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 43] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-13 09:20:45,200 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-13 09:25:45,196 [58] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-18 16:41:44,378 [10] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application starting
+2014-06-18 16:41:44,454 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Determining hash of code files on disk
+2014-06-18 16:41:44,485 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Hash determined (took 29ms)
+2014-06-18 16:41:44,502 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2014-06-18 16:41:44,504 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.IApplicationStartupHandler for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:44,929 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type umbraco.interfaces.IApplicationStartupHandler and resolution FindAllTypes was successful = True
+2014-06-18 16:41:44,930 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 34 (took 425ms)
+2014-06-18 16:41:45,251 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2014-06-18 16:41:45,252 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,262 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,262 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 10ms)
+2014-06-18 16:41:45,262 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2014-06-18 16:41:45,263 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyValueConverter for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,274 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyValueConverter and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,274 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 14 (took 11ms)
+2014-06-18 16:41:45,306 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2014-06-18 16:41:45,306 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.Mvc.SurfaceController for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,321 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Mvc.SurfaceController and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,321 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 7 (took 14ms)
+2014-06-18 16:41:45,322 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2014-06-18 16:41:45,322 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.WebApi.UmbracoApiController for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,335 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.WebApi.UmbracoApiController and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,335 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 30 (took 13ms)
+2014-06-18 16:41:45,346 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2014-06-18 16:41:45,346 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.Media.IThumbnailProvider for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,360 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IThumbnailProvider and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,362 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 3 (took 14ms)
+2014-06-18 16:41:45,363 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2014-06-18 16:41:45,363 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Core.Media.IImageUrlProvider for resolution FindAllTypes by assembly scan
+2014-06-18 16:41:45,376 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Core.Media.IImageUrlProvider and resolution FindAllTypes was successful = True
+2014-06-18 16:41:45,377 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 1 (took 13ms)
+2014-06-18 16:41:46,116 [10] DEBUG Umbraco.Core.ObjectResolution.Resolution - [Thread 1] Freezing resolution
+2014-06-18 16:41:46,139 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.IApplication
+2014-06-18 16:41:46,139 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.IApplication for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 16:41:46,152 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.IApplication, found 7 (took 13ms)
+2014-06-18 16:41:46,197 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-06-18 16:41:46,198 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types Umbraco.Web.Trees.TreeController for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 16:41:46,208 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Caching of typelist for type Umbraco.Web.Trees.TreeController and resolution FindTypesWithAttribute was successful = True
+2014-06-18 16:41:46,208 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 10ms)
+2014-06-18 16:41:46,220 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Starting resolution types of umbraco.interfaces.ITree
+2014-06-18 16:41:46,220 [10] DEBUG Umbraco.Core.PluginManager - [Thread 1] Assembly changes detected, loading types umbraco.interfaces.ITree for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 16:41:46,236 [10] INFO  Umbraco.Core.PluginManager - [Thread 1] Completed resolution of types of umbraco.interfaces.ITree, found 19 (took 16ms)
+2014-06-18 16:41:46,248 [10] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Initializing Examine and binding to business logic events
+2014-06-18 16:41:46,261 [10] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalIndexer indexer initializing, Provider=InternalIndexer, NodeId=-1
+2014-06-18 16:41:48,745 [10] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] InternalMemberIndexer indexer initializing, Provider=InternalMemberIndexer, NodeId=-1
+2014-06-18 16:41:48,752 [10] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 1] ExternalIndexer indexer initializing, Provider=ExternalIndexer, NodeId=-1
+2014-06-18 16:41:49,088 [10] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 1] Adding examine event handlers for index providers: 3
+2014-06-18 16:41:49,099 [10] DEBUG Umbraco.Core.CoreBootManager - [Thread 1] Umbraco application startup complete (took 4686ms)
+2014-06-18 16:41:50,189 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Begin request: http://localhost:7140/.
+2014-06-18 16:41:50,291 [10] DEBUG umbraco.content - [Thread 5] Initializing content on thread '' (Threadpool? True)
+2014-06-18 16:41:50,296 [10] INFO  umbraco.content - [Thread 5] Loading content from database...
+2014-06-18 16:41:50,296 [10] DEBUG umbraco.content - [Thread 5] Republishing starting
+2014-06-18 16:42:21,856 [10] DEBUG umbraco.content - [Thread 5] Xml Pages loaded
+2014-06-18 16:42:21,859 [10] DEBUG umbraco.content - [Thread 5] Done republishing Xml Index
+2014-06-18 16:42:21,859 [10] DEBUG umbraco.content - [Thread 5] Content initialized (loaded)
+2014-06-18 16:42:21,885 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindDomain: Uri="http://localhost:7140/"
+2014-06-18 16:42:22,507 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindDomain: Matches no domain
+2014-06-18 16:42:23,134 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindDomain: Culture="en-US"
+2014-06-18 16:42:23,135 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindPublishedContentAndTemplate: Path="/"
+2014-06-18 16:42:23,136 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindPublishedContent: Begin finders
+2014-06-18 16:42:23,139 [10] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 5] Test route "/"
+2014-06-18 16:42:23,159 [10] INFO  Umbraco.Core.PluginManager - [Thread 5] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2014-06-18 16:42:23,160 [10] DEBUG Umbraco.Core.PluginManager - [Thread 5] Assembly changes detected, loading types Umbraco.Core.Persistence.Mappers.BaseMapper for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 16:42:23,172 [10] DEBUG Umbraco.Core.PluginManager - [Thread 5] Caching of typelist for type Umbraco.Core.Persistence.Mappers.BaseMapper and resolution FindTypesWithAttribute was successful = True
+2014-06-18 16:42:23,172 [10] INFO  Umbraco.Core.PluginManager - [Thread 5] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 22 (took 12ms)
+2014-06-18 16:42:23,866 [10] INFO  Umbraco.Core.PluginManager - [Thread 5] Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2014-06-18 16:42:23,867 [10] DEBUG Umbraco.Core.PluginManager - [Thread 5] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IParameterEditor for resolution FindAllTypes by assembly scan
+2014-06-18 16:42:23,888 [10] DEBUG Umbraco.Core.PluginManager - [Thread 5] Caching of typelist for type Umbraco.Core.PropertyEditors.IParameterEditor and resolution FindAllTypes was successful = True
+2014-06-18 16:42:23,888 [10] INFO  Umbraco.Core.PluginManager - [Thread 5] Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 43 (took 22ms)
+2014-06-18 16:42:24,186 [10] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 5] Got content, id=1124
+2014-06-18 16:42:24,187 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindPublishedContent: End finders, a document was found (took 1050ms)
+2014-06-18 16:42:24,188 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] HandlePublishedContent: Begin
+2014-06-18 16:42:24,201 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] EnsurePublishedContentAccess: Page is not protected
+2014-06-18 16:42:24,201 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] HandlePublishedContent: End
+2014-06-18 16:42:24,212 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindTemplate: Look for template id=1048
+2014-06-18 16:42:24,218 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindTemplate: Got template id=1048 alias="Home"
+2014-06-18 16:42:24,218 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] FindTemplate: Running with template id=1048 alias="Home"
+2014-06-18 16:42:24,221 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] HandleWildcardDomains: Path="-1,1124"
+2014-06-18 16:42:24,224 [10] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 5] HandleWildcardDomains: No match.
+2014-06-18 16:42:24,232 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-06-18 16:42:25,325 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image1Caption
+2014-06-18 16:42:25,362 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image1Caption
+2014-06-18 16:42:25,363 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:25,363 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 37ms)
+2014-06-18 16:42:25,387 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image1Href
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image1Href
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image1ButtonText
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image1ButtonText
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:25,388 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,496 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image2Caption
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image2Caption
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image2Href
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image2Href
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image2ButtonText
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image2ButtonText
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:34,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,196 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image3Caption
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image3Caption
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image3Href
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image3Href
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,197 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,198 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Image3ButtonText
+2014-06-18 16:42:40,198 [10] DEBUG umbraco.item - [Thread 5] Start parsing Image3ButtonText
+2014-06-18 16:42:40,198 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:40,198 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,493 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan1Url
+2014-06-18 16:42:44,494 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan1Url
+2014-06-18 16:42:44,494 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,494 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,494 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan1Caption
+2014-06-18 16:42:44,495 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan1Caption
+2014-06-18 16:42:44,495 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,495 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,495 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan1Text
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan1Text
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan2Url
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan2Url
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,496 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan2Caption
+2014-06-18 16:42:44,497 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan2Caption
+2014-06-18 16:42:44,497 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,497 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan2Text
+2014-06-18 16:42:44,498 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan2Text
+2014-06-18 16:42:44,498 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,498 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,498 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan3Url
+2014-06-18 16:42:44,499 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan3Url
+2014-06-18 16:42:44,499 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,499 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,499 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan3Caption
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan3Caption
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Plan3Text
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Start parsing Plan3Text
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Highlight1
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Start parsing Highlight1
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,500 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,501 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Highlight2
+2014-06-18 16:42:44,501 [10] DEBUG umbraco.item - [Thread 5] Start parsing Highlight2
+2014-06-18 16:42:44,501 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,501 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,501 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Item: Highlight3
+2014-06-18 16:42:44,502 [10] DEBUG umbraco.item - [Thread 5] Start parsing Highlight3
+2014-06-18 16:42:44,502 [10] DEBUG umbraco.item - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:44,502 [10] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 5] Complete (took 0ms)
+2014-06-18 16:42:46,004 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-18 16:42:47,248 [10] DEBUG umbraco.content - [Thread 7] Xml saved in 00:00:00.0113363
+2014-06-18 16:42:54,085 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Total milliseconds for umbraco request to process: 63894.6065
+2014-06-18 16:42:54,423 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Begin request: http://localhost:7140/media/1002/carousel1.png.
+2014-06-18 16:42:54,430 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 6] Begin request: http://localhost:7140/images/icon_twitter.png.
+2014-06-18 16:42:54,432 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7140/images/icon_facebook.png.
+2014-06-18 16:42:54,466 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://localhost:7140/css/fonts.css.
+2014-06-18 16:42:54,472 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/media/1003/carousel2.png.
+2014-06-18 16:42:54,486 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7140/css/bootstrap.css.
+2014-06-18 16:42:54,498 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://localhost:7140/css/styles.css.
+2014-06-18 16:42:54,515 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7140/Scripts/custom.js.
+2014-06-18 16:42:54,530 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/Scripts/jquery-1.9.1.js.
+2014-06-18 16:42:54,571 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 6] Begin request: http://localhost:7140/images/icon_linkedin.png.
+2014-06-18 16:42:54,587 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/media/1001/carousel3.png.
+2014-06-18 16:42:54,625 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 16:42:55,611 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/images/nav-user.png.
+2014-06-18 16:42:55,634 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 7] Begin request: http://localhost:7140/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 16:42:55,639 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 8] Begin request: http://localhost:7140/images/hri-logo-sm.png.
+2014-06-18 16:42:55,648 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 6] Begin request: http://localhost:7140/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 16:42:55,664 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 5] Begin request: http://localhost:7140/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 16:43:00,571 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 6] Begin request: http://localhost:7140/__browserLink/requestData/414b9f7c21bd4954a90437db1101ff39.
+2014-06-18 16:47:45,994 [10] DEBUG Umbraco.Web.UmbracoModule - [Thread 20] Begin request: http://localhost:7140/umbraco/ping.aspx.
+2014-06-18 23:01:01,560 [32] DEBUG Umbraco.Core.CoreBootManager - [Thread 27] Umbraco application starting
+2014-06-18 23:01:01,629 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Determining hash of code files on disk
+2014-06-18 23:01:01,642 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Hash determined (took 10ms)
+2014-06-18 23:01:01,652 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2014-06-18 23:01:01,654 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types umbraco.interfaces.IApplicationStartupHandler for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:01,847 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type umbraco.interfaces.IApplicationStartupHandler and resolution FindAllTypes was successful = True
+2014-06-18 23:01:01,848 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 34 (took 194ms)
+2014-06-18 23:01:01,955 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2014-06-18 23:01:01,956 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:01,959 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter and resolution FindAllTypes was successful = True
+2014-06-18 23:01:01,959 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 3ms)
+2014-06-18 23:01:01,959 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2014-06-18 23:01:01,959 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IPropertyValueConverter for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:01,962 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Core.PropertyEditors.IPropertyValueConverter and resolution FindAllTypes was successful = True
+2014-06-18 23:01:01,963 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 14 (took 3ms)
+2014-06-18 23:01:01,986 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2014-06-18 23:01:01,986 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Web.Mvc.SurfaceController for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:01,990 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Web.Mvc.SurfaceController and resolution FindAllTypes was successful = True
+2014-06-18 23:01:01,990 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 7 (took 3ms)
+2014-06-18 23:01:01,991 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2014-06-18 23:01:01,991 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Web.WebApi.UmbracoApiController for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:01,994 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Web.WebApi.UmbracoApiController and resolution FindAllTypes was successful = True
+2014-06-18 23:01:01,994 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 30 (took 3ms)
+2014-06-18 23:01:02,001 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2014-06-18 23:01:02,002 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Core.Media.IThumbnailProvider for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:02,005 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Core.Media.IThumbnailProvider and resolution FindAllTypes was successful = True
+2014-06-18 23:01:02,005 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 3 (took 3ms)
+2014-06-18 23:01:02,006 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2014-06-18 23:01:02,006 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Core.Media.IImageUrlProvider for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:02,009 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Core.Media.IImageUrlProvider and resolution FindAllTypes was successful = True
+2014-06-18 23:01:02,009 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 1 (took 2ms)
+2014-06-18 23:01:03,188 [32] DEBUG Umbraco.Core.ObjectResolution.Resolution - [Thread 27] Freezing resolution
+2014-06-18 23:01:03,233 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-06-18 23:01:03,233 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types Umbraco.Web.Trees.TreeController for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 23:01:03,239 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Caching of typelist for type Umbraco.Web.Trees.TreeController and resolution FindTypesWithAttribute was successful = True
+2014-06-18 23:01:03,240 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 4 (took 6ms)
+2014-06-18 23:01:03,255 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of umbraco.interfaces.ITree
+2014-06-18 23:01:03,255 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types umbraco.interfaces.ITree for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 23:01:03,262 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of umbraco.interfaces.ITree, found 19 (took 7ms)
+2014-06-18 23:01:03,271 [32] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 27] Initializing Examine and binding to business logic events
+2014-06-18 23:01:03,291 [32] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 27] InternalIndexer indexer initializing, Provider=InternalIndexer, NodeId=-1
+2014-06-18 23:01:03,393 [32] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 27] InternalMemberIndexer indexer initializing, Provider=InternalMemberIndexer, NodeId=-1
+2014-06-18 23:01:03,407 [32] DEBUG UmbracoExamine.DataServices.UmbracoLogService - [Thread 27] ExternalIndexer indexer initializing, Provider=ExternalIndexer, NodeId=-1
+2014-06-18 23:01:03,438 [32] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 27] Adding examine event handlers for index providers: 3
+2014-06-18 23:01:03,444 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Starting resolution types of umbraco.interfaces.IApplication
+2014-06-18 23:01:03,444 [32] DEBUG Umbraco.Core.PluginManager - [Thread 27] Assembly changes detected, loading types umbraco.interfaces.IApplication for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 23:01:03,451 [32] INFO  Umbraco.Core.PluginManager - [Thread 27] Completed resolution of types of umbraco.interfaces.IApplication, found 7 (took 7ms)
+2014-06-18 23:01:03,469 [32] DEBUG Umbraco.Core.CoreBootManager - [Thread 27] Umbraco application startup complete (took 1872ms)
+2014-06-18 23:01:04,058 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost/.
+2014-06-18 23:01:04,058 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://localhost/.
+2014-06-18 23:01:04,266 [32] DEBUG umbraco.content - [Thread 33] Initializing content on thread '' (Threadpool? True)
+2014-06-18 23:01:04,268 [32] INFO  umbraco.content - [Thread 33] Loading content from disk cache...
+2014-06-18 23:01:04,272 [32] DEBUG umbraco.content - [Thread 33] Content initialized (loaded)
+2014-06-18 23:01:04,282 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindDomain: Uri="http://localhost/"
+2014-06-18 23:01:04,291 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindDomain: Uri="http://localhost/"
+2014-06-18 23:01:04,332 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindDomain: Matches no domain
+2014-06-18 23:01:04,332 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindDomain: Matches no domain
+2014-06-18 23:01:04,361 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindDomain: Culture="en-US"
+2014-06-18 23:01:04,361 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindDomain: Culture="en-US"
+2014-06-18 23:01:04,362 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindPublishedContentAndTemplate: Path="/"
+2014-06-18 23:01:04,362 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindPublishedContentAndTemplate: Path="/"
+2014-06-18 23:01:04,364 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindPublishedContent: Begin finders
+2014-06-18 23:01:04,365 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindPublishedContent: Begin finders
+2014-06-18 23:01:04,369 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 31] Test route "/"
+2014-06-18 23:01:04,369 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 33] Test route "/"
+2014-06-18 23:01:04,406 [32] INFO  Umbraco.Core.PluginManager - [Thread 33] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2014-06-18 23:01:04,406 [32] DEBUG Umbraco.Core.PluginManager - [Thread 33] Assembly changes detected, loading types Umbraco.Core.Persistence.Mappers.BaseMapper for resolution FindTypesWithAttribute by assembly scan
+2014-06-18 23:01:04,409 [32] DEBUG Umbraco.Core.PluginManager - [Thread 33] Caching of typelist for type Umbraco.Core.Persistence.Mappers.BaseMapper and resolution FindTypesWithAttribute was successful = True
+2014-06-18 23:01:04,410 [32] INFO  Umbraco.Core.PluginManager - [Thread 33] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 22 (took 3ms)
+2014-06-18 23:01:04,912 [32] INFO  Umbraco.Core.PluginManager - [Thread 33] Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2014-06-18 23:01:04,912 [32] DEBUG Umbraco.Core.PluginManager - [Thread 33] Assembly changes detected, loading types Umbraco.Core.PropertyEditors.IParameterEditor for resolution FindAllTypes by assembly scan
+2014-06-18 23:01:04,927 [32] DEBUG Umbraco.Core.PluginManager - [Thread 33] Caching of typelist for type Umbraco.Core.PropertyEditors.IParameterEditor and resolution FindAllTypes was successful = True
+2014-06-18 23:01:04,927 [32] INFO  Umbraco.Core.PluginManager - [Thread 33] Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 43 (took 14ms)
+2014-06-18 23:01:05,433 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 33] Got content, id=1124
+2014-06-18 23:01:05,435 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindPublishedContent: End finders, a document was found (took 1068ms)
+2014-06-18 23:01:05,437 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 31] Got content, id=1124
+2014-06-18 23:01:05,437 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindPublishedContent: End finders, a document was found (took 1072ms)
+2014-06-18 23:01:05,438 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] HandlePublishedContent: Begin
+2014-06-18 23:01:05,438 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] HandlePublishedContent: Begin
+2014-06-18 23:01:05,449 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] EnsurePublishedContentAccess: Page is not protected
+2014-06-18 23:01:05,449 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] HandlePublishedContent: End
+2014-06-18 23:01:05,449 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] EnsurePublishedContentAccess: Page is not protected
+2014-06-18 23:01:05,449 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] HandlePublishedContent: End
+2014-06-18 23:01:05,455 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindTemplate: Look for template id=1048
+2014-06-18 23:01:05,455 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindTemplate: Look for template id=1048
+2014-06-18 23:01:05,459 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindTemplate: Got template id=1048 alias="Home"
+2014-06-18 23:01:05,459 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindTemplate: Got template id=1048 alias="Home"
+2014-06-18 23:01:05,460 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] FindTemplate: Running with template id=1048 alias="Home"
+2014-06-18 23:01:05,460 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] FindTemplate: Running with template id=1048 alias="Home"
+2014-06-18 23:01:05,463 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] HandleWildcardDomains: Path="-1,1124"
+2014-06-18 23:01:05,463 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] HandleWildcardDomains: Path="-1,1124"
+2014-06-18 23:01:05,465 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 33] HandleWildcardDomains: No match.
+2014-06-18 23:01:05,465 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 31] HandleWildcardDomains: No match.
+2014-06-18 23:01:05,474 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-06-18 23:01:05,474 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-06-18 23:01:06,263 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image1Caption
+2014-06-18 23:01:06,263 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image1Caption
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image1Caption
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image1Caption
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 61ms)
+2014-06-18 23:01:06,324 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 61ms)
+2014-06-18 23:01:06,331 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image1Href
+2014-06-18 23:01:06,331 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image1Href
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image1Href
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image1Href
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image1ButtonText
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image1ButtonText
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image1ButtonText
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image1ButtonText
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,332 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,956 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image2Caption
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image2Caption
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image2Href
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image2Href
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image2ButtonText
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image2ButtonText
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image2Caption
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image2Caption
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image2Href
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image2Href
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,957 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image2ButtonText
+2014-06-18 23:01:06,958 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image2ButtonText
+2014-06-18 23:01:06,958 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:06,958 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image3Caption
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image3Caption
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image3Href
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image3Href
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Image3ButtonText
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Start parsing Image3ButtonText
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,006 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image3Caption
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image3Caption
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image3Href
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image3Href
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,007 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,008 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Image3ButtonText
+2014-06-18 23:01:07,008 [32] DEBUG umbraco.item - [Thread 31] Start parsing Image3ButtonText
+2014-06-18 23:01:07,008 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,008 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan1Url
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan1Url
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan1Caption
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan1Caption
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,051 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan1Text
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan1Text
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan2Url
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan2Url
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan2Caption
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan2Caption
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan2Text
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan2Text
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan3Url
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan3Url
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan1Url
+2014-06-18 23:01:07,052 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan3Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan1Url
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan3Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan1Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Plan3Text
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan1Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Start parsing Plan3Text
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan1Text
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Highlight1
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan1Text
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Start parsing Highlight1
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan2Url
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Highlight2
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan2Url
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan2Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan2Caption
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan2Text
+2014-06-18 23:01:07,053 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan2Text
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan3Url
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan3Url
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan3Caption
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan3Caption
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Plan3Text
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Start parsing Plan3Text
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Highlight1
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Start parsing Highlight1
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,054 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Highlight2
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 31] Start parsing Highlight2
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 33] Start parsing Highlight2
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 4ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 5ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Item: Highlight3
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Item: Highlight3
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 31] Start parsing Highlight3
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 33] Start parsing Highlight3
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 31] Complete (took 0ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.item - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:07,059 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 33] Complete (took 0ms)
+2014-06-18 23:01:09,266 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Total milliseconds for umbraco request to process: 5204
+2014-06-18 23:01:09,266 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Total milliseconds for umbraco request to process: 5203
+2014-06-18 23:01:09,364 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost/css/bootstrap.css.
+2014-06-18 23:01:09,365 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost/css/styles.css.
+2014-06-18 23:01:09,367 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 37] Begin request: http://localhost/css/fonts.css.
+2014-06-18 23:01:09,371 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost/media/1001/carousel3.png.
+2014-06-18 23:01:09,371 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 37] Begin request: http://localhost/media/1002/carousel1.png.
+2014-06-18 23:01:09,373 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost/Scripts/jquery-1.9.1.js.
+2014-06-18 23:01:09,376 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://localhost/Scripts/custom.js.
+2014-06-18 23:01:09,385 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost/media/1003/carousel2.png.
+2014-06-18 23:01:09,431 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost/images/icon_facebook.png.
+2014-06-18 23:01:09,434 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost/images/icon_twitter.png.
+2014-06-18 23:01:09,440 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost/images/icon_linkedin.png.
+2014-06-18 23:01:09,445 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:01:09,450 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://localhost/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:01:09,453 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://localhost/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:01:09,481 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost/images/hri-logo-sm.png.
+2014-06-18 23:01:09,486 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://localhost/images/nav-user.png.
+2014-06-18 23:01:09,714 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:01:09,747 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://localhost/images/favicon.ico.
+2014-06-18 23:02:03,092 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:02:16,228 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://23.21.196.149/.
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindDomain: Uri="http://23.21.196.149/"
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindDomain: Matches no domain
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindDomain: Culture="en-US"
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindPublishedContentAndTemplate: Path="/"
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindPublishedContent: Begin finders
+2014-06-18 23:02:16,229 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 39] Test route "/"
+2014-06-18 23:02:16,230 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 39] Got content, id=1124
+2014-06-18 23:02:16,230 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindPublishedContent: End finders, a document was found (took 1ms)
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] HandlePublishedContent: Begin
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] EnsurePublishedContentAccess: Page is not protected
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] HandlePublishedContent: End
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindTemplate: Look for template id=1048
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindTemplate: Got template id=1048 alias="Home"
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] FindTemplate: Running with template id=1048 alias="Home"
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] HandleWildcardDomains: Path="-1,1124"
+2014-06-18 23:02:16,231 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 39] HandleWildcardDomains: No match.
+2014-06-18 23:02:16,232 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image1Caption
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image1Caption
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image1Href
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image1Href
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image1ButtonText
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image1ButtonText
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,236 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image2Caption
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image2Caption
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image2Href
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image2Href
+2014-06-18 23:02:16,238 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,239 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,239 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image2ButtonText
+2014-06-18 23:02:16,239 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image2ButtonText
+2014-06-18 23:02:16,239 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,239 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image3Caption
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image3Caption
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image3Href
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image3Href
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Image3ButtonText
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Start parsing Image3ButtonText
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,240 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan1Url
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan1Url
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan1Caption
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan1Caption
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan1Text
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan1Text
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan2Url
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan2Url
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,242 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan2Caption
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan2Caption
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan2Text
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan2Text
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan3Url
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan3Url
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan3Caption
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan3Caption
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Plan3Text
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Plan3Text
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Highlight1
+2014-06-18 23:02:16,243 [32] DEBUG umbraco.item - [Thread 39] Start parsing Highlight1
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Highlight2
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.item - [Thread 39] Start parsing Highlight2
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Item: Highlight3
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.item - [Thread 39] Start parsing Highlight3
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.item - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,244 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 39] Complete (took 0ms)
+2014-06-18 23:02:16,262 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Total milliseconds for umbraco request to process: 34
+2014-06-18 23:02:16,411 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://23.21.196.149/css/bootstrap.css.
+2014-06-18 23:02:16,436 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://23.21.196.149/css/fonts.css.
+2014-06-18 23:02:16,442 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://23.21.196.149/css/styles.css.
+2014-06-18 23:02:16,481 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 37] Begin request: http://23.21.196.149/Scripts/jquery-1.9.1.js.
+2014-06-18 23:02:16,518 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://23.21.196.149/media/1001/carousel3.png.
+2014-06-18 23:02:16,524 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://23.21.196.149/media/1002/carousel1.png.
+2014-06-18 23:02:16,646 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://23.21.196.149/Scripts/custom.js.
+2014-06-18 23:02:16,761 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://23.21.196.149/media/1003/carousel2.png.
+2014-06-18 23:02:16,842 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://23.21.196.149/images/icon_facebook.png.
+2014-06-18 23:02:16,848 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 35] Begin request: http://23.21.196.149/images/icon_twitter.png.
+2014-06-18 23:02:16,951 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://23.21.196.149/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:02:16,976 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 33] Begin request: http://23.21.196.149/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:02:17,001 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 29] Begin request: http://23.21.196.149/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:02:17,091 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 40] Begin request: http://23.21.196.149/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:02:17,099 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 34] Begin request: http://23.21.196.149/images/hri-logo-sm.png.
+2014-06-18 23:02:17,112 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://23.21.196.149/images/nav-user.png.
+2014-06-18 23:02:17,138 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 44] Begin request: http://23.21.196.149/images/icon_linkedin.png.
+2014-06-18 23:02:17,255 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://23.21.196.149/images/favicon.ico.
+2014-06-18 23:07:03,096 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:12:03,101 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 39] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:17:03,108 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 31] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:22:03,114 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 36] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:27:03,118 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 45] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:32:03,126 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 42] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:37:03,129 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 54] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:42:03,135 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 24] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:45:19,644 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://23.21.196.149/.
+2014-06-18 23:45:19,646 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindDomain: Uri="http://23.21.196.149/"
+2014-06-18 23:45:19,648 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindDomain: Matches no domain
+2014-06-18 23:45:19,648 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindDomain: Culture="en-US"
+2014-06-18 23:45:19,648 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindPublishedContentAndTemplate: Path="/"
+2014-06-18 23:45:19,648 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindPublishedContent: Begin finders
+2014-06-18 23:45:19,648 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 13] Test route "/"
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.ContentFinderByNiceUrl - [Thread 13] Got content, id=1124
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindPublishedContent: End finders, a document was found (took 1ms)
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] HandlePublishedContent: Begin
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] EnsurePublishedContentAccess: Page is not protected
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] HandlePublishedContent: End
+2014-06-18 23:45:19,649 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindTemplate: Look for template id=1048
+2014-06-18 23:45:19,657 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindTemplate: Got template id=1048 alias="Home"
+2014-06-18 23:45:19,657 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] FindTemplate: Running with template id=1048 alias="Home"
+2014-06-18 23:45:19,657 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] HandleWildcardDomains: Path="-1,1124"
+2014-06-18 23:45:19,657 [32] DEBUG Umbraco.Web.Routing.PublishedContentRequestEngine - [Thread 13] HandleWildcardDomains: No match.
+2014-06-18 23:45:19,657 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Response status: Redirect=none, Is404=false, StatusCode=0
+2014-06-18 23:45:19,661 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image1Caption
+2014-06-18 23:45:19,661 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image1Caption
+2014-06-18 23:45:19,661 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,661 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,661 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image1Href
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image1Href
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image1ButtonText
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image1ButtonText
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,662 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image2Caption
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image2Caption
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image2Href
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image2Href
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image2ButtonText
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image2ButtonText
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,705 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,722 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image3Caption
+2014-06-18 23:45:19,722 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image3Caption
+2014-06-18 23:45:19,722 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,722 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image3Href
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image3Href
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Image3ButtonText
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.item - [Thread 13] Start parsing Image3ButtonText
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,723 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan1Url
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan1Url
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan1Caption
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan1Caption
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan1Text
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan1Text
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan2Url
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan2Url
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan2Caption
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan2Caption
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,740 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan2Text
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan2Text
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan3Url
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan3Url
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan3Caption
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan3Caption
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Plan3Text
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Start parsing Plan3Text
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Highlight1
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Start parsing Highlight1
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,741 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Highlight2
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.item - [Thread 13] Start parsing Highlight2
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Item: Highlight3
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.item - [Thread 13] Start parsing Highlight3
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.item - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,742 [32] DEBUG umbraco.presentation.templateControls.ItemRenderer - [Thread 13] Complete (took 0ms)
+2014-06-18 23:45:19,758 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Total milliseconds for umbraco request to process: 114
+2014-06-18 23:45:19,816 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/css/bootstrap.css.
+2014-06-18 23:45:19,858 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://23.21.196.149/css/fonts.css.
+2014-06-18 23:45:19,862 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 15] Begin request: http://23.21.196.149/css/styles.css.
+2014-06-18 23:45:19,935 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://23.21.196.149/media/1001/carousel3.png.
+2014-06-18 23:45:19,936 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://23.21.196.149/media/1002/carousel1.png.
+2014-06-18 23:45:19,940 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/Scripts/jquery-1.9.1.js.
+2014-06-18 23:45:19,985 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://23.21.196.149/Scripts/custom.js.
+2014-06-18 23:45:20,198 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://23.21.196.149/media/1003/carousel2.png.
+2014-06-18 23:45:20,270 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://23.21.196.149/images/icon_facebook.png.
+2014-06-18 23:45:20,327 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/images/icon_twitter.png.
+2014-06-18 23:45:20,376 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://23.21.196.149/images/icon_linkedin.png.
+2014-06-18 23:45:20,770 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://23.21.196.149/images/nav-user.png.
+2014-06-18 23:45:20,771 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://23.21.196.149/fonts/7147ec3a-8ff8-4ec9-8c5c-bd1571dc6ae6.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:45:20,772 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/fonts/5a05cf7f-f332-456f-ae67-d8c26e0d35b3.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:45:20,921 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://23.21.196.149/fonts/939cba03-5b40-4d01-9bc5-7589eca863db.woff?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:45:20,990 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 13] Begin request: http://23.21.196.149/images/hri-logo-sm.png.
+2014-06-18 23:45:21,053 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://23.21.196.149/fonts/849bc5b9-a2ff-4343-977b-26ba8bd24a60.ttf?d44f19a684109620e4841571a390e818464d53007380443c77caecd356c9fd4641f9c04d94bfc72b184ba47bc8c51c8a55ac9003cd2116d745d6b10e8f8b6078bb6204172dae9370b41c1e544d7d380c807598f45274d28b0323bbc5dfeb94785b8d524784419925eb34cb28bd3179254331ad2dc1e14a4e1cefcbc32abf91a061e74e2855128d1042845d990731bbee679aeb3027979e4bc468413fe56d86d3f1cbb8c5b8baf4073ac726548ee2d8e0285eec2f634035a9&projectId=a6ca0288-6b86-4660-9ab2-ec814a3b93b4.
+2014-06-18 23:45:22,317 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/images/favicon.ico.
+2014-06-18 23:45:30,827 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://23.21.196.149/umbraco/Surface/RegisterSurface.
+2014-06-18 23:45:30,931 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 21] Begin request: http://23.21.196.149/favicon.ico.
+2014-06-18 23:45:33,883 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 12] Begin request: http://23.21.196.149/Umbraco/Surface/RegisterSurface/.
+2014-06-18 23:47:03,141 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 11] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:52:03,146 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 63] Begin request: http://localhost/umbraco/ping.aspx.
+2014-06-18 23:57:03,151 [32] DEBUG Umbraco.Web.UmbracoModule - [Thread 63] Begin request: http://localhost/umbraco/ping.aspx.
