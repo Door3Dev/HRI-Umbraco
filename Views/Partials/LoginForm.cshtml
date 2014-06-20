@@ -1,4 +1,4 @@
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 
 @using System.Web.Mvc.Html
@@ -22,9 +22,7 @@
 
 @using (Html.BeginUmbracoForm<AuthenticationSurfaceController>("login"))
 {
-    <fieldset>
-        <legend>Login</legend>
-        
+     
         @Html.ValidationSummary("loginModel", true)
 
         @Html.LabelFor(m => loginModel.Username)
@@ -35,12 +33,8 @@
         @Html.LabelFor(m => loginModel.Password)
         @Html.PasswordFor(m => loginModel.Password)
         @Html.ValidationMessageFor(m => loginModel.Password)
-        <br />
+        <br />       
 
-        @Html.LabelFor(m => loginModel.RememberMe)
-        @Html.CheckBoxFor(m => loginModel.RememberMe)        
+        <button type="submit" class="btn hri-btn">Login</button>
 
-
-        <button>Login</button>
-    </fieldset>  
 }
