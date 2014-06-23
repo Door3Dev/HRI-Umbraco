@@ -11,7 +11,7 @@
 <div id="header" class="row-fluid">
   <div id="masthead" class="row-fluid">
     <div class="span3">
-      <a href="#">
+      <a href="@homePage.Url">
         <div class="logo-sm">
           <h1>Health Republic Insurance</h1>
         </div>
@@ -20,22 +20,37 @@
     <div class="span9">
       <div class="navigation pull-right">
         <ul class="nav-site unstyled inline">
-          <li class="menu-item short">
-                <a href="@homePage.Url" data-toggle="dropdown"
-                 class="dropdown-toggle">Home</a>
+          <li class="menu-item short">			  	
+                <a href="@homePage.Url">Home</a>
           </li>
-          @foreach (var item in menuItems)
-          {
-            <li class="dropdown">
-            <a href="" data-toggle="dropdown" class="dropdown-toggle">@Html.Raw(item.menuItemName)<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                    @foreach (var subpage in item.Children)
-                    {
-                        <li class="sub-link"><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
-                    }
-            </ul>
-            </li>                   
-          }                    
+			@foreach (var item in menuItems.Where("visibleIn!=13"))
+			{
+				if(item.Children.Where("HideFromNavigation == false").Count() > 0)
+				{
+					<li class="dropdown">
+					<a href="" data-toggle="dropdown" class="dropdown-toggle">@Html.Raw(item.menuItemName)<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+							@foreach (var subpage in item.Children)
+							{
+								if(subpage.NodeTypeAlias == "ExternalFile")
+								{
+									<li class="sub-link"><a href="@subpage.Field("file")">@Html.Raw(subpage.menuItemName)</a></li>
+								}
+								else
+								{
+									<li class="sub-link"><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+								}
+							}
+					</ul>
+					</li> 
+				}
+				else
+				{
+					<li>
+						<a href="@item.Children.First().Url" class="dropdown-toggle">@Html.Raw(item.menuItemName)</a>
+					</li>
+				}
+			  }                    
         </ul>
 
       </div>

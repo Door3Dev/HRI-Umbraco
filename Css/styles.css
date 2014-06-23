@@ -1637,7 +1637,8 @@ body {
 .hri-common .hri-common-hp .carousel .slide h1 {
     font-size: 43px;
     font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
-    color: #752b8f;
+    color: #ffffff;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     vertical-align: top;
     line-height: 0.9em;
     margin: 0 0 10px 0;
@@ -1725,6 +1726,7 @@ body {
 }
 
 .hri-common ul.expand-list li.expand-group {
+	border-top: 1px dotted #752b8f;
     padding: 10px 0 10px 34px;
 }
 
@@ -1817,14 +1819,14 @@ body {
 }
 
 .hri-common .hri-common-plans-providers .plans-sprite {
-    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    background: url("../images/plans-logos-sprite.png") no-repeat top;
     width: 260px;
     display: block;
     margin: 20px 0;
 }
 
 .hri-common .hri-common-plans-providers .magnacare-logo {
-    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    background: url("../images/plans-logos-sprite.png") no-repeat top;
     width: 260px;
     display: block;
     margin: 20px 0;
@@ -1833,7 +1835,7 @@ body {
 }
 
 .hri-common .hri-common-plans-providers .fairhealth-logo {
-    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    background: url("../images/plans-logos-sprite.png") no-repeat top;
     width: 260px;
     display: block;
     margin: 20px 0;
@@ -1843,7 +1845,7 @@ body {
 }
 
 .hri-common .hri-common-plans-providers .healthways-logo {
-    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    background: url("../images/plans-logos-sprite.png") no-repeat top;
     width: 260px;
     display: block;
     margin: 20px 0;
@@ -1853,7 +1855,7 @@ body {
 }
 
 .hri-common .hri-common-plans-providers .usscript-logo {
-    background: url("../img/state-static/plans-logos-sprite.010b72c639dc.png") no-repeat top;
+    background: url("../images/plans-logos-sprite.png") no-repeat top;
     width: 260px;
     display: block;
     margin: 20px 0;
@@ -1982,6 +1984,7 @@ body {
     background: 0;
     background-color: #231f20;
     margin-left: 0;
+	margin-top: 30px;
 }
 
 /* navigation list wrapper */
@@ -2636,7 +2639,7 @@ body {
 }
 
 .hri-member-center ul.expand-list li.expand-group .expand-content ul li:before {
-  content: "• ";
+  content: "ï¿½ ";
   color: #752b8f;
 }
 
@@ -2749,3 +2752,4 @@ input[type="radio"]:checked + label::before {
 .autocomplete-selected {
   background: #f0f0f0;
 }
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

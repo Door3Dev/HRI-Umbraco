@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+}
+
+@{
+	var dynamicMediaItem = Umbraco.Media(CurrentPage.file);
+	<script>
+		window.location = "@dynamicMediaItem.umbracoFile";
+	</script>
+}

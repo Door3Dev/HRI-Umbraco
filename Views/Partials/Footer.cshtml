@@ -1,5 +1,14 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
+@{
+    // Grab a handle to the homepage
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+
+    // The menu items we want are all of the children of the homepage unless marked hidden
+    var menuItems = homePage.Children.Where("HideFromNavigation == false");      
+
+}
+	
 <div class="footer row">
   <div class="row-fluid contacts">
     <div class="span8 questions"><h5>Questions? ¿Preguntas? Llame 有問題嗎？叫<br>Call 888.990.5702</h5></div>
@@ -20,55 +29,58 @@
       </a>
     </div>
   </div>
-  <div class="row-fluid nav">
-    <div>
-      <ul>
-        <li>Shop for<br>plans</li>
-        <li><a href="#">Individual<br>Plans</a></li>
-        <li><a href="#">Small Group Plans</a></li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li>For<br>Members</li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Find a Provider</a></li>
-        <li><a href="#">Forms & Guides</a></li>
-        <li><a href="#">FAQs</a></li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li>For<br>Brokers</li>
-        <li><a href="#">For Brokers</a></li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li>For<br>Providers</li>
-        <li><a href="#">For Providers</a></li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li>About Us</li>
-        <li><a href="#">Why we're<br>Different</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Our Staff</a></li>
-        <li><a href="#">Our Board</a></li>
-        <li><a href="#">Careers</a></li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        <li>Helpful Links</li>
-        <li><a href="#">Site Map</a></li>
-        <li><a href="#">Formulary (PDF)</a></li>
-        <li><a href="#">Wellness Info</a></li>
-      </ul>
-    </div>
+  <div class="row-fluid nav">												 
+	@foreach (var item in menuItems.Where("visibleTo!=10").Where("visibleIn!=12"))
+    {
+		<div>
+			<ul>
+				<li>@Html.Raw(item.menuItemName)</li>								
+				@if(item.Children.Where("HideFromNavigation==false").Count() > 0)
+				{
+					foreach (var subpage in item.Children.Where("HideFromNavigation==false"))
+                	{
+						if(subpage.NodeTypeAlias == "ExternalFile")
+						{
+							<li><a href="@subpage.file" target="_blank">@Html.Raw(subpage.menuItemName)</a></li>
+						}
+						else
+						{
+                			<li><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+						}
+                	}
+				}
+				else
+				{
+					<li><a href="@item.Children.First().Url">@Html.Raw(@item.Children.First().menuItemName)</a></li>
+				}
+			</ul>
+		</div>
+	}     
   </div>
-
+	  
+  @* THIS IS A TEMP SOLUTION TO SHOW ALL ITEMS REGARDLESS OF LOGIN STATE*@	  
+  <div class="row-fluid nav">
+	@foreach (var item in menuItems.Where("visibleTo!=9").Where("visibleIn!=12"))
+    {
+		<div>
+			<ul>
+				<li>@Html.Raw(item.menuItemName)</li>								
+				@if(item.Children.Where("HideFromNavigation==false").Count() > 0)
+				{
+					foreach (var subpage in item.Children.Where("HideFromNavigation==false"))
+                	{
+                		<li><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+                	}
+				}
+				else
+				{
+					<li><a href="@item.Children.First().Url">@Html.Raw(@item.Children.First().menuItemName)</a></li>
+				}
+			</ul>
+		</div>
+	}       
+  </div>	  
+	  
   <div class="row-fluid disclaimer">
     <p>
       Freelancers Health Service Corporation DBA Health Republic Insurance of New York (HRINY) is a 501(c)(29)
