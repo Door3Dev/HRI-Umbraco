@@ -6,6 +6,13 @@
 @{
 	var dynamicMediaItem = Umbraco.Media(CurrentPage.file);
 	<script>
+	if(umbraco.Field("openInNewTab"))
+	{
+		window.open('@dynamicMediaItem.umbracoFile', '_newtab');
+	}
+	else
+	{
 		window.location = "@dynamicMediaItem.umbracoFile";
+	}
 	</script>
 }

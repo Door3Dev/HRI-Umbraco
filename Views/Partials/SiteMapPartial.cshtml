@@ -1,9 +1,12 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
+@{
+    // Grab a handle to the homepage
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();                   
+}
 
 @* Render the sitemap by passing the root node to the traverse helper *@
 <div class="sitemap">
-    @Traverse(CurrentPage.AncestorOrSelf())
+    @Traverse(homePage)
 </div>
 
 @* Helper method to travers through all descendants *@
@@ -11,10 +14,9 @@
 {
     @* Update the level to reflect how deep you want the sitemap to go *@
     var maxLevelForSitemap = 4;
-    
     @* Select visible children *@
     var items = node.Children.Where("Visible").Where("Level <= " + maxLevelForSitemap);
-
+	
     @* If any items are returned, render a list *@
     if (items.Any())
     {

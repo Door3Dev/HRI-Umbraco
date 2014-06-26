@@ -4,7 +4,7 @@
     var homePage = CurrentPage.AncestorsOrSelf(1).First();
 
     // The menu items we want are all of the children of the homepage unless marked hidden
-    var menuItems = homePage.Children.Where("HideFromNavigation == false");
+    var menuItems = homePage.Children.Where("navigationVisibility!=15");
                       
 }
 
@@ -23,9 +23,9 @@
           <li class="menu-item short">			  	
                 <a href="@homePage.Url">Home</a>
           </li>
-			@foreach (var item in menuItems.Where("visibleIn!=13"))
+			@foreach (var item in menuItems.Where("navigationVisibility!=13"))
 			{
-				if(item.Children.Where("HideFromNavigation == false").Count() > 0)
+				if(item.Children.Where("navigationVisibility!=15").Count() > 0)
 				{
 					<li class="dropdown">
 					<a href="" data-toggle="dropdown" class="dropdown-toggle">@Html.Raw(item.menuItemName)<span class="caret"></span></a>
