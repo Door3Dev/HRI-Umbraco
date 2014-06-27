@@ -12,15 +12,6 @@ namespace Umbraco.Web.UI.Models
         public string Name { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
-        [Required]
-        public string MessageTopic { get; set; }
-
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
