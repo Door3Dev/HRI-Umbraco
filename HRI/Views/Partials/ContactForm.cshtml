@@ -1,0 +1,74 @@
+﻿@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web 
+@using HRI.Controllers
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+}
+
+
+
+@{		
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+	Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+	
+	var model = new HRI.Models.ContactFormViewModel();
+	if(User.Identity.IsAuthenticated)
+	{
+		model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
+		model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
+		model.Email = @Membership.GetUser().Email;
+		model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
+	}
+}
+
+@Html.RenderJsHere()
+	
+@if (!Convert.ToBoolean(TempData["IsSuccessful"]))
+{
+    <h1>Message Sent.</h1>
+    <p>Thanks for sending your message, we will get back to you shortly.</p>
+}
+else
+{
+    using (Html.BeginUmbracoForm<ContactFormSurfaceController>("Submit"))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+    
+		@Html.Label("Message Topic", model.MessageTypes)
+        @Html.DropDownList("list", model.MessageTypes, new { placeholder = "Please choose a topic" })
+		@Html.ValidationMessageFor(m => model.MessageType)
+
+		<div class="row-fluid">
+			<label class="span6 name">
+				First Name<br>
+				@Html.TextBoxFor(m => model.FirstName)
+				@Html.ValidationMessageFor(m => model.FirstName)
+			</label>
+			<label class="span6">
+				Last Name<br>
+				@Html.TextBoxFor(m => model.LastName)
+				@Html.ValidationMessageFor(m => model.LastName)
+			</label>
+		</div>
+				
+		@Html.Label("Email", "Email")
+        @Html.TextBoxFor(m => model.Email)
+		@Html.ValidationMessageFor(m => model.Email)
+    
+		@Html.Label("Phone Number", "Phone Number")
+        @Html.TextBoxFor(m => model.PhoneNumber)
+		@Html.ValidationMessageFor(m => model.PhoneNumber)
+
+		@Html.Label("Email", model.Message)
+		@Html.TextAreaFor(m => model.Message, new {rows = 6})
+		@Html.ValidationMessageFor(m => model.Message)
+        
+        <input type="submit" value="Send" class="btn hri-btn" />
+    }
+}

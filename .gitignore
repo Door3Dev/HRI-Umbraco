@@ -24,7 +24,8 @@ _NCrunch_*/
 [sS]andbox
 umbraco.config
 *.vs10x
-App_Data/TEMP/*
+HRI/App_Data/TEMP/*
+HRI/App_data/Logs/*
 [Uu]mbraco/[Pp]resentation/[Uu]mbraco/[Pp]lugins/*
 [Uu]mbraco/[Pp]resentation/[Uu]ser[Cc]ontrols/*
 [Uu]mbraco/[Pp]resentation/[Ss]cripts/*

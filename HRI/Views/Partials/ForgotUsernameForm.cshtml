@@ -1,0 +1,58 @@
+﻿@using ClientDependency.Core.Mvc
+@using HRI.Controllers
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = null;
+    
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+	Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+
+	var model = new HRI.Models.ForgotUserNameViewModel();
+
+    var homePage = CurrentPage.AncestorsOrSelf(1).First(); 
+}
+
+@Html.RenderJsHere()
+
+@if (TempData["IsSuccessful"] != null)
+{
+    if(Convert.ToBoolean(TempData["IsSuccessful"]))
+    {
+        <h3>Membership information found!</h3>
+        <p>We were able to locate your account and an email has been sent to you containing your UserName</p>
+    }
+    else
+    {
+        if (Convert.ToBoolean(TempData["EmailNotFound"]))
+        {
+            <h3 class="purple">Member not found</h3>
+            <p>No member with that email was able to be found. Please make sure the email address you entered was correct.</p>
+            <p>If you believe this is an error, please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
+        }
+        else
+        {
+            <h3>Membership look up failed.</h3>
+            <p>We apologize, but something seems to have gone wrong with looking up your UserName. Our site administrator has been notified.</p>
+            <p>Please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
+        }
+    }
+}
+else
+{
+    using (Html.BeginUmbracoForm<EmailSurfaceController>("ForgotUserName"))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+    
+        @Html.Label("Your Registered Email")
+        @Html.TextBoxFor(m => model.Email)
+        @Html.ValidationMessageFor(m => model.Email)
+        <br />
+
+        <button type="submit" class="btn hri-btn">Submit</button>
+    }
+}

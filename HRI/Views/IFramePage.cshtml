@@ -1,0 +1,54 @@
+﻿@using HRI.Controllers
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+
+    var targetUrl = @Umbraco.Field("samlTargetUrl");
+    var sp = "";
+    if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")    
+        sp = "SBCSystems";
+    else if(@Umbraco.Field("serviceProvider").ToString() == "MagnaCare")
+        sp = "MagnaCare";
+    else if(@Umbraco.Field("serviceProvider").ToString() == "US Script")
+        sp = "USScript";
+    else if(@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
+        sp = "AdamEbix";
+		
+	var frameHeight = Umbraco.Field("frameHeight").ToString();
+	if(frameHeight=="") frameHeight = "900px";
+	
+}
+
+
+<div class="hri-common-hp row-fluid">
+    <div class="span12">
+        @if(Umbraco.Field("sendSamlAssertion").ToString().ToLower() == "true")
+        {
+            <iframe name="serviceProviderIFrame" src='#' width='99%' height='1000px' style='margin-left: 3px'></iframe>
+            <script type="text/javascript">
+                function loadIFrame() {
+                    document.getElementById("urlLoader").click();
+                };
+                window.onload = function () { loadIFrame(); };
+            </script>
+        }
+        else
+        {
+			<iframe name="iframe" src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
+        }
+	</div>
+
+    
+    <br />
+    
+   
+    <br />
+    
+    @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = "serviceProviderIFrame" }))
+    {
+        <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
+    }
+
+	
+</div>		

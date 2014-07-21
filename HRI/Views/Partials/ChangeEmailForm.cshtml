@@ -1,0 +1,39 @@
+﻿@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web
+@using HRI.Models
+@using HRI.Controllers
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = null;
+    
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+
+    var model = new ChangeEmailViewModel();
+}
+
+
+    @using (Html.BeginUmbracoForm<MembersSurfaceController>("ChangeEmail"))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+
+        @Html.Label("Password", model.Password)
+        @Html.PasswordFor(m => model.Password);
+        @Html.ValidationMessageFor(m => model.Password)
+
+        @Html.Label("New Email", model.Email)
+        @Html.TextBoxFor(m => model.Email);
+        @Html.ValidationMessageFor(m => model.Email)
+
+        @Html.Label("Confirm New Email", model.Email2)
+        @Html.TextBoxFor(m => model.Email2);
+        @Html.ValidationMessageFor(m => model.Email2)
+
+        <input type="submit" value="Send" class="btn hri-btn" />
+    }
