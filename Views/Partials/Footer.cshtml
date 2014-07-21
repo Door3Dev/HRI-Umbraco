@@ -29,19 +29,58 @@
       </a>
     </div>
   </div>
-
-  <div class="row-fluid nav">												 
-	@foreach (var item in menuItems.Where("navigationVisibility!=12").Where("accessAvailability!=10"))
-    {
-		<div>
-			<ul>
-				<li>@Html.Raw(item.menuItemName)</li>								
-				@if(item.Children.Count() > 0)
-				{
-					foreach (var subpage in item.Children.Where("navigationVisibility!=15").Where("navigationVisibility!=12"))
-                	{
-						if(subpage.NodeTypeAlias == "ExternalFile")
-
+  <div class="row-fluid nav">
+	@*Check to see if the user has been authenticated*@
+	@if(User.Identity.IsAuthenticated)
+	{
+		@*@* User authenticated *@
+        @* Go through each navigation item that is visible in the footer(12 = header only) and is for members(9 = public only) *@ 
+		foreach (var item in menuItems.Where("navigationVisibility!=12").Where("accessAvailability!=9"))
+		{
+			<div>
+				<ul>
+                    <li>@Html.Raw(item.menuItemName)</li>
+                    @* if the number of non-hidden items is greater than 0 *@
+                    @if (item.Children.Where("navigationVisibility!=15").Count() > 0)
+                    {
+                        @* Go through each navigation item that is visible in the header(12 = header only) and is for members(9 = public only) *@
+                        foreach (var subpage in item.Children.Where("navigationVisibility!=12"))
+                        {
+                            if (subpage.NodeTypeAlias == "ExternalFile")
+                            {
+                                <li><a href="@subpage.file" target="_blank">@Html.Raw(subpage.menuItemName)</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (item.Children.Count() > 0)
+                        {
+                            <li><a href="@item.Children.First().Url">@Html.Raw(@item.Children.First().menuItemName)</a></li>
+                        }
+                    }
+				</ul>
+			</div>
+		} 
+	}
+	else	
+	{
+		@* The user is not authenticated *@
+		@* Go through each navigation item that is visible in the footer(12 = header only) and is for public(10 = members only) *@ 
+		foreach (var item in menuItems.Where("navigationVisibility!=12").Where("navigationVisibility!=15").Where("accessAvailability!=10"))
+		{
+			<div>
+				<ul>
+					<li>@Html.Raw(item.menuItemName)</li>
+					@* if the number of non-hidden items is greater than 0 *@
+					@if(item.Children.Where("navigationVisibility!=15").Count() > 0)
+					{
+						@* Go through each navigation item that is visible in the header(12 = header only) and is for public(10 = members only) *@ 
+                        foreach (var subpage in item.Children.Where("navigationVisibility!=12").Where("navigationVisibility!=15"))
 						{
 							if(subpage.NodeTypeAlias == "ExternalFile")
 							{
@@ -65,6 +104,7 @@
 		}
 	}
   </div>
+	  	  
 	  
   <div class="row-fluid disclaimer">
     <p>
