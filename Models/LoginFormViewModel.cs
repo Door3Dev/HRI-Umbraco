@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Umbraco.Web.UI.Models
+namespace HRI.Models
 {
-    public class LoginViewModel
+    public class LoginFormViewModel
     {
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
