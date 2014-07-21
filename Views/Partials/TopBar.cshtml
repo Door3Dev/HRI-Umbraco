@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
 @{
-	var homePage = CurrentPage.AncestorsOrSelf(1).First();
+        var homePage = CurrentPage.AncestorsOrSelf(1).First();    
 }
 	
 <div class="row-fluid">
@@ -8,6 +9,13 @@
     <h5 class="topnav-heading">Questions? ¿Preguntas? Llame 有問題嗎？叫 @Html.Raw(homePage.phoneNumber)</h5>
   </div>
   <div class="span6 nav-user pull-right">
-    <span class="icon"></span><a href="~/for-members/login">Member Login</a>     
+      @if (User.Identity.IsAuthenticated)
+      {
+        <span>Hello, @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "LoginFormSurface")</span>
+      }
+      else
+      {
+        <span class="icon"></span><a href="~/for-members/login">Member Login</a>     
+      }
   </div>
 </div>

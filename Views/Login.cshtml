@@ -1,18 +1,22 @@
-﻿@using Umbraco.Web.Models
+﻿
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
 }
+
+@if(User.Identity.IsAuthenticated)
+{
+    <script>window.location.replace("/");</script>  
+}
+
 <div id="hri-content" class="hri-login">
         <div class="row-fluid">
-
           <div class="span4 offset4 well">
-
             <h3>Member Login</h3>
+              
+            @{Html.RenderPartial("LoginForm");}
 
-            @{Html.RenderPartial("LoginForm", Model.Content);}
-
-            Enrolled in a Health Republic Plan? <a href="/user/register">Register for an account.</a>
+            Enrolled in a Health Republic Plan? <a href="~/for-members/register">Register for an account.</a>
             <br><br>
             Forgot <a href="~/for-members/forgot-username">Username?</a> <span>|</span>
             Forgot <a href="~/for-members/forgot-password">Password?</a><br>

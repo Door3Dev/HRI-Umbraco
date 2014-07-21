@@ -6,14 +6,21 @@
         <div class="row-fluid">
 
           <div class="span4 offset4 well regular-form">
+            
+            @if(Convert.ToBoolean(TEMP["Success"]) == false)
+            {
+                <h3>Update Email</h3>
+                <p>Your current email address: <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
 
-            <h3>Update Email</h3>
-            <p>Your current email address: <span id="currentEmail" class="avenir-heavy purple">melinda@sharklasers.com</span></p>
-
-            @{Html.RenderPartial("ChangeEmailForm", Model.Content);}
+                @{Html.RenderPartial("ChangeEmailForm", Model.Content);}
 
 
-            <div id="change_confirmation"></div>
+                <div id="change_confirmation"></div>
+            }
+            else
+            {
+                <p>Your email has been successfully changed to <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
+            }
             <!-- major-col-content -->
           </div>
           <!-- major-col -->

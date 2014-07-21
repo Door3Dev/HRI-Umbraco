@@ -24,7 +24,14 @@
             @foreach (var item in items)
             {
                 <li class="level-@item.Level">
-                    <a href="@item.Url">@item.Name</a>
+                    @if(item.Children.Count() > 0)
+					{
+						@item.Name
+					}
+					else
+					{						
+						<a href="@item.Url">@item.Name</a>
+					}
 
                     @* Run the traverse helper again *@
                     @Traverse(item)

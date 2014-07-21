@@ -7,10 +7,14 @@
 @using Umbraco.Web.Controllers
 
 @{
+    @*
+        You can specify a custom member type alias in the constructor, the default is 'Member'    
+        for example, to use 'Custom Member' you'd use this syntax:
     
-    var registerModel = Members.CreateRegistrationModel("Member");
-    registerModel.UsernameIsEmail = false;
-    registerModel.RedirectUrl = "/";
+        var registerModel = Members.CreateRegistrationModel("Custom Member");
+    *@
+    
+    var registerModel = Members.CreateRegistrationModel();
     
     @*
         Configurable here:           
@@ -41,7 +45,6 @@
 @*NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed*@
 @Html.RenderJsHere()
 
-
 @if (success) 
 { 
     @* This message will show if RedirectOnSucces is set to false (default) *@
@@ -54,16 +57,11 @@ else
         <fieldset>
             <legend>Register Member</legend>
 
-            @Html.ValidationSummary("registerModel", true)            
+            @Html.ValidationSummary("registerModel", true)
 
-            @Html.LabelFor(m => registerModel.MemberProperties.Where(prop => prop.Alias == "primaryMemberID").First().Value, registerModel.MemberProperties.Where(prop => prop.Name == "PrimaryMemberID").First().Name)
-            @Html.EditorFor(m => registerModel.MemberProperties.Where(prop => prop.Alias == "primaryMemberID").First().Name)
-            @Html.HiddenFor(m => registerModel.MemberProperties.Where(prop => prop.Alias == "primaryMemberID").First().Alias)
-            <br />
-            
-            @Html.LabelFor(m => registerModel.Username)
-            @Html.TextBoxFor(m => registerModel.Username)
-            @Html.ValidationMessageFor(m => registerModel.Username)
+            @Html.LabelFor(m => registerModel.Name)
+            @Html.TextBoxFor(m => registerModel.Name)
+            @Html.ValidationMessageFor(m => registerModel.Name)
             <br />
 
             @Html.LabelFor(m => registerModel.Email)
@@ -93,18 +91,12 @@ else
                     <br />
                 }
             }
-            else
-            {
-                
-            }
 
             @Html.HiddenFor(m => registerModel.MemberTypeAlias)
             @Html.HiddenFor(m => registerModel.RedirectUrl)
-            @Html.HiddenFor(m => registerModel.UsernameIsEmail)    
-            @Html.HiddenFor(m=> registerModel.Name)            
-            <br />        
+            @Html.HiddenFor(m => registerModel.UsernameIsEmail)
 
-            <button onsubmit="">Register</button>
+            <button>Register</button>
         </fieldset>
     }
 }

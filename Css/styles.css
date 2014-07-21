@@ -2587,12 +2587,20 @@ body {
 
 /* ------------ MEMBER CENTER ------------ */
 
+.hri-member-center ul.expand-list li.expand-group {
+	border: 0 !important;
+}
+
 .hri-member-center ul.expand-list li.expand-group .expand-link {
   color: #752b8f;
   text-decoration: none;
   font-size: 14px;
   font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
   margin: 0;
+}
+
+.hri-member-center ul.expand-list li.expand-group.active .expand-link span{
+  color: #555555!important;
 }
 
 .hri-member-center ul.expand-list li.expand-group .expand-link:hover {
@@ -2639,7 +2647,7 @@ body {
 }
 
 .hri-member-center ul.expand-list li.expand-group .expand-content ul li:before {
-  content: "� ";
+  content: "\2022  ";
   color: #752b8f;
 }
 
@@ -2751,5 +2759,15 @@ input[type="radio"]:checked + label::before {
 
 .autocomplete-selected {
   background: #f0f0f0;
+}
+
+/* ------- GENERAL ----------- */
+.input-validation-error {
+	border: #ff0000 1px solid!important;
+}
+.field-validation-error {
+	color: #ff0000;
+	font-size: 12px;
+	font-weight: bold;
 }
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

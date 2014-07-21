@@ -1,18 +1,31 @@
-﻿@using Umbraco.Web.Models
+﻿@using HRI.Models
+
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
 }
-<div id="hri-content" class="hri-login">
-        <div class="row-fluid">
 
-          <div class="span4 offset4 well">            
-            <h3>Contact Us</h3>
-            @{Html.RenderPartial("ContactForm", new Umbraco.Web.UI.Models.ContactFormViewModel());}
-            
-            <br><br>
-            Want to speak with a representitive immediately? Call us at <b>888.990.5702</b>.
-
-          </div>
-        </div>
-      </div>
+<div class="hri-contact-us">
+   <h4>
+     Send us a message and we'll get back to you usually within two business days. Or give us a call to speak
+     with someone immediately.
+   </h4>
+ 
+   <div class="row-fluid">
+	   <div class="span6">
+     @{Html.RenderPartial("ContactForm");}
+ 	   </div>
+     <div class="span6 help">
+       <div class="row">
+         <p class="phone">
+           <span>@Umbraco.Field("Phone")</span><br>
+           @Umbraco.Field("Schedule")</p><br>
+ 
+           @Umbraco.Field("Address")<br>
+         
+         @Umbraco.Field("AdditionalInformation")
+ 
+       </div>
+     </div>
+   </div>
+ </div>
