@@ -63,6 +63,6 @@ QueryResult.htm
 build/ApiDocs/*
 build/ApiDocs/Output/*
 
-packages/*
+
 src/packages/*
 
