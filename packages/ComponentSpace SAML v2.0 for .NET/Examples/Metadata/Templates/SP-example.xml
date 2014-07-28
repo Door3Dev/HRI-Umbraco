@@ -1,0 +1,36 @@
+<!-- Example service provider SAML metadata -->
+<md:EntityDescriptor entityID="https://test.componentspace.com" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+    <md:SPSSODescriptor WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:KeyDescriptor>
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>
+                        MIIBrTCCARagAwIBAgIQRNF3nYxMMq1Oj4mZ54kcWTANBgkqhkiG9w0BAQUFADAV
+                        MRMwEQYDVQQDEwp3d3cuc3AuY29tMB4XDTEzMDIxMjIzMjI1NFoXDTQ5MTIzMTE0
+                        MDAwMFowFTETMBEGA1UEAxMKd3d3LnNwLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOB
+                        jQAwgYkCgYEA6Dz4MK2K82HCOUS5FkcVg0nkFaXMjTz1W6RDzSISRFsH8fCXu9Z3
+                        Cag1WZ8vhnalSS3Q6EhxNVWSqH/o+8yPPCcqqb219rPZxJg9ZVLByFfWkvTlqYvh
+                        /AXAif2S+lXVQAXrrov7RB3lTpWdIlf7AoFUgHyV/tSoH60lFhFq+zMCAwEAATAN
+                        BgkqhkiG9w0BAQUFAAOBgQCwiJllyHHBA363hZ3dlz2YdrE1sYvO2Q46BRXX3eCE
+                        YrxZU7f06KtVQy5UonWI4RCz6U2ElrpKrNBdKlJv/GzbM9CSn6cT+QMkp3qEAidx
+                        i/ULjEj+dyc8MKlVOHfTYR/1v45iIT6riW76YBpsF7MFXynpwPu4P2fzFcCga9uN
+                        Kg==
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test.componentspace.com/ExampleServiceProvider/SAML/SLOService.aspx"/>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+        <md:AssertionConsumerService index="1" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test.componentspace.com/ExampleServiceProvider/SAML/AssertionConsumerService.aspx"/>
+    </md:SPSSODescriptor>
+    <md:Organization>
+        <md:OrganizationName xml:lang="en">ComponentSpace</md:OrganizationName>
+        <md:OrganizationDisplayName xml:lang="en">ComponentSpace</md:OrganizationDisplayName>
+        <md:OrganizationURL xml:lang="en">http://www.componentspace.com/</md:OrganizationURL>
+    </md:Organization>
+    <md:ContactPerson contactType="technical">
+        <md:GivenName>ComponentSpace</md:GivenName>
+        <md:SurName>Support</md:SurName>
+        <md:EmailAddress>support@componentspace.com</md:EmailAddress>
+    </md:ContactPerson>
+</md:EntityDescriptor>

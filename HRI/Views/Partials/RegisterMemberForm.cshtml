@@ -54,8 +54,6 @@ else
         <fieldset>
             <legend>Register Member</legend>
 
-            @Html.Action("IsUserNameAvailable", new { username = registerModel.Name })
-
             @Html.ValidationSummary("registerModel", true)
 
             @Html.Label("User Name")

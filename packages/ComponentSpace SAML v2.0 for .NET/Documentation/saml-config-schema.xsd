@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This schema defines the SAML configuration syntax. -->
+<schema targetNamespace="urn:componentspace:SAML:2.0:configuration"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:saml="urn:componentspace:SAML:2.0:configuration"
+        elementFormDefault="qualified">
+
+  <!-- SAML configuration -->
+  <element name="SAMLConfiguration" type="saml:SAMLConfigurationType"/>
+
+  <complexType name="SAMLConfigurationType">
+    <sequence>
+      <element name="IdentityProvider" type="saml:IdentityProviderType" minOccurs="0"/>
+      <element name="ServiceProvider" type="saml:ServiceProviderType" minOccurs="0"/>
+      <element name="PartnerIdentityProvider" type="saml:PartnerIdentityProviderType" minOccurs="0" maxOccurs="unbounded"/>
+      <element name="PartnerServiceProvider" type="saml:PartnerServiceProviderType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="ReloadOnConfigurationChange" type="boolean" default="true"/>
+    <attribute name="TraceLevel" type="saml:TraceLevelType"/>
+  </complexType>
+
+  <!-- Identity Provider -->
+  <complexType name="IdentityProviderType">
+    <complexContent>
+      <extension base="saml:LocalProviderType"/>
+    </complexContent>
+  </complexType>
+
+  <!-- Service Provider -->
+  <complexType name="ServiceProviderType">
+    <complexContent>
+      <extension base="saml:LocalProviderType">
+        <attribute name="AssertionConsumerServiceUrl" type="string" use="required"/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- Partner Identity Provider -->
+  <complexType name="PartnerIdentityProviderType">
+    <complexContent>
+      <extension base="saml:PartnerProviderType">
+        <attribute name="SingleSignOnServiceUrl" type="string"/>
+        <attribute name="SingleSignOnServiceBinding" type="saml:SAMLBindingType" default="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+        <attribute name="SignAuthnRequest" type="boolean" default="false"/>
+        <attribute name="ForceAuthn" type="boolean" default="false"/>
+        <attribute name="WantSAMLResponseSigned" type="boolean" default="false"/>
+        <attribute name="WantAssertionSigned" type="boolean" default="false"/>
+        <attribute name="WantAssertionEncrypted" type="boolean" default="false"/>
+        <attribute name="DisableAudienceRestrictionCheck" type="boolean" default="false"/>
+        <attribute name="OverridePendingAuthnRequest" type="boolean" default="false"/>
+        <attribute name="RequestedAuthnContext" type="string"/>
+        <attribute name="ProviderName" type="string"/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- Partner Service Provider -->
+  <complexType name="PartnerServiceProviderType">
+    <complexContent>
+      <extension base="saml:PartnerProviderType">
+        <attribute name="AssertionConsumerServiceUrl" type="string"/>
+        <attribute name="WantAuthnRequestSigned" type="boolean" default="false"/>
+        <attribute name="SignSAMLResponse" type="boolean" default="false"/>
+        <attribute name="SignAssertion" type="boolean" default="false"/>
+        <attribute name="EncryptAssertion" type="boolean" default="false"/>
+        <attribute name="AssertionLifeTime" type="string" default="00:03:00"/>
+        <attribute name="AuthnContext" type="string" default="urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified"/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- Local and partner provider types -->
+  <complexType name="LocalProviderType" abstract="true">
+    <complexContent>
+      <extension base="saml:ProviderType"/>
+    </complexContent>
+  </complexType>
+
+  <complexType name="PartnerProviderType" abstract="true">
+    <complexContent>
+      <extension base="saml:ProviderType">
+        <attribute name="SingleLogoutServiceUrl" type="string"/>
+        <attribute name="SingleLogoutServiceBinding" type="saml:SAMLBindingType" default="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+        <attribute name="LogoutRequestLifeTime" type="string" default="00:03:00"/>
+        <attribute name="DisableInboundLogout" type="boolean" default="false"/>
+        <attribute name="DisableOutboundLogout" type="boolean" default="false"/>
+        <attribute name="DisableInResponseToCheck" type="boolean" default="false"/>
+        <attribute name="SignLogoutRequest" type="boolean" default="false"/>
+        <attribute name="SignLogoutResponse" type="boolean" default="false"/>
+        <attribute name="WantLogoutRequestSigned" type="boolean" default="false"/>
+        <attribute name="WantLogoutResponseSigned" type="boolean" default="false"/>
+        <attribute name="UseEmbeddedCertificate" type="boolean" default="false"/>
+        <attribute name="NameIDFormat" type="string" default="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"/>
+        <attribute name="DigestMethod" type="saml:DigestMethodType" default="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <attribute name="SignatureMethod" type="saml:SignatureMethodType" default="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+        <attribute name="KeyEncryptionMethod" type="saml:KeyEncryptionMethodType" default="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+        <attribute name="DataEncryptionMethod" type="saml:DataEncryptionMethodType" default="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+        <attribute name="ClockSkew" type="string" default="00:03:00"/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="ProviderType" abstract="true">
+    <attribute name="Name" type="string" use="required"/>
+    <attribute name="CertificateFile" type="string"/>
+    <attribute name="CertificatePassword" type="string"/>
+    <attribute name="CertificatePasswordKey" type="string"/>
+    <attribute name="CertificateSerialNumber" type="string"/>
+    <attribute name="CertificateThumbprint" type="string"/>
+    <attribute name="CertificateSubject" type="string"/>
+  </complexType>
+
+  <!-- Bindings -->
+  <simpleType name="SAMLBindingType">
+    <restriction base="string">
+      <enumeration value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+      <enumeration value="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+    </restriction>
+  </simpleType>
+
+  <!-- Security -->
+  <simpleType name="KeyEncryptionMethodType">
+    <restriction base="string">
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="DataEncryptionMethodType">
+    <restriction base="string">
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#aes192-cbc"/>
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="DigestMethodType">
+    <restriction base="string">
+      <enumeration value="http://www.w3.org/2000/09/xmldsig#sha1"/>
+      <enumeration value="http://www.w3.org/2001/04/xmlenc#sha256"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="SignatureMethodType">
+    <restriction base="string">
+      <enumeration value="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <enumeration value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+    </restriction>
+  </simpleType>
+  
+  <!-- Trace -->
+  <simpleType name="TraceLevelType">
+    <restriction base="string">
+      <enumeration value="Off"/>
+      <enumeration value="Verbose"/>
+    </restriction>
+  </simpleType>
+</schema>
