@@ -163,5 +163,21 @@ namespace HRI.Controllers
             return RedirectToCurrentUmbracoPage();
         }
 
+        [HttpGet]
+        public ActionResult ResetPassword(string username, string guid)
+        {
+            var member = Membership.GetUser(username);
+            
+            if(member == null)
+                return Redirect("/");
+
+            if (Services.MemberService.GetByUsername(username).GetValue("guid") != guid)
+            {
+                return Redirect("/");
+            }
+            
+            member.ResetPassword();
+            return Redirect("/");
+        }
     }
 }

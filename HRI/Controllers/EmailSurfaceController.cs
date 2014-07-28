@@ -29,7 +29,7 @@ namespace HRI.Controllers
             string emailMessage;
             // Get the id of the template set in Umbraco
             // TO-DO: make property name dynamic
-            var emailtemplateid = CurrentPage.GetProperty("forgotUserNameTemplate").Value;
+            var emailtemplateid = CurrentPage.GetProperty(template).Value;
             // Get an instance of the template
             var mediaItem = Services.MediaService.GetById((int)emailtemplateid);
             // Get the path to the template
@@ -120,7 +120,7 @@ namespace HRI.Controllers
                     // Get the SMTP email account
                     string smtpEmail = rootNodeModel.Content.GetProperty("smtpEmailAddress").Value.ToString();
                     // Get the SMTP email password
-                    string password = "An03ticLLC";//rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
+                    string password = rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
                     
                     // Build a dictionary for all teh dynamic text in the email template
                     Dictionary<string, string> dynamicText = new Dictionary<string,string>();
@@ -132,7 +132,7 @@ namespace HRI.Controllers
                     MailMessage message = new MailMessage(smtpEmail,
                                                           member.Email,
                                                           "Health Republic Insurance - UserName Recovery",
-                                                          BuildEmail("ForgotUserName.txt", dynamicText));
+                                                          BuildEmail("forgotUserNameTemplate", dynamicText));
 
                     // Create an SMTP client object and send the message with it
                     SmtpClient smtp = new SmtpClient(smtpServer, 587);
@@ -155,6 +155,61 @@ namespace HRI.Controllers
             catch(Exception ex)
             {
                 // Set the success flag to false and post back to the same page
+                TempData["IsSuccessful"] = false;
+                return RedirectToCurrentUmbracoPage();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
+            {                
+                // Get a handle on the member
+                var member = Services.MemberService.GetByUsername(model.UserName);
+                // Create a random Guid
+                Guid key = Guid.NewGuid();
+                // Update the user's Guid field
+                member.SetValue("guid", key.ToString());
+                // Save the updated information
+                Services.MemberService.Save(member);
+
+                // Send an email to the user
+                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+                // Build a model from the node
+                RenderModel rootNodeModel = new RenderModel(root);
+
+                // Get the SMTP server
+                string smtpServer = rootNodeModel.Content.GetProperty("smtpServer").Value.ToString();
+                // Get the SMTP email account
+                string smtpEmail = rootNodeModel.Content.GetProperty("smtpEmailAddress").Value.ToString();
+                // Get the SMTP email password
+                string password = rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
+
+                // Build a dictionary for all teh dynamic text in the email template
+                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
+                dynamicText.Add("<%PhoneNumber%>", rootNodeModel.Content.GetProperty("phoneNumber").Value.ToString());
+                dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MemberSurface/ResetPassword?username=" + model.UserName + "?guid=" + key.ToString());
+
+                // Create a message
+                MailMessage message = new MailMessage(smtpEmail,
+                                                      member.Email,
+                                                      "Health Republic Insurance - Password Reset",
+                                                      BuildEmail("forgotPasswordTemplate", dynamicText));
+
+                // Create an SMTP client object and send the message with it
+                SmtpClient smtp = new SmtpClient(smtpServer, 587);
+                smtp.Credentials = new NetworkCredential(smtpEmail, password);
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+
+                TempData["IsSuccessful"] = true;
+                return RedirectToCurrentUmbracoPage();
+            }
+            else
+            {
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }

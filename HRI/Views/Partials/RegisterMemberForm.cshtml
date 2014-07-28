@@ -1,10 +1,8 @@
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
-
 @using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
-@using Umbraco.Web.Controllers
+@using HRI.Controllers
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
     @*
@@ -42,8 +40,7 @@
     var success = TempData["FormSuccess"] != null;
 }
 
-@*NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed*@
-@Html.RenderJsHere()
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 @if (success) 
 { 
@@ -52,17 +49,25 @@
 }
 else
 {
-    using (Html.BeginUmbracoForm<UmbRegisterController>("HandleRegisterMember"))
+    using (Html.BeginUmbracoForm<HriRegisterSurfaceController>("HandleRegisterMember"))
     {
         <fieldset>
             <legend>Register Member</legend>
 
+            @Html.Action("IsUserNameAvailable", new { username = registerModel.Name })
+
             @Html.ValidationSummary("registerModel", true)
 
-            @Html.LabelFor(m => registerModel.Name)
-            @Html.TextBoxFor(m => registerModel.Name)
+            @Html.Label("User Name")
+            @Html.TextBoxFor(m => registerModel.Name, new { @id = "username"})
+            <script>
+                $("#username").keyup(function () {                    
+                    document.getElementById('result').innerHTML = 'false';
+                })
+            </script>
             @Html.ValidationMessageFor(m => registerModel.Name)
             <br />
+            <div id="result"></div>
 
             @Html.LabelFor(m => registerModel.Email)
             @Html.TextBoxFor(m => registerModel.Email)

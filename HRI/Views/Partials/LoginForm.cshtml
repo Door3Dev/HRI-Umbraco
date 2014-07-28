@@ -6,6 +6,7 @@
 @using Umbraco.Web
 @using Umbraco.Web.Models
 @using Umbraco.Web.Controllers
+@using HRI.Controllers
 
 @{
     var loginModel = new LoginModel();
@@ -17,18 +18,16 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 }
 
-@* NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed *@
-@Html.RenderJsHere()
-
-@using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin"))
+@using (Html.BeginUmbracoForm<HriLoginSurfaceController>("HandleLogin"))
 {
     <fieldset>
         <legend>Login</legend>
         
         @Html.ValidationSummary("loginModel", true)
+        @Html.AntiForgeryToken()
 
         @Html.LabelFor(m => loginModel.Username)
-        @Html.TextBoxFor(m => loginModel.Username)
+        @Html.TextBoxFor(m => loginModel.Username, new{id="focus"})
         @Html.ValidationMessageFor(m => loginModel.Username)
         <br />
 
@@ -40,3 +39,7 @@
         <button>Login</button>
     </fieldset>  
 }
+
+<script>
+    document.getElementById('focus').focus();
+</script>

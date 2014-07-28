@@ -212,6 +212,7 @@
   <ItemGroup>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
+    <Content Include="EmailTemplates\ForgotPassword.txt" />
     <Content Include="EmailTemplates\ForgotUserName.txt" />
     <Content Include="EmailTemplates\ChangePassword.txt" />
     <Content Include="packages.config" />
@@ -242,7 +243,6 @@
     <Content Include="Views\Partials\ForgotUsernameForm.cshtml" />
     <Content Include="Views\Partials\Header.cshtml" />
     <Content Include="Views\Partials\LoginForm.cshtml" />
-    <Content Include="Views\Partials\RegisterForm.cshtml" />
     <Content Include="Views\Partials\ResendEmailForm.cshtml" />
     <Content Include="Views\Partials\SiteMapPartial.cshtml" />
     <Content Include="Views\Partials\TopBar.cshtml" />
@@ -271,6 +271,45 @@
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="SecCertMC071114.cer" />
+    <Content Include="SecCertUS071514.cer" />
+    <Content Include="Views\Broker.cshtml" />
+    <Content Include="Views\Careers.cshtml" />
+    <Content Include="Views\ChangeEmail.cshtml" />
+    <Content Include="Views\ChangePassword.cshtml" />
+    <Content Include="Views\ComparePlans.cshtml" />
+    <Content Include="Views\ContactUs.cshtml" />
+    <Content Include="Views\ExpandableList.cshtml" />
+    <Content Include="Views\ExternalFile.cshtml" />
+    <Content Include="Views\ExternalLink.cshtml" />
+    <Content Include="Views\FAQs.cshtml" />
+    <Content Include="Views\ForgotPassword.cshtml" />
+    <Content Include="Views\FormsGuides.cshtml" />
+    <Content Include="Views\ForgotUsername.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\IFramePage.cshtml" />
+    <Content Include="Views\IndividualPlans.cshtml" />
+    <Content Include="Views\ManagePrimaryPhysician.cshtml" />
+    <Content Include="Views\MasterPage.cshtml" />
+    <Content Include="Views\MemberCenter.cshtml" />
+    <Content Include="Views\OneColumn.cshtml" />
+    <Content Include="Views\OurBoard.cshtml" />
+    <Content Include="Views\OurStaff.cshtml" />
+    <Content Include="Views\Page.cshtml" />
+    <Content Include="Views\Provider.cshtml" />
+    <Content Include="Views\ProviderDirectory.cshtml" />
+    <Content Include="Views\Registration.cshtml" />
+    <Content Include="Views\ResendEmail.cshtml" />
+    <Content Include="Views\ShopForPlans.cshtml" />
+    <Content Include="Views\SiteMap.cshtml" />
+    <Content Include="Views\SmallGroupPlans.cshtml" />
+    <Content Include="Views\SmallGroupPlans1.cshtml" />
+    <Content Include="Views\Templates.cshtml" />
+    <Content Include="Views\ThreeColumn.cshtml" />
+    <Content Include="Views\TwoColumn.cshtml" />
+    <Content Include="Views\UrlOpener.cshtml" />
+    <Content Include="Views\WellnessInfo.cshtml" />
+    <Content Include="Views\WhyWeAreDifferent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,14 +330,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
+    <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
     <Compile Include="Controllers\EmailSurfaceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HriLoginController.cs" />
+    <Compile Include="Controllers\HriRegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
+    <Compile Include="Models\ComparePlansViewModel.cs" />
     <Compile Include="Models\ContactFormViewModel.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ForgotUserNameViewModel.cs" />
     <Compile Include="Models\LoginFormViewModel.cs">
       <SubType>Code</SubType>

@@ -1,4 +1,5 @@
 ﻿@using ClientDependency.Core.Mvc
+@using HRI.Models
 @using HRI.Controllers
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
@@ -11,7 +12,7 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
-	var model = new HRI.Models.ForgotUserNameViewModel();
+	var model = new ForgotUserNameViewModel();
 
     var homePage = CurrentPage.AncestorsOrSelf(1).First(); 
 }

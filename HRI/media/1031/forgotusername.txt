@@ -4,9 +4,6 @@ We received your request to recover your user name.
 
 Your user name is: <%UserName%>
 
-Once you have visited the verification URL you will be redirected to the Change Password page
-where you can enter in your new password.
-
 If you have any problems or questions, or if you did not request to have your user name sent to you,
 contact Health Republic Insurance New York immeadiately.
 
