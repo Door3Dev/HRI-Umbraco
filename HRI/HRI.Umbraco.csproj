@@ -311,6 +311,8 @@
     <Content Include="Views\UrlOpener.cshtml" />
     <Content Include="Views\WellnessInfo.cshtml" />
     <Content Include="Views\WhyWeAreDifferent.cshtml" />
+    <Content Include="Views\Partials\ResetPasswordForm.cshtml" />
+    <Content Include="Views\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -334,8 +336,8 @@
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
     <Compile Include="Controllers\EmailSurfaceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HriLoginSurfaceController.cs" />
-    <Compile Include="Controllers\HriRegisterSurfaceController.cs" />
+    <Compile Include="Controllers\LoginSurfaceController.cs" />
+    <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
@@ -350,6 +352,7 @@
     </Compile>
     <Compile Include="Models\MemberProfile.cs" />
     <Compile Include="Models\RegisterFormViewModel.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

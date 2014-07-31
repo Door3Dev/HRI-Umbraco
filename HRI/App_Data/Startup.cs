@@ -39,6 +39,16 @@ namespace HRI
                     action = "SLO",
                     id = "2"
                 });
+
+            RouteTable.Routes.MapRoute(
+                "",
+                "TransferRegistration",
+                new
+                {
+                    controller = "HriRegisterController",
+                    action = "HandleRegisterMember",
+                    id = "0"
+                });
         }
 
         public void OnApplicationInitialized(

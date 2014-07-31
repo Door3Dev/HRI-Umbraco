@@ -11,7 +11,7 @@ using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
-    public class HriRegisterSurfaceController : SurfaceController
+    public class RegisterSurfaceController : SurfaceController
     {
         public ActionResult IsUserNameAvailable(string username)
         {
@@ -19,6 +19,7 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public  ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")]RegisterModel model)
         {
             if (ModelState.IsValid == false)
@@ -33,7 +34,7 @@ namespace HRI.Controllers
             switch (status)
             {
                 case MembershipCreateStatus.Success:
-
+                    
                     // CUSTOM CODE - Register the user with HRI API
                     string registrationApiString = "";
                     registrationApiString += CurrentPage.GetProperty("ApiRegistrationUrl").Value;

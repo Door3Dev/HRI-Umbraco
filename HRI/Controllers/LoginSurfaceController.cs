@@ -7,18 +7,21 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
-    public class HriLoginSurfaceController : SurfaceController
+    public class LoginSurfaceController : SurfaceController
     {
         [HttpPost]
         public ActionResult HandleLogin([Bind(Prefix = "loginModel")]LoginModel model)
         {
+            // If the model is NOT valid
             if (ModelState.IsValid == false)
             {
+                // Return the user to the login page
                 return CurrentUmbracoPage();
             }
 
@@ -38,7 +41,7 @@ namespace HRI.Controllers
                 {
                     // Create a API url
                     // TO-DO: use umbraco field to build address
-                    string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration?isMemberIdRegistered=" + model.Username;
+                    string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration?userName=" + model.Username;
                     
                     // Create a web request
                     WebRequest request = WebRequest.Create(userNameCheckApiString);
@@ -55,10 +58,23 @@ namespace HRI.Controllers
                     readStream.Close();
                     
                     // If the user exists in IWS database
-                    if(Convert.ToBoolean(json["Registered"]))
+                    if(json["RegId"] != null)
                     {
-                        // Create the user locally
-                        // Force them to change their password
+
+                        // Create the registration model
+                        var registerModel = Members.CreateRegistrationModel();
+                        registerModel.Email = json["EMail"].ToString();
+                        registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
+                        registerModel.Username = json["UserName"].ToString();
+                        registerModel.Password = "P@ssw0rd";
+                        registerModel.LoginOnSuccess = false;
+
+                        // Register the user with Door3 automatically
+                        MembershipCreateStatus status;
+                        var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+
+                        // Redirect the user to the 'security upgrade' page that lets them know to change their password
+                        return Redirect("/for-members/securtiy-upgrade");
                     }
                     else // The user doesnt exist locally or in IWS db
                     {

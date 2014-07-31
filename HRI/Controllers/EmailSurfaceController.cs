@@ -191,7 +191,7 @@ namespace HRI.Controllers
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", rootNodeModel.Content.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MemberSurface/ResetPassword?username=" + model.UserName + "?guid=" + key.ToString());
+                dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPassword?username=" + model.UserName + "&guid=" + key.ToString());
 
                 // Create a message
                 MailMessage message = new MailMessage(smtpEmail,

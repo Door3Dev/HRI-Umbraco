@@ -7,8 +7,6 @@
     Layout = null;
 }
 
-
-
 @{		
     Html.EnableClientValidation(true);
     Html.EnableUnobtrusiveJavaScript(true);
@@ -28,14 +26,14 @@
 
 @Html.RenderJsHere()
 	
-@if (!Convert.ToBoolean(TempData["IsSuccessful"]))
+@if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
     <h1>Message Sent.</h1>
     <p>Thanks for sending your message, we will get back to you shortly.</p>
 }
 else
 {
-    using (Html.BeginUmbracoForm<ContactFormSurfaceController>("Submit"))
+    using (Html.BeginUmbracoForm<EmailSurfaceController>("ContactUs"))
     {
         @Html.ValidationSummary(true)
         @Html.AntiForgeryToken()
