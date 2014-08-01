@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+
+<div id="hri-content">
+    <div class="row-fluid">
+
+        <div class="span4 offset4 well regular-form">
+
+            <h3>We are upgrading our security system</h3>
+			
+			<p>In order to provide you with a more secure user experience, we are requiring members to update their password before they can log in.<p
+			<p>First, we have to make sure you are @User.Identity.Name. Please click the button below to send a verification link to your email.</p>
+			
+			<input type="submit">Send Verification Link</input>
+
+			<p>Once you receive your email, click the link to activate your account and change your password</p>			
+
+            <div id="change_confirmation"></div>
+            <!-- major-col-content -->
+        </div>
+        <!-- major-col -->
+        <!-- blank -->
+        <!-- minor-col -->
+    </div>
+</div>

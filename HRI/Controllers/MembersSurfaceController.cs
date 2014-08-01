@@ -166,18 +166,29 @@ namespace HRI.Controllers
         [HttpGet]
         public ActionResult ResetPassword(string username, string guid)
         {
-            var member = Membership.GetUser(username);
-            
+            // Verify the member exists
+            var member = Membership.GetUser(username);            
             if(member == null)
                 return Redirect("/");
 
-            if (Services.MemberService.GetByUsername(username).GetValue("guid") != guid)
+            // Verify the user provided the correct guid
+            if (Services.MemberService.GetByUsername(username).GetValue("guid").ToString() != guid.ToString())
             {
                 return Redirect("/");
             }
-            
+
+            // Set the username and guid
+            TempData["username"] = username;
+            TempData["guid"] = guid;
+            return Redirect("/for-members/reset-password/");                        
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            var member = Membership.GetUser("test");
             member.ResetPassword();
-            return Redirect("/");
+            return RedirectToCurrentUmbracoPage();
         }
     }
 }

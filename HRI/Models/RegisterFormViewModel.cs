@@ -16,6 +16,7 @@ namespace HRI.Models
         public int UserType { get; set; }
 
         public string MemberId { get; set; }
+
         public string SSN { get; set; }
 
         [Required]
