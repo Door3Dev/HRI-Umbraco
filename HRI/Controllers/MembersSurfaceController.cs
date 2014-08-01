@@ -25,7 +25,7 @@ namespace HRI.Controllers
 
         public ActionResult SingleSignOn(IDictionary<string, string> attributes, string targetUrl, string partnerSP)
         {
-            // Initiate single sign-on to the service provider (IdP-initiated SSO)
+            // Initiate single sign-on to the service provider (IdP-initiated SSO)]
             // by sending a SAML response containing a SAML assertion to the SP.
             
             // If this is a door3 user we can grab our user number from the database            

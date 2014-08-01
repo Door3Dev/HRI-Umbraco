@@ -1,35 +1,47 @@
 ﻿using HRI.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Xml.Serialization;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
+    public class ZipCountyRegion
+    {
+        public ZipCountyRegion(string z, string c, string r) { zipCode = z; county = c; region = r; }
+        public string zipCode;
+        public string county;
+        public string region;
+    }
+
     public class ComparePlansSurfaceController : SurfaceController
     {
-        private class ZipCountyRegion
-        {
-            public ZipCountyRegion(int z, string c, int r){zipCode = z; county = c; region = r;}
-            public int zipCode;
-            public string county;
-            public int region;
-        }
-
         // TO-DO: Create a list of all zip codes / counties / region#
-        private List<ZipCountyRegion> RegionData = new List<ZipCountyRegion>()
+        private List<ZipCountyRegion> RegionData = new List<ZipCountyRegion>();
+
+        public ComparePlansSurfaceController()
         {
-            new ZipCountyRegion(10000, "Manhattan", 0),
-            new ZipCountyRegion(10001, "Brooklyn", 1),
-            new ZipCountyRegion(10001, "Harlem", 2),
-            new ZipCountyRegion(10003, "Williamsburg", 3),
-            new ZipCountyRegion(10004, "Tarrytown", 4),
-            new ZipCountyRegion(10004, "Park Slope", 5),
-            new ZipCountyRegion(10004, "Queens", 6)
-        };
+            var zipCodePath = HostingEnvironment.MapPath("~/App_Data/zip-codes.csv");
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            using (var rd = new StreamReader(zipCodePath))
+            {
+                rd.ReadLine();
+                while (!rd.EndOfStream)
+                {
+                    var splits = rd.ReadLine().Split(',');
+                    var endsWithAny = splits[0].Contains('*');
+                    var zip = endsWithAny ? splits[0].Substring(0, splits[0].Length - 1) : splits[0];
+                    var county = textInfo.ToTitleCase(splits[19].ToLower());
+                    RegionData.Add(new ZipCountyRegion(zip, county, String.Empty));
+                }
+            }
+        }
 
         /// <summary>
         /// This function will return all the ZipCodeRegion elements that match the given zip code.
@@ -42,14 +54,16 @@ namespace HRI.Controllers
         /// <param name="zipCode">The zipcode to get counties for.</param>
         /// <returns></returns>
         [HttpGet]
-        public string GetRegionsList(int zipCode)
+        public string GetZipCodeList(string zipCode)
         {
-            var applicableCounties = RegionData.Where(o => o.zipCode == zipCode).ToList();           
+            var applicableZipCodes = RegionData.GroupBy(o => o.zipCode)
+                                                .Where(x => x.First().zipCode.StartsWith(zipCode))
+                                                .Select(x => new ZipCountyRegion(x.First().zipCode, x.First().county, x.First().region))
+                                                .Take(100)
+                                                .ToList();
             var oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            string sJSON = oSerializer.Serialize(applicableCounties);
-            return sJSON;
+            return oSerializer.Serialize(applicableZipCodes);
         }
-
 
         /// <summary>
         /// This function will take a ComparePlansViewModel and determine what plans a person is eligible for - and at what price estimate.

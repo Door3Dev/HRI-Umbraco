@@ -2751,6 +2751,7 @@ input[type="radio"]:checked + label::before {
   background: #fff;
   border: 1px solid #cacaca;
   box-shadow: 2px 2px 5px #cacaca;
+  overflow-y: scroll;
 }
 
 .autocomplete-suggestion {

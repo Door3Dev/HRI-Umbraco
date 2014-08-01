@@ -268,6 +268,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="idp.pfx" />
+    <Content Include="App_Data\zip-codes.csv" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
