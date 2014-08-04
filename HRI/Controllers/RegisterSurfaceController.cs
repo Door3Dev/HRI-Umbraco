@@ -13,10 +13,7 @@ namespace HRI.Controllers
 {
     public class RegisterSurfaceController : SurfaceController
     {
-        public ActionResult IsUserNameAvailable(string username)
-        {
-            return Content("false");
-        }
+        
 
         [HttpPost]
         [AllowAnonymous]

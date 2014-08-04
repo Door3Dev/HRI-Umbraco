@@ -213,6 +213,7 @@
   <ItemGroup>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
+    <Content Include="EmailTemplates\SecurityUpgrade.txt" />
     <Content Include="EmailTemplates\ForgotPassword.txt" />
     <Content Include="EmailTemplates\ForgotUserName.txt" />
     <Content Include="EmailTemplates\ChangePassword.txt" />
@@ -314,6 +315,7 @@
     <Content Include="Views\WhyWeAreDifferent.cshtml" />
     <Content Include="Views\Partials\ResetPasswordForm.cshtml" />
     <Content Include="Views\ResetPassword.cshtml" />
+    <Content Include="Views\SecurityUpgrade.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -334,6 +336,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
+    <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
     <Compile Include="Controllers\EmailSurfaceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -354,6 +357,7 @@
     <Compile Include="Models\MemberProfile.cs" />
     <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\SendVerificationLinkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,7 @@
 }
 else
 {
-    using (Html.BeginUmbracoForm<HriRegisterSurfaceController>("HandleRegisterMember"))
+    using (Html.BeginUmbracoForm<RegisterSurfaceController>("HandleRegisterMember"))
     {
         <fieldset>
             <legend>Register Member</legend>
@@ -57,15 +57,33 @@ else
             @Html.ValidationSummary("registerModel", true)
 
             @Html.Label("User Name")
-            @Html.TextBoxFor(m => registerModel.Name, new { @id = "username"})
-            <script>
-                $("#username").keyup(function () {                    
-                    document.getElementById('result').innerHTML = 'false';
-                })
-            </script>
+            <div>
+                @Html.TextBoxFor(m => registerModel.Name, new { @id = "username" })
+                <script>
+                    $("#username").keyup(function () {
+                        if ($('#username').val().length > 0) {
+                            $.ajax({
+                                url: "/umbraco/api/HriApi/IsUserNameAvailable",
+                                data: { username: $('#username').val() },
+                                success: function (data) {
+                                    if (data == 'true' && $('#username').val().length > 5)
+                                        $('#result').html("UserName is available");
+                                    else
+                                        $('#result').html("UserName not available");
+                                },
+                                error: function () { alert('error'); },
+                                dataType: 'html'
+                            });
+                        }
+                        else
+                            $('#result').html('');
+                    })
+                </script>
+                <div id="result"></div>
+            </div>
             @Html.ValidationMessageFor(m => registerModel.Name)
             <br />
-            <div id="result"></div>
+            
 
             @Html.LabelFor(m => registerModel.Email)
             @Html.TextBoxFor(m => registerModel.Email)

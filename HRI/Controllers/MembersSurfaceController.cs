@@ -55,7 +55,7 @@ namespace HRI.Controllers
 
         
 
-        public ActionResult ActivateUser(string email)
+        public ActionResult ActivateUser(string userName, string guid)
         {
             var m = Services.MemberService.GetByEmail(email);
             m.IsApproved = true;

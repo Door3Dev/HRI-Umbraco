@@ -63,18 +63,42 @@ namespace HRI.Controllers
 
                         // Create the registration model
                         var registerModel = Members.CreateRegistrationModel();
-                        registerModel.Email = json["EMail"].ToString();
+                        
+                        // Member Name
                         registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
+                        // Member Id
+                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["MemberId"].ToString();
+                        // User Name
                         registerModel.Username = json["UserName"].ToString();
+                        // First Name
+                        registerModel.MemberProperties.Where(p=>p.Alias=="firstName").FirstOrDefault().Value = json["FirstName"].ToString();
+                        // Last Name
+                        registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
+                        // SSN
+                        registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
+                        // Email
+                        registerModel.Email = json["EMail"].ToString();
+                        // Zip Code
+                        registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
+                        // Phone Number
+                        registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+
+                        
                         registerModel.Password = "P@ssw0rd";
                         registerModel.LoginOnSuccess = false;
+                        registerModel.UsernameIsEmail = false;
 
                         // Register the user with Door3 automatically
                         MembershipCreateStatus status;
                         var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+                        // Set the member to not approved (they must click on the verification link
+                        newMember.IsApproved = false;
 
                         // Redirect the user to the 'security upgrade' page that lets them know to change their password
-                        return Redirect("/for-members/securtiy-upgrade");
+                        TempData["UserName"] = registerModel.Username;
+                        TempData["RedirectUrl"] = "/";
+
+                        return Redirect("/for-members/security-upgrade/");
                     }
                     else // The user doesnt exist locally or in IWS db
                     {

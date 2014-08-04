@@ -1,0 +1,14 @@
+﻿Hello <%FirstName%>! 
+
+We would like to thank you for being with Health Republic New York. We have upgraded our security systems and we are requiring our members to update their passwords.
+
+We have assigned you a new temporary password: <%TemporaryPassword%>
+
+You are welcome to keep this password or change it in the members section of our website once you log in.
+
+If you have any problems or questions feel free to contact Health Republic Insurance New York.
+
+Health Republic Insurance New York
+<%PhoneNumber%>
+
+Thank you!

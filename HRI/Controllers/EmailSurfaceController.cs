@@ -214,5 +214,61 @@ namespace HRI.Controllers
                 return RedirectToCurrentUmbracoPage();
             }
         }
+
+
+        [HttpPost]
+        public ActionResult SendVerificationLink(SendVerificationLinkViewModel model)//string username, string redirectUrl)
+        {            
+            if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
+            {  
+                // Get a handle on the member
+                var member = Services.MemberService.GetByUsername(model.UserName);
+                
+                MembershipUser member2 = System.Web.Security.Membership.GetUser(model.UserName);
+
+                // Send an email to the user
+                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+                // Build a model from the node
+                RenderModel rootNodeModel = new RenderModel(root);
+
+                // Get the SMTP server
+                string smtpServer = "smtp.live.com";//rootNodeModel.Content.GetProperty("smtpServer").Value.ToString();
+                // Get the SMTP email account
+                string smtpEmail = "mattwood2855@hotmail.com";// rootNodeModel.Content.GetProperty("smtpEmailAddress").Value.ToString();
+                // Get the SMTP email password
+                string smtpPassword = "An03ticLLC";// rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
+
+                // Build a dictionary for all the dynamic text in the email template
+                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
+                dynamicText.Add("<%PhoneNumber%>", rootNodeModel.Content.GetProperty("phoneNumber").Value.ToString());
+                dynamicText.Add("<%TemporaryPassword%>", member2.ResetPassword());            
+
+                // Create a message
+                MailMessage message = new MailMessage(smtpEmail,
+                                                      "mattwood2855@gmail.com",
+                                                      "Health Republic Insurance - Password Reset",
+                                                      BuildEmail("securityUpgradeEmailTemplate", dynamicText));
+
+                // Create an SMTP client object and send the message with it
+                SmtpClient smtp = new SmtpClient(smtpServer, 587);
+                smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+
+                TempData["IsSuccessful"] = true;
+
+                if (model.RedirectUrl != "" && model.RedirectUrl != null)
+                    return Redirect(model.RedirectUrl);
+                else
+                    return Redirect("/");
+            }
+            else
+            {
+                TempData["IsSuccessful"] = false;
+                return Redirect("/");
+            }
+        }
     }
 }
