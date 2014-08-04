@@ -51,42 +51,15 @@ namespace HRI.Controllers
 
             ViewBag.Response = Response;
             return new EmptyResult();
-        }
-
-        
+        }        
 
         public ActionResult ActivateUser(string userName, string guid)
         {
-            var m = Services.MemberService.GetByEmail(email);
+            var m = Services.MemberService.GetByUsername(userName);
             m.IsApproved = true;
+            System.Web.Security.Roles.AddUserToRole(userName, "Registered");
 
-            string regData="";
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://23.253.132.105:64102/api/Registration");
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.ContentLength = regData.Length;
-            using (Stream webStream = request.GetRequestStream())
-            {
-                using(StreamWriter requestWriter = new StreamWriter(webStream, System.Text.Encoding.ASCII))
-                {
-                    requestWriter.Write(regData);
-                }
-            }
-
-            try
-            {
-                WebResponse webResponse = request.GetResponse();
-                using(Stream webstream = webResponse.GetResponseStream())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            { }
-            // Register with API here
-            
-            return Redirect("/");
+            return Redirect("/umbraco/api/HriApi/RegisterUser?userName=" + userName);
         }
 
         /// <summary>

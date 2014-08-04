@@ -127,6 +127,7 @@
       <Private>True</Private>
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\System.Data.SqlServerCe.Entity.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -213,6 +214,7 @@
   <ItemGroup>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
+    <Content Include="EmailTemplates\VerifyAccount.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />
     <Content Include="EmailTemplates\ForgotPassword.txt" />
     <Content Include="EmailTemplates\ForgotUserName.txt" />
@@ -357,7 +359,7 @@
     <Compile Include="Models\MemberProfile.cs" />
     <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
-    <Compile Include="Models\SendVerificationLinkViewModel.cs" />
+    <Compile Include="Models\SendVerificationLinkModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

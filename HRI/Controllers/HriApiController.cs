@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Umbraco.Web.Models;
 using Umbraco.Web.WebApi;
+using System.Net.Http;
 
 namespace HRI.Controllers
 {
@@ -47,21 +48,22 @@ namespace HRI.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public bool RegisterUser([Bind(Prefix = "registerModel")]RegisterModel model)
-        {            
+        public bool RegisterUser(string userName)
+        {
+            var model = Services.MemberService.GetByUsername(userName);
             // Create a dictionary for easy visualization of API object
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
-            jsonData.Add("RegId", model.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value);
+            jsonData.Add("RegId", model.GetValue("memberId").ToString());
             jsonData.Add("RegDate", DateTime.Now.ToString());
-            jsonData.Add("MemberId", model.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value);
+            jsonData.Add("MemberId", model.GetValue("memberId").ToString());
             jsonData.Add("UserName", model.Username);
-            jsonData.Add("FirstName", model.MemberProperties.Where(p => p.Alias == "firstName").FirstOrDefault().Value);            
-            jsonData.Add("LastName", model.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value);
-            jsonData.Add("Ssn", model.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value);
+            jsonData.Add("FirstName",  model.GetValue("firstName").ToString()); 
+            jsonData.Add("LastName", model.GetValue("lastName").ToString());
+            jsonData.Add("Ssn", model.GetValue("ssn").ToString());
             jsonData.Add("EMail", model.Email);
-            jsonData.Add("ZipCode", model.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value);
-            jsonData.Add("PhoneNumber", model.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value);
-            jsonData.Add("RegVerified", "false");
+            jsonData.Add("ZipCode",  model.GetValue("zipCode").ToString());
+            jsonData.Add("PhoneNumber", model.GetValue("phoneNumber").ToString());
+            jsonData.Add("RegVerified", "true");
 
             // Convert the dictionary to JSON
             string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
@@ -84,9 +86,9 @@ namespace HRI.Controllers
             Stream receiveStream = response.GetResponseStream();
             Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
             StreamReader readStream = new StreamReader(receiveStream, encode);
-            JObject json = JObject.Parse(readStream.ReadToEnd());
-            response.Close();
+            JObject json = JObject.Parse(readStream.ReadToEnd());            
             readStream.Close();
+            response.Close();
 
             if (json["yNumber"] != null)
             {

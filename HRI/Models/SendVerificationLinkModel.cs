@@ -5,9 +5,10 @@ using System.Web;
 
 namespace HRI.Models
 {
-    public class SendVerificationLinkViewModel
+    public class SendVerificationLinkModel
     {
         public string UserName { get; set; }
         public string RedirectUrl { get; set; }
+        public object emailTemplateId { get; set; }
     }
 }
