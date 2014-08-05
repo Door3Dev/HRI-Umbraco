@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
-        var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+        var homePage = CurrentPage.AncestorsOrSelf(1).First();
 }
 	
 <div class="row-fluid">
@@ -14,8 +14,10 @@
         <span>Hello, @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
       }
       else
-      {
-        <span class="icon"></span><a href="~/for-members/login">Member Login</a>     
+      {        
+        if(@Model.Content.Name != "Index"){ 
+            <span class="icon"></span><a href="~/for-members/login">Member Login</a> 
+        }
       }
   </div>
 </div>

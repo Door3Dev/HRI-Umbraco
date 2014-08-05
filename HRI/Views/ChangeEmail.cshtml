@@ -12,7 +12,7 @@
                 <h3>Update Email</h3>
                 <p>Your current email address: <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
 
-                @{Html.RenderPartial("ChangeEmailForm", Model.Content);}
+                @Html.Partial("ChangeEmailForm", Model.Content)
 
                 <div id="change_confirmation"></div>
             }

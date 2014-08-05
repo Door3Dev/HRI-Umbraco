@@ -42,11 +42,11 @@ namespace HRI
 
             RouteTable.Routes.MapRoute(
                 "",
-                "TransferRegistration",
+                "RegisterUser",
                 new
                 {
-                    controller = "HriRegisterController",
-                    action = "HandleRegisterMember",
+                    controller = "HriApiController",
+                    action = "RegisterUser",
                     id = "0"
                 });
         }

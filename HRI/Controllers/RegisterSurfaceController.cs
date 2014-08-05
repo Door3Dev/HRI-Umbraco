@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,10 +14,7 @@ namespace HRI.Controllers
 {
     public class RegisterSurfaceController : SurfaceController
     {
-        public ActionResult IsUserNameAvailable(string username)
-        {
-            return Content("false");
-        }
+        
 
         [HttpPost]
         [AllowAnonymous]
@@ -29,31 +27,18 @@ namespace HRI.Controllers
 
 
             MembershipCreateStatus status;
-            var member = Members.RegisterMember(model, out status, model.LoginOnSuccess);
+            var member = Members.RegisterMember(model, out status, false);
 
             switch (status)
             {
-                case MembershipCreateStatus.Success:
-                    
-                    // CUSTOM CODE - Register the user with HRI API
-                    string registrationApiString = "";
-                    registrationApiString += CurrentPage.GetProperty("ApiRegistrationUrl").Value;
-                    
-                    WebRequest request = WebRequest.Create(registrationApiString);
-                    request.Method = "POST";                    
-                    request.Credentials = CredentialCache.DefaultCredentials;
-                    //request.
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    response.Close();
-                    //if there is a specified path to redirect to then use it
-                    if (model.RedirectUrl != null || model.RedirectUrl != "")
-                    {
-                        return Redirect(model.RedirectUrl);
-                    }
+                case MembershipCreateStatus.Success:                                        
+                    // Send the user a verification link to activate their account     
+                    SendVerificationLinkModel viewModel = new SendVerificationLinkModel();
+                    viewModel.UserName = model.Username;
+                    viewModel.RedirectUrl = "/for-members/verify-account/";
+                    viewModel.emailTemplateId = CurrentPage.GetProperty("verifyAccountEmailTemplate").Value;
+                    return RedirectToAction("SendVerificationLink", "EmailSurface", viewModel);
 
-                    //redirect to current page by default
-                    TempData["FormSuccess"] = true;
-                    return RedirectToCurrentUmbracoPage();
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError((model.UsernameIsEmail || model.Username == null)
                         ? "registerModel.Email"

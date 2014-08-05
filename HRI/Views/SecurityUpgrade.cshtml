@@ -1,25 +1,42 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@{
-    Layout = "MasterPage.cshtml";
-}
+@using Umbraco.Web.Models
+@using HRI.Controllers
+@using HRI.Models
+@using ClientDependency.Core.Mvc
 
+@{
+    var model = new SendVerificationLinkViewModel();
+    try { 
+    model.UserName = TempData["UserName"].ToString();
+    model.RedirectUrl = TempData["RedirectUrl"].ToString();
+    }
+    catch(Exception ex)
+    {}
+    Layout = "MasterPage.cshtml";
+    //var temp = TempData["registerModel"];
+    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+}
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <div id="hri-content">
     <div class="row-fluid">
-
         <div class="span4 offset4 well regular-form">
-
             <h3>We are upgrading our security system</h3>
-			
-			<p>In order to provide you with a more secure user experience, we are requiring members to update their password before they can log in.<p
-			<p>First, we have to make sure you are @User.Identity.Name. Please click the button below to send a verification link to your email.</p>
-			
-			<input type="submit">Send Verification Link</input>
 
-			<p>Once you receive your email, click the link to activate your account and change your password</p>			
-
+            <p>In order to provide you with a more secure user experience, we are requiring members to update their password before they can log in.<p
+            <p>First, we have to make sure you are you - Please click the button below to send a verification link to your email.</p>
+            @using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
+            {
+                <fieldset>
+                    @Html.HiddenFor(m => model.UserName)
+                    @Html.HiddenFor(m => model.RedirectUrl)
+                    <input type="submit" value="Send Verification Link" />
+                </fieldset>
+            }
+            <p>Once you receive your email, click the link to activate your account and change your password</p>
             <div id="change_confirmation"></div>
-            <!-- major-col-content -->
         </div>
+        
+        <!-- major-col-content -->
         <!-- major-col -->
         <!-- blank -->
         <!-- minor-col -->
