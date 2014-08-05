@@ -1202,7 +1202,7 @@ body {
     font-family: 15px;
 }
 
-.hri-common a.cta {
+.hri-common .cta {
     color: #ffffff;
     font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
     font-size: 18px;
@@ -1217,13 +1217,13 @@ body {
     text-align: center;
 }
 
-.hri-common a.cta.cta-centered {
+.hri-common .cta.cta-centered {
     margin: 30px auto;
     max-width: 200px;
     display: block;
 }
 
-.hri-common a.cta-arrow:after {
+.hri-common .cta-arrow:after {
     content: "";
     width: 0;
     height: 0;
@@ -1236,7 +1236,7 @@ body {
     vertical-align: middle;
 }
 
-.hri-common a.cta:hover {
+.hri-common .cta:hover {
     background: 0;
     background-color: #231f20;
     color: #ffffff;

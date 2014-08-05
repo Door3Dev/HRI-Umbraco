@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+
+<div id="hri-content">
+    <div class="row-fluid">
+
+        <div class="span12">
+
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span4 offset1">
+                        <h2 class="page-title">Compare Plans</h2>
+                        <span class="page-breadcrumbs"><em>Home › </em></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span10 offset1">
+                        @Html.Action("ShowPlans", "ComparePlansSurface")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,18 +12,287 @@ using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
-    public class ZipCountyRegion
-    {
-        public ZipCountyRegion(string z, string c, string r) { zipCode = z; county = c; region = r; }
-        public string zipCode;
-        public string county;
-        public string region;
-    }
-
     public class ComparePlansSurfaceController : SurfaceController
     {
-        // TO-DO: Create a list of all zip codes / counties / region#
-        private List<ZipCountyRegion> RegionData = new List<ZipCountyRegion>();
+        private class ZipCode
+        {
+            public ZipCode(string z, string c) { zipCode = z; county = c; }
+            public string zipCode;
+            public string county;
+        }
+
+        private List<ZipCode> ZipCodes = new List<ZipCode>();
+
+        #region Regions Counties 
+        private Dictionary<string, int> Regions = new Dictionary<string, int>() { 
+            {"Warren", 1},
+            {"Washington", 1},
+            {"Rensselaer", 1},
+            {"Columbia", 1},
+            {"Greene", 1},
+            {"Schoharie", 1},
+            {"Montgomery", 1},
+            {"Fulton", 1},
+            {"Saratoga", 1},
+            {"Schenectady", 1},
+            {"Albany", 1},
+            {"Orleans", 2},
+            {"Genesee", 2},
+            {"Wyoming", 2},
+            {"Allegany", 2},
+            {"Cattaraugus", 2},
+            {"Chautauqua", 2},
+            {"Erie", 2},
+            {"Niagara", 2},
+            {"Delaware", 3},
+            {"Ulster", 3},
+            {"Dutchess", 3},
+            {"Putnam", 3},
+            {"Orange", 3},
+            {"Sullivan", 3},
+            {"Westchester", 4},
+            {"Rockland", 4},
+            {"New York", 4},
+            {"Kings", 4},
+            {"Queens", 4},
+            {"Richmond", 4},
+            {"Monroe", 5},
+            {"Wayne", 5},
+            {"Seneca", 5},
+            {"Yates", 5},
+            {"Livington", 5},
+            {"Ontario", 5},
+            {"Onondaga", 6},
+            {"Cortland", 6},
+            {"Broome", 6},
+            {"Tioga", 6},
+            {"Chemug", 6},
+            {"Steuben", 6},
+            {"Schuyler", 6},
+            {"Tompkins", 6},
+            {"Cayuga", 6},
+            {"Clinton", 7},
+            {"Franklin", 7},
+            {"Essex", 7},
+            {"Hamilton", 7},
+            {"Herkimer", 7},
+            {"Otsego", 7},
+            {"Chenango", 7},
+            {"Madison", 7},
+            {"Oneida", 7},
+            {"Lewis", 7},
+            {"Oswego", 7},
+            {"Jefferson", 7},
+            {"St. Lawrence", 7},
+            {"Nassau", 8},
+            {"Suffolk", 8}
+        };
+        #endregion
+
+        #region Base Rates
+        private double BaseRate = 214.578957;
+        private Dictionary<int, double> RegionsFactor = new Dictionary<int, double>
+        {
+            {1, 1.086664},
+            {2, 1.017235},
+            {3, 1.220650},
+            {4, 1.431276},
+            {5, 1.00},
+            {6, 1.056058},
+            {7, 1.027582},
+            {8, 1.431276}
+        };
+        private double ConversionFactor = 1.00;   
+        private double IndividualFactor = 1.00;
+        private double CoupleFactor = 2.00;
+        private double PrimarySubscriberAnd1DependentFactor = 1.70;
+        private double PrimarySubscriberAnd2DependentFactor = 1.70;
+        private double PrimarySubscriberAnd3DependentFactor = 1.70;
+        private double CoupleAnd1DependentFactor = 2.85;
+        private double CoupleAnd2DependentFactor = 2.85;
+        private double CoupleAnd3DependentFactor = 2.85;
+        #endregion
+
+        #region Products Data
+        private Dictionary<string, Product> Products = new Dictionary<string,Product>() {
+            { 
+                "EssentialCare", 
+                new Product {
+                    Name = "EssentialCare Plan",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0010004",
+                            MetalTier = "Platinum",
+                            RateFactor = 1.679497
+                        },
+                        new Plan {
+                            HiosId = "71644NY0010003",
+                            MetalTier = "Gold",
+                            RateFactor = 1.428384
+                        },
+                        new Plan {
+                            HiosId = "71644NY0010002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.261463
+                        },
+                        new Plan {
+                            HiosId = "71644NY0010001",
+                            MetalTier = "Bronze",
+                            RateFactor = 1.000000,
+                        },
+                        new Plan {
+                            HiosId = "",
+                            MetalTier = "Catastrophic",
+                            RateFactor = 0.692666
+                        }
+                    }
+                }
+            },
+            { 
+                "PrimarySelect", 
+                new Product {
+                    Name = "PrimarySelect Plan",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0030004",
+                            MetalTier = "Platinum",
+                            RateFactor = 1.610092
+                        },
+                        new Plan {
+                            HiosId = "71644NY0030003",
+                            MetalTier = "Gold",
+                            RateFactor = 1.427252
+                        },
+                        new Plan {
+                            HiosId = "71644NY0030002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.260554
+                        },
+                        new Plan {
+                            HiosId = "71644NY0030001",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.866851
+                        },
+                    }
+                }
+            },
+
+            { 
+                "PrimarySelectEPO", 
+                new Product {
+                    Name = "PrimarySelect EPO Plan",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0040002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.189375
+                        }
+                    }
+                }
+            },
+
+            { 
+                "EssentialCareChildOnly", 
+                new Product {
+                    Name = "EssentialCare Child Only Plan",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0020004",
+                            MetalTier = "Platinum",
+                            RateFactor = 0.691953
+                        },
+                        new Plan {
+                            HiosId = "71644NY0020003",
+                            MetalTier = "Gold",
+                            RateFactor = 0.588494
+                        },
+                        new Plan {
+                            HiosId = "71644NY0020002",
+                            MetalTier = "Silver",
+                            RateFactor = 0.519723
+                        },
+                        new Plan {
+                            HiosId = "71644NY0020001",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.412000
+                        }
+                    }
+                }
+            },
+
+            { 
+                "EssentialCare29", 
+                new Product {
+                    Name = "EssentialCare Plan 29",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0090004",
+                            MetalTier = "Platinum",
+                            RateFactor = 1.679497
+                        },
+                        new Plan {
+                            HiosId = "71644NY0090003",
+                            MetalTier = "Gold",
+                            RateFactor = 1.428384
+                        },
+                        new Plan {
+                            HiosId = "71644NY0090002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.261463
+                        },
+                        new Plan {
+                            HiosId = "71644NY0090001",
+                            MetalTier = "Bronze",
+                            RateFactor = 1.000000
+                        }
+                    }
+                }
+            },
+
+            { 
+                "PrimarySelect29", 
+                new Product {
+                    Name = "PrimarySelect Plan 29",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0130004",
+                            MetalTier = "Platinum",
+                            RateFactor = 1.610092
+                        },
+                        new Plan {
+                            HiosId = "71644NY0130003",
+                            MetalTier = "Gold",
+                            RateFactor = 1.427252
+                        },
+                        new Plan {
+                            HiosId = "71644NY0130002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.260554
+                        },
+                        new Plan {
+                            HiosId = "71644NY0130001",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.866851
+                        }
+                    }
+                }
+            },
+
+            { 
+                "PrimarySelectEPO29", 
+                new Product {
+                    Name = "PrimarySelect EPO Plan 29",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0150002",
+                            MetalTier = "Silver",
+                            RateFactor = 1.189375
+                        }
+                    }
+                }
+            },
+        };
+        #endregion
 
         public ComparePlansSurfaceController()
         {
@@ -38,7 +307,7 @@ namespace HRI.Controllers
                     var endsWithAny = splits[0].Contains('*');
                     var zip = endsWithAny ? splits[0].Substring(0, splits[0].Length - 1) : splits[0];
                     var county = textInfo.ToTitleCase(splits[19].ToLower());
-                    RegionData.Add(new ZipCountyRegion(zip, county, String.Empty));
+                    ZipCodes.Add(new ZipCode(zip, county));
                 }
             }
         }
@@ -56,9 +325,9 @@ namespace HRI.Controllers
         [HttpGet]
         public string GetZipCodeList(string zipCode)
         {
-            var applicableZipCodes = RegionData.GroupBy(o => o.zipCode)
+            var applicableZipCodes = ZipCodes.GroupBy(o => o.zipCode)
                                                 .Where(x => x.First().zipCode.StartsWith(zipCode))
-                                                .Select(x => new ZipCountyRegion(x.First().zipCode, x.First().county, x.First().region))
+                                                .Select(x => new ZipCode(x.First().zipCode, x.First().county))
                                                 .Take(100)
                                                 .ToList();
             var oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -72,16 +341,64 @@ namespace HRI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ShowPlans(ComparePlansViewModel model)
+        public ActionResult ShowPlans([Bind(Prefix = "viewModel")]ComparePlansViewModel model)
         {
-            // TO-DO: Determine Plan Eligibility
+            var county = ZipCodes.First(z => z.zipCode == model.ZipCode).county;
+            var regionFactor = Regions[county];
 
-            // TO-DO: Calculate cost per plan
+            // Family factor calculation
+            var familyFactor = IndividualFactor;
+            if (model.CoverSelf && model.CoverSpouse)
+                familyFactor = CoupleFactor;
+            if (model.ChildrenAges != null) { 
+                 if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 1)
+                    familyFactor = PrimarySubscriberAnd1DependentFactor;
+                else if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 2)
+                    familyFactor = PrimarySubscriberAnd2DependentFactor;
+                else if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 3)
+                    familyFactor = PrimarySubscriberAnd3DependentFactor;
+                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 1)
+                    familyFactor = CoupleAnd1DependentFactor;
+                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 2)
+                    familyFactor = CoupleAnd2DependentFactor;
+                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 3)
+                    familyFactor = CoupleAnd3DependentFactor;
+            }
 
-            // TO-DO: Create a plans ViewModel
+            // Build products list
+            var productList = new List<Product>();
+            if (model.ChildrenAges == null)
+            {
+                productList.Add(Products["EssentialCare"]);
+                productList.Add(Products["PrimarySelect"]);
+                productList.Add(Products["PrimarySelectEPO"]);
+            }
+            else if (model.CoverSelf
+                && model.ChildrenAges.Count >= 1
+                && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
+            {
+                productList.Add(Products["EssentialCare29"]);
+                productList.Add(Products["PrimarySelect29"]);
+                productList.Add(Products["PrimarySelectEPO29"]);
+            }
+            else if (model.ChildrenAges.Count >= 1)
+            {
+                productList.Add(Products["EssentialCareChildOnly"]);
+            }
 
-            // TO-DO: Route to Plans View with ViewModel
-            return RedirectToCurrentUmbracoPage();
+            // Calculate price for each plan
+            foreach (var product in productList)
+            {
+                foreach (var plan in product.Plans)
+                {
+                    // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
+                    plan.Price = Math.Round(BaseRate * ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
+                }
+            }
+
+            model.Products = productList;
+
+            return PartialView("PlansList", model);
         }
     }
 }
