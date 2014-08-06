@@ -1,7 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
-    var header = TempData["ShowPlans"].IfNull(x => Umbraco.Field("Header"));
 }
 <div id="hri-content" class="hri-compare-plans">
     <div class="row-fluid">
@@ -18,7 +17,7 @@
             </div>
             <div class="span6">
             <p class="dark-purple text-justify">
-				@header 
+				@(TempData["ShowPlans"] == null ? Umbraco.Field("Header").ToString() : String.Empty)
             </p>
             </div>
         </div>

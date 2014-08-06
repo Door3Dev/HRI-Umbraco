@@ -368,6 +368,13 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ShowPlans([Bind(Prefix = "viewModel")]ComparePlansViewModel model)
         {
+            // If the model is NOT valid
+            if (ModelState.IsValid == false)
+            {
+                // Return the user to the login page
+                return CurrentUmbracoPage();
+            }
+
             var county = ZipCodes.First(z => z.zipCode == model.ZipCode).county;
             var regionNumber = Regions[county];
             var regionFactor = RegionsFactor[regionNumber];
