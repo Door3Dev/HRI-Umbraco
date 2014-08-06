@@ -66,9 +66,9 @@
 
                 <h3>@Umbraco.Field("Plan1Caption")</h3>
 
-                @if(Umbraco.Field("Plan1Text").ToString().Length > 60)
-                { 
-                    <p>@Umbraco.Field("Plan1Text").ToString().Substring(0, 60 ) &gt;</p>
+                @if (Umbraco.Field("Plan1Text").ToString().Length > 60)
+                {
+                    <p>@Umbraco.Field("Plan1Text").ToString().Substring(0, 60) &gt;</p>
                 }
                 else
                 {
@@ -82,7 +82,14 @@
 
                 <h3>@Umbraco.Field("Plan2Caption")</h3>
 
-                <p>@Umbraco.Field("Plan2Text").ToString().Substring(0, 60) &gt;</p>
+                @if (Umbraco.Field("Plan2Text").ToString().Length > 60)
+                {
+                    <p>@Umbraco.Field("Plan2Text").ToString().Substring(0, 60) &gt;</p>
+                }
+                else
+                {
+                    <p>@Umbraco.Field("Plan2Text").ToString()</p>
+                }
 
             </a>
         </div>
@@ -91,7 +98,14 @@
 
                 <h3>@Umbraco.Field("Plan3Caption")</h3>
 
-                <p>@Umbraco.Field("Plan3Text").ToString().Substring(0, 60) &gt;</p>
+                @if (Umbraco.Field("Plan3Text").ToString().Length > 60)
+                {
+                    <p>@Umbraco.Field("Plan3Text").ToString().Substring(0, 60) &gt;</p>
+                }
+                else
+                {
+                    <p>@Umbraco.Field("Plan3Text").ToString()</p>
+                }
             </a>
         </div>
     </div>
