@@ -1,4 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@model HRI.Models.ComparePlansViewModel
 @{
     Layout = "MasterPage.cshtml";
 }
@@ -20,7 +21,7 @@
             <div class="content">
                 <div class="row-fluid">
                     <div class="span10 offset1">
-                        @Html.Action("ShowPlans", "ComparePlansSurface")
+                        @Html.Partial("PlansList")
                     </div>
                 </div>
             </div>

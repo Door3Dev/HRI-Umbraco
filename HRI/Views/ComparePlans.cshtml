@@ -17,11 +17,17 @@
             </div>
             <div class="span6">
             <p class="dark-purple text-justify">
-				@Umbraco.Field("Header")
+				@Umbraco.Field("Header") 
             </p>
             </div>
         </div>
-        @{ Html.RenderPartial("ComparePlansForm"); }
+        @{
+            if (TempData["ShowPlans"] != null) {
+                Html.RenderPartial("PlansList", TempData["model"]);
+            } else {
+                Html.RenderPartial("ComparePlansForm");
+            } 
+        }
         </div>
     </div>
     </div>

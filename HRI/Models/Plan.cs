@@ -11,5 +11,6 @@ namespace HRI.Models
         public string MetalTier;
         public double RateFactor;
         public double Price;
+        public PlanDescription Description;
     }
 }

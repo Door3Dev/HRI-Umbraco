@@ -113,6 +113,8 @@ namespace HRI.Controllers
         private double CoupleAnd3DependentFactor = 2.85;
         #endregion
 
+        
+
         #region Products Data
         private Dictionary<string, Product> Products = new Dictionary<string,Product>() {
             { 
@@ -123,27 +125,32 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0010004",
                             MetalTier = "Platinum",
-                            RateFactor = 1.679497
+                            RateFactor = 1.679497,
+                            Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0010003",
                             MetalTier = "Gold",
-                            RateFactor = 1.428384
+                            RateFactor = 1.428384,
+                            Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0010002",
                             MetalTier = "Silver",
-                            RateFactor = 1.261463
+                            RateFactor = 1.261463,
+                            Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0010001",
                             MetalTier = "Bronze",
                             RateFactor = 1.000000,
+                            Description = PlansDescriptioData.EssentialCareBronzePlanDescription
                         },
                         new Plan {
-                            HiosId = "",
+                            HiosId = "71644NY0010005",
                             MetalTier = "Catastrophic",
-                            RateFactor = 0.692666
+                            RateFactor = 0.692666,
+                            Description = PlansDescriptioData.EssentialCareCatastrophicPlanDescription
                         }
                     }
                 }
@@ -156,22 +163,26 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0030004",
                             MetalTier = "Platinum",
-                            RateFactor = 1.610092
+                            RateFactor = 1.610092,
+                            Description = PlansDescriptioData.PrimarySelectPlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030003",
                             MetalTier = "Gold",
-                            RateFactor = 1.427252
+                            RateFactor = 1.427252,
+                            Description = PlansDescriptioData.PrimarySelectGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030002",
                             MetalTier = "Silver",
-                            RateFactor = 1.260554
+                            RateFactor = 1.260554,
+                            Description = PlansDescriptioData.PrimarySelectSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030001",
                             MetalTier = "Bronze",
-                            RateFactor = 0.866851
+                            RateFactor = 0.866851,
+                            Description = PlansDescriptioData.PrimarySelectBronzePlanDescription
                         },
                     }
                 }
@@ -185,7 +196,8 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0040002",
                             MetalTier = "Silver",
-                            RateFactor = 1.189375
+                            RateFactor = 1.189375,
+                            Description = PlansDescriptioData.PrimarySelectSilverEPOPlanDescription
                         }
                     }
                 }
@@ -199,22 +211,26 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0020004",
                             MetalTier = "Platinum",
-                            RateFactor = 0.691953
+                            RateFactor = 0.691953,
+                            Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020003",
                             MetalTier = "Gold",
-                            RateFactor = 0.588494
+                            RateFactor = 0.588494,
+                            Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020002",
                             MetalTier = "Silver",
-                            RateFactor = 0.519723
+                            RateFactor = 0.519723,
+                            Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020001",
                             MetalTier = "Bronze",
-                            RateFactor = 0.412000
+                            RateFactor = 0.412000,
+                            Description = PlansDescriptioData.EssentialCareBronzePlanDescription
                         }
                     }
                 }
@@ -228,22 +244,26 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0090004",
                             MetalTier = "Platinum",
-                            RateFactor = 1.679497
+                            RateFactor = 1.679497,
+                            Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0090003",
                             MetalTier = "Gold",
-                            RateFactor = 1.428384
+                            RateFactor = 1.428384,
+                            Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0090002",
                             MetalTier = "Silver",
-                            RateFactor = 1.261463
+                            RateFactor = 1.261463,
+                            Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0090001",
                             MetalTier = "Bronze",
-                            RateFactor = 1.000000
+                            RateFactor = 1.000000,
+                            Description = PlansDescriptioData.EssentialCareBronzePlanDescription
                         }
                     }
                 }
@@ -257,22 +277,26 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0130004",
                             MetalTier = "Platinum",
-                            RateFactor = 1.610092
+                            RateFactor = 1.610092,
+                            Description = PlansDescriptioData.PrimarySelectPlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130003",
                             MetalTier = "Gold",
-                            RateFactor = 1.427252
+                            RateFactor = 1.427252,
+                            Description = PlansDescriptioData.PrimarySelectGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130002",
                             MetalTier = "Silver",
-                            RateFactor = 1.260554
+                            RateFactor = 1.260554,
+                            Description = PlansDescriptioData.PrimarySelectSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130001",
                             MetalTier = "Bronze",
-                            RateFactor = 0.866851
+                            RateFactor = 0.866851,
+                            Description = PlansDescriptioData.PrimarySelectBronzePlanDescription
                         }
                     }
                 }
@@ -286,11 +310,12 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0150002",
                             MetalTier = "Silver",
-                            RateFactor = 1.189375
+                            RateFactor = 1.189375,
+                            Description = PlansDescriptioData.PrimarySelectSilverEPOPlanDescription
                         }
                     }
                 }
-            },
+            }
         };
         #endregion
 
@@ -398,7 +423,9 @@ namespace HRI.Controllers
 
             model.Products = productList;
 
-            return PartialView("PlansList", model);
+            TempData["model"] = model;
+            TempData["ShowPlans"] = true;
+            return RedirectToCurrentUmbracoPage();
         }
     }
 }

@@ -20,7 +20,7 @@
     </div>
     <div class="row-fluid">
         <div class="span12">
-            @foreach (var product in Model.Content.Products)
+            @foreach (var product in Model.Products)
             {
                 <div class="hri-accordion">
                 <div class="hri-accordion-header">
@@ -42,13 +42,13 @@
                                     <th class="first-col">Tier</th>
                                     @foreach (var plan in product.Plans) {
                                         <th>@plan.MetalTier<br>
-                                            @{ Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" }); }
+                                            @using(Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" })) {
                                                 @Html.AntiForgeryToken()
-                                                @Html.Hidden("ZipCode", Model.Content.ZipCode)
+                                                @Html.Hidden("ZipCode", Model.ZipCode)
                                                 @Html.Hidden("PlanId", plan.HiosId)
                                                 @Html.Hidden("PlanPrice", plan.Price)
                                                 <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
-                                            @{ Html.EndForm(); }
+                                            }
                                         </th>
                                     }
                                 </tr>

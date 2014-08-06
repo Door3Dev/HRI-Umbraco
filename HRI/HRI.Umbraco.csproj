@@ -397,7 +397,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\MemberProfile.cs" />
+    <Compile Include="Models\PlanDescription.cs" />
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\PlansDescriptioData.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />

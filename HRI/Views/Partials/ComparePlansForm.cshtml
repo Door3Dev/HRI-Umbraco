@@ -1,12 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @using ClientDependency.Core.Mvc
 @using HRI.Models
+@using HRI.Controllers
 
 @{
     var viewModel = new ComparePlansViewModel();
 }
 
-@using (Html.BeginForm("ShowPlans", "ComparePlansSurface")) {
+@using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("ShowPlans")) {
 <div class="row-fluid block">
     <div class="span5 desc"><h3>Please enter your zip code.</h3></div>
     <div class="span7">
