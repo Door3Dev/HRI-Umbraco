@@ -311,6 +311,21 @@
                                             {
                                             <td>@plan.Description.ConventionalContactLenses</td> }
                                         </tr>
+                                        <tr>
+                                            <td></td>
+                                            @foreach (var plan in product.Plans) { 
+                                            <td>
+                                                @using (Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.Hidden("ZipCode", Model.ZipCode)
+                                                    @Html.Hidden("PlanId", plan.HiosId)
+                                                    @Html.Hidden("PlanPrice", plan.Price)
+                                                    <input class="btn btn-block hri-btn" type="submit" value="Select Plan">
+                                                }
+                                            </td>
+                                            }
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -356,14 +371,11 @@
                         </tr>
                         <tr>
                             <th>Annual Salary:</th>
-                            <td>
-
-                                N/A
-                            </td>
+                            <td>@(Model.Income.HasValue ? "$" + Model.Income : "N/A")</td>
                         </tr>
                         <tr>
                             <th># of people in household:</th>
-                            <td>N/A</td>
+                            <td>@(Model.NumberInHousehold.HasValue ? Model.NumberInHousehold.ToString() : "N/A")</td>
                         </tr>
                         <tr>
                             <th>May be eligible for financial assistance? :</th>
@@ -383,44 +395,33 @@
                         </tr>
                         <tr>
                             <th>Zip Code:</th>
-                            <td>11590</td>
+                            <td>@Model.ZipCode</td>
                         </tr>
                         <tr>
                             <th>County:</th>
-                            <td>Nassau</td>
+                            <td>@Model.County</td>
                         </tr>
                         <tr>
                             <th>Age:</th>
-                            <td>
-
-                                30 years
-
-                            </td>
+                            <td>@(Model.CustomerAge.HasValue ? Model.CustomerAge.ToString() + " years" : "N/A")</td>
                         </tr>
                         <tr>
                             <th>Spouse/Partner:</th>
-                            <td>
-
-                                N/A
-
-                            </td>
+                            <td>@(Model.SpouseAge.HasValue ? Model.SpouseAge.ToString() + " years" : "N/A")</td>
                         </tr>
                         <tr>
                             <th>Dependents:</th>
-                            <td>1 dependent(s)</td>
+                            <td>@(Model.ChildrenAges != null ? Model.ChildrenAges.Count : 0) dependent(s)</td>
                         </tr>
                         <tr>
                             <th>Annual Salary:</th>
-                            <td>
-
-                                N/A
-                            </td>
+                            <td>@(Model.Income.HasValue ? "$" + Model.Income : "N/A")</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="span2 pull-right">
-                <a href="/shop" class="btn hri-btn btn-block pull-right">Start Over</a>
+                <a href="/shop-for-plans/compare-plans/" class="btn hri-btn btn-block pull-right">Start Over</a>
             </div>
         </div>
         <div class="row-fluid">

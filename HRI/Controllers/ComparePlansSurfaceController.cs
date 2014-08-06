@@ -369,25 +369,32 @@ namespace HRI.Controllers
         public ActionResult ShowPlans([Bind(Prefix = "viewModel")]ComparePlansViewModel model)
         {
             var county = ZipCodes.First(z => z.zipCode == model.ZipCode).county;
-            var regionFactor = Regions[county];
+            var regionNumber = Regions[county];
+            var regionFactor = RegionsFactor[regionNumber];
 
             // Family factor calculation
             var familyFactor = IndividualFactor;
             if (model.CoverSelf && model.CoverSpouse)
                 familyFactor = CoupleFactor;
-            if (model.ChildrenAges != null) { 
-                 if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 1)
-                    familyFactor = PrimarySubscriberAnd1DependentFactor;
-                else if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 2)
-                    familyFactor = PrimarySubscriberAnd2DependentFactor;
-                else if (model.CoverSelf && !model.CoverSpouse && model.ChildrenAges.Count == 3)
-                    familyFactor = PrimarySubscriberAnd3DependentFactor;
-                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 1)
-                    familyFactor = CoupleAnd1DependentFactor;
-                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 2)
-                    familyFactor = CoupleAnd2DependentFactor;
-                else if (model.CoverSelf && model.CoverSpouse && model.ChildrenAges.Count == 3)
-                    familyFactor = CoupleAnd3DependentFactor;
+            if (model.ChildrenAges != null) {
+                if (model.CoverSelf && !model.CoverSpouse)
+                {
+                    if (model.ChildrenAges.Count == 1)
+                        familyFactor = PrimarySubscriberAnd1DependentFactor;
+                    else if (model.ChildrenAges.Count == 2)
+                        familyFactor = PrimarySubscriberAnd2DependentFactor;
+                    else if (model.ChildrenAges.Count == 3)
+                        familyFactor = PrimarySubscriberAnd3DependentFactor;
+                }
+                if (model.CoverSelf && model.CoverSpouse)
+                {
+                    if (model.ChildrenAges.Count == 1)
+                        familyFactor = CoupleAnd1DependentFactor;
+                    else if (model.ChildrenAges.Count == 2)
+                        familyFactor = CoupleAnd2DependentFactor;
+                    else if (model.ChildrenAges.Count == 3)
+                        familyFactor = CoupleAnd3DependentFactor;
+                }
             }
 
             // Build products list
@@ -422,6 +429,7 @@ namespace HRI.Controllers
             }
 
             model.Products = productList;
+            model.County = county;
 
             TempData["model"] = model;
             TempData["ShowPlans"] = true;
