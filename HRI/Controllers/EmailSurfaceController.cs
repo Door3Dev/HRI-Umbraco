@@ -160,6 +160,40 @@ namespace HRI.Controllers
             }
         }
 
+        [HttpGet]
+        public bool ResetPassword(string userName, string smtpServer, string email, string pass)
+        {
+            try
+            {
+                var member = Membership.GetUser(userName);
+                string newPass = member.ResetPassword();
+
+                // Build a dictionary for all teh dynamic text in the email template
+                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                dynamicText.Add("<%FirstName%>", member.UserName);
+                dynamicText.Add("<%PhoneNumber%>", "999-999-9999");
+                dynamicText.Add("<%NewPassword%>", newPass);
+
+                // Create a message
+                MailMessage message = new MailMessage(email,
+                                                      member.Email,
+                                                      "Health Republic Insurance - Password Reset",
+                                                      newPass);
+
+                // Create an SMTP client object and send the message with it
+                SmtpClient smtp = new SmtpClient(smtpServer, 25);
+                smtp.Credentials = new NetworkCredential(email, pass);
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {

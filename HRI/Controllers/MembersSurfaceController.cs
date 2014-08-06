@@ -28,38 +28,55 @@ namespace HRI.Controllers
             // Initiate single sign-on to the service provider (IdP-initiated SSO)]
             // by sending a SAML response containing a SAML assertion to the SP.
             
-            // If this is a door3 user we can grab our user number from the database            
-            string memberID = Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "primaryMemberID").First().Value.ToString();
+            // get the member id (was IWS number) from the database           
+            string memberId = Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "memberId").First().Value.ToString();
 
+            // Create a dictionary of attributes to add to the SAML assertion
             Dictionary<string, string> attribs = new Dictionary<string, string>();
 
             // Attributes for MagnaCare
-            attribs.Add("Member ID", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "primaryMemberID").First().Value.ToString());
+            attribs.Add("Member ID", memberId);
             attribs.Add("First Name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "firstName").First().Value.ToString());
             attribs.Add("Last Name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "lastName").First().Value.ToString());
             attribs.Add("Product", "PRIMARYSELECT");
 
-            // Otherwise we must use the HRI api to determine the user ID for the given username
-            // Update the door3 database to have this user number for future uses            
+            // Attributes for HealthX
 
+
+                     
+            // Send an IdP initiated SAML assertion
             SAMLIdentityProvider.InitiateSSO(
                 Response,
-                memberID,
+                memberId,
                 attribs,
                 targetUrl,
                 partnerSP);
 
+            // Add the response to the ViewBag so we can access it on the front end if we need to
             ViewBag.Response = Response;
+            // Return an empty response since we wait for the SAML consumer to send us the requested page
             return new EmptyResult();
         }        
 
         public ActionResult ActivateUser(string userName, string guid)
         {
             var m = Services.MemberService.GetByUsername(userName);
-            m.IsApproved = true;
-            System.Web.Security.Roles.AddUserToRole(userName, "Registered");
 
-            return Redirect("/umbraco/api/HriApi/RegisterUser?userName=" + userName);
+            bool regSuccess;
+            string registerApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
+            using(var client = new WebClient())
+            {
+                var result = client.UploadString(registerApiUrl, userName);
+                regSuccess = Convert.ToBoolean(result);
+            }
+
+            if (regSuccess)
+            {
+                m.IsApproved = true;
+                System.Web.Security.Roles.AddUserToRole(userName, "Registered");
+                return Redirect("/for-members/login");
+            }
+            return Content("There was an error validating your account. Please Contact Health Republic New York immediately");            
         }
 
         /// <summary>

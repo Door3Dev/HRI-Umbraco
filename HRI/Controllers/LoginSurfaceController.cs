@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -29,7 +31,7 @@ namespace HRI.Controllers
             if (Members.Login(model.Username, model.Password) == false)
             {
                 // Check to make sure that the user exists
-                var member = Members.GetByUsername(model.Username);                
+                var member = Services.MemberService.GetByUsername(model.Username);                
                 if (member != null)
                 {
                     // If the user does exist then it was a wrong password
@@ -39,23 +41,30 @@ namespace HRI.Controllers
                 }
                 else // If the user doesnt exists, check the HRI API to see if this is a returning IWS user
                 {
-                    // Create a API url
+
                     // TO-DO: use umbraco field to build address
                     string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration?userName=" + model.Username;
-                    
-                    // Create a web request
-                    WebRequest request = WebRequest.Create(userNameCheckApiString);
-                    request.Method = "GET";
-                    request.Credentials = CredentialCache.DefaultCredentials;  
-                    
-                    // Get the web response as a JSON object
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    Stream receiveStream = response.GetResponseStream();
-                    Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
-                    StreamReader readStream = new StreamReader(receiveStream, encode);
-                    JObject json = JObject.Parse(readStream.ReadToEnd());
-                    response.Close();              
-                    readStream.Close();
+                    string response;
+                    JObject json;
+
+                    Dictionary<string, string> jsonData = new Dictionary<string, string>();
+                    jsonData.Add("userName", model.Username);
+                    // Convert the dictionary to JSON
+                    string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
+                    using(var client = new WebClient())
+                    {
+                        // Set the format to JSON
+                        client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                        try
+                        {
+                            response = client.DownloadString(userNameCheckApiString);
+                            json = JObject.Parse(response);
+                        }
+                        catch(WebException ex)
+                        {                            
+                            return Content("Error");
+                        }
+                    }                    
                     
                     // If the user exists in IWS database
                     if(json["RegId"] != null)
@@ -67,7 +76,7 @@ namespace HRI.Controllers
                         // Member Name
                         registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
                         // Member Id
-                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["MemberId"].ToString();
+                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["RegId"].ToString();
                         // User Name
                         registerModel.Username = json["UserName"].ToString();
                         // First Name
@@ -82,6 +91,8 @@ namespace HRI.Controllers
                         registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
                         // Phone Number
                         registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+                        // Y Number
+                        registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
 
                         
                         registerModel.Password = "P@ssw0rd";
@@ -91,14 +102,30 @@ namespace HRI.Controllers
                         // Register the user with Door3 automatically
                         MembershipCreateStatus status;
                         var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
-                        // Set the member to not approved (they must click on the verification link
-                        newMember.IsApproved = false;
+                        Session.Clear();
+                        FormsAuthentication.SignOut();
+                        
+                        // Authenticate the user automatically as a registered user
+                        newMember.IsApproved = true;
+                        System.Web.Security.Roles.AddUserToRole(newMember.UserName, "Registered");
+                        
+                        // Reset the password and send an email to the user
+                        bool resetSuccess;
+                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.Username + "&smtpServer=" + "smtp.live.com" + "&email=" + "mattwood2855@hotmail.com" + "&pass=" + "ChangePass1";
+                        using(var client = new WebClient())
+                        {
+                            var result = client.DownloadString(resetApiUrl);
+                            resetSuccess = Convert.ToBoolean(result);
+                        }                            
 
-                        // Redirect the user to the 'security upgrade' page that lets them know to change their password
-                        TempData["UserName"] = registerModel.Username;
-                        TempData["RedirectUrl"] = "/";
-
-                        return Redirect("/for-members/security-upgrade/");
+                        if(resetSuccess)
+                        {
+                            return Redirect("/for-members/security-upgrade/");
+                        }
+                        else
+                        {
+                            return Redirect("/");
+                        }
                     }
                     else // The user doesnt exist locally or in IWS db
                     {

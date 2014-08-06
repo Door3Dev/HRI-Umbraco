@@ -52,19 +52,41 @@ namespace HRI.Controllers
         {
             var model = Services.MemberService.GetByUsername(userName);
 
+            bool test = true;
             // Create a dictionary for easy visualization of API object
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
-            jsonData.Add("RegId", null);
-            jsonData.Add("RegDate", DateTime.Now.ToString());
-            jsonData.Add("MemberId", null);
-            jsonData.Add("UserName", model.Username);
-            jsonData.Add("FirstName",  model.GetValue("firstName").ToString()); 
-            jsonData.Add("LastName", model.GetValue("lastName").ToString());
-            jsonData.Add("Ssn", model.GetValue("ssn").ToString());
-            jsonData.Add("EMail", model.Email);
-            jsonData.Add("ZipCode",  model.GetValue("zipCode").ToString());
-            jsonData.Add("PhoneNumber", model.GetValue("phoneNumber").ToString());
-            jsonData.Add("RegVerified", "true");
+            if (test) 
+            {
+                // Test Block
+                
+                jsonData.Add("RegId", null);
+                jsonData.Add("RegDate", DateTime.Now.ToString());
+                jsonData.Add("MemberId", null);
+                jsonData.Add("UserName", userName);
+                jsonData.Add("FirstName", userName + "first");
+                jsonData.Add("LastName", userName + "last");
+                jsonData.Add("Ssn", null);
+                jsonData.Add("EMail", userName + new Random().ToString() + "@somewhere.com");
+                jsonData.Add("ZipCode", "10010");
+                jsonData.Add("PhoneNumber", "9169120472");
+                jsonData.Add("RegVerified", "true");
+            }
+            else
+            {
+                jsonData.Add("RegId", null);
+                jsonData.Add("RegDate", DateTime.Now.ToString());
+                jsonData.Add("MemberId", null);
+                jsonData.Add("UserName", model.Username);
+                jsonData.Add("FirstName", model.GetValue("firstName").ToString());
+                jsonData.Add("LastName", model.GetValue("lastName").ToString());
+                jsonData.Add("Ssn", model.GetValue("ssn").ToString());
+                jsonData.Add("EMail", model.Email);
+                jsonData.Add("ZipCode", model.GetValue("zipCode").ToString());
+                jsonData.Add("PhoneNumber", model.GetValue("phoneNumber").ToString());
+                jsonData.Add("RegVerified", "true");
+            }
+
+            
 
             // Convert the dictionary to JSON
             string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
@@ -72,21 +94,41 @@ namespace HRI.Controllers
             // TO-DO bring this string to umbraco back end instead of hard coded
             string registerUserApi = "http://23.253.132.105:64102/api/Registration";
 
+            // Create a JSON object to hold the response
             JObject json;
+            string response;
+            // Create a webclient object to post the user data
             using(var client = new WebClient())
             {
+                // Set the format to JSON
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                var response = client.UploadString(registerUserApi, myJsonString);
+                // Get the response when posting the member
+                try
+                {
+                    response = client.UploadString(registerUserApi, myJsonString);
+                }
+                catch(WebException ex)
+                {                    
+                    return false;
+                }
+                // Get the results into a json object
                 json = JObject.Parse(response);
             }
 
-
-            if (json["RegId"] != null)
+            // If the user was created
+            if (json["MemberId"] != null)
             {
-                Services.MemberService.GetByUsername(model.Username).SetValue("yNumber", json["yNumber"]);
+                // Assign this user their member id
+                var temp = model.GetValue("memberId");
+                model.SetValue("memberId", json["RegId"]);                
+                // Assign their Morneau Shapell Y Number
+                Services.MemberService.GetByUsername(model.Username).SetValue("yNumber", json["MemberId"]);
+                // Return successful registration
+                return true;
             }
 
-            return Convert.ToBoolean(json["isAvailable"]);
+            // Member was not registered with HRI; return false
+            return false;
         }
     }
 }
