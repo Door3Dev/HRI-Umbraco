@@ -356,7 +356,6 @@
     <Content Include="Views\Partials\ResetPasswordForm.cshtml" />
     <Content Include="Views\ResetPassword.cshtml" />
     <Content Include="Views\Partials\PlansList.cshtml" />
-    <Content Include="Views\PlansList.cshtml" />
     <Content Include="Views\Partials\ComparePlansForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

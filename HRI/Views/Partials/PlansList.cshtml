@@ -1,200 +1,446 @@
 ﻿@using HRI.Models
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<ComparePlansViewModel>
 
-<div class="plan-summary-section">
-    <div class="row-fluid">
-        <div class="span6">
-            <p class="purple"><strong>Plan Options <sup>†</sup></strong></p>
-        </div>
-
-        <div class="span6">
-            <a href="#" class="dark-purple pull-right hri-accordion-toggle-all" data-accordion-toggle-all-text="Collapse all plans">Expand all plans</a>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <p>
-                <strong>Note: </strong>All Health Republic Insurance of New York (HRINY) plans provide no coverage for out-of-network services. However, in the event of a true medical emergency, HRINY will cover expenses associated with true and real medical emergencies in accordance with and as defined by New York state and federal laws.
-            </p>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            @foreach (var product in Model.Products)
-            {
-                <div class="hri-accordion">
-                <div class="hri-accordion-header">
-                    <div class="hri-accordion-icon">
-                        <span class="hri-accordion-icon-expand">+</span>
-                        <span class="hri-accordion-icon-collapse">–</span>
-                    </div>
-                    <div class="hri-accordion-title plan-header">
-                        <p class="plan-title">
-                            <strong>@product.Name</strong>
-                        </p>
-                    </div>
-                </div>
-                <div class="hri-accordion-content" style="display: none;">
-                    <div class="plan-content">
-                        <table class="plan-summary table cols cols-4">
-                            <thead>
-                                <tr>
-                                    <th class="first-col">Tier</th>
-                                    @foreach (var plan in product.Plans) {
-                                        <th>@plan.MetalTier<br>
-                                            @using(Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" })) {
-                                                @Html.AntiForgeryToken()
-                                                @Html.Hidden("ZipCode", Model.ZipCode)
-                                                @Html.Hidden("PlanId", plan.HiosId)
-                                                @Html.Hidden("PlanPrice", plan.Price)
-                                                <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
-                                            }
-                                        </th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>Premium (All family members)</th>
-
-                                    <td>$877</td>
-
-                                    <td>$746</td>
-
-                                    <td>$659</td>
-
-                                    <td>$522</td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<div class="span10 offset1">
+    <div class="plan-summary-section">
+        <div class="row-fluid">
+            <div class="span6">
+                <p class="purple"><strong>Plan Options <sup>†</sup></strong></p>
             </div>
-            }
+
+            <div class="span6">
+                <a href="#" class="dark-purple pull-right hri-accordion-toggle-all" data-accordion-toggle-all-text="Collapse all plans">Expand all plans</a>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <p>
+                    <strong>Note: </strong>All Health Republic Insurance of New York (HRINY) plans provide no coverage for out-of-network services. However, in the event of a true medical emergency, HRINY will cover expenses associated with true and real medical emergencies in accordance with and as defined by New York state and federal laws.
+                </p>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="hri-accordion">
+                        <div class="hri-accordion-header">
+                            <div class="hri-accordion-icon">
+                                <span class="hri-accordion-icon-expand">+</span>
+                                <span class="hri-accordion-icon-collapse">–</span>
+                            </div>
+                            <div class="hri-accordion-title plan-header">
+                                <p class="plan-title">
+                                    <strong>@product.Name</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hri-accordion-content" style="display: none;">
+                            <div class="plan-content">
+                                <table class="plan-summary table cols cols-4">
+                                    <thead>
+                                        <tr>
+                                            <th class="first-col">Tier</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                                <th>
+                                                    @plan.MetalTier<br>
+                                                @using (Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.Hidden("ZipCode", Model.ZipCode)
+                                                    @Html.Hidden("PlanId", plan.HiosId)
+                                                    @Html.Hidden("PlanPrice", plan.Price)
+                                                    <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
+                                                }
+                                            </th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Premium (All family members)</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>$@plan.Price</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Deductible</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.Deductible</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Coinsurance</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.Coinsurance</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Out of Pocket Maximum</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutofPocketMaximum</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Allergy Testing <br>
+                                                Bone Density Testing<br>
+                                                Cervical Cytology<br>
+                                                Colonoscopy Screening<br>
+                                                Gynecological Screening<br>
+                                                Immunizations<br>
+                                                Mammography<br>
+                                                Prenatal Maternity Care<br>
+                                                Prostate Cancer Screening<br>
+                                                Routine Exams<br>
+                                                Women's Preventive Health Services<br>
+                                                Other Services Noted in Section 2713 of ACA
+                                            </th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.PreventiveServices</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Out of Pocket Maximum</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutofPocketMaximum</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Office Visit</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OfficeVisit</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Outpatient Surgical Procedures (in physician's office)</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutpatientSurgicalProcedures</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Emergency Room</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.EmergencyRoom</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Ambulance</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.Ambulance</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Urgent Care Center</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.UrgentCareCenter</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Inpatient Hospital</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InpatientHospital</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Outpatient Surgical Procedures (Facility)</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutpatientSurgicalProceduresFacility</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Skilled Nursing Facility</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.SkilledNursingFacility</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Laboratory Testing</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.LaboratoryTesting</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>EKG</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.EKG</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Routine Radiology</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.RoutineRadiology</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Advanced Radiology</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.AdvancedRadiology</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Inpatient Maternity</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InpatientMaternity</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Inpatient Mental Health</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InpatientMentalHealth</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Outpatient Mental Health</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutpatientMentalHealth</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Inpatient Substance Abuse - Rehab</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InpatientSubstanceAbuseRehab</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Inpatient Substance Abuse - Detox</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InpatientSubstanceAbuseDetox</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Outpatient Substance Abuse</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.OutpatientSubstanceAbuse</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Insulin and Other Oral Agents</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.InsulinandOtherOralAgents</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Diabetic Medical Supplies (Test Strips, Syringes, etc.)</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.DiabeticMedicalSupplies</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Chiropractic Services</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.ChiropracticServices</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Physical - Occupational - Speech Therapies</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.PhysicalOccupationalSpeechTherapies</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Cardiac Rehabilitation</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.CardiacRehabilitation</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Pulmonary Rehabilitation</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.PulmonaryRehabilitation</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Durable Medical Equipment</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.DurableMedicalEquipment</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Prosthetics and Appliances</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.ProstheticsandAppliances</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Chemotherapy</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.Chemotherapy</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Home Health Care</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.HomeHealthCare</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Prescription Plan</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.PrescriptionPlan</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Maintenance Medications</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.MaintenanceMedications</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Medical Exam</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.MedicalExam</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Standard Plastic Lenses</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.StandardPlasticLenses</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Frames</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.Frames</td> }
+                                        </tr>
+                                        <tr>
+                                            <th>Conventional Contact Lenses</th>
+                                            @foreach (var plan in product.Plans)
+                                            {
+                                            <td>@plan.Description.ConventionalContactLenses</td> }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <ul class="plan-fineprint">
+                    <li>
+                        <span>†</span>
+                        <p>
+                            All premiums quoted are for informational purposes only, based on the information provided by the website user.  The premium quoted upon enrollment may differ from the actual premium amount once all required documentation is obtained.  The benefits quoted above are intended for informational purposes only – all details of coverage and the circumstances under which they are available are described in the policy document, available upon enrollment.  In the event of any inconsistency between the information provided on this website and the policy document, the expected policy document shall govern.
+                        </p>
+                    </li>
+                    <li>
+                        <span>**</span>
+                        <p>The plans provided on this website are valid and effective from January 1, 2014 through December 31, 2014.  Depending on when you enroll, coverage may start as early as January 1, 2014.</p>
+                    </li>
+                    <li>
+                        <span>***</span>
+                        <p>Your privacy is important to us.  The information provided for this tool is not stored, nor is it provided to any external partner of any kind.  Please click to review our <a href="/sec_docs/privacy-policy" target="_blank">privacy policy</a>.</p>
+                    </li>
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <ul class="plan-fineprint">
-                <li>
-                    <span>†</span>
+    <br> <br>
+    <div class="shop-summary-section">
+        <div class="row-fluid">
+            <div class="span7">
+                <table id="shop-summary" class="table table-condensed">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <span class="purple"><strong>Financial assistance</strong></span>
+                            </th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Annual Salary:</th>
+                            <td>
+
+                                N/A
+                            </td>
+                        </tr>
+                        <tr>
+                            <th># of people in household:</th>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <th>May be eligible for financial assistance? :</th>
+                            <td>
+
+                                N/A&nbsp;
+
+                                (<a href="http://www.nystateofhealth.ny.gov/" target="_blank">Learn More</a>)
+                            </td>
+                        </tr>
+                        <tr><td colspan="2"></td></tr>
+                        <tr>
+                            <th>
+                                <span class="purple"><strong>Summary</strong></span>
+                            </th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Zip Code:</th>
+                            <td>11590</td>
+                        </tr>
+                        <tr>
+                            <th>County:</th>
+                            <td>Nassau</td>
+                        </tr>
+                        <tr>
+                            <th>Age:</th>
+                            <td>
+
+                                30 years
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Spouse/Partner:</th>
+                            <td>
+
+                                N/A
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Dependents:</th>
+                            <td>1 dependent(s)</td>
+                        </tr>
+                        <tr>
+                            <th>Annual Salary:</th>
+                            <td>
+
+                                N/A
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="span2 pull-right">
+                <a href="/shop" class="btn hri-btn btn-block pull-right">Start Over</a>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <br><br>
+                <small>
                     <p>
-                        All premiums quoted are for informational purposes only, based on the information provided by the website user.  The premium quoted upon enrollment may differ from the actual premium amount once all required documentation is obtained.  The benefits quoted above are intended for informational purposes only – all details of coverage and the circumstances under which they are available are described in the policy document, available upon enrollment.  In the event of any inconsistency between the information provided on this website and the policy document, the expected policy document shall govern.
+                        Health Republic Insurance of New York has provided this tax credit eligibility information based on the information provided by the website user and guidelines provided by the Federal Government.  The determination of tax credit eligibility and amount is made on and available <strong><u>only</u></strong> through the New York State Health Benefit Exchange, called the New York State of Health, at the following website: <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>.
                     </p>
-                </li>
-                <li>
-                    <span>**</span>
-                    <p>The plans provided on this website are valid and effective from January 1, 2014 through December 31, 2014.  Depending on when you enroll, coverage may start as early as January 1, 2014.</p>
-                </li>
-                <li>
-                    <span>***</span>
-                    <p>Your privacy is important to us.  The information provided for this tool is not stored, nor is it provided to any external partner of any kind.  Please click to review our <a href="/sec_docs/privacy-policy" target="_blank">privacy policy</a>.</p>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-        </div>
-    </div>
-</div>
-<br> <br>
-<div class="shop-summary-section">
-    <div class="row-fluid">
-        <div class="span7">
-            <table id="shop-summary" class="table table-condensed">
-                <thead></thead>
-                <tbody>
-                    <tr>
-                        <th>
-                            <span class="purple"><strong>Financial assistance</strong></span>
-                        </th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Annual Salary:</th>
-                        <td>
-
-                            N/A
-                        </td>
-                    </tr>
-                    <tr>
-                        <th># of people in household:</th>
-                        <td>N/A</td>
-                    </tr>
-                    <tr>
-                        <th>May be eligible for financial assistance? :</th>
-                        <td>
-
-                            N/A&nbsp;
-
-                            (<a href="http://www.nystateofhealth.ny.gov/" target="_blank">Learn More</a>)
-                        </td>
-                    </tr>
-                    <tr><td colspan="2"></td></tr>
-                    <tr>
-                        <th>
-                            <span class="purple"><strong>Summary</strong></span>
-                        </th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Zip Code:</th>
-                        <td>11590</td>
-                    </tr>
-                    <tr>
-                        <th>County:</th>
-                        <td>Nassau</td>
-                    </tr>
-                    <tr>
-                        <th>Age:</th>
-                        <td>
-
-                            30 years
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Spouse/Partner:</th>
-                        <td>
-
-                            N/A
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Dependents:</th>
-                        <td>1 dependent(s)</td>
-                    </tr>
-                    <tr>
-                        <th>Annual Salary:</th>
-                        <td>
-
-                            N/A
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="span2 pull-right">
-            <a href="/shop" class="btn hri-btn btn-block pull-right">Start Over</a>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <br><br>
-            <small>
-                <p>
-                    Health Republic Insurance of New York has provided this tax credit eligibility information based on the information provided by the website user and guidelines provided by the Federal Government.  The determination of tax credit eligibility and amount is made on and available <strong><u>only</u></strong> through the New York State Health Benefit Exchange, called the New York State of Health, at the following website: <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>.
-                </p>
-                <p>
-                    The tool provided herein on this website may not be considered or used as legal or tax advice. Any information provided is not intended to be used as such and cannot be considered in any payment or tax dispute.
-                </p>
-                <p>
-                    To ensure access to financial assistance, you <strong><u>must</u></strong> purchase insurance through the New York State Health Benefit Exchange, at <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>. Any other health insurance purchases — including through this website — will not enable you to tax credits or cost sharing reductions, if available to you.
-                </p>
-                <p>
-                    Your privacy is important to us.  The information provided for this tool is not stored, nor is it provided to any external partner of any kind.  Please click to review our <a href="/sec_docs/privacy-policy" target="_blank">privacy policy</a> in complete detail.
-                </p>
-            </small>
+                    <p>
+                        The tool provided herein on this website may not be considered or used as legal or tax advice. Any information provided is not intended to be used as such and cannot be considered in any payment or tax dispute.
+                    </p>
+                    <p>
+                        To ensure access to financial assistance, you <strong><u>must</u></strong> purchase insurance through the New York State Health Benefit Exchange, at <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>. Any other health insurance purchases — including through this website — will not enable you to tax credits or cost sharing reductions, if available to you.
+                    </p>
+                    <p>
+                        Your privacy is important to us.  The information provided for this tool is not stored, nor is it provided to any external partner of any kind.  Please click to review our <a href="/sec_docs/privacy-policy" target="_blank">privacy policy</a> in complete detail.
+                    </p>
+                </small>
+            </div>
         </div>
     </div>
 </div>
