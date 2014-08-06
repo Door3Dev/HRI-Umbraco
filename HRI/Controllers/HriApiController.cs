@@ -51,11 +51,12 @@ namespace HRI.Controllers
         public bool RegisterUser(string userName)
         {
             var model = Services.MemberService.GetByUsername(userName);
+
             // Create a dictionary for easy visualization of API object
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
-            jsonData.Add("RegId", model.GetValue("memberId").ToString());
+            jsonData.Add("RegId", null);
             jsonData.Add("RegDate", DateTime.Now.ToString());
-            jsonData.Add("MemberId", model.GetValue("memberId").ToString());
+            jsonData.Add("MemberId", null);
             jsonData.Add("UserName", model.Username);
             jsonData.Add("FirstName",  model.GetValue("firstName").ToString()); 
             jsonData.Add("LastName", model.GetValue("lastName").ToString());
@@ -67,30 +68,20 @@ namespace HRI.Controllers
 
             // Convert the dictionary to JSON
             string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
-            // Convert it to a byte array
-            byte[] apiObject = System.Text.Encoding.UTF8.GetBytes(myJsonString);
 
             // TO-DO bring this string to umbraco back end instead of hard coded
-            string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration";
+            string registerUserApi = "http://23.253.132.105:64102/api/Registration";
 
-            // Create a web request
-            WebRequest request = WebRequest.Create(userNameCheckApiString);
-            request.Method = "POST";
-            request.Credentials = CredentialCache.DefaultCredentials;
-            Stream dataStream = request.GetRequestStream ();            
-            dataStream.Write(apiObject, 0, apiObject.Length);
-            dataStream.Close();            
-            
-            // Get the web response as a JSON object
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream receiveStream = response.GetResponseStream();
-            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader readStream = new StreamReader(receiveStream, encode);
-            JObject json = JObject.Parse(readStream.ReadToEnd());            
-            readStream.Close();
-            response.Close();
+            JObject json;
+            using(var client = new WebClient())
+            {
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                var response = client.UploadString(registerUserApi, myJsonString);
+                json = JObject.Parse(response);
+            }
 
-            if (json["yNumber"] != null)
+
+            if (json["RegId"] != null)
             {
                 Services.MemberService.GetByUsername(model.Username).SetValue("yNumber", json["yNumber"]);
             }
