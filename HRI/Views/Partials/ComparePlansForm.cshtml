@@ -19,6 +19,7 @@
     <div class="span7">
         <label>Zip Code</label>
         @Html.TextBoxFor(m => viewModel.ZipCode, new { id = "shop-zipcode"})
+        @Html.ValidationMessageFor(m => viewModel.ZipCode)
         <div class="county" id="shop-county"></div>
     </div>
 </div>
@@ -94,7 +95,8 @@
         </div>
     </div>
 </div>
-<p class="find">
+<div class="find">
+    @Html.ValidationSummary("viewModel", true)
     <input type="submit" class="btn cta cta-centered" value="Find a plan for you">
-</p>
+</div>
 }

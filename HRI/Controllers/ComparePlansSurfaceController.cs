@@ -113,8 +113,6 @@ namespace HRI.Controllers
         private double CoupleAnd3DependentFactor = 2.85;
         #endregion
 
-        
-
         #region Products Data
         private Dictionary<string, Product> Products = new Dictionary<string,Product>() {
             { 
@@ -371,7 +369,16 @@ namespace HRI.Controllers
             // If the model is NOT valid
             if (ModelState.IsValid == false)
             {
-                // Return the user to the login page
+                // Return the user to the page
+                return CurrentUmbracoPage();
+            }
+            if (model.CoverSelf && !model.CustomerAge.HasValue
+                || model.CoverSpouse && !model.SpouseAge.HasValue
+                || model.ChildrenAges != null && model.ChildrenAges.Count(x => x > 30) > 0)
+            {
+                // If the user does exist then it was a wrong password
+                //don't add a field level error, just model level
+                ModelState.AddModelError("viewModel", "The information you have entered is incomplete. Please enter details of the person you want to cover and submit the form again.");
                 return CurrentUmbracoPage();
             }
 

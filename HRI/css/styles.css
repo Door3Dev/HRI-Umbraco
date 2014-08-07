@@ -2745,6 +2745,18 @@ input[type="radio"]:checked + label::before {
   padding-left: 40px;
 }
 
+.hri-compare-plans .find .cta {
+    border: 0;
+    text-shadow: none;
+    padding: 5px 20px;
+}
+
+.hri-compare-plans .validation-summary-errors {
+    padding: 10px 50px;
+    text-align: center;
+    color: red;
+}
+
 /* --------- AUTOCOMPLETE ----------- */
 .autocomplete-suggestions {
   background: #fff;

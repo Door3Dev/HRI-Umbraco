@@ -17,7 +17,7 @@
             </div>
             <div class="span6">
             <p class="dark-purple text-justify">
-				@(TempData["ShowPlans"] == null ? Umbraco.Field("Header").ToString() : String.Empty)
+				@(TempData["ShowPlans"] == null ? Umbraco.Field("Header") : MvcHtmlString.Empty)
             </p>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 Html.RenderPartial("PlansList", TempData["model"]);
             } else {
                 Html.RenderPartial("ComparePlansForm");
-            } 
+            }
         }
         </div>
     </div>
