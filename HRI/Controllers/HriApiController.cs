@@ -11,6 +11,7 @@ using System.Web.Script.Serialization;
 using Umbraco.Web.Models;
 using Umbraco.Web.WebApi;
 using System.Net.Http;
+using Umbraco.Core.Models;
 
 namespace HRI.Controllers
 {
@@ -24,21 +25,23 @@ namespace HRI.Controllers
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         public bool IsUserNameAvailable(string username)
         {
-            string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration?isUserNameAvailable=" + username;
-                    
-            // Create a web request
-            WebRequest request = WebRequest.Create(userNameCheckApiString);
-            request.Method = "GET";
-            request.Credentials = CredentialCache.DefaultCredentials;  
-                    
-            // Get the web response as a JSON object
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream receiveStream = response.GetResponseStream();
-            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader readStream = new StreamReader(receiveStream, encode);
-            JObject json = JObject.Parse(readStream.ReadToEnd());
-            response.Close();              
-            readStream.Close();
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the API uri
+            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            // Apend the command to determine user availability
+            string userNameCheckApiString = apiUri + "/Registration?isUserNameAvailable=" + username;
+            // Create a JSON object to hold the response 
+            JObject json;
+            // Create a web client to access the API
+            using(var client = new WebClient())
+            {
+                // Set the format to JSON
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                // Execute a GET and get the response as a JSON object
+                json = JObject.Parse(client.DownloadString(userNameCheckApiString));
+            }
+            // Return whether or not it is available
             return Convert.ToBoolean(json["isAvailable"]);
         }
 
@@ -50,50 +53,31 @@ namespace HRI.Controllers
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         public bool RegisterUser(string userName)
         {
-            var model = Services.MemberService.GetByUsername(userName);
-
-            bool test = true;
-            // Create a dictionary for easy visualization of API object
+            // Get an instance of the member
+            var member = Services.MemberService.GetByUsername(userName);
+            // Create a dictionary of values that we will convert to JSON and send
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
-            if (test) 
-            {
-                // Test Block
-                
-                jsonData.Add("RegId", null);
-                jsonData.Add("RegDate", DateTime.Now.ToString());
-                jsonData.Add("MemberId", null);
-                jsonData.Add("UserName", userName);
-                jsonData.Add("FirstName", userName + "first");
-                jsonData.Add("LastName", userName + "last");
-                jsonData.Add("Ssn", null);
-                jsonData.Add("EMail", userName + new Random().ToString() + "@somewhere.com");
-                jsonData.Add("ZipCode", "10010");
-                jsonData.Add("PhoneNumber", "9169120472");
-                jsonData.Add("RegVerified", "true");
-            }
-            else
-            {
-                jsonData.Add("RegId", null);
-                jsonData.Add("RegDate", DateTime.Now.ToString());
-                jsonData.Add("MemberId", null);
-                jsonData.Add("UserName", model.Username);
-                jsonData.Add("FirstName", model.GetValue("firstName").ToString());
-                jsonData.Add("LastName", model.GetValue("lastName").ToString());
-                jsonData.Add("Ssn", model.GetValue("ssn").ToString());
-                jsonData.Add("EMail", model.Email);
-                jsonData.Add("ZipCode", model.GetValue("zipCode").ToString());
-                jsonData.Add("PhoneNumber", model.GetValue("phoneNumber").ToString());
-                jsonData.Add("RegVerified", "true");
-            }
-
-            
-
+            jsonData.Add("RegId", null);
+            jsonData.Add("RegDate", DateTime.Now.ToString());
+            jsonData.Add("MemberId", null);
+            jsonData.Add("UserName", member.Username);
+            jsonData.Add("FirstName", member.GetValue("firstName").ToString());
+            jsonData.Add("LastName", member.GetValue("lastName").ToString());
+            jsonData.Add("Ssn", member.GetValue("ssn").ToString());
+            jsonData.Add("EMail", member.Email);
+            jsonData.Add("ZipCode", member.GetValue("zipCode").ToString());
+            jsonData.Add("PhoneNumber", member.GetValue("phoneNumber").ToString());
+            jsonData.Add("RegVerified", "true");
             // Convert the dictionary to JSON
             string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
 
-            // TO-DO bring this string to umbraco back end instead of hard coded
-            string registerUserApi = "http://23.253.132.105:64102/api/Registration";
-
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the API uri
+            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            // Apend the command to invoke the register function
+            string registerUserApi = apiUri + "/Registration";                                   
+            
             // Create a JSON object to hold the response
             JObject json;
             string response;
@@ -102,27 +86,27 @@ namespace HRI.Controllers
             {
                 // Set the format to JSON
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                // Execute a GET and get the response as a JSON object
+                
                 // Get the response when posting the member
                 try
                 {
-                    response = client.UploadString(registerUserApi, myJsonString);
+                    json = JObject.Parse(client.UploadString(registerUserApi, myJsonString));
                 }
                 catch(WebException ex)
                 {                    
                     return false;
                 }
-                // Get the results into a json object
-                json = JObject.Parse(response);
             }
 
             // If the user was created
             if (json["MemberId"] != null)
             {
                 // Assign this user their member id
-                var temp = model.GetValue("memberId");
-                model.SetValue("memberId", json["RegId"]);                
+                var temp = member.GetValue("memberId");
+                member.SetValue("memberId", json["RegId"]);                
                 // Assign their Morneau Shapell Y Number
-                Services.MemberService.GetByUsername(model.Username).SetValue("yNumber", json["MemberId"]);
+                Services.MemberService.GetByUsername(member.Username).SetValue("yNumber", json["MemberId"]);
                 // Return successful registration
                 return true;
             }

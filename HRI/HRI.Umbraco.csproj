@@ -358,6 +358,7 @@
     <Content Include="Views\ResetPassword.cshtml" />
     <Content Include="Views\Partials\PlansList.cshtml" />
     <Content Include="Views\Partials\ComparePlansForm.cshtml" />
+    <Content Include="SecCertHX080714.cer" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

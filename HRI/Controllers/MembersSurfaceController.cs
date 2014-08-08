@@ -23,7 +23,7 @@ namespace HRI.Controllers
             return Redirect("/");
         }
 
-        public ActionResult SingleSignOn(IDictionary<string, string> attributes, string targetUrl, string partnerSP)
+        public ActionResult SingleSignOn(string attributes, string targetUrl, string partnerSP)
         {
             // Initiate single sign-on to the service provider (IdP-initiated SSO)]
             // by sending a SAML response containing a SAML assertion to the SP.
@@ -41,8 +41,7 @@ namespace HRI.Controllers
             attribs.Add("Product", "PRIMARYSELECT");
 
             // Attributes for HealthX
-
-
+            //attribs.Add("RedirectInfo", "<ServiceId>9098A07C-F253-45C2-9BF7-9C04F95502CA</ServiceId>");
                      
             // Send an IdP initiated SAML assertion
             SAMLIdentityProvider.InitiateSSO(
