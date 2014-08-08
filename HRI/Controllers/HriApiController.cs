@@ -45,6 +45,36 @@ namespace HRI.Controllers
             return Convert.ToBoolean(json["isAvailable"]);
         }
 
+        public bool GetRegisteredUserByUsername(string username, out RegisterModel registerModel)
+        {
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the API uri
+            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            // Apend the command to determine user exists
+            string userNameCheckApiString = apiUri + "/Registration?userName=" + username;
+            string response;
+            JObject json;
+
+            using (var client = new WebClient())
+            {
+                // Set the format to JSON
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                try
+                {
+                    response = client.DownloadString(userNameCheckApiString);
+                    json = JObject.Parse(response);
+                }
+                catch (WebException ex)
+                {
+                    registerModel = null;
+                    return false;
+                }
+            }
+            registerModel = null;
+            return true;
+        }
+
         /// <summary>
         /// Registers a user with the HRI web API
         /// </summary>
