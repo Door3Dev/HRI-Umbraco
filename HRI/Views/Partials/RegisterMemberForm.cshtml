@@ -66,9 +66,15 @@ else
             <div class="span5 desc"><h3>Please enter your information.</h3></div>
             <div class="span7">
                 @Html.Label("Social Security Number")
-                @Html.EditorFor(m => registerModel.MemberProperties[6].Value)
+                @Html.EditorFor(m => registerModel.MemberProperties[5].Value)
                 @Html.HiddenFor(m => registerModel.MemberProperties[5].Value)
                 @Html.ValidationMessageFor(m => registerModel.MemberProperties[5].Value)
+            </div>
+            <div class="span7">
+                @Html.Label("Primary Members ID")
+                @Html.EditorFor(m => registerModel.MemberProperties[6].Value)
+                @Html.HiddenFor(m => registerModel.MemberProperties[6].Value)
+                @Html.ValidationMessageFor(m => registerModel.MemberProperties[6].Value)
             </div>
         </div>
         <div class="row-fluid">
