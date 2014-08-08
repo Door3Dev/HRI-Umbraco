@@ -2801,7 +2801,7 @@ input[type="radio"]:checked + label::before {
 
 .hri-registration .block.group {
   border-top: 1px dashed #848484;
-  margin: 50px 50px 0 50px;
+  margin: 0 50px 0 50px;
   padding-top: 10px;
   width: 90%;
 }
@@ -2831,6 +2831,11 @@ input[type="radio"]:checked + label::before {
     font-size: 11px;
     list-style-type: disc;
     list-style-position: inside;
+}
+
+.hri-registration .already-member {
+    padding:0;
+    margin: 0;
 }
 
 
