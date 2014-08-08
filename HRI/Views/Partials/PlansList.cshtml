@@ -45,14 +45,13 @@
                                             {
                                                 <th>
                                                     @plan.MetalTier<br>
-                                                @using (Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" }))
-                                                {
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.Hidden("ZipCode", Model.ZipCode)
-                                                    @Html.Hidden("PlanId", plan.HiosId)
-                                                    @Html.Hidden("PlanPrice", plan.Price)
-                                                    <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
-                                                }
+                                                    <form action="/for-members/register" method="post" class="selectplan">
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.Hidden("ZipCode", Model.ZipCode)
+                                                        @Html.Hidden("PlanId", plan.HiosId)
+                                                        @Html.Hidden("PlanPrice", plan.Price)
+                                                        <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
+                                                    </form>
                                             </th>
                                             }
                                         </tr>
@@ -315,14 +314,13 @@
                                             <td></td>
                                             @foreach (var plan in product.Plans) { 
                                             <td>
-                                                @using (Html.BeginForm("SelectPlan", "ComparePlansSurface", new { }, FormMethod.Post, new { @class = "selectplan" }))
-                                                {
+                                                <form action="/for-members/register" method="post" class="selectplan">
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("ZipCode", Model.ZipCode)
                                                     @Html.Hidden("PlanId", plan.HiosId)
                                                     @Html.Hidden("PlanPrice", plan.Price)
                                                     <input class="btn btn-block hri-btn" type="submit" value="Select Plan">
-                                                }
+                                                </form>
                                             </td>
                                             }
                                         </tr>
