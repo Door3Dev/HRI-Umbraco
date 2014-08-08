@@ -309,7 +309,7 @@ namespace HRI.Controllers
 
                 // Create a message
                 MailMessage message = new MailMessage(smtpEmail,
-                                                      "mattwood2855@gmail.com",
+                                                      member.Email,
                                                       "Health Republic Insurance - Verification Link",
                                                        "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
 
