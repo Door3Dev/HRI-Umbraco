@@ -37,9 +37,8 @@
     Html.RequiresJs("/umbraco_client/ui/jquery.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
-    
+
     var success = TempData["FormSuccess"] != null;
-    var ssn = registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault();
     var firstName = registerModel.MemberProperties.Where(p => p.Alias == "firstName").FirstOrDefault();
     var lastName = registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault();
     var zipCode = registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault();
@@ -64,9 +63,9 @@ else
             <div class="span5 desc"><h3>Please enter your information.</h3></div>
             <div class="span7">
                 @Html.Label("Social Security Number")
-                @Html.EditorFor(m => ssn.Value)
-                @Html.HiddenFor(m => ssn.Alias)
-                @Html.ValidationMessageFor(m => ssn.Alias)
+                @Html.EditorFor(m => registerModel.MemberProperties.Where(p=>p.Alias == "ssn").FirstOrDefault().Value)
+                @Html.HiddenFor(m => registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Alias)
+                @Html.ValidationMessageFor(m => registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Alias)
             </div>
         </div>
         <div class="row-fluid">
