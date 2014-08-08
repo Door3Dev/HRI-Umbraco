@@ -39,6 +39,11 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
     
     var success = TempData["FormSuccess"] != null;
+    var ssn = registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault();
+    var firstName = registerModel.MemberProperties.Where(p => p.Alias == "firstName").FirstOrDefault();
+    var lastName = registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault();
+    var zipCode = registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault();
+    var phoneNumber = registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault();
 }
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -52,73 +57,115 @@ else
 {
     using (Html.BeginUmbracoForm<RegisterSurfaceController>("HandleRegisterMember"))
     {
-        <fieldset>
-            <legend>Register Member</legend>
 
-            @Html.ValidationSummary("registerModel", true)
+        @Html.ValidationSummary("registerModel", true)
 
-            @Html.Label("User Name")
-            <div>
+        <div class="row-fluid block group">
+            <div class="span5 desc"><h3>Please enter your information.</h3></div>
+            <div class="span7">
+                @Html.Label("Social Security Number")
+                @Html.EditorFor(m => ssn.Value)
+                @Html.HiddenFor(m => ssn.Alias)
+                @Html.ValidationMessageFor(m => ssn.Alias)
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span3 offset5">
+                @Html.Label("First Name")
+                @Html.EditorFor(m => firstName.Value)
+                @Html.HiddenFor(m => firstName.Alias)
+                @Html.ValidationMessageFor(m => firstName.Alias)
+            </div>
+            <div class="span3">
+                @Html.Label("Last Name")
+                @Html.EditorFor(m => lastName.Value)
+                @Html.HiddenFor(m => lastName.Alias)
+                @Html.ValidationMessageFor(m => lastName.Alias)
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span7 offset5">
+                @Html.Label("Email")
+                @Html.TextBoxFor(m => registerModel.Email)
+                @Html.ValidationMessageFor(m => registerModel.Email)
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span7 offset5">
+                @Html.Label("Confirm Email")
+                @Html.TextBoxFor(m => registerModel.Email)
+                @Html.ValidationMessageFor(m => registerModel.Email)
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span7 offset5">
+                @Html.Label("Zip Code")
+                @Html.EditorFor(m => zipCode.Value)
+                @Html.HiddenFor(m => zipCode.Alias)
+                @Html.ValidationMessageFor(m => zipCode.Alias)
+            </div>
+        </div>
+
+        <div class="row-fluid block">
+            <div class="span5 desc"><h3>Choose a username.</h3></div>
+            <div class="span7">
+                @Html.Label("Username")
                 @Html.TextBoxFor(m => registerModel.Name, new { @id = "username" })
-                <script>
-                    $("#username").keyup(function () {
-                        if ($('#username').val().length > 0) {
-                            $.ajax({
-                                url: "/umbraco/api/HriApi/IsUserNameAvailable",
-                                data: { username: $('#username').val() },
-                                success: function (data) {
-                                    if (data == 'true' && $('#username').val().length > 5)
-                                        $('#result').html("UserName is available");
-                                    else
-                                        $('#result').html("UserName not available");
-                                },
-                                error: function () { alert('error'); },
-                                dataType: 'html'
-                            });
-                        }
-                        else
-                            $('#result').html('');
-                    })
-                </script>
+                @Html.ValidationMessageFor(m => registerModel.Name)
                 <div id="result"></div>
             </div>
-            @Html.ValidationMessageFor(m => registerModel.Name)
-            <br />
+        </div>
+
+        <div class="row-fluid block">
+            <div class="span5 desc">
+                <h3>Choose a password.</h3>
+                <ul class="password-help">
+                    <li>Password must be at least 8 characters long.</li>
+                    <li>Contain 1 uppercase and 1 lowercase letter.</li>
+                    <li>1 number or special character.</li>
+                </ul>
+            </div>
+            <div class="span7">
+                @Html.LabelFor(m => registerModel.Password)
+                @Html.PasswordFor(m => registerModel.Password)
+                @Html.ValidationMessageFor(m => registerModel.Password)
+            </div>
+        </div>
+        <div class="row-fluid block">
+            <div class="span5 desc"><h3>Optional.</h3></div>
+            <div class="span7">
+                @Html.Label("Phone Number")
+                @Html.EditorFor(m => phoneNumber.Value)
+                @Html.HiddenFor(m => phoneNumber.Alias)
+                @Html.ValidationMessageFor(m => phoneNumber.Alias)
+            </div>
+        </div>
             
+        @Html.HiddenFor(m => registerModel.MemberTypeAlias)
+        @Html.HiddenFor(m => registerModel.RedirectUrl)
+        @Html.HiddenFor(m => registerModel.UsernameIsEmail)
 
-            @Html.LabelFor(m => registerModel.Email)
-            @Html.TextBoxFor(m => registerModel.Email)
-            @Html.ValidationMessageFor(m => registerModel.Email)
-            <br />
-
-            @Html.LabelFor(m => registerModel.Password)
-            @Html.PasswordFor(m => registerModel.Password)
-            @Html.ValidationMessageFor(m => registerModel.Password)
-            <br />
-
-            @if (registerModel.MemberProperties != null)
-            {
-                for (var i = 0; i < registerModel.MemberProperties.Count; i++)
-                {
-                    @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
-                    @* 
-                        By default this will render a textbox but if you want to change the editor template for this property you can 
-                        easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
-                        create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to 
-                        render your specific editor template like:
-                        @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
-                    *@
-                    @Html.EditorFor(m => registerModel.MemberProperties[i].Value)
-                    @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
-                    <br />
-                }
-            }
-
-            @Html.HiddenFor(m => registerModel.MemberTypeAlias)
-            @Html.HiddenFor(m => registerModel.RedirectUrl)
-            @Html.HiddenFor(m => registerModel.UsernameIsEmail)
-
-            <button>Register</button>
-        </fieldset>
+        <input type="submit" class="btn cta cta-centered" value="Submit">
     }
 }
+
+<script>
+    $("#username").keyup(function () {
+        if ($('#username').val().length > 0) {
+            $.ajax({
+                url: "/umbraco/api/HriApi/IsUserNameAvailable",
+                data: { username: $('#username').val() },
+                success: function (data) {
+                    if (data == 'true' && $('#username').val().length > 5)
+                        $('#result').html("UserName is available");
+                    else
+                        $('#result').html("UserName not available");
+                },
+                error: function () { alert('error'); },
+                dataType: 'html'
+            });
+        }
+        else
+            $('#result').html('');
+    })
+</script>

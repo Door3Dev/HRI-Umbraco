@@ -2745,7 +2745,8 @@ input[type="radio"]:checked + label::before {
   padding-left: 40px;
 }
 
-.hri-compare-plans .find .cta {
+.hri-compare-plans .find .cta,
+.hri-registration .cta {
     border: 0;
     text-shadow: none;
     padding: 5px 20px;
@@ -2782,4 +2783,55 @@ input[type="radio"]:checked + label::before {
 	font-size: 12px;
 	font-weight: bold;
 }
+
+/* ------------ COMPARE PLANS ------------ */
+
+.hri-registration h3 {
+  font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.hri-registration .block {
+  border-top: 1px dashed #848484;
+  margin: 50px;
+  padding-top: 10px;
+  width: 90%;
+}
+
+.hri-registration .block.group {
+  border-top: 1px dashed #848484;
+  margin: 50px 50px 0 50px;
+  padding-top: 10px;
+  width: 90%;
+}
+
+.hri-registration .block h3 {
+  margin: 0;
+}
+
+.hri-registration .block div.desc {
+  padding-right: 100px;
+}
+
+.hri-registration .block span.desc {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.hri-registration label {
+  margin-bottom: 0;
+}
+
+.hri-registration .offset5 {
+    padding-left: 10px;
+}
+
+.hri-registration .password-help {
+    font-size: 11px;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
