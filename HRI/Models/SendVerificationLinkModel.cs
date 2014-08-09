@@ -9,6 +9,5 @@ namespace HRI.Models
     {
         public string UserName { get; set; }
         public string RedirectUrl { get; set; }
-        public object emailTemplateId { get; set; }
     }
 }

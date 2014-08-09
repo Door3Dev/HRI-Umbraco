@@ -65,7 +65,7 @@ namespace HRI.Controllers
             string registerApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
             using(var client = new WebClient())
             {
-                var result = client.UploadString(registerApiUrl, userName);
+                var result = client.DownloadString(registerApiUrl);
                 regSuccess = Convert.ToBoolean(result);
             }
 
@@ -75,7 +75,7 @@ namespace HRI.Controllers
                 System.Web.Security.Roles.AddUserToRole(userName, "Registered");
                 return Redirect("/for-members/login");
             }
-            return Content("There was an error validating your account. Please Contact Health Republic New York immediately");            
+            return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.");            
         }
 
         /// <summary>

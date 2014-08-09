@@ -12,6 +12,7 @@ using Umbraco.Web.Models;
 using Umbraco.Web.WebApi;
 using System.Net.Http;
 using Umbraco.Core.Models;
+using Umbraco.Web.Security;
 
 namespace HRI.Controllers
 {
@@ -38,14 +39,15 @@ namespace HRI.Controllers
             {
                 // Set the format to JSON
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and get the response as a JSON object
+                // Execute a GET and convert the response to a JSON object
                 json = JObject.Parse(client.DownloadString(userNameCheckApiString));
             }
             // Return whether or not it is available
             return Convert.ToBoolean(json["isAvailable"]);
         }
 
-        public bool GetRegisteredUserByUsername(string username, out RegisterModel registerModel)
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        public string GetRegisteredUserByUsername(string username)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
@@ -53,26 +55,23 @@ namespace HRI.Controllers
             string apiUri = root.GetProperty("apiUri").Value.ToString();
             // Apend the command to determine user exists
             string userNameCheckApiString = apiUri + "/Registration?userName=" + username;
-            string response;
+            string result;
             JObject json;
 
             using (var client = new WebClient())
             {
                 // Set the format to JSON
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                try
-                {
-                    response = client.DownloadString(userNameCheckApiString);
-                    json = JObject.Parse(response);
-                }
-                catch (WebException ex)
-                {
-                    registerModel = null;
-                    return false;
-                }
+                // Execute a GET and convert the response to a JSON object
+                result = client.DownloadString(userNameCheckApiString);                
             }
-            registerModel = null;
-            return true;
+            json = JObject.Parse(result);
+            // If the user didn't exist
+            if(json["RegId"] == null)
+            {
+                return null;
+            }
+            return result;
         }
 
         /// <summary>

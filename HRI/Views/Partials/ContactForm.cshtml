@@ -24,7 +24,7 @@
 	}
 }
 
-@Html.RenderJsHere()
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
@@ -39,8 +39,8 @@ else
         @Html.AntiForgeryToken()
     
 		@Html.Label("Message Topic", model.MessageTypes)
-        @Html.DropDownList("list", model.MessageTypes, new { placeholder = "Please choose a topic" })
-		@Html.ValidationMessageFor(m => model.MessageType)
+        @Html.DropDownList("list", model.MessageTypes, new { placeholder = "Please choose a topic", id="messageTypes" })
+		@Html.ValidationMessageFor(m => model.MessageTypes)
 
 		<div class="row-fluid">
 			<label class="span6 name">
@@ -66,7 +66,14 @@ else
 		@Html.Label("Email", model.Message)
 		@Html.TextAreaFor(m => model.Message, new {rows = 6})
 		@Html.ValidationMessageFor(m => model.Message)
-        
+    
+        @Html.HiddenFor(m=>model.MessageType, new{ id="messageType" })    
+    
         <input type="submit" value="Send" class="btn hri-btn" />
     }
+    <script>
+        $('#messageTypes').change(function(){
+            $('#messageType').val($('#messageTypes :selected').text());
+        })
+    </script>
 }

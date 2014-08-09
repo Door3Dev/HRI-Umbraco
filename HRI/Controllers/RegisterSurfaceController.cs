@@ -25,7 +25,7 @@ namespace HRI.Controllers
                 return CurrentUmbracoPage();
             }
 
-
+            model.Name = model.Username;
             MembershipCreateStatus status;
             var member = Members.RegisterMember(model, out status, false);
 
@@ -33,11 +33,10 @@ namespace HRI.Controllers
             {
                 case MembershipCreateStatus.Success:                                        
                     // Send the user a verification link to activate their account     
-                    SendVerificationLinkModel viewModel = new SendVerificationLinkModel();
-                    viewModel.UserName = model.Username;
-                    viewModel.RedirectUrl = "/for-members/verify-account/";
-                    viewModel.emailTemplateId = CurrentPage.GetProperty("verifyAccountEmailTemplate").Value;
-                    return RedirectToAction("SendVerificationLink", "EmailSurface", viewModel);
+                    SendVerificationLinkModel sendVerificationLinkModel = new SendVerificationLinkModel();
+                    sendVerificationLinkModel.UserName = model.Username;
+                    sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
+                    return RedirectToAction("SendVerificationLink_GET", "EmailSurface", sendVerificationLinkModel);
 
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError((model.UsernameIsEmail || model.Username == null)

@@ -13,8 +13,8 @@
     *@
     
     var registerModel = Members.CreateRegistrationModel();
-    
-    
+
+    registerModel.UsernameIsEmail = false;
     registerModel.RedirectUrl = "for-members/verify-account/";
     
     @*
@@ -118,8 +118,8 @@ else
             <div class="span5 desc"><h3>Choose a username.</h3></div>
             <div class="span7">
                 @Html.Label("Username")
-                @Html.TextBoxFor(m => registerModel.Name, new { @id = "username" })
-                @Html.ValidationMessageFor(m => registerModel.Name)
+                @Html.TextBoxFor(m => registerModel.Username, new { @id = "username" })
+                @Html.ValidationMessageFor(m => registerModel.Username)
                 <div id="result"></div>
             </div>
         </div>
@@ -152,6 +152,7 @@ else
         @Html.HiddenFor(m => registerModel.MemberTypeAlias)
         @Html.HiddenFor(m => registerModel.RedirectUrl)
         @Html.HiddenFor(m => registerModel.UsernameIsEmail)
+        @Html.HiddenFor(m => registerModel.Name)
 
         <button class="btn cta cta-centered">Submit</button>
             </fieldset>

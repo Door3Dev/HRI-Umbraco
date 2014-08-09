@@ -21,7 +21,7 @@
 @using (Html.BeginUmbracoForm<LoginSurfaceController>("HandleLogin"))
 {
     <fieldset>
-        <legend>Login</legend>
+        <h3>Member Login</h3>
         
         @Html.ValidationSummary("loginModel", true)
         @Html.AntiForgeryToken()

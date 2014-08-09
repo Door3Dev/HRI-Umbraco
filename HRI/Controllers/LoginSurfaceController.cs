@@ -35,44 +35,26 @@ namespace HRI.Controllers
                 if (member != null)
                 {
                     // If the user does exist then it was a wrong password
-                    //don't add a field level error, just model level
+                    // Don't add a field level error, just model level
                     ModelState.AddModelError("loginModel", "Invalid username or password");
                     return CurrentUmbracoPage();
                 }
-                else // If the user doesnt exists, check the HRI API to see if this is a returning IWS user
+                else // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
                 {
-
-                    // TO-DO: use umbraco field to build address
-                    string userNameCheckApiString = "http://23.253.132.105:64102/api/Registration?userName=" + model.Username;
-                    string response;
+                    // Create a JSON object to receive the HRI API response
                     JObject json;
-
-                    Dictionary<string, string> jsonData = new Dictionary<string, string>();
-                    jsonData.Add("userName", model.Username);
-                    // Convert the dictionary to JSON
-                    string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
+                    // Exectue a GET against the API
                     using(var client = new WebClient())
                     {
-                        // Set the format to JSON
-                        client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                        try
-                        {
-                            response = client.DownloadString(userNameCheckApiString);
-                            json = JObject.Parse(response);
-                        }
-                        catch(WebException ex)
-                        {                            
-                            return Content("Error");
-                        }
-                    }                    
-                    
+                        // Read the response into a JSON object
+                        json = JObject.Parse(client.DownloadString("http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/GetRegisteredUserByUsername?userName=" + model.Username));                        
+                    }
+                                                          
                     // If the user exists in IWS database
                     if(json["RegId"] != null)
                     {
-
                         // Create the registration model
-                        var registerModel = Members.CreateRegistrationModel();
-                        
+                        var registerModel = Members.CreateRegistrationModel();                        
                         // Member Name
                         registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
                         // Member Id

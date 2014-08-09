@@ -1,6 +1,39 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@Html.Label("Username")
-@Html.TextBox("Username")
-<br />       
+    
+@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web
+@using Umbraco.Web.Models
+@using Umbraco.Web.Controllers
+@using HRI.Controllers
+@using HRI.Models
 
-<button type="submit" class="btn hri-btn">Submit</button>
+@{
+    var sendVerificationLinkModel = new SendVerificationLinkModel();
+    sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+}
+
+@using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
+{
+    <fieldset>
+        @Html.ValidationSummary("linkModel", true)
+        @Html.AntiForgeryToken()
+
+        @Html.LabelFor(m => sendVerificationLinkModel.UserName)
+        @Html.TextBoxFor(m => sendVerificationLinkModel.UserName, new { id = "focus" })
+        @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
+
+        @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
+        <button class="btn hri-btn">Send Verification Email</button>
+    </fieldset>
+}
+
+<script>
+    document.getElementById('focus').focus();
+</script>

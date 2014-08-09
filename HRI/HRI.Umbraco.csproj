@@ -253,7 +253,7 @@
   <ItemGroup>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
-    <Content Include="EmailTemplates\VerifyAccount.txt" />
+    <Content Include="EmailTemplates\VerificationEmailTemplate.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />
     <Content Include="EmailTemplates\ForgotPassword.txt" />
     <Content Include="EmailTemplates\ForgotUserName.txt" />
@@ -359,6 +359,8 @@
     <Content Include="Views\Partials\PlansList.cshtml" />
     <Content Include="Views\Partials\ComparePlansForm.cshtml" />
     <Content Include="SecCertHX080714.cer" />
+    <Content Include="Views\VerifyAccount.cshtml" />
+    <Content Include="Views\SecurityUpgrade.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

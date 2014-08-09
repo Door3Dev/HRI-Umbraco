@@ -23,15 +23,12 @@ namespace HRI.Controllers
         /// <param name="template">The template file located in the ~/EmailTemplates folder</param>
         /// <param name="values">A dictionary that contains the dynamic placeholder as a key, and has the text to insert as the value. (ex item["<%UserName%>", model.UserName])</param>
         /// <returns>A string representation of the email with all the dynamic text replaced by the provided values</returns>
-        private string BuildEmail(string template, IDictionary<string, string> values)
+        private string BuildEmail(int emailTemplateId, IDictionary<string, string> values)
         {
             // Create a string to hold the email text
             string emailMessage;
-            // Get the id of the template set in Umbraco
-            // TO-DO: make property name dynamic
-            var emailtemplateid = CurrentPage.GetProperty(template).Value;
             // Get an instance of the template
-            var mediaItem = Services.MediaService.GetById((int)emailtemplateid);
+            var mediaItem = Services.MediaService.GetById(emailTemplateId);
             // Get the path to the template
             string path = Server.MapPath(mediaItem.Properties["umbracoFile"].Value as string);
             // Open a Stream Reader to read in all the text from the template
@@ -62,29 +59,26 @@ namespace HRI.Controllers
         {
             try
             {
-                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-                // Build a model from the node
-                RenderModel rootNodeModel = new RenderModel(root);
-
-                // Get the contact us email value
-                string sendTo = rootNodeModel.Content.GetProperty("contactUsEmail").Value.ToString();
+                // Get ahold of the root/home node
+                IPublishedContent root = Umbraco.ContentAtRoot().First();
                 // Get the SMTP server
-                string smtpServer = rootNodeModel.Content.GetProperty("smtpServer").Value.ToString();
+                string smtpServer = root.GetProperty("smtpServer").Value.ToString();
                 // Get the SMTP email account
-                string email = rootNodeModel.Content.GetProperty("smtpEmailAddress").Value.ToString();
+                string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
                 // Get the SMTP email password
-                string password = rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
+                string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
+                // Get the contact us email value
+                string sendTo = root.GetProperty("incomingEmailAddress").Value.ToString();
 
                 // Create a message
                 MailMessage message = new MailMessage(model.Email,
                                                       sendTo,
-                                                      model.MessageTypes.SelectedValue.ToString(),
+                                                      model.MessageType,
                                                       model.Message);
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, 587);
-                smtp.Credentials = new NetworkCredential(email, password);
+                smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
                 smtp.EnableSsl = true;
                 smtp.Send(message);
 
@@ -132,7 +126,7 @@ namespace HRI.Controllers
                     MailMessage message = new MailMessage(smtpEmail,
                                                           member.Email,
                                                           "Health Republic Insurance - UserName Recovery",
-                                                          BuildEmail("forgotUserNameTemplate", dynamicText));
+                                                          "v");//BuildEmail("forgotUserNameTemplate", dynamicText));
 
                     // Create an SMTP client object and send the message with it
                     SmtpClient smtp = new SmtpClient(smtpServer, 587);
@@ -231,7 +225,7 @@ namespace HRI.Controllers
                 MailMessage message = new MailMessage(smtpEmail,
                                                       member.Email,
                                                       "Health Republic Insurance - Password Reset",
-                                                      BuildEmail("forgotPasswordTemplate", dynamicText));
+                                                      "v");//BuildEmail("forgotPasswordTemplate", dynamicText));
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, 587);
@@ -250,8 +244,8 @@ namespace HRI.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult SendVerificationLink(SendVerificationLinkModel model)
+        [HttpPost]
+        public ActionResult SendVerificationLink([Bind(Prefix = "sendVerificationLinkModel")]SendVerificationLinkModel model)
         {            
             if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
             {  
@@ -264,54 +258,28 @@ namespace HRI.Controllers
                 // Save the updated information
                 Services.MemberService.Save(member);
 
-                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-                // Build a model from the node
-                //RenderModel rootNodeModel = new RenderModel(root);
-
+                // Get ahold of the root/home node
+                IPublishedContent root = Umbraco.ContentAtRoot().First();
                 // Get the SMTP server
-                string smtpServer = "smtp.live.com";// rootNodeModel.Content.GetProperty("smtpServer").Value.ToString();
+                string smtpServer = root.GetProperty("smtpServer").Value.ToString();
                 // Get the SMTP email account
-                string smtpEmail = "mattwood2855@hotmail.com";//rootNodeModel.Content.GetProperty("smtpEmailAddress").Value.ToString();
+                string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
                 // Get the SMTP email password
-                string smtpPassword = "ChangePass1";//rootNodeModel.Content.GetProperty("smtpEmailPassword").Value.ToString();
+                string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
+                // Get the Verification Email Template ID
+                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
-                /*/ Build a dictionary for all the dynamic text in the email template
+                // Build a dictionary for all the dynamic text in the email template
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
-                //dynamicText.Add("<%PhoneNumber%>", rootNodeModel.Content.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());            
-
-                // Create a string to hold the email text
-                string emailMessage;
-                // Get the id of the template set in Umbraco
-                // TO-DO: make property name dynamic
-                var emailtemplateid = root.Content.GetProperty("verifyAccountEmailTemplate").Value;
-                // Get an instance of the template
-                var mediaItem = Services.MediaService.GetById((int)emailtemplateid);
-                // Get the path to the template
-                string path = Server.MapPath(mediaItem.Properties["umbracoFile"].Value as string);
-                // Open a Stream Reader to read in all the text from the template
-                using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
-                {
-                    // Read all the text into the emailMessage string
-                    emailMessage = sr.ReadToEnd();
-                    // Close the stream
-                    sr.Close();
-                }
-                // For each dynamic item in the template
-                foreach(KeyValuePair<string,string> dynamicTextItem in dynamicText)
-                {
-                    // Replace the dynamic item with the values member info
-                    emailMessage = emailMessage.Replace(dynamicTextItem.Key, dynamicTextItem.Value);
-                }
-                */
+                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
+                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());                                
 
                 // Create a message
                 MailMessage message = new MailMessage(smtpEmail,
                                                       member.Email,
-                                                      "Health Republic Insurance - Verification Link",
-                                                       "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
+                                                      "Health Republic Insurance - Member Verification Link",
+                                                      BuildEmail((int)emailTemplateId, dynamicText));                                                      
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, 587);
@@ -319,16 +287,85 @@ namespace HRI.Controllers
                 smtp.EnableSsl = true;
                 smtp.Send(message);
 
+                // Mark this method as successful for the next page
                 TempData["IsSuccessful"] = true;
 
+                // If there is a redirect url
                 if (model.RedirectUrl != "" && model.RedirectUrl != null)
+                    // Send the user to that page
                     return Redirect(model.RedirectUrl);
                 else
+                    // Otherwise send the user to the home page
                     return Redirect("/");
             }
-            else
+            else // Model was bad or user didnt exist
             {
+                // Mark the method as failed
                 TempData["IsSuccessful"] = false;
+                // Return the user to the home page
+                return Redirect("/");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult SendVerificationLink_GET(SendVerificationLinkModel model)
+        {
+            if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
+            {
+                // Get a handle on the member
+                var member = Services.MemberService.GetByUsername(model.UserName);
+                // Create a random Guid
+                Guid key = Guid.NewGuid();
+                // Update the user's Guid field
+                member.SetValue("guid", key.ToString());
+                // Save the updated information
+                Services.MemberService.Save(member);
+
+                // Get ahold of the root/home node
+                IPublishedContent root = Umbraco.ContentAtRoot().First();
+                // Get the SMTP server
+                string smtpServer = root.GetProperty("smtpServer").Value.ToString();
+                // Get the SMTP email account
+                string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
+                // Get the SMTP email password
+                string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
+                // Get the Verification Email Template ID
+                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
+
+                // Build a dictionary for all the dynamic text in the email template
+                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
+                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
+                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
+
+                // Create a message
+                MailMessage message = new MailMessage(smtpEmail,
+                                                      member.Email,
+                                                      "Health Republic Insurance - Member Verification Link",
+                                                      BuildEmail((int)emailTemplateId, dynamicText));
+
+                // Create an SMTP client object and send the message with it
+                SmtpClient smtp = new SmtpClient(smtpServer, 587);
+                smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+
+                // Mark this method as successful for the next page
+                TempData["IsSuccessful"] = true;
+
+                // If there is a redirect url
+                if (model.RedirectUrl != "" && model.RedirectUrl != null)
+                    // Send the user to that page
+                    return Redirect(model.RedirectUrl);
+                else
+                    // Otherwise send the user to the home page
+                    return Redirect("/");
+            }
+            else // Model was bad or user didnt exist
+            {
+                // Mark the method as failed
+                TempData["IsSuccessful"] = false;
+                // Return the user to the home page
                 return Redirect("/");
             }
         }

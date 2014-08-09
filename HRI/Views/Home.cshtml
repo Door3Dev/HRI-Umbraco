@@ -14,49 +14,10 @@
         <div id="hri-carousel" class="carousel slide">
             <!-- Carousel items -->
             <div class="carousel-inner">
-                <div class="item">
-                    <div class="slide">
-                        <h1>@Umbraco.Field("Image1Caption")</h1>                      
-                        <a href='@Umbraco.Field("Image1Href")' class="btn btn-small hri-btn">
-                            @Umbraco.Field("Image1ButtonText")<span class="caret"></span>
-                        </a>
-                    </div>
-                    @{
-                      var dynamicMediaItem1 = Umbraco.Media(CurrentPage.Image1);
-                      <img src="@dynamicMediaItem1.umbracoFile" alt="@dynamicMediaItem1.Name" />
-                    }
-                </div>
-                <div class="item">
-                    <div class="slide">    
-                        <h1>@Umbraco.Field("Image2Caption")</h1>
-                        <a href='@Umbraco.Field("Image2Href")' class="btn btn-small hri-btn">
-                            @Umbraco.Field("Image2ButtonText")<span class="caret"></span>
-                        </a>
-                    </div>
-                    @{
-                      var dynamicMediaItem2 = Umbraco.Media(CurrentPage.Image2);
-                      <img src="@dynamicMediaItem2.umbracoFile" alt="@dynamicMediaItem2.Name" />
-                    }
-                </div>
-                <div class="item">
-                    <div class="slide">
-                        <h1>@Umbraco.Field("Image3Caption")</h1>   
-                        <a href='@Umbraco.Field("Image3Href")' class="btn btn-small hri-btn">
-                            @Umbraco.Field("Image3ButtonText")<span class="caret"></span>
-                        </a>
-                    </div>
-                    @{
-                      var dynamicMediaItem3 = Umbraco.Media(CurrentPage.Image3);
-                      <img src="@dynamicMediaItem3.umbracoFile" alt="@dynamicMediaItem3.Name" />
-                    }
-                </div>                
+                @Umbraco.Field("Slides")               
             </div>
 
-            <ol class="carousel-indicators">
-                <li data-target="#hri-carousel" data-slide-to="0" class=""></li>
-                <li data-target="#hri-carousel" data-slide-to="1" class=""></li>
-                <li data-target="#hri-carousel" data-slide-to="2" class="active"></li>
-            </ol>
+            
         </div>
     </div>
 

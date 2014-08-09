@@ -1,10 +1,9 @@
-﻿Hello <%UserName%>! 
+﻿Hello <%FirstName%>! 
 
 Welcome to Health Republic New York. We are glad you have chosen us and we take your security very seriously.
 Please click the link below to activate your account and begin using our web services.
 
 <%VerificationUrl%>
-
 
 
 If you have any problems or questions, or if you did not register with us,
