@@ -2838,5 +2838,68 @@ input[type="radio"]:checked + label::before {
     margin: 0;
 }
 
+.hri-registration .select-type a {
+    font-size: 12px;
+}
+
+.hri-registration .select-type label span {
+    font-weight: bold;
+    font-size: 12px;
+    top: 3px;
+    position: relative;
+}
+
+.hri-registration .select-type label {
+    border-bottom: solid 1px #dddddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.hri-registration .select-type span.desc {
+    font-weight: normal;
+    font-size: 12px;
+    padding-left: 15px;
+    display: inline-block;
+    line-height: 16px;
+    padding-top: 5px;
+    display: none;
+}
+
+.hri-registration .select-type .last {
+    border-bottom: none !important;
+}
+
+.hri-registration #register-form {
+    display: none;
+}
+
+.hri-registration .short {
+    width: 19%;
+}
+
+.hri-registration .short input {
+    width: 130px;
+}
+
+.hri-registration .or {
+    padding-top: 10px;
+    font-weight: bold;
+    padding-top: 25px;
+    width: 20px !important;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.hri-registration .name {
+    width: 17%;
+}
+
+.hri-registration .name input {
+    width: 100%;
+}
+
+.hri-registration .span7 input {
+    width: 330px;
+}
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

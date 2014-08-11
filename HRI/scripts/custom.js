@@ -2043,5 +2043,15 @@ var preventCopyPaste = function (a) {
                 });
             }
         });
+
+        $('.hri-registration input[name=user_type]').change(function () {
+            var type = $(this).val();
+            if (type == 'register')
+                $('#register-form').show();
+            else
+                $('#register-form').hide();
+            $('.hri-registration .selection .desc').hide();
+            $(this).next().next().css('display', 'inline-block');
+        });
     })
 })();
