@@ -262,6 +262,8 @@ namespace HRI.Controllers
                 IPublishedContent root = Umbraco.ContentAtRoot().First();
                 // Get the SMTP server
                 string smtpServer = root.GetProperty("smtpServer").Value.ToString();
+                // Get the SMTP port
+                int smtpPort = Convert.ToInt32(root.GetProperty("smtpPort").Value);
                 // Get the SMTP email account
                 string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
                 // Get the SMTP email password
@@ -282,7 +284,7 @@ namespace HRI.Controllers
                                                       BuildEmail((int)emailTemplateId, dynamicText));                                                      
 
                 // Create an SMTP client object and send the message with it
-                SmtpClient smtp = new SmtpClient(smtpServer, 587);
+                SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
                 smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
                 smtp.EnableSsl = true;
                 smtp.Send(message);

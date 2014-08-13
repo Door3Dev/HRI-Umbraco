@@ -4,6 +4,7 @@
 @{
     Layout = "MasterPage.cshtml";
 
+    <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
     var targetUrl = @Umbraco.Field("samlTargetUrl");
     var sp = "";
     if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")    
@@ -16,6 +17,12 @@
         sp = "AdamEbix";
     else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+    
+    <!-- If the url needs the Ebix Id parameter added to it-->   
+    var url = @Umbraco.Field("IframeUrl");
+    if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
+        url = url;
+        
 		
 	var frameHeight = Umbraco.Field("frameHeight").ToString();
 	if(frameHeight=="") frameHeight = "900px";
