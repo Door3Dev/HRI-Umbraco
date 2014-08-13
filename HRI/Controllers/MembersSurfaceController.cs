@@ -35,10 +35,10 @@ namespace HRI.Controllers
             Dictionary<string, string> attribs = new Dictionary<string, string>();
 
             // Attributes for MagnaCare
-            attribs.Add("Member ID", memberId);
-            attribs.Add("First Name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "firstName").First().Value.ToString());
-            attribs.Add("Last Name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "lastName").First().Value.ToString());
-            attribs.Add("Product", "PRIMARYSELECT");
+            attribs.Add("member:id", memberId);
+            attribs.Add("member:first_name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "firstName").First().Value.ToString());
+            attribs.Add("member:last_name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "lastName").First().Value.ToString());
+            attribs.Add("member:product", "PRIMARYSELECT");
 
             // Attributes for HealthX
             //attribs.Add("RedirectInfo", "<ServiceId>9098A07C-F253-45C2-9BF7-9C04F95502CA</ServiceId>");

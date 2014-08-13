@@ -311,6 +311,7 @@
     </Content>
     <Content Include="idp.pfx" />
     <Content Include="App_Data\zip-codes.csv" />
+    <Content Include="mc_saml.cer" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
