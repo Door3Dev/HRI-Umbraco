@@ -7,7 +7,8 @@ namespace HRI.Models
 {
     public class Product
     {
-        public string Name;
-        public List<Plan> Plans;
+        public string Name { get; set; }
+        public List<Plan> Plans { get; set; }
+        public string Description { get; set; }
     }
 }

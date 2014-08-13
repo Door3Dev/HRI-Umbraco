@@ -116,9 +116,10 @@ namespace HRI.Controllers
         #region Products Data
         private Dictionary<string, Product> Products = new Dictionary<string,Product>() {
             { 
-                "EssentialCare", 
+                "EssentialCare",
                 new Product {
                     Name = "EssentialCare Plan",
+                    Description = "Benefits, deductibles, co-pays, and all other plan features adhere to the NYS requirements for the “standard plan,” allowing you to make a true comparison across insurers.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0010004",
@@ -157,6 +158,7 @@ namespace HRI.Controllers
                 "PrimarySelect", 
                 new Product {
                     Name = "PrimarySelect Plan",
+                    Description = "Breaks down barriers to accessing the healthcare you deserve - visits to your selected primary care physician are free and you get access to the full MagnaCare PPO network of specialty care providers without a referral.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0030004",
@@ -190,6 +192,7 @@ namespace HRI.Controllers
                 "PrimarySelectEPO", 
                 new Product {
                     Name = "PrimarySelect EPO Plan",
+                    Description = "Choose your primary care physician from our list of patient-centered medical homes to help you manage your health options and still enjoy direct access to the full MagnaCare PPO network, too.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0040002",
