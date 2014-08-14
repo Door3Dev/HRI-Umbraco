@@ -1,7 +1,10 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var slideClass = (bool)Model.MacroParameters["showFirst"] ? "slide active" : "slide";
+}
 
 <div class="item">
-	<div class="slide">
+	<div class="@slideClass">
 		<h1>@Model.MacroParameters["caption"]</h1>                      
 		<a href='@Model.MacroParameters["href"]' class="btn btn-small hri-btn">
 			@Model.MacroParameters["buttonText"]<span class="caret"></span>
