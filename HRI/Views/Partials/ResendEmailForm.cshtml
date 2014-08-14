@@ -22,7 +22,7 @@
 @using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
 {
     <fieldset>
-        @Html.ValidationSummary("linkModel", true)
+        @Html.ValidationSummary("sendVerificationLinkModel", true)
         @Html.AntiForgeryToken()
 
         @Html.LabelFor(m => sendVerificationLinkModel.UserName)
