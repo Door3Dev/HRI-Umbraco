@@ -19,7 +19,7 @@ namespace HRI.Models
                 new{ID = "3", Name = "Benefits Questions"},
                 new{ID = "4", Name = "Provider Network"},
                 new{ID = "5", Name = "Techincal Issues"},
-                new{ID = "6", Name = "Claims Option On Our Website"},
+                new{ID = "6", Name = "Claims"},
                 new{ID = "7", Name = "Cancellation"},
                 new{ID = "8", Name = "Update Information"},
                 new{ID = "9", Name = "Pharmacy"},
