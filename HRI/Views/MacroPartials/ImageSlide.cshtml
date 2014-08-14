@@ -1,18 +1,17 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
-    //var slideClass = (bool)Model.MacroParameters["showFirst"] ? "slide active" : "slide";
-    var slideClass = "slide";
+    var itemClass = Model.MacroParameters["showFirst"] != String.Empty ? "item active" : "item";
 }
 
-<div class="item">
-	<div class="@slideClass">
-		<h1>@Model.MacroParameters["caption"]</h1>                      
-		<a href='@Model.MacroParameters["href"]' class="btn btn-small hri-btn">
-			@Model.MacroParameters["buttonText"]<span class="caret"></span>
-		</a>
-	</div>
-	@{
-		var dynamicMediaItem = Umbraco.Media(@Model.MacroParameters["image"]);
-		<img src="@dynamicMediaItem.umbracoFile" alt='@Model.MacroParameters["image"]' />
-	}
+<div class="@itemClass">
+    <div class="slide">
+        <h1>@Model.MacroParameters["caption"]</h1>
+        <a href='@Model.MacroParameters["href"]' class="btn btn-small hri-btn">
+            @Model.MacroParameters["buttonText"]<span class="caret"></span>
+        </a>
+    </div>
+    @{
+        var dynamicMediaItem = Umbraco.Media(@Model.MacroParameters["image"]);
+        <img src="@dynamicMediaItem.umbracoFile" alt='@Model.MacroParameters["image"]' />
+    }
 </div>
