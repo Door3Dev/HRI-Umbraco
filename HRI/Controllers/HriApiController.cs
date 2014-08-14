@@ -67,7 +67,8 @@ namespace HRI.Controllers
             }
             json = JObject.Parse(result);
             // If the user didn't exist
-            if(json["RegId"] == null)
+            var temp = json["RegId"];
+            if(!json["RegId"].HasValues)
             {
                 return null;
             }

@@ -287,7 +287,16 @@ namespace HRI.Controllers
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
                 smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
                 smtp.EnableSsl = true;
-                smtp.Send(message);
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch(SmtpException ex)
+                {
+                    //don't add a field level error, just model level
+                    ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
+                    return CurrentUmbracoPage();
+                }
 
                 // Mark this method as successful for the next page
                 TempData["IsSuccessful"] = true;

@@ -41,7 +41,7 @@ namespace HRI.Controllers
             attribs.Add("member:product", "PRIMARYSELECT");
 
             // Attributes for HealthX
-            //attribs.Add("RedirectInfo", "<ServiceId>9098A07C-F253-45C2-9BF7-9C04F95502CA</ServiceId>");
+            attribs.Add("RedirectInfo", "<ServiceId>9098A07C-F253-45C2-9BF7-9C04F95502CA</ServiceId>");
                      
             // Send an IdP initiated SAML assertion
             SAMLIdentityProvider.InitiateSSO(
