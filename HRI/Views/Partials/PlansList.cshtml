@@ -1,5 +1,7 @@
-﻿@using HRI.Models
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<ComparePlansViewModel>
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ComparePlansViewModel>
+@using HRI.Models
+@using HRI.Controllers
+
 
 <div class="span10 offset1">
     <div class="plan-summary-section">
@@ -51,13 +53,14 @@
                                             {
                                                 <th>
                                                     @plan.MetalTier<br>
-                                                    <form action="/for-members/register" method="post" class="selectplan">
+                                                    @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan" }))
+                                                    {
                                                         @Html.AntiForgeryToken()
                                                         @Html.Hidden("ZipCode", Model.ZipCode)
                                                         @Html.Hidden("PlanId", plan.HiosId)
                                                         @Html.Hidden("PlanPrice", plan.Price)
                                                         <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
-                                                    </form>
+                                                    }
                                             </th>
                                             }
                                         </tr>
@@ -320,13 +323,14 @@
                                             <td></td>
                                             @foreach (var plan in product.Plans) { 
                                             <td>
-                                                <form action="/for-members/register" method="post" class="selectplan">
+                                                @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new { }, new { @class = "selectplan" }))
+                                                {
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("ZipCode", Model.ZipCode)
                                                     @Html.Hidden("PlanId", plan.HiosId)
                                                     @Html.Hidden("PlanPrice", plan.Price)
                                                     <input class="btn btn-block hri-btn" type="submit" value="Select Plan">
-                                                </form>
+                                                }
                                             </td>
                                             }
                                         </tr>
