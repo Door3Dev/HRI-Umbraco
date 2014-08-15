@@ -67,9 +67,7 @@ namespace HRI.Controllers
         }        
 
         public ActionResult ActivateUser(string userName, string guid)
-        {
-            var m = Services.MemberService.GetByUsername(userName);
-
+        {            
             bool regSuccess;
             string registerApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
             using(var client = new WebClient())
@@ -80,8 +78,11 @@ namespace HRI.Controllers
 
             if (regSuccess)
             {
-                m.IsApproved = true;
+                // Set the user to be not approved
+                MembershipUser memb = Membership.GetUser(userName);
+                memb.IsApproved = true;                      
                 System.Web.Security.Roles.AddUserToRole(userName, "Registered");
+                Membership.UpdateUser(memb); 
                 return Redirect("/for-members/login");
             }
             return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.");            

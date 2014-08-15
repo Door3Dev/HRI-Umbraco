@@ -275,12 +275,12 @@ namespace HRI.Controllers
                 string smtpServer = root.GetProperty("smtpServer").Value.ToString();
                 // Get the SMTP port
                 int smtpPort = Convert.ToInt32(root.GetProperty("smtpPort").Value);
+                // Get the SMTP User Name
                 string exchangeAccountUserName = root.GetProperty("exchangeAccountUserName").Value.ToString();
+                // Get the SMTP Password
                 string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
                 // Get the SMTP email account
                 string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
-                // Get the SMTP email password
-                string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
                 // Get the Verification Email Template ID
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
@@ -298,8 +298,8 @@ namespace HRI.Controllers
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-                smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);                
-                //smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);
+                // Try to send the message
                 try
                 {
                     smtp.Send(message);
@@ -359,11 +359,11 @@ namespace HRI.Controllers
                 int smtpPort = Convert.ToInt32(root.GetProperty("smtpPort").Value);
                 // Get the SMTP email account
                 string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
-                // Get the SMTP email password
-                string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
-                // Get the Verification Email Template ID
+                // Get the SMTP User Name
                 string exchangeAccountUserName = root.GetProperty("exchangeAccountUserName").Value.ToString();
+                // Get the SMTP Password
                 string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
+                // Get the Verification Email Template ID
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
                 // Build a dictionary for all the dynamic text in the email template
@@ -381,8 +381,17 @@ namespace HRI.Controllers
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
                 smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);
-                smtp.EnableSsl = true;
-                smtp.Send(message);
+                // Try to send the message
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (SmtpException ex)
+                {
+                    //don't add a field level error, just model level
+                    ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
+                    return CurrentUmbracoPage();
+                }
 
                 // Mark this method as successful for the next page
                 TempData["IsSuccessful"] = true;

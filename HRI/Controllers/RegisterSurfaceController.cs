@@ -28,11 +28,17 @@ namespace HRI.Controllers
             model.Name = model.Username;
             MembershipCreateStatus status;
             var member = Members.RegisterMember(model, out status, false);
-            member.IsApproved = false;
-            Membership.UpdateUser(member);
+            
             switch (status)
             {
-                case MembershipCreateStatus.Success:                                        
+                case MembershipCreateStatus.Success:
+                    // Sign the user out (Umbraco wont stop auto logging in - this is a hack to fix)
+                    Session.Clear();
+                    FormsAuthentication.SignOut();
+                    // Set the user to be not approved
+                    MembershipUser memb = Membership.GetUser(model.Username);
+                    memb.IsApproved = false;
+                    Membership.UpdateUser(memb);                   
                     // Send the user a verification link to activate their account     
                     SendVerificationLinkModel sendVerificationLinkModel = new SendVerificationLinkModel();
                     sendVerificationLinkModel.UserName = model.Username;
