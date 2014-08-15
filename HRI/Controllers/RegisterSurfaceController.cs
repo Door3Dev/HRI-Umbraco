@@ -28,7 +28,8 @@ namespace HRI.Controllers
             model.Name = model.Username;
             MembershipCreateStatus status;
             var member = Members.RegisterMember(model, out status, false);
-
+            member.IsApproved = false;
+            Membership.UpdateUser(member);
             switch (status)
             {
                 case MembershipCreateStatus.Success:                                        

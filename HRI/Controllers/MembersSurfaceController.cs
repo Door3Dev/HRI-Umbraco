@@ -28,7 +28,8 @@ namespace HRI.Controllers
             // Initiate single sign-on to the service provider (IdP-initiated SSO)]
             // by sending a SAML response containing a SAML assertion to the SP.
             
-            // get the member id (was IWS number) from the database           
+            // get the member id (was IWS number) from the database 
+            var member = Services.MemberService.GetByUsername(User.Identity.Name);
             string memberId = Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "memberId").First().Value.ToString();
 
             // Create a dictionary of attributes to add to the SAML assertion
@@ -36,12 +37,20 @@ namespace HRI.Controllers
 
             // Attributes for MagnaCare
             attribs.Add("member:id", memberId);
-            attribs.Add("member:first_name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "firstName").First().Value.ToString());
-            attribs.Add("member:last_name", Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "lastName").First().Value.ToString());
+            attribs.Add("member:first_name", member.GetValue("firstName").ToString());
+            attribs.Add("member:last_name", member.GetValue("lastName").ToString());
             attribs.Add("member:product", "PRIMARYSELECT");
 
             // Attributes for HealthX
-            attribs.Add("RedirectInfo", "<ServiceId>9098A07C-F253-45C2-9BF7-9C04F95502CA</ServiceId>");
+            attribs.Add("RedirectInfo", targetUrl);
+            attribs.Add("Version", "1");
+            attribs.Add("RelationshipCode", "18");
+            attribs.Add("UserId", member.GetValue("memberId").ToString());
+            attribs.Add("MemberLastName", member.GetValue("lastName").ToString());
+            attribs.Add("MemberFirstName", member.GetValue("firstName").ToString());
+            attribs.Add("UserEmailAddress", member.Email);
+            attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
+            
                      
             // Send an IdP initiated SAML assertion
             SAMLIdentityProvider.InitiateSSO(

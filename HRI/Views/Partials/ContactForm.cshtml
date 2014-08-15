@@ -18,7 +18,7 @@
 	if(User.Identity.IsAuthenticated)
 	{
 		model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
-		model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
+		model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("lastName").ToString();
 		model.Email = @Membership.GetUser().Email;
 		model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
 	}

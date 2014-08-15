@@ -244,11 +244,22 @@ namespace HRI.Controllers
         }
 
 
+        /// <summary>
+        /// This version is called from the resend email page. It sends them a new verification email
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SendVerificationLink([Bind(Prefix = "sendVerificationLinkModel")]SendVerificationLinkModel model)
-        {            
+        {
+            // If the user model is valid and the user exists
             if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
             {  
+                // If this user has already been verified
+                if(Services.MemberService.GetByUsername(model.UserName).IsApproved)
+                { 
+                    return Content("This account has already been verified!");
+                }
                 // Get a handle on the member
                 var member = Services.MemberService.GetByUsername(model.UserName);               
                 // Create a random Guid
@@ -264,6 +275,8 @@ namespace HRI.Controllers
                 string smtpServer = root.GetProperty("smtpServer").Value.ToString();
                 // Get the SMTP port
                 int smtpPort = Convert.ToInt32(root.GetProperty("smtpPort").Value);
+                string exchangeAccountUserName = root.GetProperty("exchangeAccountUserName").Value.ToString();
+                string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
                 // Get the SMTP email account
                 string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
                 // Get the SMTP email password
@@ -285,8 +298,8 @@ namespace HRI.Controllers
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-                smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
-                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);                
+                //smtp.EnableSsl = true;
                 try
                 {
                     smtp.Send(message);
@@ -318,6 +331,12 @@ namespace HRI.Controllers
             }
         }
 
+
+        /// <summary>
+        /// This is called from the registration page after a new user is registered
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SendVerificationLink_GET(SendVerificationLinkModel model)
         {
@@ -343,6 +362,8 @@ namespace HRI.Controllers
                 // Get the SMTP email password
                 string smtpPassword = root.GetProperty("smtpEmailPassword").Value.ToString();
                 // Get the Verification Email Template ID
+                string exchangeAccountUserName = root.GetProperty("exchangeAccountUserName").Value.ToString();
+                string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
                 // Build a dictionary for all the dynamic text in the email template
@@ -359,7 +380,7 @@ namespace HRI.Controllers
 
                 // Create an SMTP client object and send the message with it
                 SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-                smtp.Credentials = new NetworkCredential(smtpEmail, smtpPassword);
+                smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);
                 smtp.EnableSsl = true;
                 smtp.Send(message);
 
