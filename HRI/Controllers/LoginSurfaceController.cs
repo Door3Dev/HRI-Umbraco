@@ -79,7 +79,7 @@ namespace HRI.Controllers
                             registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
                         // SSN
                         if (json["EbixId"].HasValues)
-                            registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["Ssn"].ToString();
+                            registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
                         // Email
                         if (json["EMail"].HasValues)
                             registerModel.Email = json["EMail"].ToString();

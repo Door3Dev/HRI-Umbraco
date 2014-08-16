@@ -29,39 +29,69 @@ namespace HRI.Controllers
             // by sending a SAML response containing a SAML assertion to the SP.
             
             // get the member id (was IWS number) from the database 
-            var member = Services.MemberService.GetByUsername(User.Identity.Name);
-            string memberId = Services.MemberService.GetByUsername(User.Identity.Name).Properties.Where(p => p.Alias == "memberId").First().Value.ToString();
+            var member = Services.MemberService.GetByUsername(User.Identity.Name);            
 
             // Create a dictionary of attributes to add to the SAML assertion
             Dictionary<string, string> attribs = new Dictionary<string, string>();
 
             // Attributes for MagnaCare
-            attribs.Add("member:id", memberId);
-            attribs.Add("member:first_name", member.GetValue("firstName").ToString());
-            attribs.Add("member:last_name", member.GetValue("lastName").ToString());
-            attribs.Add("member:product", "PRIMARYSELECT");
+            if (partnerSP == "MagnaCare")
+            {                
+                attribs.Add("Member ID", member.GetValue("yNumber").ToString());
+                attribs.Add("member:id", member.GetValue("yNumber").ToString());
+                attribs.Add("First Name", member.GetValue("firstName").ToString());
+                attribs.Add("member:first_name", member.GetValue("firstName").ToString());
+                attribs.Add("Last Name", member.GetValue("lastName").ToString());
+                attribs.Add("member:last_name", member.GetValue("lastName").ToString());
+                attribs.Add("Product", "EPO");
+                attribs.Add("member:product", "EPO");
+
+                // Send an IdP initiated SAML assertion
+                SAMLIdentityProvider.InitiateSSO(
+                    Response,
+                    member.GetValue("yNumber").ToString(),
+                    attribs,
+                    "PRIMARYSELECT",
+                    partnerSP);
+            }
 
             // Attributes for HealthX
-            attribs.Add("RedirectInfo", targetUrl);
-            attribs.Add("Version", "1");
-            attribs.Add("RelationshipCode", "18");
-            attribs.Add("UserId", member.GetValue("memberId").ToString());
-            attribs.Add("MemberLastName", member.GetValue("lastName").ToString());
-            attribs.Add("MemberFirstName", member.GetValue("firstName").ToString());
-            attribs.Add("UserEmailAddress", member.Email);
-            attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
-            
-                     
-            // Send an IdP initiated SAML assertion
-            SAMLIdentityProvider.InitiateSSO(
-                Response,
-                memberId,
-                attribs,
-                targetUrl,
-                partnerSP);
+            if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
+            {
+                attribs.Add("RedirectInfo", targetUrl);
+                attribs.Add("Version", "1");
+                attribs.Add("RelationshipCode", "18");
+                attribs.Add("UserId", member.GetValue("memberId").ToString());
+                attribs.Add("MemberLastName", member.GetValue("lastName").ToString());
+                attribs.Add("MemberFirstName", member.GetValue("firstName").ToString());
+                attribs.Add("UserEmailAddress", member.Email);
+                attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
+
+                // Send an IdP initiated SAML assertion
+                SAMLIdentityProvider.InitiateSSO(
+                    Response,
+                    member.GetValue("memberId").ToString(),
+                    attribs,
+                    targetUrl,
+                    partnerSP);
+            }
+
+
+            // Attributes for Morneau Shapell
+            if (partnerSP == "SBCSystems")
+            {
+                // Send an IdP initiated SAML assertion
+                SAMLIdentityProvider.InitiateSSO(
+                    Response,
+                    member.GetValue("memberId").ToString(),
+                    attribs,
+                    targetUrl,
+                    partnerSP);
+            }
 
             // Add the response to the ViewBag so we can access it on the front end if we need to
             ViewBag.Response = Response;
+            TempData["response"] = Response;
             // Return an empty response since we wait for the SAML consumer to send us the requested page
             return new EmptyResult();
         }        
