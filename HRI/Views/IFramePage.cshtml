@@ -19,16 +19,14 @@
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
     
     <!-- If the url needs the Ebix Id parameter added to it-->   
-    var url = @Umbraco.Field("IframeUrl");
-    if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
-        url = url;
-        
+    var url = @Umbraco.Field("IframeUrl").ToHtmlString().ToString();            
 		
 	var frameHeight = Umbraco.Field("frameHeight").ToString();
 	if(frameHeight=="") frameHeight = "900px";
 	
 }
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 <div class="hri-common-hp row-fluid">
     <div class="span12">
@@ -44,7 +42,20 @@
         }
         else
         {
-			<iframe name="iframe" src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
+            if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
+            {
+            
+            <script>
+                $.ajax({
+                    url: "/umbraco/api/HriApi/GetEbixIdByUsername?username=spicedsp",                    
+                    success: function (data) {
+                        url = url + "&amp;uid=" + data;
+                    },
+                    dataType: 'html'
+                });
+            </script>
+            }
+			<iframe name="iframe" src='@url' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
         }
 	</div>
 
