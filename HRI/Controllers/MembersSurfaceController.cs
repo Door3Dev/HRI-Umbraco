@@ -36,14 +36,10 @@ namespace HRI.Controllers
 
             // Attributes for MagnaCare
             if (partnerSP == "MagnaCare")
-            {                
-                attribs.Add("Member ID", member.GetValue("yNumber").ToString());
-                attribs.Add("member:id", member.GetValue("yNumber").ToString());
-                attribs.Add("First Name", member.GetValue("firstName").ToString());
-                attribs.Add("member:first_name", member.GetValue("firstName").ToString());
-                attribs.Add("Last Name", member.GetValue("lastName").ToString());
+            {                                
+                attribs.Add("member:id", member.GetValue("yNumber").ToString());                
+                attribs.Add("member:first_name", member.GetValue("firstName").ToString());                
                 attribs.Add("member:last_name", member.GetValue("lastName").ToString());
-                attribs.Add("Product", "EPO");
                 attribs.Add("member:product", "EPO");
 
                 // Send an IdP initiated SAML assertion

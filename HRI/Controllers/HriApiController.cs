@@ -151,14 +151,14 @@ namespace HRI.Controllers
         /// <param name="username">Name of the user to retrieve Ebix Id for</param>
         /// <returns></returns>
         [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public string GetEbixIdByUsername(string username)
+        public string GetEbixIdByYNumber(string ynumber)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
             // Get the API uri
             string apiUri = root.GetProperty("apiUri").Value.ToString();
             // Apend the command to determine user exists
-            string userNameCheckApiString = apiUri + "/Registration?EbixMemberId=" + username;
+            string userNameCheckApiString = apiUri + "/Registration?EbixMemberId=" + ynumber;
             string result;
             JObject json;
 
@@ -171,13 +171,46 @@ namespace HRI.Controllers
             }
             json = JObject.Parse(result);
             // If the user didn't exist
-            var temp = json["RegId"];
-            if (!json["RegId"].HasValues)
+            string temp = json["EbixId"].ToString();
+            if (!json["EbixId"].HasValues)
             {
                 return null;
             }
-            return result;
+            return temp;
         }
 
+        /// <summary>
+        /// Get the given users plan id.
+        /// </summary>
+        /// <param name="username">Name of the user to retrieve Plan Id for</param>
+        /// <returns></returns>
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        public string GetPlanIdByUsername(string username)
+        {
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the API uri
+            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            // Apend the command to determine user exists
+            string userNameCheckApiString = apiUri + "/Registration?PlanId=" + username;
+            string result;
+            JObject json;
+
+            using (var client = new WebClient())
+            {
+                // Set the format to JSON
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                // Execute a GET and convert the response to a JSON object
+                result = client.DownloadString(userNameCheckApiString);
+            }
+            json = JObject.Parse(result);
+            // If the user didn't exist
+            string temp = json["PlanId"].ToString();
+            if (!json["PlanId"].HasValues)
+            {
+                return null;
+            }
+            return temp;
+        }
     }
 }
