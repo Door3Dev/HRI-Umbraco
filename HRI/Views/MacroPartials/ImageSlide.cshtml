@@ -1,6 +1,6 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
-    var itemClass = Model.MacroParameters["isFirst"] != String.Empty ? "item active" : "item";
+    var itemClass = Convert.ToInt32(Model.MacroParameters["isFirst"]) == 1 ? "item active" : "item";
 }
 
 

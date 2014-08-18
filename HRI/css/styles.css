@@ -1659,6 +1659,7 @@ body {
 }
 
 .hri-common .hri-common-hp .hp-plan-desc {
+    height: 99px;
     padding: 15px 20px;
     margin-top: 10px;
     display: block;
@@ -2168,116 +2169,13 @@ body {
     text-transform: uppercase;
 }
 
-/* Legacy Homepage styles */
+/* ------------- HOME PAGE ---------------- */
 
-.hri-oregon {
-    /* Static Ribbon styling */
-
+.hri-common .hri-common-hp .carousel .item {
+    width: 634px;
+    height: 407px;
+    overflow: hidden;
 }
-
-.hri-oregon .hri-oregon-hp {
-    text-align: center;
-}
-
-.hri-oregon .lg-heading {
-    padding: 30px 80px;
-}
-
-.hri-oregon .lg-heading p {
-    font-size: 20px;
-}
-
-.hri-oregon .lg-heading span {
-    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
-    color: #451d5c;
-}
-
-.hri-oregon .wiam-banner {
-    background: url("../img/state-static/hri-common-wiam-banner.b220d7db2a7f.png") no-repeat center top;
-    min-height: 480px;
-    position: relative;
-}
-
-.hri-oregon .what-we-are {
-    background: url("../img/state-static/hri-common-what-we-are-banner.bf5c7692a3b1.jpg") center no-repeat;
-    min-height: 450px;
-    position: relative;
-    padding: 40px 0;
-}
-
-.hri-oregon .our-purpose {
-    background: url("../img/state-static/hri-common-our-purpose-banner.9b18e915220c.jpg") no-repeat top;
-    min-height: 450px;
-    position: relative;
-}
-
-.hri-oregon .bubble {
-    border-radius: 300px;
-    width: 230px;
-    height: 200px;
-    padding: 50px 40px;
-    position: relative;
-    font-family: 'Avenir LT W01 95 Black', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.hri-oregon .bubble h4 {
-    line-height: 1.4;
-    font-size: 18px;
-    margin: 40px 0;
-}
-
-.hri-oregon .bubble .bubble-inner-blue span {
-    color: #ffffff;
-    font-size: 18px;
-}
-
-.hri-oregon .bubble .bubble-inner-teal {
-    margin: 8px;
-}
-
-.hri-oregon .bubble .bubble-inner-teal h5 {
-    font-size: 18px;
-    margin: 20px 0;
-}
-
-.hri-oregon .bubble .bubble-inner-teal span {
-    color: #ffffff;
-    font-size: 18px;
-    white-space: nowrap;
-}
-
-.hri-oregon .bubble-teal {
-    background-color: rgba(122, 200, 170, 0.95);
-    background-color: #73c6a6;
-    color: #387c62;
-    float: right;
-    margin: 70px 45px 0 0;
-}
-
-.hri-oregon .bubble-blue {
-    background-color: rgba(123, 186, 227, 0.95);
-    *background-color: #74b8e4;
-    color: #5185aa;
-    float: left;
-    margin: 70px 0 0 45px;
-}
-
-.hri-oregon #news-wheel {
-    padding: 20px 90px;
-    position: relative;
-}
-
-.hri-oregon #news-wheel p {
-    color: #231f20;
-    font-family: 'Avenir LT W01 45 Book', Helvetica, Arial, sans-serif;
-}
-
-.hri-oregon #news-wheel .carousel-inner {
-    min-height: 410px;
-}
-
 
 .hri-common .hri-common-hp .carousel .hri-btn {
     background: #752b8f;
