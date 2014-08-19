@@ -312,13 +312,13 @@ namespace HRI.Controllers
                 // Get ahold of the root/home node
                 IPublishedContent root = Umbraco.ContentAtRoot().First();
                 // Get the Verification Email Template ID
-                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
+                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;                
 
                 // Build a dictionary for all the dynamic text in the email template
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
+                dynamicText.Add("<%VerificationUrl%>", root.GetProperty("HostUrl") + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
 
                 // Try to send the message
                 try
@@ -330,7 +330,7 @@ namespace HRI.Controllers
                 {
                     //don't add a field level error, just model level
                     ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
-                    return Redirect("/");
+                    return Redirect("/for-members/register");
                 }
 
                 // Mark this method as successful for the next page
