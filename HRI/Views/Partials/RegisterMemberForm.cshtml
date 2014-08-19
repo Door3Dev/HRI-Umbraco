@@ -197,11 +197,11 @@ $("#username").keyup(function () {
             data: { username: $('#username').val() },
             success: function (data) {
                 if (data == 'true' && $('#username').val().length > 5)
-                    $('#result').html("UserName is available");
+                    $('#result').html("<span class='success'>Username is available</span>");
                 else
-                    $('#result').html("UserName not available");
+                    $('#result').html("<span class='error'>Username not available</span>");
             },
-            error: function () { alert('error'); },
+            error: function () { $('#result').html("<span class='error'>Username not available</span>"); },
             dataType: 'html'
         });
     }

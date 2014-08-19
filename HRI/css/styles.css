@@ -2545,6 +2545,15 @@ input[type="radio"]:checked + label::before {
 	font-weight: bold;
 }
 
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+
 /* ------------ COMPARE PLANS ------------ */
 
 .hri-registration h3 {
