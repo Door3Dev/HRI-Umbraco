@@ -35,15 +35,22 @@ namespace HRI.Controllers
             // Create a JSON object to hold the response 
             JObject json;
             // Create a web client to access the API
-            using(var client = new WebClient())
+            try
             {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and convert the response to a JSON object
-                json = JObject.Parse(client.DownloadString(userNameCheckApiString));
+                using (var client = new WebClient())
+                {
+                    // Set the format to JSON
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    // Execute a GET and convert the response to a JSON object
+                    json = JObject.Parse(client.DownloadString(userNameCheckApiString));
+                }
+                // Return whether or not it is available
+                return Convert.ToBoolean(json["isAvailable"]);
             }
-            // Return whether or not it is available
-            return Convert.ToBoolean(json["isAvailable"]);
+            catch(WebException ex)
+            {
+                return false;
+            }
         }
 
         [System.Web.Http.AcceptVerbs("GET", "POST")]

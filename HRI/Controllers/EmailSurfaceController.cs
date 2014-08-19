@@ -330,7 +330,7 @@ namespace HRI.Controllers
                 {
                     //don't add a field level error, just model level
                     ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
-                    return CurrentUmbracoPage();
+                    return Redirect("/");
                 }
 
                 // Mark this method as successful for the next page
