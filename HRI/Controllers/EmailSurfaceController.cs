@@ -199,7 +199,7 @@ namespace HRI.Controllers
                 // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
                 IPublishedContent root = Umbraco.TypedContentAtRoot().First();
                 // Get the Verification Email Template ID
-                var emailTemplateId = root.GetProperty("forgotPasswordTemplate").Value;
+                //var emailTemplateId = root.GetProperty("forgotPasswordTemplate").Value;
 
                 // Build a dictionary for all teh dynamic text in the email template
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
@@ -208,7 +208,7 @@ namespace HRI.Controllers
                 dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPassword?username=" + model.UserName + "&guid=" + key.ToString());
 
                 SendEmail(member.Email, "Health Republic Insurance - Password Reset",
-                                        BuildEmail((int)emailTemplateId, dynamicText));
+                                        "v");//BuildEmail((int)emailTemplateId, dynamicText));
 
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
