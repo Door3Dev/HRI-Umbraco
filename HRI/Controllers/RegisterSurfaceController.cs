@@ -81,6 +81,8 @@ namespace HRI.Controllers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            if (ModelState.Count > 0)
+                TempData["IsNotValid"] = true;
 
 
             return CurrentUmbracoPage();
