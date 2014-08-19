@@ -22,6 +22,7 @@ namespace HRI.Controllers
         {
             if (ModelState.IsValid == false)
             {
+                TempData["IsNotValid"] = true;
                 return CurrentUmbracoPage();
             }
 

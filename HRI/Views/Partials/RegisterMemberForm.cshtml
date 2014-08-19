@@ -42,6 +42,8 @@
 
     var success = TempData["FormSuccess"] != null;
     var newUser = TempData["NewUser"] != null;
+    var isNotValid = TempData["IsNotValid"] != null;
+    var formClass = newUser || isNotValid ? String.Empty : "display: none;";
 }
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -82,7 +84,7 @@ else
                     </label>
                 </div>
             </div>
-        <div id="register-form" style="@(!newUser ? "display: none;" : String.Empty)">
+        <div id="register-form" style="@formClass">
             <div class="row-fluid block group">
                 <div class="span5 desc"><h3>Please enter your information.</h3></div>
                 @if (newUser)
