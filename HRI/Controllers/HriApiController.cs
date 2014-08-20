@@ -158,12 +158,14 @@ namespace HRI.Controllers
         /// <param name="username">Name of the user to retrieve Ebix Id for</param>
         /// <returns></returns>
         [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public string GetEbixIdByYNumber(string ynumber)
+        public string GetEbixIdByYNumber(string username)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
             // Get the API uri
             string apiUri = root.GetProperty("apiUri").Value.ToString();
+            string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
+
             // Apend the command to determine user exists
             string userNameCheckApiString = apiUri + "/Registration?EbixMemberId=" + ynumber;
             string result;
@@ -178,11 +180,7 @@ namespace HRI.Controllers
             }
             json = JObject.Parse(result);
             // If the user didn't exist
-            string temp = json["EbixId"].ToString();
-            if (!json["EbixId"].HasValues)
-            {
-                return null;
-            }
+            string temp = json["EBIXMemberId"].Value<string>();
             return temp;
         }
 

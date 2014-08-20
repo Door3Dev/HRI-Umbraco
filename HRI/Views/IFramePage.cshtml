@@ -19,7 +19,7 @@
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
     
     <!-- If the url needs the Ebix Id parameter added to it-->   
-    var url = @Umbraco.Field("IframeUrl").ToHtmlString().ToString();            
+    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            
 		
 	var frameHeight = Umbraco.Field("frameHeight").ToString();
 	if(frameHeight=="") frameHeight = "900px";
@@ -45,17 +45,18 @@
             if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
             {
             
-            <script>
-                $.ajax({
-                    url: "/umbraco/api/HriApi/GetEbixIdByYNumber?username=spicedsp",                    
-                    success: function (data) {
-                        url = url + "&amp;uid=" + data;
-                    },
-                    dataType: 'html'
-                });
-            </script>
-            }
-			<iframe name="iframe" src='@url' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
+                <script>
+                    $.ajax({
+                        url: "/umbraco/api/HriApi/GetEbixIdByYNumber?username=@Membership.GetUser().UserName",
+                        success: function (data) {
+                            var url = '@url' + '&amp;uid=' + data.replace(/\"/g, "");
+                            console.log(url);
+                            $('<iframe name="iframe" src="' + url + '" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>').appendTo('.hri-common-hp div');
+                        },
+                        dataType: 'html'
+                    });
+                </script>
+             }
         }
 	</div>
 
