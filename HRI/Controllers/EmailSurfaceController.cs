@@ -144,6 +144,7 @@ namespace HRI.Controllers
             }
             catch(Exception ex)
             {
+                ModelState.AddModelError("forgotUserNameViewModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
                 // Set the success flag to false and post back to the same page
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
@@ -151,7 +152,7 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
-        public bool ResetPassword(string userName, string smtpServer, string email, string pass)
+        public bool ResetPassword(string userName)
         {
             try
             {
@@ -164,14 +165,15 @@ namespace HRI.Controllers
                 // Build a dictionary for all teh dynamic text in the email template
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.UserName);
-                dynamicText.Add("<%PhoneNumber%>", "999-999-9999");
+                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
                 dynamicText.Add("<%NewPassword%>", newPass);
 
-                // Get the Verification Email Template ID
-                //var emailTemplateId = root.GetProperty("resetPasswordTemplate").Value;
+                //Get the Verification Email Template ID
+                var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
-                SendEmail(member.Email, "Health Republic Insurance - Password Reset",
-                                        "v");//BuildEmail((int) emailTemplateId, dynamicText));
+                SendEmail(member.Email, 
+                          "Health Republic Insurance - Password Reset",
+                          BuildEmail((int) emailTemplateId, dynamicText));
 
                 return true;
             }

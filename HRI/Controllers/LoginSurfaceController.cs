@@ -46,15 +46,23 @@ namespace HRI.Controllers
                     // Exectue a GET against the API
                     using(var client = new WebClient())
                     {
-                        // Read the response into a string
-                        string jsonString = client.DownloadString("http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/GetRegisteredUserByUsername?userName=" + model.Username);
-                        // If the user existed create a JSON object
-                        if (jsonString != "null")
-                            json = JObject.Parse(jsonString);
-                        else // There is an API error
+                        try
                         {
-                            //don't add a field level error, just model level
-                            ModelState.AddModelError("loginModel", "There was trouble accessing your account, please contact us by telephone.");
+                            // Read the response into a string
+                            string jsonString = client.DownloadString("http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/GetRegisteredUserByUsername?userName=" + model.Username);
+                            // If the user existed create a JSON object
+                            if (jsonString != "null")
+                                json = JObject.Parse(jsonString);
+                            else // There is an API error
+                            {
+                                //don't add a field level error, just model level
+                                ModelState.AddModelError("loginModel", "There was trouble accessing your account, please contact us by telephone.");
+                                return CurrentUmbracoPage();
+                            }
+                        }
+                        catch(Exception ex) // There was an error in connecting to or executing the function on the API
+                        {
+                            ModelState.AddModelError("loginModel", "Error in API call GetRegisteredUserByUsername");
                             return CurrentUmbracoPage();
                         }
                     }
@@ -94,13 +102,14 @@ namespace HRI.Controllers
                         registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
 
                         
-                        registerModel.Password = "P@ssw0rd";
+                        registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
                         registerModel.UsernameIsEmail = false;
 
                         // Register the user with Door3 automatically
                         MembershipCreateStatus status;
                         var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+                        // Force sign out (hack for Umbraco bug that automatically logs user in on registration
                         Session.Clear();
                         FormsAuthentication.SignOut();
                         
@@ -110,7 +119,7 @@ namespace HRI.Controllers
                         
                         // Reset the password and send an email to the user
                         bool resetSuccess;
-                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.Username + "&smtpServer=" + "smtp.live.com" + "&email=" + "mattwood2855@hotmail.com" + "&pass=" + "ChangePass1";
+                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.Username;
                         using(var client = new WebClient())
                         {
                             var result = client.DownloadString(resetApiUrl);
@@ -143,8 +152,7 @@ namespace HRI.Controllers
 
             //redirect to current page by default
             TempData["LoginSuccess"] = true;
-            return RedirectToCurrentUmbracoPage();
-            //return RedirectToCurrentUmbracoUrl();
+            return Redirect("/member-center/index");
         }
 
     }

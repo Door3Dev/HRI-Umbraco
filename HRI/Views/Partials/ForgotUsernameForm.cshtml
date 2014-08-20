@@ -12,7 +12,7 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
-	var model = new ForgotUserNameViewModel();
+	var forgotUserNameViewModel = new ForgotUserNameViewModel();
 
     var homePage = CurrentPage.AncestorsOrSelf(1).First(); 
 }
@@ -30,15 +30,19 @@
     {
         if (Convert.ToBoolean(TempData["EmailNotFound"]))
         {
+            @Html.ValidationSummary(true)
             <h3 class="purple">Member not found</h3>
             <p>No member with that email was able to be found. Please make sure the email address you entered was correct.</p>
             <p>If you believe this is an error, please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
+            <p>@Html.ValidationSummary("forgotUserNameViewModel", false)</p>
         }
         else
         {
+            @Html.ValidationSummary(true)
             <h3>Membership look up failed.</h3>
             <p>We apologize, but something seems to have gone wrong with looking up your UserName. Our site administrator has been notified.</p>
             <p>Please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
+            <p>@Html.ValidationSummary("forgotUserNameViewModel", false)</p>
         }
     }
 }
@@ -48,10 +52,10 @@ else
     {
         @Html.ValidationSummary(true)
         @Html.AntiForgeryToken()
-    
+        @Html.ValidationSummary("forgotUserNameViewModel", false)
         @Html.Label("Your Registered Email")
-        @Html.TextBoxFor(m => model.Email)
-        @Html.ValidationMessageFor(m => model.Email)
+        @Html.TextBoxFor(m => forgotUserNameViewModel.Email)
+        @Html.ValidationMessageFor(m => forgotUserNameViewModel.Email)
         <br />
 
         <button type="submit" class="btn hri-btn">Submit</button>

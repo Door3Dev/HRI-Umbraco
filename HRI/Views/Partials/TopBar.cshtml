@@ -3,6 +3,7 @@
 @{
         var homePage = CurrentPage.AncestorsOrSelf(1).First();
 }
+@*test*@
 	
 <div class="row-fluid">
   <div class="span6">
@@ -11,13 +12,21 @@
   <div class="span6 nav-user pull-right">
       @if (User.Identity.IsAuthenticated)
       {
-        <span>Hello, @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
+          if (@Members.GetByUsername(User.Identity.Name) != null)
+          { 
+              <span>Hello, @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
+          }
+          else
+          {
+            <span>Hello, Previewer | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
+          }
       }
       else
-      {        
-        if(@Model.Content.Name != "Index"){ 
+      {
+          if (@Model.Content.Name != "Index")
+          {
             <span class="icon"></span><a href="~/for-members/login">Member Login</a> 
-        }
+          }
       }
   </div>
 </div>

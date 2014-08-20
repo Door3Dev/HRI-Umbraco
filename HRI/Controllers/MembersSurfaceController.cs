@@ -57,11 +57,11 @@ namespace HRI.Controllers
                 attribs.Add("RedirectInfo", targetUrl);
                 attribs.Add("Version", "1");
                 attribs.Add("RelationshipCode", "18");
-                attribs.Add("UserId", member.GetValue("memberId").ToString());
+                attribs.Add("UserId", member.GetValue("yNumber").ToString());
                 attribs.Add("MemberLastName", member.GetValue("lastName").ToString());
                 attribs.Add("MemberFirstName", member.GetValue("firstName").ToString());
-                attribs.Add("UserEmailAddress", member.Email);
-                attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
+                //attribs.Add("UserEmailAddress", member.Email);
+                //attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
 
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
