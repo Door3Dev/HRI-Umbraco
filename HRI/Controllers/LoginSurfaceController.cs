@@ -102,7 +102,7 @@ namespace HRI.Controllers
                         registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
 
                         
-                        registerModel.Password = "P@ssw0rd";
+                        registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
                         registerModel.UsernameIsEmail = false;
 

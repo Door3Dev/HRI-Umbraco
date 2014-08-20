@@ -253,6 +253,7 @@
   <ItemGroup>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
+    <Content Include="EmailTemplates\ResetPasswordEmailTemplate.txt" />
     <Content Include="EmailTemplates\VerificationEmailTemplate.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />
     <Content Include="EmailTemplates\ForgotPassword.txt" />

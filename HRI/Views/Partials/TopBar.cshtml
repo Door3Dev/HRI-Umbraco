@@ -3,6 +3,7 @@
 @{
         var homePage = CurrentPage.AncestorsOrSelf(1).First();
 }
+@*test*@
 	
 <div class="row-fluid">
   <div class="span6">
@@ -25,7 +26,7 @@
           if (@Model.Content.Name != "Index")
           {
             <span class="icon"></span><a href="~/for-members/login">Member Login</a> 
-        }
+          }
       }
   </div>
 </div>
