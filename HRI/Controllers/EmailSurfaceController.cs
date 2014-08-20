@@ -144,6 +144,7 @@ namespace HRI.Controllers
             }
             catch(Exception ex)
             {
+                ModelState.AddModelError("forgotUserNameViewModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
                 // Set the success flag to false and post back to the same page
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
@@ -151,7 +152,7 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
-        public bool ResetPassword(string userName, string smtpServer, string email, string pass)
+        public bool ResetPassword(string userName)
         {
             try
             {
