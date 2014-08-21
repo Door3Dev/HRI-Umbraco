@@ -164,7 +164,7 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")]ChangePasswordViewModel model)
         {
             var user = Membership.GetUser();
             user.ChangePassword(model.OldPassword, model.NewPassword);

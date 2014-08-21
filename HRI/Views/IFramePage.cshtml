@@ -22,7 +22,7 @@
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            
 		
 	var frameHeight = Umbraco.Field("frameHeight").ToString();
-	if(frameHeight=="") frameHeight = "900px";
+	if(frameHeight==""){ frameHeight = "900px";}
 	
 }
 

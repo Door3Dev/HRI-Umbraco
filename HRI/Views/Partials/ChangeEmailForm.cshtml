@@ -24,15 +24,15 @@
         @Html.AntiForgeryToken()
 
         @Html.Label("Password", model.Password)
-        @Html.PasswordFor(m => model.Password);
+        @Html.PasswordFor(m => model.Password)
         @Html.ValidationMessageFor(m => model.Password)
 
         @Html.Label("New Email", model.Email)
-        @Html.TextBoxFor(m => model.Email);
+        @Html.TextBoxFor(m => model.Email)
         @Html.ValidationMessageFor(m => model.Email)
 
         @Html.Label("Confirm New Email", model.Email2)
-        @Html.TextBoxFor(m => model.Email2);
+        @Html.TextBoxFor(m => model.Email2)
         @Html.ValidationMessageFor(m => model.Email2)
 
         <input type="submit" value="Send" class="btn hri-btn" />

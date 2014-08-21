@@ -106,7 +106,7 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ForgotUserName(ForgotUserNameViewModel model)
+        public ActionResult ForgotUserName([Bind(Prefix = "forgotUserNameViewModel")]ForgotUserNameViewModel model)
         {
             try 
             {
@@ -124,11 +124,12 @@ namespace HRI.Controllers
                     dynamicText.Add("<%UserName%>", member.Username);
                     dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
 
-                    // Get the Verification Email Template ID
-                    //var emailTemplateId = root.GetProperty("forgotUserNameTemplate").Value;
+                    //Get the Verification Email Template ID
+                    var emailTemplateId = root.GetProperty("forgotUserNameEmailTemplate").Value;
+
 
                     SendEmail(member.Email, "Health Republic Insurance - UserName Recovery",
-                                            "v");
+                                             BuildEmail((int)emailTemplateId, dynamicText));
 
                     // Set the sucess flag to true and post back to the same page
                     TempData["IsSuccessful"] = true;
@@ -187,33 +188,36 @@ namespace HRI.Controllers
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
-            {                
-                // Get a handle on the member
-                var member = Services.MemberService.GetByUsername(model.UserName);
-                // Create a random Guid
-                Guid key = Guid.NewGuid();
-                // Update the user's Guid field
-                member.SetValue("guid", key.ToString());
-                // Save the updated information
-                Services.MemberService.Save(member);
+            {
+                try
+                {
+                    var member = Membership.GetUser(model.UserName);
+                    string newPass = member.ResetPassword();
 
-                // Send an email to the user
-                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-                // Get the Verification Email Template ID
-                //var emailTemplateId = root.GetProperty("forgotPasswordTemplate").Value;
+                    // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+                    IPublishedContent root = Umbraco.TypedContentAtRoot().First();
 
-                // Build a dictionary for all teh dynamic text in the email template
-                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
-                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
-                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPassword?username=" + model.UserName + "&guid=" + key.ToString());
+                    // Build a dictionary for all teh dynamic text in the email template
+                    Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                    dynamicText.Add("<%FirstName%>", member.UserName);
+                    dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
+                    dynamicText.Add("<%NewPassword%>", newPass);
 
-                SendEmail(member.Email, "Health Republic Insurance - Password Reset",
-                                        "v");//BuildEmail((int)emailTemplateId, dynamicText));
+                    //Get the Verification Email Template ID
+                    var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
-                TempData["IsSuccessful"] = true;
-                return RedirectToCurrentUmbracoPage();
+                    SendEmail(member.Email,
+                              "Health Republic Insurance - Password Reset",
+                              BuildEmail((int)emailTemplateId, dynamicText));
+
+                    TempData["IsSuccessful"] = true;
+                    return RedirectToCurrentUmbracoPage();
+                }
+                catch (Exception ex)
+                {
+                    TempData["IsSuccessful"] = false;
+                    return RedirectToCurrentUmbracoPage();
+                }
             }
             else
             {
