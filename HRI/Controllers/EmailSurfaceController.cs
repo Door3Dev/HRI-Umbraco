@@ -324,7 +324,7 @@ namespace HRI.Controllers
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationUrl%>", root.GetProperty("HostUrl") + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
+                dynamicText.Add("<%VerificationUrl%>", root.GetProperty("HostUrl").Value.ToString() + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
 
                 // Try to send the message
                 try
