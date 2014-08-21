@@ -2584,6 +2584,11 @@ input[type="radio"]:checked + label::before {
   padding-right: 100px;
 }
 
+.hri-registration .block div.info {
+  height: 60px;
+  overflow-y: visible;
+}
+
 .hri-registration .block span.desc {
   font-size: 18px;
   line-height: 21px;

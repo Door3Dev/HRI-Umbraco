@@ -87,7 +87,10 @@ else
             </div>
         <div id="register-form" style="@formClass">
             <div class="row-fluid block group">
-                <div class="span5 desc"><h3>Please enter your information.</h3></div>
+                <div class="span5 desc info">
+                    <h3>Please enter your information.</h3>
+                    @Umbraco.Field("Information")
+                </div>
                 @if (newUser)
                 { 
                     <div class="span3 short">
