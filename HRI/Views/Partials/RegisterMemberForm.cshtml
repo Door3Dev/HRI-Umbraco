@@ -45,6 +45,7 @@
     var isNotValid = TempData["IsNotValid"] != null;
     var formClass = newUser || isNotValid ? String.Empty : "display: none;";
     var selectTypeClass = newUser || isNotValid ? "hri-hide" : String.Empty;
+    var isEnrolled = TempData["IsEnrolled"] != null ? 1 : 0;
 }
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -90,25 +91,20 @@ else
                 <div class="span5 desc info">
                     <h3>Please enter your information.</h3>
                     @Umbraco.Field("Information")
+                </div> 
+                <div class="span3 short @(newUser ? "" : "hide")">
+                    @Html.Label("Social Security Number")
+                    @Html.EditorFor(m => registerModel.MemberProperties[5].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[5].Alias)
+                    @Html.ValidationMessageFor(m => registerModel.MemberProperties[5].Value)
                 </div>
-                @if (newUser)
-                { 
-                    <div class="span3 short">
-                        @Html.Label("Social Security Number")
-                        @Html.EditorFor(m => registerModel.MemberProperties[5].Value)
-                        @Html.HiddenFor(m => registerModel.MemberProperties[5].Value)
-                        @Html.ValidationMessageFor(m => registerModel.MemberProperties[5].Value)
-                    </div>
-                }
-                else
-                {
-                    <div class="span3 short">
-                        @Html.Label("Member ID")
-                        @Html.EditorFor(m => registerModel.MemberProperties[6].Value)
-                        @Html.HiddenFor(m => registerModel.MemberProperties[6].Value)
-                        @Html.ValidationMessageFor(m => registerModel.MemberProperties[6].Value)
-                    </div>
-                }
+
+                <div class="span3 short @(newUser ? "hide" : "")">
+                    @Html.Label("Member ID")
+                    @Html.EditorFor(m => registerModel.MemberProperties[6].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[6].Alias)
+                    @Html.ValidationMessageFor(m => registerModel.MemberProperties[6].Value)
+                </div>
             </div>
 
             <div class="row-fluid">
@@ -116,12 +112,12 @@ else
                     @Html.Label("First Name")
                     @Html.EditorFor(m => registerModel.MemberProperties[0].Value)
                     @Html.HiddenFor(m => registerModel.MemberProperties[0].Alias)
-                    @Html.ValidationMessageFor(m => registerModel.MemberProperties[0].Alias)
+                    @Html.ValidationMessageFor(m => registerModel.MemberProperties[0].Value)
                 </div>
                 <div class="span3 name">
                     @Html.Label("Last Name")
                     @Html.EditorFor(m => registerModel.MemberProperties[1].Value)
-                    @Html.HiddenFor(m => registerModel.MemberProperties[1].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[1].Alias)
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[1].Value)
                 </div>
             </div>
@@ -143,7 +139,7 @@ else
                 <div class="span7 offset5">
                     @Html.Label("Zip Code")
                     @Html.EditorFor(m => registerModel.MemberProperties[3].Value)
-                    @Html.HiddenFor(m => registerModel.MemberProperties[3].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[3].Alias)
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[3].Value)
                 </div>
             </div>
@@ -177,11 +173,16 @@ else
                 <div class="span7">
                     @Html.Label("Phone Number")
                     @Html.EditorFor(m => registerModel.MemberProperties[4].Value)
-                    @Html.HiddenFor(m => registerModel.MemberProperties[4].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[4].Alias)
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[4].Value)
                 </div>
             </div>
 
+            @Html.HiddenFor(m => registerModel.MemberProperties[2].Alias)
+            @Html.HiddenFor(m => registerModel.MemberProperties[7].Alias)
+            @Html.HiddenFor(m => registerModel.MemberProperties[8].Alias)
+            @Html.HiddenFor(m => registerModel.MemberProperties[9].Alias)
+            @Html.HiddenFor(m => registerModel.MemberProperties[9].Value, new { Value = isEnrolled})
             @Html.HiddenFor(m => registerModel.MemberTypeAlias)
             @Html.HiddenFor(m => registerModel.RedirectUrl)
             @Html.HiddenFor(m => registerModel.UsernameIsEmail)

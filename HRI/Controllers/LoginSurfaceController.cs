@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.Web.Security;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+using Umbraco.Core.Models;
 
 namespace HRI.Controllers
 {
@@ -26,12 +27,12 @@ namespace HRI.Controllers
                 // Return the user to the login page
                 return CurrentUmbracoPage();
             }
+            var member = Services.MemberService.GetByUsername(model.Username); 
 
             // If the user is unable to login
             if (Members.Login(model.Username, model.Password) == false)
             {
                 // Check to make sure that the user exists
-                var member = Services.MemberService.GetByUsername(model.Username);                
                 if (member != null)
                 {
                     // If the user does exist then it was a wrong password
@@ -142,6 +143,14 @@ namespace HRI.Controllers
                         return CurrentUmbracoPage();
                     }
                 }                
+            }
+
+            //
+            if (member.GetValue<string>("enrollmentpageafterlogin") == "1")
+            {
+                member.SetValue("enrollmentpageafterlogin", String.Empty);
+                Services.MemberService.Save(member);
+                return Redirect("/for-members/enrollment/");
             }
 
             //if there is a specified path to redirect to then use it

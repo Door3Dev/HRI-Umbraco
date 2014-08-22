@@ -460,6 +460,7 @@ namespace HRI.Controllers
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
             TempData["PlanPrice"] = planPrice;
+            TempData["IsEnrolled"] = true;
             // Redirect to the registration page
             return RedirectToUmbracoPage(1343);
 

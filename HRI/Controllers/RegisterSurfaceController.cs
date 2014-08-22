@@ -39,7 +39,7 @@ namespace HRI.Controllers
                     // Set the user to be not approved
                     MembershipUser memb = Membership.GetUser(model.Username);
                     memb.IsApproved = false;
-                    Membership.UpdateUser(memb);                   
+                    Membership.UpdateUser(memb);
                     // Send the user a verification link to activate their account     
                     SendVerificationLinkModel sendVerificationLinkModel = new SendVerificationLinkModel();
                     sendVerificationLinkModel.UserName = model.Username;
