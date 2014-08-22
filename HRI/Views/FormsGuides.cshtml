@@ -1,7 +1,11 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using umbraco.NodeFactory
+  
 @{
     Layout = "MasterPage.cshtml";
+
 }
+
 <div id="hri-content">
         <div class="row-fluid">
 
@@ -18,7 +22,7 @@
             <div class="content">
               <div class="row-fluid">
                 <div class="span10 offset1">
-                  <div class="row-fluid">
+                  <div class="row-fluid">                    
                     @Umbraco.Field("Content")
                   </div>
                 </div>

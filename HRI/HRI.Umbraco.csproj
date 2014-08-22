@@ -363,6 +363,9 @@
     <Content Include="SecCertHX080714.cer" />
     <Content Include="Views\VerifyAccount.cshtml" />
     <Content Include="Views\SecurityUpgrade.cshtml" />
+    <Content Include="Views\MacroPartials\ImageSlide.cshtml" />
+    <Content Include="Views\MacroPartials\ImageSlideIndicator.cshtml" />
+    <Content Include="Views\MacroPartials\MemberPolicyLink.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
