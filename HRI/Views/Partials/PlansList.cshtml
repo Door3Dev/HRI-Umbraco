@@ -2,6 +2,11 @@
 @using HRI.Models
 @using HRI.Controllers
 
+@{
+    IPublishedContent root = Umbraco.ContentAtRoot().First();
+    bool showButton = Convert.ToBoolean(root.GetPropertyValue("preventEnrollment"));
+    string displayStatus = showButton ? "" : "display: none";
+}
 
 <div class="span10 offset1">
     <div class="plan-summary-section">
@@ -53,13 +58,16 @@
                                             {
                                                 <th>
                                                     @plan.MetalTier<br>
-                                                    @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan" }))
-                                                    {
-                                                        @Html.AntiForgeryToken()
-                                                        @Html.Hidden("ZipCode", Model.ZipCode)
-                                                        @Html.Hidden("PlanId", plan.HiosId)
-                                                        @Html.Hidden("PlanPrice", plan.Price)
-                                                        <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
+                                                    @*This will allow the user to hide enrollment buttons based on the checkbox in the Home Page under Extra Settings*@
+                                                    @if(!Convert.ToBoolean(Umbraco.ContentAtRoot().First().GetPropertyValue("preventEnrollment"))){                                                    
+                                                        using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan", @style = "@displayStatus"}))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.Hidden("ZipCode", Model.ZipCode)
+                                                            @Html.Hidden("PlanId", plan.HiosId)
+                                                            @Html.Hidden("PlanPrice", plan.Price)
+                                                            <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
+                                                        }
                                                     }
                                             </th>
                                             }
@@ -319,21 +327,26 @@
                                             {
                                             <td>@plan.Description.ConventionalContactLenses</td> }
                                         </tr>
+                                        @*This will allow the user to hide enrollment buttons based on the checkbox in the Home Page under Extra Settings*@
+                                        @if(!Convert.ToBoolean(Umbraco.ContentAtRoot().First().GetPropertyValue("preventEnrollment"))){
                                         <tr>
                                             <td></td>
+                                             
                                             @foreach (var plan in product.Plans) { 
-                                            <td>
+                                            <td>                                                
                                                 @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new { }, new { @class = "selectplan" }))
-                                                {
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.Hidden("ZipCode", Model.ZipCode)
-                                                    @Html.Hidden("PlanId", plan.HiosId)
-                                                    @Html.Hidden("PlanPrice", plan.Price)
-                                                    <input class="btn btn-block hri-btn" type="submit" value="Select Plan">
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.Hidden("ZipCode", Model.ZipCode)
+                                                        @Html.Hidden("PlanId", plan.HiosId)
+                                                        @Html.Hidden("PlanPrice", plan.Price)
+                                                        <input class="btn btn-block hri-btn" type="submit" value="Select Plan">
                                                 }
-                                            </td>
+                                                
+                                            </td>                                            
                                             }
                                         </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
