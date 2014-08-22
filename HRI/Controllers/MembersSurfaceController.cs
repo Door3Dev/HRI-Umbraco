@@ -58,8 +58,8 @@ namespace HRI.Controllers
                 attribs.Add("Version", "1");
                 attribs.Add("RelationshipCode", "18");
                 attribs.Add("UserId", member.GetValue("yNumber").ToString());
-                attribs.Add("MemberLastName", member.GetValue("lastName").ToString());
-                attribs.Add("MemberFirstName", member.GetValue("firstName").ToString());
+                attribs.Add("MemberLastName", member.GetValue("lastName").ToString().ToUpper());
+                attribs.Add("MemberFirstName", member.GetValue("firstName").ToString().ToUpper());
                 //attribs.Add("UserEmailAddress", member.Email);
                 //attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
 
