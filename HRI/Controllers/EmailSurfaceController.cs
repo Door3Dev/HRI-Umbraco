@@ -1,4 +1,5 @@
 ﻿using HRI.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -187,17 +188,22 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
+            if (ModelState.IsValid)
             {
-                try
+                #region User Exists
+                // If the username exists
+                if (Services.MemberService.GetByUsername(model.UserName) != null)
                 {
+                    // Get the member
                     var member = Membership.GetUser(model.UserName);
+
+                    // Reset the password and store it for local use
                     string newPass = member.ResetPassword();
 
                     // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
                     IPublishedContent root = Umbraco.TypedContentAtRoot().First();
 
-                    // Build a dictionary for all teh dynamic text in the email template
+                    // Build a dictionary for all the dynamic text in the email template
                     Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                     dynamicText.Add("<%FirstName%>", member.UserName);
                     dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
@@ -206,24 +212,115 @@ namespace HRI.Controllers
                     //Get the Verification Email Template ID
                     var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
+                    // Send the email with the new password
                     SendEmail(member.Email,
-                              "Health Republic Insurance - Password Reset",
-                              BuildEmail((int)emailTemplateId, dynamicText));
+                                "Health Republic Insurance - Password Reset",
+                                BuildEmail((int)emailTemplateId, dynamicText));
 
                     TempData["IsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
-                }
-                catch (Exception ex)
+                } 
+                #endregion
+                #region User Not Found
+                else // USERNAME DOESNT EXIST; Check if old IWS user
                 {
-                    TempData["IsSuccessful"] = false;
-                    return RedirectToCurrentUmbracoPage();
+                    #region Checkolduser
+                    // Create a JSON object to receive the HRI API response
+                    JObject json;
+                    // Exectue a GET against the API
+                    using (var client = new WebClient())
+                    {
+                        try
+                        {
+                            // Read the response into a string
+                            string jsonString = client.DownloadString("http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/GetRegisteredUserByUsername?userName=" + model.UserName);
+                            // If the user existed create a JSON object
+                            if (jsonString != "null")
+                                json = JObject.Parse(jsonString);
+                            else // There is an API error
+                            {
+                                //don't add a field level error, just model level
+                                ModelState.AddModelError("forgotPasswordViewModel", "Sorry, that user name does not exist in our system.");
+                                return CurrentUmbracoPage();
+                            }
+                        }
+                        catch (Exception ex) // There was an error in connecting to or executing the function on the API
+                        {
+                            ModelState.AddModelError("forgotPasswordViewModel", "Error in API call GetRegisteredUserByUsername");
+                            return CurrentUmbracoPage();
+                        }
+                    }
+
+                    // If the user exists in IWS database
+                    if (json["RegId"] != null)
+                    {
+                        // Create the registration model
+                        var registerModel = Members.CreateRegistrationModel();
+                        // Member Name
+                        registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
+                        // Member Id
+                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["RegId"].ToString();
+                        // User Name
+                        registerModel.Username = json["UserName"].ToString();
+                        // First Name
+                        registerModel.MemberProperties.Where(p => p.Alias == "firstName").FirstOrDefault().Value = json["FirstName"].ToString();
+                        // Last Name
+                        registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
+                        // SSN
+                        if (json["Ssn"].HasValues)
+                            registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
+                        // SSN
+                        if (json["EbixId"].HasValues)
+                            registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
+                        // Email
+                        if (json["EMail"].HasValues)
+                            registerModel.Email = json["EMail"].ToString();
+                        // Zip Code
+                        if (json["ZipCode"].HasValues)
+                            registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
+                        // Phone Number
+                        if (json["PhoneNumber"].HasValues)
+                            registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+                        // Y Number
+                        if (json["MemberId"].HasValues)
+                            registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
+
+
+                        registerModel.Password = Membership.GeneratePassword(12, 4);
+                        registerModel.LoginOnSuccess = false;
+                        registerModel.UsernameIsEmail = false;
+
+                        // Register the user with Door3 automatically
+                        MembershipCreateStatus status;
+                        var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+                        // Force sign out (hack for Umbraco bug that automatically logs user in on registration
+                        Session.Clear();
+                        FormsAuthentication.SignOut();
+
+                        // Authenticate the user automatically as a registered user
+                        newMember.IsApproved = true;
+                        System.Web.Security.Roles.AddUserToRole(newMember.UserName, "Registered");
+                        #endregion
+                        // Reset the password and send an email to the user
+                        bool resetSuccess;
+                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.UserName;
+                        using (var client = new WebClient())
+                        {
+                            var result = client.DownloadString(resetApiUrl);
+                            resetSuccess = Convert.ToBoolean(result);
+                        }
+                        return RedirectToCurrentUmbracoPage();                      
+                    }
+                    return CurrentUmbracoPage();
                 }
+            
             }
-            else
+            else // The model was invalid
             {
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }
+            #endregion
         }
 
 

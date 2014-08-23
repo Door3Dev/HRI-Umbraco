@@ -2,24 +2,16 @@
 @{
     Layout = "MasterPage.cshtml";
 }
+
 <div id="hri-content">
         <div class="row-fluid">
 
           <div class="span4 offset4 well regular-form">
+                      
+            @{Html.RenderPartial("ChangeEmailForm");}
+
+            <div id="change_confirmation"></div>
             
-            @if (Convert.ToBoolean(TempData["Success"]) == false)
-            {
-                <h3>Update Email</h3>
-                <p>Your current email address: <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
-
-                @Html.Partial("ChangeEmailForm", Model.Content)
-
-                <div id="change_confirmation"></div>
-            }
-            else
-            {
-                <p>Your email has been successfully changed to <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
-            }
             <!-- major-col-content -->
           </div>
           <!-- major-col -->

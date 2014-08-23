@@ -117,7 +117,7 @@ namespace HRI.Controllers
             
             // Create a JSON object to hold the response
             JObject json;
-            string response;
+
             // Create a webclient object to post the user data
             using(var client = new WebClient())
             {

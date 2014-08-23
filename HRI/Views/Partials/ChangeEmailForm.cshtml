@@ -1,39 +1,49 @@
-﻿@using System.Web.Mvc.Html
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using HRI.Models
 @using HRI.Controllers
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
-@{
-    Layout = null;
+@{  
+    var changeEmailViewModel = new ChangeEmailViewModel();
     
-    Html.EnableClientValidation(true);
-    Html.EnableUnobtrusiveJavaScript(true);
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
     Html.RequiresJs("/umbraco_client/ui/jquery.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
-    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
-
-    var model = new ChangeEmailViewModel();
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");    
 }
 
+@if (Convert.ToBoolean(TempData["IsSuccessful"]) == false)
+{
+    <h3>Update Email</h3>
+    <p>Your current email address: <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
 
-    @using (Html.BeginUmbracoForm<MembersSurfaceController>("ChangeEmail"))
+    using (Html.BeginUmbracoForm<MembersSurfaceController>("ChangeEmail"))
     {
-        @Html.ValidationSummary(true)
-        @Html.AntiForgeryToken()
+        <fieldset>
+            @Html.ValidationSummary("changeEmailViewModel", true)
+            @Html.AntiForgeryToken()
 
-        @Html.Label("Password", model.Password)
-        @Html.PasswordFor(m => model.Password)
-        @Html.ValidationMessageFor(m => model.Password)
+            @Html.Label("Password", changeEmailViewModel.Password)
+            @Html.PasswordFor(m => changeEmailViewModel.Password)
+            @Html.ValidationMessageFor(m => changeEmailViewModel.Password)
 
-        @Html.Label("New Email", model.Email)
-        @Html.TextBoxFor(m => model.Email)
-        @Html.ValidationMessageFor(m => model.Email)
+            @Html.Label("New Email", changeEmailViewModel.Email)
+            @Html.TextBoxFor(m => changeEmailViewModel.Email)
+            @Html.ValidationMessageFor(m => changeEmailViewModel.Email)
 
-        @Html.Label("Confirm New Email", model.Email2)
-        @Html.TextBoxFor(m => model.Email2)
-        @Html.ValidationMessageFor(m => model.Email2)
-
-        <input type="submit" value="Send" class="btn hri-btn" />
+            @Html.Label("Confirm New Email", changeEmailViewModel.Email2)
+            @Html.TextBoxFor(m => changeEmailViewModel.Email2)
+            @Html.ValidationMessageFor(m => changeEmailViewModel.Email2)
+            
+            <input type="submit" value="Send" class="btn hri-btn" />
+        </fieldset>
     }
+}
+else
+{
+    <p>Your email has been successfully changed to <span id="currentEmail" class="avenir-heavy purple">@Membership.GetUser().Email</span></p>
+}

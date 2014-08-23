@@ -120,7 +120,7 @@ namespace HRI.Controllers
         /// <param name="model">Change Email model containing password and email address</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ChangeEmail(ChangeEmailViewModel model)
+        public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")]ChangeEmailViewModel model)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace HRI.Controllers
                 // Verify the password is correct
                 if (model.Email == model.Email2)
                 {                  
-                    if (Membership.ValidateUser( User.Identity.Name, model.Password))
+                    if (Membership.ValidateUser(User.Identity.Name, model.Password))
                     {
                         // Set the user's email address to the new supplied email address.
                         user.Email = model.Email;
@@ -137,21 +137,20 @@ namespace HRI.Controllers
                         Membership.UpdateUser((System.Web.Security.MembershipUser)user);
                         // Set the success flag to true
                         TempData["IsSuccessful"] = true;
+                        
                     }
                     else // The password was incorrect
                     {
-                        // Pass the view model back to the page to persist the data
-                        TempData["ViewModel"] = model;
+                        ModelState.AddModelError("changeEmailViewModel", "Incorrect Password");
                         // Mark the post as unsuccessful
                         TempData["IsSuccessful"] = false;
                     }                    
                 }
                 else // Email and confirmation email didnt match
                 {
-                    // Pass the view model back to the page to persist the data
-                    TempData["ViewModel"] = model;
                     // Mark the post as unsuccessful
-                    TempData["IsSuccessful"] = false;
+                    ModelState.AddModelError("changeEmailViewModel", "The email adresses you have entered do not mach");                    
+                    //TempData["IsSuccessful"] = false;
                 }
 
                 return RedirectToCurrentUmbracoPage();
