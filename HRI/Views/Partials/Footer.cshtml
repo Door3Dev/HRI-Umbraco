@@ -35,7 +35,7 @@
 	{
 		@*@* User authenticated *@
         @* Go through each navigation item that is visible in the footer(12 = header only) and is for members(9 = public only) *@ 
-		foreach (var item in menuItems.Where("navigationVisibility!=12").Where("accessAvailability!=9"))
+		foreach (var item in menuItems.Where("navigationVisibility!=12").Where("navigationVisibility!=15").Where("accessAvailability!=9"))
 		{
 			<div>
 				<ul>
@@ -43,8 +43,8 @@
                     @* if the number of non-hidden items is greater than 0 *@
                     @if (item.Children.Where("navigationVisibility!=15").Count() > 0)
                     {
-                        @* Go through each navigation item that is visible in the header(12 = header only) and is for members(9 = public only) *@
-                        foreach (var subpage in item.Children.Where("navigationVisibility!=12"))
+                        @* Go through each navigation item that is visible in the footer(12 = header only) and is for members(9 = public only) *@
+                        foreach (var subpage in item.Children.Where("navigationVisibility!=12").Where("navigationVisibility!=15"))
                         {
                             if (subpage.NodeTypeAlias == "ExternalFile")
                             {
@@ -79,7 +79,7 @@
 					@* if the number of non-hidden items is greater than 0 *@
 					@if(item.Children.Where("navigationVisibility!=15").Count() > 0)
 					{
-						@* Go through each navigation item that is visible in the header(12 = header only) and is for public(10 = members only) *@ 
+						@* Go through each navigation item that is visible in the footer(12 = header only) and is for public(10 = members only) *@ 
                         foreach (var subpage in item.Children.Where("navigationVisibility!=12").Where("navigationVisibility!=15"))
 						{
 							if(subpage.NodeTypeAlias == "ExternalFile")
