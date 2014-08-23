@@ -165,10 +165,13 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")]ChangePasswordViewModel model)
         {
-            var user = Membership.GetUser();
-            user.ChangePassword(model.OldPassword, model.NewPassword);
-            // Update the User profile in the database
-            Membership.UpdateUser((System.Web.Security.MembershipUser)user);
+            if (ModelState.IsValid)
+            {
+                var user = Membership.GetUser();
+                TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
+                // Update the User profile in the database
+                Membership.UpdateUser((System.Web.Security.MembershipUser)user);                
+            }
             return RedirectToCurrentUmbracoPage();
         }
 
