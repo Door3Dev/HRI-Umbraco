@@ -138,11 +138,6 @@ namespace HRI.Controllers
                 {
 
                     // If there was an error, return an error and message in the JSON string
-
-                    Trace.WriteLine("HRI-API-Register");
-                    Trace.TraceError(ex.Message);
-                    Trace.TraceError(ex.InnerException.Message);
-
                     json.Add("error", "true");
                     json.Add("message", ex.Message + ". " + ex.InnerException);                    
                 }
@@ -152,9 +147,10 @@ namespace HRI.Controllers
             if (json["MemberId"] != null)
             {
                 // Assign this user their member id                
-                member.SetValue("memberId", json["RegId"]);                
+                member.SetValue("memberId", json["RegId"].ToString());                
                 // Assign their Morneau Shapell Y Number
-                member.SetValue("yNumber", json["MemberId"]);
+                member.SetValue("yNumber", json["MemberId"].ToString());
+                Membership.UpdateUser(member);
                 // Return successful registration
                 json.Add("error", "false");
                 return json.ToString(Formatting.None);
