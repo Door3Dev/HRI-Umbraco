@@ -103,7 +103,7 @@ namespace HRI.Controllers
             {
                 // Replace the template variables in the url
                 if (targetUrl.IndexOf("<%PLANID%>") != -1)
-                    targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthPlanId").ToString());
+                    targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthplanid").ToString());
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
