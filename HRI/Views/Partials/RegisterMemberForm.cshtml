@@ -46,6 +46,7 @@
     var formClass = newUser || isNotValid ? String.Empty : "display: none;";
     var selectTypeClass = newUser || isNotValid ? "hri-hide" : String.Empty;
     var isEnrolled = TempData["IsEnrolled"] != null ? 1 : 0;
+    var planId = TempData["PlanId"];
 }
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -177,10 +178,12 @@ else
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[4].Value)
                 </div>
             </div>
-
+            @* Form should contain all Member Properties even if it's not using them to prevent data lost during submit *@
             @Html.HiddenFor(m => registerModel.MemberProperties[2].Alias)
             @Html.HiddenFor(m => registerModel.MemberProperties[7].Alias)
             @Html.HiddenFor(m => registerModel.MemberProperties[8].Alias)
+            @Html.HiddenFor(m => registerModel.MemberProperties[8].Value, new { Value = planId })
+
             @Html.HiddenFor(m => registerModel.MemberProperties[9].Alias)
             @Html.HiddenFor(m => registerModel.MemberProperties[9].Value, new { Value = isEnrolled})
             @Html.HiddenFor(m => registerModel.MemberTypeAlias)

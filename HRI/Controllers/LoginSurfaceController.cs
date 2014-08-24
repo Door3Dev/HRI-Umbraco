@@ -150,7 +150,7 @@ namespace HRI.Controllers
             {
                 member.SetValue("enrollmentpageafterlogin", String.Empty);
                 Services.MemberService.Save(member);
-                return Redirect("/for-members/enrollment/");
+                return Redirect("/your-account/enrollment/");
             }
 
             //if there is a specified path to redirect to then use it
