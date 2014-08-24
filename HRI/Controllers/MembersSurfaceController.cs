@@ -102,7 +102,8 @@ namespace HRI.Controllers
             if (partnerSP == "SBCSystems")
             {
                 // Replace the template variables in the url
-                targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthPlanId").ToString());
+                if (targetUrl.IndexOf("<%PLANID%>") != -1)
+                    targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthPlanId").ToString());
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
