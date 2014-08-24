@@ -13,6 +13,7 @@ using Umbraco.Web.WebApi;
 using System.Net.Http;
 using Umbraco.Core.Models;
 using Umbraco.Web.Security;
+using Newtonsoft.Json;
 
 namespace HRI.Controllers
 {
@@ -88,7 +89,7 @@ namespace HRI.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public bool RegisterUser(string userName)
+        public string RegisterUser(string userName)
         {
             // Get an instance of the member
             var member = Services.MemberService.GetByUsername(userName);
@@ -116,7 +117,7 @@ namespace HRI.Controllers
             string registerUserApi = apiUri + "/Registration";                                   
             
             // Create a JSON object to hold the response
-            JObject json;
+            JObject json = new JObject();
 
             // Create a webclient object to post the user data
             using(var client = new WebClient())
@@ -128,11 +129,13 @@ namespace HRI.Controllers
                 // Get the response when posting the member
                 try
                 {
-                    json = JObject.Parse(client.UploadString(registerUserApi, myJsonString));
+                    string response = client.UploadString(registerUserApi, myJsonString);
+                    json = JObject.Parse(response);
                 }
                 catch(WebException ex)
-                {                    
-                    return false;
+                {    
+                    json.Add("error", "true");
+                    json.Add("message", ex.Message + ". " + ex.InnerException);                    
                 }
             }
 
@@ -145,11 +148,12 @@ namespace HRI.Controllers
                 // Assign their Morneau Shapell Y Number
                 Services.MemberService.GetByUsername(member.Username).SetValue("yNumber", json["MemberId"]);
                 // Return successful registration
-                return true;
+                json.Add("error", "false");
+                return json.ToString(Formatting.None);
             }
 
-            // Member was not registered with HRI; return false
-            return false;
+            // Member was not registered with HRI; return false            
+            return json.ToString(Formatting.None);
         }
 
         /// <summary>
