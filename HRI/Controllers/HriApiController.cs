@@ -98,7 +98,8 @@ namespace HRI.Controllers
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
             jsonData.Add("RegId", null);
             jsonData.Add("RegDate", DateTime.Now.ToString());
-            jsonData.Add("MemberId", null);
+            // The MemberId is null for the new user
+            jsonData.Add("MemberId", member.GetValue("yNumber").ToString());
             jsonData.Add("UserName", member.Username);
             jsonData.Add("FirstName", member.GetValue("firstName").ToString());
             jsonData.Add("LastName", member.GetValue("lastName").ToString());
