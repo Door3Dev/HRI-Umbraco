@@ -20,6 +20,7 @@ namespace HRI.Controllers
 {
     public class HriApiController : UmbracoApiController
     {
+
         /// <summary>
         /// Checks to see if a username is available using the HRI API
         /// </summary>
@@ -135,6 +136,13 @@ namespace HRI.Controllers
                 }
                 catch(WebException ex)
                 {
+
+                    // If there was an error, return an error and message in the JSON string
+
+                    Trace.WriteLine("HRI-API-Register");
+                    Trace.TraceError(ex.Message);
+                    Trace.TraceError(ex.InnerException.Message);
+
                     json.Add("error", "true");
                     json.Add("message", ex.Message + ". " + ex.InnerException);                    
                 }
@@ -143,12 +151,10 @@ namespace HRI.Controllers
             // If the user was created
             if (json["MemberId"] != null)
             {
-                // Assign this user their member id
-                var temp = member.GetValue("memberId");
-                member.SetValue("memberId", json["RegId"].ToString());                
+                // Assign this user their member id                
+                member.SetValue("memberId", json["RegId"]);                
                 // Assign their Morneau Shapell Y Number
-                member.SetValue("yNumber", json["MemberId"].ToString());
-                Services.MemberService.Save(member);
+                member.SetValue("yNumber", json["MemberId"]);
                 // Return successful registration
                 json.Add("error", "false");
                 return json.ToString(Formatting.None);
