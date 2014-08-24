@@ -101,6 +101,8 @@ namespace HRI.Controllers
             // Attributes for Morneau Shapell
             if (partnerSP == "SBCSystems")
             {
+                // Replace the template variables in the url
+                targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthPlanId").ToString());
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
