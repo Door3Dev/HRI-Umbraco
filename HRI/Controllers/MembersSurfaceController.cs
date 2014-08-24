@@ -36,6 +36,29 @@ namespace HRI.Controllers
             // Create a dictionary of attributes to add to the SAML assertion
             Dictionary<string, string> attribs = new Dictionary<string, string>();
 
+            /////////////////////////////////////////////////////////////////////////
+            // SAML Parameter Configurations
+            /////////////////////////////////////////////////////////////////////////
+
+            // Attributes for US Script
+            if(partnerSP == "UsScript")
+            {
+                attribs.Add("clientId", targetUrl);                ;
+                attribs.Add("urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString());
+                attribs.Add("urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString());
+                attribs.Add("urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString());
+                attribs.Add("email", member.Email);
+
+                
+                // Send an IdP initiated SAML assertion
+                SAMLIdentityProvider.InitiateSSO(
+                    Response,
+                    targetUrl, // Use target URL as subject - trying to see how to fix usscript
+                    attribs,
+                    "",
+                    partnerSP);
+            }
+
             // Attributes for MagnaCare
             if (partnerSP == "MagnaCare")
             {                                
@@ -56,9 +79,9 @@ namespace HRI.Controllers
             // Attributes for HealthX
             if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
             {
-                attribs.Add("RedirectInfo", targetUrl);
-                attribs.Add("Version", "1");
-                attribs.Add("RelationshipCode", "18");
+                //attribs.Add("RedirectInfo", targetUrl);
+                //attribs.Add("Version", "1");
+                //attribs.Add("RelationshipCode", "18");
                 attribs.Add("UserId", member.GetValue("yNumber").ToString());
                 attribs.Add("MemberLastName", member.GetValue("lastName").ToString().ToUpper());
                 attribs.Add("MemberFirstName", member.GetValue("firstName").ToString().ToUpper());
@@ -68,7 +91,7 @@ namespace HRI.Controllers
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
-                    member.GetValue("memberId").ToString(),
+                    member.GetValue("yNumber").ToString(),
                     attribs,
                     targetUrl,
                     partnerSP);
