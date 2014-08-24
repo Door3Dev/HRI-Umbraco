@@ -125,30 +125,37 @@ namespace HRI.Controllers
             bool regSuccess;
             // String to api call to register the current user
             string registerApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
-            JObject json;
-            using(var client = new WebClient())
+            JObject json = new JObject();
+            try
             {
-                // Call the register function (Registers user with HRI API)
-                string result = client.DownloadString(registerApiUrl);
-                // Remove the leading and trailing quotes and remove the \ that are used to escape in ToString() from API call
-                result = result.Substring(1, result.Length - 2);
-                result = result.Replace("\\", "");                                
-                json = JObject.Parse(result);
-                // Determine the result of the registration
-                regSuccess = !Convert.ToBoolean(json["error"]);
+                using (var client = new WebClient())
+                {
+                    // Call the register function (Registers user with HRI API)
+                    string result = client.DownloadString(registerApiUrl);
+                    // Remove the leading and trailing quotes and remove the \ that are used to escape in ToString() from API call
+                    result = result.Substring(1, result.Length - 2);
+                    result = result.Replace("\\", "");
+                    json = JObject.Parse(result);
+                    // Determine the result of the registration
+                    regSuccess = !Convert.ToBoolean(json["error"]);
+                }
+                // If a success
+                if (regSuccess)
+                {
+                    // Set the user to be approved
+                    MembershipUser memb = Membership.GetUser(userName);
+                    memb.IsApproved = true;
+                    // Add the registered role to the user
+                    System.Web.Security.Roles.AddUserToRole(userName, "Registered");
+                    // Save the member
+                    Membership.UpdateUser(memb);
+                    // Send the user to the login page
+                    return Redirect("/for-members/login");
+                }
             }
-            // If a success
-            if (regSuccess)
+            catch (Exception)
             {
-                // Set the user to be approved
-                MembershipUser memb = Membership.GetUser(userName);
-                memb.IsApproved = true;                      
-                // Add the registered role to the user
-                System.Web.Security.Roles.AddUserToRole(userName, "Registered");
-                // Save the member
-                Membership.UpdateUser(memb); 
-                // Send the user to the login page
-                return Redirect("/for-members/login");
+                return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);     
             }
             return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);            
         }
