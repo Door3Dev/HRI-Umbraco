@@ -135,9 +135,6 @@ namespace HRI.Controllers
                 }
                 catch(WebException ex)
                 {
-                    Trace.WriteLine("HRI-API-Register");
-                    Trace.TraceError(ex.Message);
-                    Trace.TraceError(ex.InnerException.Message);
                     json.Add("error", "true");
                     json.Add("message", ex.Message + ". " + ex.InnerException);                    
                 }
@@ -148,9 +145,10 @@ namespace HRI.Controllers
             {
                 // Assign this user their member id
                 var temp = member.GetValue("memberId");
-                member.SetValue("memberId", json["RegId"]);                
+                member.SetValue("memberId", json["RegId"].ToString());                
                 // Assign their Morneau Shapell Y Number
-                Services.MemberService.GetByUsername(member.Username).SetValue("yNumber", json["MemberId"]);
+                member.SetValue("yNumber", json["MemberId"].ToString());
+                Services.MemberService.Save(member);
                 // Return successful registration
                 json.Add("error", "false");
                 return json.ToString(Formatting.None);
