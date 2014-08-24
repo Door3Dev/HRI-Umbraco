@@ -14,6 +14,7 @@ using System.Net.Http;
 using Umbraco.Core.Models;
 using Umbraco.Web.Security;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace HRI.Controllers
 {
@@ -133,7 +134,10 @@ namespace HRI.Controllers
                     json = JObject.Parse(response);
                 }
                 catch(WebException ex)
-                {    
+                {
+                    Trace.WriteLine("HRI-API-Register");
+                    Trace.TraceError(ex.Message);
+                    Trace.TraceError(ex.InnerException.Message);
                     json.Add("error", "true");
                     json.Add("message", ex.Message + ". " + ex.InnerException);                    
                 }
