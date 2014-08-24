@@ -94,7 +94,7 @@ namespace HRI.Controllers
         {
             // Get an instance of the member
             var member = Services.MemberService.GetByUsername(userName);
-            // Create a dictionary of values that we will convert to JSON and send
+            // Create a dictionary of the members info that we will convert to JSON and send to HRI API
             Dictionary<string, string> jsonData = new Dictionary<string, string>();
             jsonData.Add("RegId", null);
             jsonData.Add("RegDate", DateTime.Now.ToString());
@@ -125,7 +125,6 @@ namespace HRI.Controllers
             {
                 // Set the format to JSON
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and get the response as a JSON object
                 
                 // Get the response when posting the member
                 try
@@ -154,7 +153,7 @@ namespace HRI.Controllers
                 return json.ToString(Formatting.None);
             }
 
-            // Member was not registered with HRI; return false            
+            // Member was not registered with HRI           
             return json.ToString(Formatting.None);
         }
 
