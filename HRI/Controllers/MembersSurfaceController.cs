@@ -103,10 +103,11 @@ namespace HRI.Controllers
             JObject json;
             using(var client = new WebClient())
             {
+                // Call the register function (Registers user with HRI API)
                 string result = client.DownloadString(registerApiUrl);
+                // Remove the leading and trailing quotes and remove the \ that are used to escape in ToString() from API call
                 result = result.Substring(1, result.Length - 2);
-                result = result.Replace("\\", "");
-                // Call the register function                
+                result = result.Replace("\\", "");                                
                 json = JObject.Parse(result);
                 // Determine the result of the registration
                 regSuccess = !Convert.ToBoolean(json["error"]);
