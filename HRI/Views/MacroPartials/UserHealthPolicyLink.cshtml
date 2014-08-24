@@ -1,20 +1,15 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @{
-    string pdfLink = "/";
     if (User.Identity.IsAuthenticated)
     {
+        string pdfLink = "/";
         string policyNumber = @Members.GetCurrentMember().GetPropertyValue("healthPlanId").ToString();
-        string pdfFolderId = Umbraco.ContentAtRoot().FirstOrDefault().GetPropertyValue("pdfFolder").ToString();
+        string pdfFolderId = @Umbraco.ContentAtRoot().FirstOrDefault().GetPropertyValue("pdfFolder").ToString();
         var docs = Umbraco.Media(pdfFolderId).Children;
-        
         foreach (dynamic n in docs)
             if (n.Name.ToUpper() == policyNumber.ToUpper() + ".PDF")
                 pdfLink = n.Url;
+        <ul><li><a href="@pdfLink"> Policy / Contract / Certificate of Coverage</a></li></ul>
     }
-}
-
-@if (User.Identity.IsAuthenticated)
-{
-<ul><li><a href="@pdfLink"> Policy / Contract / Certificate of Coverage</a></li></ul>
 }
