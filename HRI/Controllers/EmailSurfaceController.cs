@@ -133,13 +133,13 @@ namespace HRI.Controllers
                                              BuildEmail((int)emailTemplateId, dynamicText));
 
                     // Set the sucess flag to true and post back to the same page
-                    TempData["IsSuccessful"] = true;
+                    TempData["ForgotUsernameIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
                 }
                 else // The email has no member associated with it
                 {
                     // Set the success flag to false and post back to the same page
-                    TempData["IsSuccessful"] = false;
+                    TempData["ForgotUsernameIsSuccessful"] = false;
                     TempData["EmailNotFound"] = true;
                     return RedirectToCurrentUmbracoPage();
                 }
@@ -148,7 +148,7 @@ namespace HRI.Controllers
             {
                 ModelState.AddModelError("forgotUserNameViewModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
                 // Set the success flag to false and post back to the same page
-                TempData["IsSuccessful"] = false;
+                TempData["ForgotUsernameIsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }
         }
@@ -217,7 +217,7 @@ namespace HRI.Controllers
                                 "Health Republic Insurance - Password Reset",
                                 BuildEmail((int)emailTemplateId, dynamicText));
 
-                    TempData["IsSuccessful"] = true;
+                    TempData["ForgotPasswordIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
                 } 
                 #endregion
@@ -317,7 +317,7 @@ namespace HRI.Controllers
             }
             else // The model was invalid
             {
-                TempData["IsSuccessful"] = false;
+                TempData["ForgotPasswordIsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }
             #endregion
@@ -337,8 +337,9 @@ namespace HRI.Controllers
             {  
                 // If this user has already been verified
                 if(Services.MemberService.GetByUsername(model.UserName).IsApproved)
-                { 
-                    return Content("This account has already been verified!");
+                {
+                    TempData["ResendEmailAlreadyVefiried"] = true;
+                    return CurrentUmbracoPage();
                 }
                 // Get a handle on the member
                 var member = Services.MemberService.GetByUsername(model.UserName);               

@@ -19,9 +19,9 @@
 
 @Html.RenderJsHere()
 
-@if (TempData["IsSuccessful"] != null)
+@if (TempData["ForgotUsernameIsSuccessful"] != null)
 {
-    if(Convert.ToBoolean(TempData["IsSuccessful"]))
+    if(Convert.ToBoolean(TempData["ForgotUsernameIsSuccessful"]))
     {
         <h3>Membership information found!</h3>
         <p>We were able to locate your account and an email has been sent to you containing your UserName</p>

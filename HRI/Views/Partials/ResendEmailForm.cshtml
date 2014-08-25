@@ -19,21 +19,28 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 }
 
-@using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
+@if (TempData["ResendEmailAlreadyVefiried"] != null)
 {
-    <fieldset>
-        @Html.ValidationSummary("sendVerificationLinkModel", true)
-        @Html.AntiForgeryToken()
-
-        @Html.LabelFor(m => sendVerificationLinkModel.UserName)
-        @Html.TextBoxFor(m => sendVerificationLinkModel.UserName, new { id = "focus" })
-        @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
-
-        @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
-        <button class="btn hri-btn">Send Verification Email</button>
-    </fieldset>
+    <p>This account has already been verified!</p>
 }
+else 
+{ 
+    using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
+    {
+        <fieldset>
+            @Html.ValidationSummary("sendVerificationLinkModel", true)
+            @Html.AntiForgeryToken()
 
-<script>
-    document.getElementById('focus').focus();
-</script>
+            @Html.LabelFor(m => sendVerificationLinkModel.UserName)
+            @Html.TextBoxFor(m => sendVerificationLinkModel.UserName, new { id = "focus" })
+            @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
+
+            @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
+            <button class="btn hri-btn">Send Verification Email</button>
+        </fieldset>
+    }
+
+    <script>
+        document.getElementById('focus').focus();
+    </script>
+}
