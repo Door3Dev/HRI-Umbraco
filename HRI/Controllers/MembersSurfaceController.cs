@@ -79,9 +79,9 @@ namespace HRI.Controllers
             // Attributes for HealthX
             if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
             {
-                //attribs.Add("RedirectInfo", targetUrl);
-                //attribs.Add("Version", "1");
-                //attribs.Add("RelationshipCode", "18");
+                attribs.Add("RedirectInfo", targetUrl);
+                attribs.Add("Version", "1");
+                attribs.Add("RelationshipCode", "18");
                 attribs.Add("UserId", member.GetValue("yNumber").ToString());
                 attribs.Add("MemberLastName", member.GetValue("lastName").ToString().ToUpper());
                 attribs.Add("MemberFirstName", member.GetValue("firstName").ToString().ToUpper());
@@ -93,7 +93,7 @@ namespace HRI.Controllers
                     Response,
                     member.GetValue("yNumber").ToString(),
                     attribs,
-                    targetUrl,
+                    "",
                     partnerSP);
             }
 
@@ -143,13 +143,17 @@ namespace HRI.Controllers
                 // If a success
                 if (regSuccess)
                 {
+                    var member = Services.MemberService.GetByUsername(userName);
+                    if(member.GetValue("memberId") == null || member.GetValue("memberId") == "")
+                        member.SetValue("memberId", json["RegId"].ToString());
+                    if (member.GetValue("yNumber") == null || member.GetValue("yNumber") == "")
+                        member.SetValue("yNumber", json["MemberId"].ToString());
                     // Set the user to be approved
-                    MembershipUser memb = Membership.GetUser(userName);
-                    memb.IsApproved = true;
+                    member.IsApproved = true;                    
                     // Add the registered role to the user
                     System.Web.Security.Roles.AddUserToRole(userName, "Registered");
                     // Save the member
-                    Membership.UpdateUser(memb);
+                    Services.MemberService.Save(member);                    
                     // Send the user to the login page
                     return Redirect("/for-members/login");
                 }
