@@ -166,7 +166,7 @@ namespace HRI.Controllers
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.UserName);
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%ResetPasswordLink%>", newPass);
+                dynamicText.Add("<%NewPassword%>", newPass);
 
                 //Get the Verification Email Template ID
                 var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
@@ -188,40 +188,44 @@ namespace HRI.Controllers
         {
             if (ModelState.IsValid)
             {
-                #region User Exists
+                
                 // If the username exists
                 if (Services.MemberService.GetByUsername(model.UserName) != null)
                 {
+                    #region User Exists
                     // Get the member
-                    var member = Membership.GetUser(model.UserName);
-
-                    // Reset the password and store it for local use
-                    string newPass = member.ResetPassword();
+                    var member = Services.MemberService.GetByUsername(model.UserName);
+                    // Create a random Guid
+                    Guid key = Guid.NewGuid();
+                    // Update the user's Guid field
+                    member.SetValue("guid", key.ToString());
+                    // Save the updated information
+                    Services.MemberService.Save(member);                    
 
                     // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
                     IPublishedContent root = Umbraco.TypedContentAtRoot().First();
 
                     // Build a dictionary for all the dynamic text in the email template
                     Dictionary<string, string> dynamicText = new Dictionary<string, string>();
-                    dynamicText.Add("<%FirstName%>", member.UserName);
+                    dynamicText.Add("<%FirstName%>", member.Username);
                     dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                    dynamicText.Add("<%NewPassword%>", newPass);
+                    dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPasword?userName=" + model.UserName + "&guid=" + key.ToString());
 
                     //Get the Verification Email Template ID
                     var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
                     // Send the email with the new password
                     SendEmail(member.Email,
-                                "Health Republic Insurance - Password Reset",
+                                "Health Republic Insurance - Password Reset Link",
                                 BuildEmail((int)emailTemplateId, dynamicText));
 
                     TempData["ForgotPasswordIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
-                } 
-                #endregion
-                #region User Not Found
+                    #endregion
+                }                                 
                 else // USERNAME DOESNT EXIST; Check if old IWS user
                 {
+                    #region User Not Found
                     #region Checkolduser
                     // Create a JSON object to receive the HRI API response
                     JObject json;
@@ -310,15 +314,16 @@ namespace HRI.Controllers
                         return RedirectToCurrentUmbracoPage();                      
                     }
                     return CurrentUmbracoPage();
+                    #endregion
                 }
-            
+                
             }
             else // The model was invalid
             {
                 TempData["ForgotPasswordIsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }
-            #endregion
+            
         }
 
 
@@ -357,7 +362,7 @@ namespace HRI.Controllers
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());                                
+                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
 
                 // Try to send the message
                 try

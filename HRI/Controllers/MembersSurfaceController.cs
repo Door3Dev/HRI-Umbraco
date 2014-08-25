@@ -254,18 +254,18 @@ namespace HRI.Controllers
         public ActionResult ResetPassword(string userName, string guid)
         {
             // Verify the member exists
-            var member = Membership.GetUser(username);            
+            var member = Membership.GetUser(userName);            
             if(member == null)
                 return Redirect("/");
 
             // Verify the user provided the correct guid
-            if (Services.MemberService.GetByUsername(username).GetValue("guid").ToString() != guid.ToString())
+            if (Services.MemberService.GetByUsername(userName).GetValue("guid").ToString() != guid.ToString())
             {
                 return Redirect("/");
             }
 
             // Set the username and guid
-            TempData["username"] = username;
+            TempData["username"] = userName;
             TempData["guid"] = guid;
             return Redirect("/for-members/reset-password/");                        
         }

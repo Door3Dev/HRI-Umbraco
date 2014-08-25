@@ -2380,4 +2380,5 @@ Session index: _860b916b-0b73-4db2-9d13-81e50511c25a
 ComponentSpace.SAML2 Verbose: 0 : 12:17:46 PM: Initiation of SSO to the partner service provider https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx has completed successfully.
 Saving content to disk on thread '' (Threadpool? True)Saved content on thread '' in 00:00:00.0025434 (Threadpool? True)Saving content to disk on thread '' (Threadpool? True)Saved content on thread '' in 00:00:00.0019792 (Threadpool? True)Content initialized (was already in context)
 Content initialized (was already in context)
-Saving content to disk on thread '' (Threadpool? True)Saved content on thread '' in 00:00:00.0025615 (Threadpool? True)
+Saving content to disk on thread '' (Threadpool? True)Saved content on thread '' in 00:00:00.0025615 (Threadpool? True)Content initialized (was already in context)
+Content initialized (was already in context)
