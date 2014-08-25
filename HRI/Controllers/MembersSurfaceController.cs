@@ -271,10 +271,13 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")]ResetPasswordViewModel model)
         {
             var member = Membership.GetUser("test");
-            member.ResetPassword();
+            string tempPassword = member.ResetPassword();
+            member.ChangePassword(tempPassword, model.NewPassword);
+            Membership.UpdateUser(member);
+            TempData["ResetPasswordIsSuccessful"] = true;
             return RedirectToCurrentUmbracoPage();
         }
     }
