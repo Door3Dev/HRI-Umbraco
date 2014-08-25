@@ -69,7 +69,7 @@ namespace HRI.Controllers
                     }
                                                           
                     // If the user exists in IWS database
-                    if(json["RegId"] != null)
+                    if((string)json["RegId"] != null)
                     {
                         // Create the registration model
                         var registerModel = Members.CreateRegistrationModel();                        
@@ -84,25 +84,24 @@ namespace HRI.Controllers
                         // Last Name
                         registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
                         // SSN
-                        if(json["Ssn"].HasValues)
+                        if((string)json["Ssn"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
                         // SSN
-                        if (json["EbixId"].HasValues)
+                        if ((string)json["EbixId"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
                         // Email
-                        if (json["EMail"].HasValues)
+                        if ((string)json["EMail"] != null)
                             registerModel.Email = json["EMail"].ToString();
                         // Zip Code
-                        if (json["ZipCode"].HasValues)
-                        registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
+                        if ((string)json["ZipCode"] != null)
+                            registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
                         // Phone Number
-                        if (json["PhoneNumber"].HasValues)
-                        registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+                        if ((string)json["PhoneNumber"] != null)
+                            registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
                         // Y Number
-                        if (json["MemberId"].HasValues)
-                        registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
+                        if ((string)json["MemberId"] != null)
+                            registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
 
-                        
                         registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
                         registerModel.UsernameIsEmail = false;
@@ -128,13 +127,9 @@ namespace HRI.Controllers
                         }                            
 
                         if(resetSuccess)
-                        {
                             return Redirect("/for-members/security-upgrade/");
-                        }
                         else
-                        {
                             return Redirect("/");
-                        }
                     }
                     else // The user doesnt exist locally or in IWS db
                     {

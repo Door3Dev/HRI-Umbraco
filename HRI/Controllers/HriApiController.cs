@@ -15,6 +15,7 @@ using Umbraco.Core.Models;
 using Umbraco.Web.Security;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace HRI.Controllers
 {
@@ -57,7 +58,7 @@ namespace HRI.Controllers
         }
 
         [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public string GetRegisteredUserByUsername(string username)
+        public JObject GetRegisteredUserByUsername(string username)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
@@ -77,12 +78,9 @@ namespace HRI.Controllers
             }
             json = JObject.Parse(result);
             // If the user didn't exist
-            var temp = json["RegId"];
-            if(!json["RegId"].HasValues)
-            {
-                return null;
-            }
-            return result;
+            var hasRegId = json.Value<int?>("RegId").HasValue;
+
+            return hasRegId ? json : null;
         }
 
         /// <summary>

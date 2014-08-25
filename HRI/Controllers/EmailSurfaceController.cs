@@ -242,19 +242,19 @@ namespace HRI.Controllers
                             else // There is an API error
                             {
                                 //don't add a field level error, just model level
-                                ModelState.AddModelError("forgotPasswordViewModel", "Sorry, that user name does not exist in our system.");
+                                ModelState.AddModelError("model", "Sorry, that user name does not exist in our system.");
                                 return CurrentUmbracoPage();
                             }
                         }
                         catch (Exception ex) // There was an error in connecting to or executing the function on the API
                         {
-                            ModelState.AddModelError("forgotPasswordViewModel", "Error in API call GetRegisteredUserByUsername");
+                            ModelState.AddModelError("model", "Error in API call GetRegisteredUserByUsername");
                             return CurrentUmbracoPage();
                         }
                     }
 
                     // If the user exists in IWS database
-                    if (json["RegId"] != null)
+                    if ((string)json["RegId"] != null)
                     {
                         // Create the registration model
                         var registerModel = Members.CreateRegistrationModel();
@@ -269,24 +269,23 @@ namespace HRI.Controllers
                         // Last Name
                         registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
                         // SSN
-                        if (json["Ssn"].HasValues)
+                        if ((string)json["Ssn"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
                         // SSN
-                        if (json["EbixId"].HasValues)
+                        if ((string)json["EbixId"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
                         // Email
-                        if (json["EMail"].HasValues)
+                        if ((string)json["EMail"] != null)
                             registerModel.Email = json["EMail"].ToString();
                         // Zip Code
-                        if (json["ZipCode"].HasValues)
+                        if ((string)json["ZipCode"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
                         // Phone Number
-                        if (json["PhoneNumber"].HasValues)
+                        if ((string)json["PhoneNumber"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
                         // Y Number
-                        if (json["MemberId"].HasValues)
+                        if ((string)json["MemberId"] != null)
                             registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
-
 
                         registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
@@ -311,6 +310,7 @@ namespace HRI.Controllers
                             var result = client.DownloadString(resetApiUrl);
                             resetSuccess = Convert.ToBoolean(result);
                         }
+                        TempData["ForgotPasswordIsSuccessful"] = true;
                         return RedirectToCurrentUmbracoPage();                      
                     }
                     return CurrentUmbracoPage();
