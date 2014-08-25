@@ -151,37 +151,39 @@ namespace HRI.Controllers
             }
         }
 
-        [HttpGet]
-        public bool ResetPassword(string userName)
-        {
-            try
-            {
-                var member = Membership.GetUser(userName);
-                string newPass = member.ResetPassword();
+        // This function was depricated and replaced by ForgotPassword
+        //
+        //[HttpGet]
+        //public bool ResetPassword(string userName)
+        //{
+        //    try
+        //    {
+        //        var member = Membership.GetUser(userName);
+        //        string newPass = member.ResetPassword();
 
-                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+        //        // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+        //        IPublishedContent root = Umbraco.TypedContentAtRoot().First();
 
-                // Build a dictionary for all teh dynamic text in the email template
-                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
-                dynamicText.Add("<%FirstName%>", member.UserName);
-                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%NewPassword%>", newPass);
+        //        // Build a dictionary for all teh dynamic text in the email template
+        //        Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+        //        dynamicText.Add("<%FirstName%>", member.UserName);
+        //        dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
+        //        dynamicText.Add("<%NewPassword%>", newPass);
 
-                //Get the Verification Email Template ID
-                var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
+        //        //Get the Verification Email Template ID
+        //        var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
-                SendEmail(member.Email, 
-                          "Health Republic Insurance - Password Reset",
-                          BuildEmail((int) emailTemplateId, dynamicText));
+        //        SendEmail(member.Email, 
+        //                  "Health Republic Insurance - Password Reset",
+        //                  BuildEmail((int) emailTemplateId, dynamicText));
 
-                return true;
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //}
 
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
@@ -209,7 +211,7 @@ namespace HRI.Controllers
                     Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                     dynamicText.Add("<%FirstName%>", member.Username);
                     dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                    dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPasword?userName=" + model.UserName + "&guid=" + key.ToString());
+                    dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPassword?userName=" + model.UserName + "&guid=" + key.ToString());
 
                     //Get the Verification Email Template ID
                     var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
