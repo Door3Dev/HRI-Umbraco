@@ -50,7 +50,6 @@ namespace HRI.Controllers
             return emailMessage;
         }
 
-
         private void SendEmail(string email, string title, string content)
         {
             // Get ahold of the root/home node
@@ -75,7 +74,6 @@ namespace HRI.Controllers
             // Try to send the message
             smtp.Send(message); 
         }
-
 
         /// <summary>
         /// Emails the Web Administrator with a message from a member
@@ -168,7 +166,7 @@ namespace HRI.Controllers
                 Dictionary<string, string> dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.UserName);
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%NewPassword%>", newPass);
+                dynamicText.Add("<%ResetPasswordLink%>", newPass);
 
                 //Get the Verification Email Template ID
                 var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;

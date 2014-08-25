@@ -43,8 +43,7 @@
         else
         {
             if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
-            {
-            
+            {            
                 <script>
                     $.ajax({
                         url: "/umbraco/api/HriApi/GetEbixIdByYNumber?username=@Membership.GetUser().UserName",

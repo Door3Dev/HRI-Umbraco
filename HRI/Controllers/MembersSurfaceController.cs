@@ -78,13 +78,22 @@ namespace HRI.Controllers
 
             // Attributes for HealthX
             if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
-            {
-                attribs.Add("RedirectInfo", targetUrl);
+            {            
                 attribs.Add("Version", "1");
+                attribs.Add("ServiceId", "d99bfe58-3896-4eb6-9586-d2f9ae673052");
+                attribs.Add("SiteId", "e6fa832c-fbd3-48c7-860f-e4f04b22bab7");                
+                attribs.Add("RedirectInfo", targetUrl);                
                 attribs.Add("RelationshipCode", "18");
                 attribs.Add("UserId", member.GetValue("yNumber").ToString());
                 attribs.Add("MemberLastName", member.GetValue("lastName").ToString().ToUpper());
                 attribs.Add("MemberFirstName", member.GetValue("firstName").ToString().ToUpper());
+                //attribs.Add("MemberDateOfBirth", member.GetValue("firstName").ToString().ToUpper());
+                //attribs.Add("UserEmailAddress", member.GetValue("firstName").ToString().ToUpper());
+                attribs.Add("UserLastName", member.GetValue("lastName").ToString().ToUpper());
+                attribs.Add("UserFirstName", member.GetValue("firstName").ToString().ToUpper());
+                //attribs.Add("UserDateOfBirth", member.GetValue("firstName").ToString().ToUpper());                
+                
+                
                 //attribs.Add("UserEmailAddress", member.Email);
                 //attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
 
@@ -242,7 +251,7 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
-        public ActionResult ResetPassword(string username, string guid)
+        public ActionResult ResetPassword(string userName, string guid)
         {
             // Verify the member exists
             var member = Membership.GetUser(username);            
