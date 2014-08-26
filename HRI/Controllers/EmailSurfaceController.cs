@@ -2,79 +2,17 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Core.Models;
-using Umbraco.Web.Models;
-using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
-    public class EmailSurfaceController : SurfaceController
+    public class EmailSurfaceController : HriSufraceController
     {
-        /// <summary>
-        /// Build an email message from a template.
-        /// </summary>
-        /// <param name="template">The template file located in the ~/EmailTemplates folder</param>
-        /// <param name="values">A dictionary that contains the dynamic placeholder as a key, and has the text to insert as the value. (ex item["<%UserName%>", model.UserName])</param>
-        /// <returns>A string representation of the email with all the dynamic text replaced by the provided values</returns>
-        private string BuildEmail(int emailTemplateId, IDictionary<string, string> values)
-        {
-            // Create a string to hold the email text
-            string emailMessage;
-            // Get an instance of the template
-            var mediaItem = Services.MediaService.GetById(emailTemplateId);
-            // Get the path to the template
-            string path = Server.MapPath(mediaItem.Properties["umbracoFile"].Value as string);
-            // Open a Stream Reader to read in all the text from the template
-            using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
-            {
-                // Read all the text into the emailMessage string
-                emailMessage = sr.ReadToEnd();
-                // Close the stream
-                sr.Close();
-            }
-            // For each dynamic item in the template
-            foreach(KeyValuePair<string,string> dynamicTextItem in values)
-            {
-                // Replace the dynamic item with the values member info
-                emailMessage = emailMessage.Replace(dynamicTextItem.Key, dynamicTextItem.Value);
-            }
-            // Return the modfied email template string
-            return emailMessage;
-        }
-
-        private void SendEmail(string email, string title, string content)
-        {
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the SMTP server
-            string smtpServer = root.GetProperty("smtpServer").Value.ToString();
-            // Get the SMTP port
-            int smtpPort = Convert.ToInt32(root.GetProperty("smtpPort").Value);
-            // Get the SMTP User Name
-            string exchangeAccountUserName = root.GetProperty("exchangeAccountUserName").Value.ToString();
-            // Get the SMTP Password
-            string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
-            // Get the SMTP email account
-            string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
-
-            // Create a message
-            MailMessage message = new MailMessage(smtpEmail, email, title, content);                                                      
-
-            // Create an SMTP client object and send the message with it
-            SmtpClient smtp = new SmtpClient(smtpServer, smtpPort);
-            smtp.Credentials = new NetworkCredential(exchangeAccountUserName, exchangeAccountPassword);
-            // Try to send the message
-            smtp.Send(message); 
-        }
-
         /// <summary>
         /// Emails the Web Administrator with a message from a member
         /// </summary>
@@ -118,10 +56,12 @@ namespace HRI.Controllers
                     IPublishedContent root = Umbraco.TypedContentAtRoot().First();
                    
                     // Build a dictionary for all teh dynamic text in the email template
-                    Dictionary<string, string> dynamicText = new Dictionary<string,string>();
-                    dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
-                    dynamicText.Add("<%UserName%>", member.Username);
-                    dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
+                    var dynamicText = new Dictionary<string,string>
+                    {
+                        {"<%FirstName%>", member.GetValue("firstName").ToString()},
+                        {"<%UserName%>", member.Username},
+                        {"<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString()}
+                    };
 
                     //Get the Verification Email Template ID
                     var emailTemplateId = root.GetProperty("forgotUserNameEmailTemplate").Value;
@@ -151,46 +91,11 @@ namespace HRI.Controllers
             }
         }
 
-        // This function was depricated and replaced by ForgotPassword
-        //
-        //[HttpGet]
-        //public bool ResetPassword(string userName)
-        //{
-        //    try
-        //    {
-        //        var member = Membership.GetUser(userName);
-        //        string newPass = member.ResetPassword();
-
-        //        // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-        //        IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-
-        //        // Build a dictionary for all teh dynamic text in the email template
-        //        Dictionary<string, string> dynamicText = new Dictionary<string, string>();
-        //        dynamicText.Add("<%FirstName%>", member.UserName);
-        //        dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-        //        dynamicText.Add("<%NewPassword%>", newPass);
-
-        //        //Get the Verification Email Template ID
-        //        var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
-
-        //        SendEmail(member.Email, 
-        //                  "Health Republic Insurance - Password Reset",
-        //                  BuildEmail((int) emailTemplateId, dynamicText));
-
-        //        return true;
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
-
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                
                 // If the username exists
                 if (Services.MemberService.GetByUsername(model.UserName) != null)
                 {
@@ -202,24 +107,9 @@ namespace HRI.Controllers
                     // Update the user's Guid field
                     member.SetValue("guid", key.ToString());
                     // Save the updated information
-                    Services.MemberService.Save(member);                    
+                    Services.MemberService.Save(member);
 
-                    // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                    IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-
-                    // Build a dictionary for all the dynamic text in the email template
-                    Dictionary<string, string> dynamicText = new Dictionary<string, string>();
-                    dynamicText.Add("<%FirstName%>", member.Username);
-                    dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                    dynamicText.Add("<%ResetPasswordLink%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ResetPassword?userName=" + model.UserName + "&guid=" + key.ToString());
-
-                    //Get the Verification Email Template ID
-                    var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
-
-                    // Send the email with the new password
-                    SendEmail(member.Email,
-                                "Health Republic Insurance - Password Reset Link",
-                                BuildEmail((int)emailTemplateId, dynamicText));
+                    SendResetPasswordEmail(member.Email, member.Username, key.ToString());
 
                     TempData["ForgotPasswordIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
@@ -263,31 +153,36 @@ namespace HRI.Controllers
                         // Member Name
                         registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
                         // Member Id
-                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["RegId"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "memberId").Value = json["RegId"].ToString();
                         // User Name
                         registerModel.Username = json["UserName"].ToString();
                         // First Name
-                        registerModel.MemberProperties.Where(p => p.Alias == "firstName").FirstOrDefault().Value = json["FirstName"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "firstName").Value = json["FirstName"].ToString();
                         // Last Name
-                        registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "lastName").Value = json["LastName"].ToString();
                         // SSN
                         if ((string)json["Ssn"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ssn").Value = json["Ssn"].ToString();
                         // SSN
                         if ((string)json["EbixId"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ebixId").Value = json["ebixID"].ToString();
                         // Email
                         if ((string)json["EMail"] != null)
                             registerModel.Email = json["EMail"].ToString();
                         // Zip Code
                         if ((string)json["ZipCode"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "zipCode").Value = json["ZipCode"].ToString();
                         // Phone Number
                         if ((string)json["PhoneNumber"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "phoneNumber").Value = json["PhoneNumber"].ToString();
                         // Y Number
                         if ((string)json["MemberId"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "yNumber").Value = json["MemberId"].ToString();
+                        
+                        // Create a random Guid
+                        Guid key = Guid.NewGuid();
+                        // Update the user's Guid field
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "guid").Value = key.ToString();
 
                         registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
@@ -302,16 +197,12 @@ namespace HRI.Controllers
 
                         // Authenticate the user automatically as a registered user
                         newMember.IsApproved = true;
-                        System.Web.Security.Roles.AddUserToRole(newMember.UserName, "Registered");
+                        Roles.AddUserToRole(newMember.UserName, "Registered");
                         #endregion
+
                         // Reset the password and send an email to the user
-                        bool resetSuccess;
-                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.UserName;
-                        using (var client = new WebClient())
-                        {
-                            var result = client.DownloadString(resetApiUrl);
-                            resetSuccess = Convert.ToBoolean(result);
-                        }
+                        SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
+
                         TempData["ForgotPasswordIsSuccessful"] = true;
                         return RedirectToCurrentUmbracoPage();                      
                     }

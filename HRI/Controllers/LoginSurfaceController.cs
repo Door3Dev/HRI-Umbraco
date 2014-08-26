@@ -1,22 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using System.Web.Security;
 using Umbraco.Web.Models;
-using Umbraco.Web.Mvc;
-using Umbraco.Core.Models;
 
 namespace HRI.Controllers
 {
-    public class LoginSurfaceController : SurfaceController
+    public class LoginSurfaceController : HriSufraceController
     {
         [HttpPost]
         public ActionResult HandleLogin([Bind(Prefix = "loginModel")]LoginModel model)
@@ -76,31 +68,36 @@ namespace HRI.Controllers
                         // Member Name
                         registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
                         // Member Id
-                        registerModel.MemberProperties.Where(p => p.Alias == "memberId").FirstOrDefault().Value = json["RegId"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "memberId").Value = json["RegId"].ToString();
                         // User Name
                         registerModel.Username = json["UserName"].ToString();
                         // First Name
-                        registerModel.MemberProperties.Where(p=>p.Alias=="firstName").FirstOrDefault().Value = json["FirstName"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias=="firstName").Value = json["FirstName"].ToString();
                         // Last Name
-                        registerModel.MemberProperties.Where(p => p.Alias == "lastName").FirstOrDefault().Value = json["LastName"].ToString();
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "lastName").Value = json["LastName"].ToString();
                         // SSN
                         if((string)json["Ssn"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "ssn").FirstOrDefault().Value = json["Ssn"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ssn").Value = json["Ssn"].ToString();
                         // SSN
                         if ((string)json["EbixId"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "ebixId").FirstOrDefault().Value = json["ebixID"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ebixId").Value = json["ebixID"].ToString();
                         // Email
                         if ((string)json["EMail"] != null)
                             registerModel.Email = json["EMail"].ToString();
                         // Zip Code
                         if ((string)json["ZipCode"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "zipCode").FirstOrDefault().Value = json["ZipCode"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "zipCode").Value = json["ZipCode"].ToString();
                         // Phone Number
                         if ((string)json["PhoneNumber"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "phoneNumber").FirstOrDefault().Value = json["PhoneNumber"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "phoneNumber").Value = json["PhoneNumber"].ToString();
                         // Y Number
                         if ((string)json["MemberId"] != null)
-                            registerModel.MemberProperties.Where(p => p.Alias == "yNumber").FirstOrDefault().Value = json["MemberId"].ToString();
+                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "yNumber").Value = json["MemberId"].ToString();
+
+                        // Create a random Guid
+                        Guid key = Guid.NewGuid();
+                        // Update the user's Guid field
+                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "guid").Value = key.ToString();
 
                         registerModel.Password = Membership.GeneratePassword(12, 4);
                         registerModel.LoginOnSuccess = false;
@@ -115,21 +112,12 @@ namespace HRI.Controllers
                         
                         // Authenticate the user automatically as a registered user
                         newMember.IsApproved = true;
-                        System.Web.Security.Roles.AddUserToRole(newMember.UserName, "Registered");
+                        Roles.AddUserToRole(newMember.UserName, "Registered");
                         
                         // Reset the password and send an email to the user
-                        bool resetSuccess;
-                        string resetApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/EmailSurface/ResetPassword?userName=" + model.Username;
-                        using(var client = new WebClient())
-                        {
-                            var result = client.DownloadString(resetApiUrl);
-                            resetSuccess = Convert.ToBoolean(result);
-                        }                            
-
-                        if(resetSuccess)
-                            return Redirect("/for-members/security-upgrade/");
-                        else
-                            return Redirect("/");
+                        SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
+                        
+                        return Redirect("/for-members/security-upgrade/");
                     }
                     else // The user doesnt exist locally or in IWS db
                     {
@@ -149,7 +137,7 @@ namespace HRI.Controllers
             }
 
             //if there is a specified path to redirect to then use it
-            if (model.RedirectUrl != null && model.RedirectUrl != "")
+            if (!string.IsNullOrEmpty(model.RedirectUrl))
             {
                 return Redirect(model.RedirectUrl);
             }
