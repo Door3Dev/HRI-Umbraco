@@ -273,7 +273,7 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")]ResetPasswordViewModel model)
         {
-            var member = Membership.GetUser("test");
+            var member = Membership.GetUser(model.UserName);
             string tempPassword = member.ResetPassword();
             member.ChangePassword(tempPassword, model.NewPassword);
             Membership.UpdateUser(member);
