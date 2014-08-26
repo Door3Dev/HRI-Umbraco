@@ -7,24 +7,22 @@
     Layout = null;
 }
 
-@{		
+@{
     Html.EnableClientValidation(true);
     Html.EnableUnobtrusiveJavaScript(true);
-	Html.RequiresJs("/umbraco_client/ui/jquery.js");
+
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
-	
-	var model = new HRI.Models.ContactFormViewModel();
-	if(User.Identity.IsAuthenticated)
-	{
-		model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
-		model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("lastName").ToString();
-		model.Email = @Membership.GetUser().Email;
-		model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
-	}
-}
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    var model = new HRI.Models.ContactFormViewModel();
+    if (User.Identity.IsAuthenticated)
+    {
+        model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
+        model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("lastName").ToString();
+        model.Email = @Membership.GetUser().Email;
+        model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
+    }
+}
 	
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {

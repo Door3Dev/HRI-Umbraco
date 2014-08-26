@@ -2056,8 +2056,8 @@ var preventCopyPaste = function (a) {
     })
 
     // Disable buttons after click
-    $('.disable-after-click').click(function (e) {
-        $(this).prop('disabled', true).addClass('disabled');
-        $(this).parents('form').submit();
+    $('form').submit(function (e) {
+        if ($(this).valid && $(this).valid() || !$(this).valid)
+            $(this).find('.disable-after-click').prop('disabled', true).addClass('disabled');
     });
 })();

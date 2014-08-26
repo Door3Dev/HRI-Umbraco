@@ -36,7 +36,7 @@
   
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
-    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
@@ -61,8 +61,6 @@
     var planIdIndex = registerModel.MemberProperties.FindIndex(property => property.Alias == "healthplanid");
     var enrollmentIndex = registerModel.MemberProperties.FindIndex(property => property.Alias == "enrollmentpageafterlogin");
 }
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 @if (success) 
 { 
