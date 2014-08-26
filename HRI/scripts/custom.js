@@ -2054,4 +2054,10 @@ var preventCopyPaste = function (a) {
             $(this).next().next().css('display', 'inline-block');
         });
     })
+
+    // Disable buttons after click
+    $('.disable-after-click').click(function (e) {
+        $(this).prop('disabled', true).addClass('disabled');
+        $(this).parents('form').submit();
+    });
 })();

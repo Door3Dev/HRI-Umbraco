@@ -3,8 +3,6 @@
 @using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
-@using Umbraco.Web.Models
-@using Umbraco.Web.Controllers
 @using HRI.Controllers
 @using HRI.Models
 
@@ -36,7 +34,7 @@ else
             @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
 
             @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
-            <button class="btn hri-btn">Send Verification Email</button>
+            <button class="btn hri-btn disable-after-click">Send Verification Email</button>
         </fieldset>
     }
 

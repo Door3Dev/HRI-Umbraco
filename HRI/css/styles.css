@@ -2345,6 +2345,13 @@ body {
   background-color: #451d5c;
 }
 
+.btn.disabled,
+.btn.disabled:hover
+ {
+    background: #757575;
+    color: #ffffff;
+}
+
 /* ------------ MEMBER CENTER ------------ */
 
 .hri-member-center ul.expand-list li.expand-group {
@@ -2551,6 +2558,12 @@ input[type="radio"]:checked + label::before {
 
 .success {
     color: green;
+}
+
+
+
+button.disabled {
+    background: #757575;
 }
 
 
