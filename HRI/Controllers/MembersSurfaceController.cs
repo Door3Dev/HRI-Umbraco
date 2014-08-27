@@ -15,6 +15,7 @@ namespace HRI.Controllers
 {
     public class MembersSurfaceController : SurfaceController
     {
+
         [HttpGet]
         public ActionResult Logout()
         {
@@ -60,7 +61,10 @@ namespace HRI.Controllers
 
             // Attributes for MagnaCare
             if (partnerSP == "MagnaCare")
-            {                                
+            {
+                // Create attribute list an populate with needed data
+                List<ComponentSpace.SAML2.Assertions.SAMLAttribute> attrib = new List<ComponentSpace.SAML2.Assertions.SAMLAttribute>();
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version", "xs:string", "1"));
                 attribs.Add("member:id", member.GetValue("yNumber").ToString());                
                 attribs.Add("member:first_name", member.GetValue("firstName").ToString());                
                 attribs.Add("member:last_name", member.GetValue("lastName").ToString());
@@ -82,10 +86,15 @@ namespace HRI.Controllers
                 List<ComponentSpace.SAML2.Assertions.SAMLAttribute> attrib = new List<ComponentSpace.SAML2.Assertions.SAMLAttribute>();
                 // Version 1 is constant value set by HealthX                
                 attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version", "xs:string", "1"));
+                // This is the service ID and is redundant since it is in the Assertion consumer url. I added this for completeness
                 attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("ServiceId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "ServiceID", "xs:string", "d99bfe58-3896-4eb6-9586-d2f9ae673052"));
+                // This is the site ID and is redundant since it is in the Assertion consumer url. I added this for completeness
                 attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("SiteId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "SiteId", "xs:string", "e6fa832c-fbd3-48c7-860f-e4f04b22bab7"));
-                // Nest a node named ServiceId in the RedirectInfo attribute -- Add a serializer to allow the nesting of the serviceid attribute
-                SAMLAttribute.RegisterAttributeValueSerializer("RedirectInfo", null, new XmlAttributeValueSerializer());
+                // Nest a node named ServiceId in the RedirectInfo attribute -- Add a serializer to allow the nesting of the serviceid attribute without it being url encoded    
+                
+                if(!SAMLAttribute.IsAttributeValueSerializerRegistered("RedirectInfo", null))
+                    SAMLAttribute.RegisterAttributeValueSerializer("RedirectInfo", null, new XmlAttributeValueSerializer());
+
                 ComponentSpace.SAML2.Assertions.SAMLAttribute att = new ComponentSpace.SAML2.Assertions.SAMLAttribute("RedirectInfo", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "RedirectInfo", "xs:anyType", targetUrl);
                 attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("RelationshipCode", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "RelationshipCode", "xs:string", "18"));
                 attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("UserId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserId", "xs:string", member.GetValue("yNumber").ToString().ToUpper()));
