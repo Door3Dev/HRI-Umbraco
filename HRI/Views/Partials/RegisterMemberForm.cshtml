@@ -33,10 +33,9 @@
                                           @Html.TextBoxFor(m => registerModel.Username)
                                           @Html.ValidationMessageFor(m => registerModel.Username)
     *@
-  
+    
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
-    
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
@@ -106,16 +105,18 @@ else
                 </div> 
                 <div class="span3 short @(newUser ? "" : "hide")">
                     @Html.Label("Social Security Number")
+                    
                     @Html.EditorFor(m => registerModel.MemberProperties[ssnIndex].Value)
                     @Html.HiddenFor(m => registerModel.MemberProperties[ssnIndex].Alias)
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[ssnIndex].Value)
                 </div>
 
-                <div class="span3 short @(newUser ? "hide" : "")">
+                <div class="span7 @(newUser ? "hide" : "")">
                     @Html.Label("Member ID")
-                    @Html.EditorFor(m => registerModel.MemberProperties[yNumberIndex].Value)
+                    @Html.TextBoxFor(m => registerModel.MemberProperties[yNumberIndex].Value, new { id = "memberId", maxlength = "9", style = "width: 150px;" })
                     @Html.HiddenFor(m => registerModel.MemberProperties[yNumberIndex].Alias)
                     @Html.ValidationMessageFor(m => registerModel.MemberProperties[yNumberIndex].Value)
+                    <div id="memberIdCheck"></div>
                 </div>
             </div>
 
@@ -161,7 +162,7 @@ else
                     @Html.Label("Username")
                     @Html.TextBoxFor(m => registerModel.Username, new { @id = "username" })
                     @Html.ValidationMessageFor(m => registerModel.Username)
-                    <div id="result"></div>
+                    <div id="userNameCheck"></div>
                 </div>
             </div>
 
@@ -210,22 +211,38 @@ else
 }
 
 <script>
-$("#username").keyup(function () {
-    if ($('#username').val().length > 0) {
+    // Check user uniqueness
+    $("#username").keyup(function() {
+        if ($('#username').val().length > 0) {
+            $.ajax({
+                url: "/umbraco/api/HriApi/IsUserNameAvailable",
+                data: { username: $('#username').val() },
+                success: function(data) {
+                    if (data == 'true' && $('#username').val().length > 5)
+                        $('#userNameCheck').html("<span class='success'>Username is available</span>");
+                    else
+                        $('#userNameCheck').html("<span class='error'>Username not available</span>");
+                },
+                error: function() { $('#userNameCheck').html("<span class='error'>Username not available</span>"); },
+                dataType: 'html'
+            });
+        } else
+            $('#userNameCheck').html('');
+    });
+
+    // Check member id uniquieness
+    $('#memberId').keyup(function () {
+        if ($('#memberId').val().length != 9) {
+            $('#memberIdCheck').html('');
+            return;
+        };
         $.ajax({
-            url: "/umbraco/api/HriApi/IsUserNameAvailable",
-            data: { username: $('#username').val() },
-            success: function (data) {
-                if (data == 'true' && $('#username').val().length > 5)
-                    $('#result').html("<span class='success'>Username is available</span>");
-                else
-                    $('#result').html("<span class='error'>Username not available</span>");
-            },
-            error: function () { $('#result').html("<span class='error'>Username not available</span>"); },
-            dataType: 'html'
+            url: "/umbraco/api/HriApi/IsUserWithMemberIdRegistered",
+            data: { memberId: $('#memberId').val() },
+            success: function(data) {
+                if (data != 'null')
+                    $('#memberIdCheck').html('<span class="error">The Member Id you have entered is registered with existing user name: ' + data.username + '</span>');
+            }
         });
-    }
-    else
-        $('#result').html('');
-})
+    });
 </script>

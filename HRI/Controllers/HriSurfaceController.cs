@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Web;
+using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
 
@@ -96,6 +98,38 @@ namespace HRI.Controllers
             SendEmail(email,
                         "Health Republic Insurance - Password Reset Link",
                         BuildEmail((int)emailTemplateId, dynamicText));
+        }
+
+        /// <summary>
+        /// Make internal HriApi call
+        /// </summary>
+        /// <param name="action">Action name</param>
+        /// <param name="values">List of values</param>
+        /// <returns></returns>
+        protected string MakeInternalApiCall(string action, Dictionary<string, string> values)
+        {
+            // Exectue a GET against the API
+            using (var client = new WebClient())
+            {
+                // Read the response into a string
+                var valuesList = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
+                var protocol = Request.IsSecureConnection ? "https" : "http";
+                string url = String.Format("{0}://{1}:{2}/umbraco/api/HriApi/{3}?{4}", protocol, Request.Url.Host,
+                    Request.Url.Port, action, String.Join("&", valuesList));
+                return client.DownloadString(url);
+            }
+        }
+
+        /// <summary>
+        /// Make internal HriApi call
+        /// </summary>
+        /// <param name="action">Action name</param>
+        /// <param name="values">List of values</param>
+        /// <returns>Json object</returns>
+        protected JObject MakeInternalApiCallJson(string action, Dictionary<string, string> values)
+        {
+            var result = MakeInternalApiCall(action, values);
+            return result == "null" ? null : JObject.Parse(result);
         }
     }
 }

@@ -386,7 +386,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HriSurfaceController.cs" />
     <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
     <Compile Include="Controllers\EmailSurfaceController.cs" />

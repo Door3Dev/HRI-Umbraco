@@ -2425,15 +2425,14 @@ body {
   text-align: right;
 }
 
-/*
-input[type="radio"] + label::before {
-  content: url("../images/radio.png");
+.hri-registration .validation-summary-errors {
+    padding: 20px 70px;
+    color: red;
 }
 
-input[type="radio"]:checked + label::before {
-  content: url("../images/radio-checked.png");
+.hri-registration .validation-summary-errors ul {
+    list-style-type: disc;
 }
-*/
 
 /* ------------ COMPARE PLANS ------------ */
 

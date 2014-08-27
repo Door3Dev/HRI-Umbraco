@@ -1,18 +1,15 @@
-﻿using HRI.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
+using HRI.Models;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using Umbraco.Web.Controllers;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
-    public class RegisterSurfaceController : SurfaceController
+    public class RegisterSurfaceController : HriSufraceController
     {
         
 
@@ -26,9 +23,29 @@ namespace HRI.Controllers
                 return CurrentUmbracoPage();
             }
 
+            var yNumber = model.MemberProperties.FirstOrDefault(p => p.Alias == "yNumber").Value;
+            var enrolledUser = model.MemberProperties.FirstOrDefault(p => p.Alias == "enrollmentpageafterlogin").Value;
+            if (yNumber.Length != 9 && enrolledUser == "0")
+            {
+                ModelState.AddModelError("registerModel", "The Member ID should equal to 9 characters.");
+                TempData["IsNotValid"] = true;
+                return CurrentUmbracoPage();
+            }
+
+            var existedUser = MakeInternalApiCallJson("GetRegisteredUserByMemberId", new Dictionary<string, string> { { "memberId", model.Username } });
+            if (existedUser != null
+                && existedUser.Value<string>("MemberId") == yNumber
+                && existedUser.Value<string>("UserName") == model.Username
+                && existedUser.Value<string>("EMail") == model.Email)
+            {
+                ModelState.AddModelError("registerModel", "The user with such Member Id, Username and Email has already been registered.");
+                TempData["IsNotValid"] = true;
+                return CurrentUmbracoPage();
+            }
+
             model.Name = model.Username;
             MembershipCreateStatus status;
-            var member = Members.RegisterMember(model, out status, false);
+            Members.RegisterMember(model, out status, false);
             
             switch (status)
             {

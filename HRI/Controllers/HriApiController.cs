@@ -1,46 +1,38 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Linq;
+using System.Web;
+using System.Web.Http;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Umbraco.Web.Models;
 using Umbraco.Web.WebApi;
-using System.Net.Http;
 using Umbraco.Core.Models;
-using Umbraco.Web.Security;
 using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Globalization;
 
 namespace HRI.Controllers
 {
     public class HriApiController : UmbracoApiController
     {
-
         /// <summary>
-        /// Checks to see if a username is available using the HRI API
+        /// General method to make an HRI API call
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="values"></param>
         /// <returns></returns>
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public bool IsUserNameAvailable(string username)
+        private JObject MakeApiCall(Dictionary<string, string> values)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
             // Get the API uri
             string apiUri = root.GetProperty("apiUri").Value.ToString();
             // Apend the command to determine user availability
-            string userNameCheckApiString = apiUri + "/Registration?isUserNameAvailable=" + username;
-            // Create a JSON object to hold the response 
-            JObject json;
+            var valuesList  = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
+            string userNameCheckApiString = apiUri + "/Registration?" + String.Join("&", valuesList);
             // Create a web client to access the API
             try
             {
+                // Create a JSON object to hold the response 
+                JObject json;
                 using (var client = new WebClient())
                 {
                     // Set the format to JSON
@@ -49,38 +41,87 @@ namespace HRI.Controllers
                     json = JObject.Parse(client.DownloadString(userNameCheckApiString));
                 }
                 // Return whether or not it is available
-                return Convert.ToBoolean(json["isAvailable"]);
+                return json;
             }
-            catch(WebException ex)
+            catch
             {
-                return false;
+                return null;
             }
         }
 
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        /// <summary>
+        /// Checks to see if a username is available using the HRI API
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public bool IsUserNameAvailable(string username)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> {{"isUserNameAvailable", username}});
+
+            return result != null && Convert.ToBoolean(result["isAvailable"]);
+        }
+
+        /// <summary>
+        /// Checks to see if a memberId is available using the HRI API
+        /// </summary>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public bool IsMemberIdRegistered(string memberId)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> { { "isMemberIdRegistered", memberId } });
+
+            return result != null && Convert.ToBoolean(result["Registered"]);
+        }
+        
+        /// <summary>
+        /// Checks to see if a email is available using the HRI API
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public bool IsEmailAddressInUse(string email)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> { { "isEMailAddressInUse", email } });
+
+            return result != null && Convert.ToBoolean(result["EmaiInUse"]); // Yes, "Emai"
+        }
+
+        [HttpGet]
         public JObject GetRegisteredUserByUsername(string username)
         {
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the API uri
-            string apiUri = root.GetProperty("apiUri").Value.ToString();
-            // Apend the command to determine user exists
-            string userNameCheckApiString = apiUri + "/Registration?userName=" + username;
-            string result;
-            JObject json;
+            var result = MakeApiCall(new Dictionary<string, string> { { "userName", username } });
+            var hasRegId = result.Value<int?>("RegId").HasValue;
 
-            using (var client = new WebClient())
+            return hasRegId ? result : null;
+        }
+
+        /// <summary>
+        /// Get user by member id (Y number)
+        /// </summary>
+        /// <param name="memberId">Member Id (Y numbaer)</param>
+        /// <returns>User data</returns>
+        [HttpGet]
+        public JObject GetRegisteredUserByMemberId(string memberId)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> {{"memberId", memberId}});
+            var hasRegId = result.Value<int?>("RegId").HasValue;
+
+            return hasRegId ? result : null;
+        }
+
+        [HttpGet]
+        public JObject IsUserWithMemberIdRegistered(string memberId)
+        {
+            var user = GetRegisteredUserByMemberId(memberId);
+            if (user == null)
+                return null;
+
+            return JObject.FromObject(new
             {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and convert the response to a JSON object
-                result = client.DownloadString(userNameCheckApiString);                
-            }
-            json = JObject.Parse(result);
-            // If the user didn't exist
-            var hasRegId = json.Value<int?>("RegId").HasValue;
-
-            return hasRegId ? json : null;
+                username = user.Value<string>("UserName"),
+            });
         }
 
         /// <summary>
@@ -166,62 +207,10 @@ namespace HRI.Controllers
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         public string GetEbixIdByYNumber(string username)
         {
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the API uri
-            string apiUri = root.GetProperty("apiUri").Value.ToString();
             string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
+            var result = MakeApiCall(new Dictionary<string, string> { { "EbixMemberId", ynumber } });
 
-            // Apend the command to determine user exists
-            string userNameCheckApiString = apiUri + "/Registration?EbixMemberId=" + ynumber;
-            string result;
-            JObject json;
-
-            using (var client = new WebClient())
-            {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and convert the response to a JSON object
-                result = client.DownloadString(userNameCheckApiString);
-            }
-            json = JObject.Parse(result);
-            // If the user didn't exist
-            string temp = json["EBIXMemberId"].Value<string>();
-            return temp;
-        }
-
-        /// <summary>
-        /// Get the given users plan id.
-        /// </summary>
-        /// <param name="username">Name of the user to retrieve Plan Id for</param>
-        /// <returns></returns>
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
-        public string GetPlanIdByUsername(string username)
-        {
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the API uri
-            string apiUri = root.GetProperty("apiUri").Value.ToString();
-            // Apend the command to determine user exists
-            string userNameCheckApiString = apiUri + "/Registration?PlanId=" + username;
-            string result;
-            JObject json;
-
-            using (var client = new WebClient())
-            {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                // Execute a GET and convert the response to a JSON object
-                result = client.DownloadString(userNameCheckApiString);
-            }
-            json = JObject.Parse(result);
-            // If the user didn't exist
-            string temp = json["PlanId"].ToString();
-            if (!json["PlanId"].HasValues)
-            {
-                return null;
-            }
-            return temp;
+            return result["EBIXMemberId"].Value<string>();
         }
     }
 }
