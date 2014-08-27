@@ -1,11 +1,14 @@
 ﻿using ComponentSpace.SAML2;
+using ComponentSpace.SAML2.Assertions;
 using HRI.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Xml;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
@@ -30,7 +33,8 @@ namespace HRI.Controllers
 
             // Create a dictionary of attributes to add to the SAML assertion
             Dictionary<string, string> attribs = new Dictionary<string, string>();
-
+            
+            
             /////////////////////////////////////////////////////////////////////////
             // SAML Parameter Configurations
             /////////////////////////////////////////////////////////////////////////
@@ -73,30 +77,28 @@ namespace HRI.Controllers
 
             // Attributes for HealthX
             if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
-            {            
-                attribs.Add("Version", "1");
-                attribs.Add("ServiceId", "d99bfe58-3896-4eb6-9586-d2f9ae673052");
-                attribs.Add("SiteId", "e6fa832c-fbd3-48c7-860f-e4f04b22bab7");                
-                attribs.Add("RedirectInfo", targetUrl);                
-                attribs.Add("RelationshipCode", "18");
-                attribs.Add("UserId", member.GetValue("yNumber").ToString());
-                attribs.Add("MemberLastName", member.GetValue("lastName").ToString().ToUpper());
-                attribs.Add("MemberFirstName", member.GetValue("firstName").ToString().ToUpper());
-                //attribs.Add("MemberDateOfBirth", member.GetValue("firstName").ToString().ToUpper());
-                //attribs.Add("UserEmailAddress", member.GetValue("firstName").ToString().ToUpper());
-                attribs.Add("UserLastName", member.GetValue("lastName").ToString().ToUpper());
-                attribs.Add("UserFirstName", member.GetValue("firstName").ToString().ToUpper());
-                //attribs.Add("UserDateOfBirth", member.GetValue("firstName").ToString().ToUpper());                
-                
-                
-                //attribs.Add("UserEmailAddress", member.Email);
-                //attribs.Add("UserPhoneNumber", member.GetValue("phoneNumber").ToString());
+            {
+                // Create attribute list an populate with needed data
+                List<ComponentSpace.SAML2.Assertions.SAMLAttribute> attrib = new List<ComponentSpace.SAML2.Assertions.SAMLAttribute>();
+                // Version 1 is constant value set by HealthX                
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version", "xs:string", "1"));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("ServiceId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "ServiceID", "xs:string", "d99bfe58-3896-4eb6-9586-d2f9ae673052"));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("SiteId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "SiteId", "xs:string", "e6fa832c-fbd3-48c7-860f-e4f04b22bab7"));
+                // Nest a node named ServiceId in the RedirectInfo attribute -- Add a serializer to allow the nesting of the serviceid attribute
+                SAMLAttribute.RegisterAttributeValueSerializer("RedirectInfo", null, new XmlAttributeValueSerializer());
+                ComponentSpace.SAML2.Assertions.SAMLAttribute att = new ComponentSpace.SAML2.Assertions.SAMLAttribute("RedirectInfo", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "RedirectInfo", "xs:anyType", targetUrl);
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("RelationshipCode", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "RelationshipCode", "xs:string", "18"));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("UserId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserId", "xs:string", member.GetValue("yNumber").ToString().ToUpper()));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("MemberLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "MemberLastName", "xs:string", member.GetValue("lastName").ToString().ToUpper()));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("MemberFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "MemberFirstName", "xs:string", member.GetValue("firstName").ToString().ToUpper()));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("UserLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserLastName", "xs:string", member.GetValue("lastName").ToString().ToUpper()));
+                attrib.Add(new ComponentSpace.SAML2.Assertions.SAMLAttribute("UserFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserFirstName", "xs:string", member.GetValue("firstName").ToString().ToUpper()));                                                       
 
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
                     member.GetValue("yNumber").ToString(),
-                    attribs,
+                    attrib.ToArray(),
                     "",
                     partnerSP);
             }
