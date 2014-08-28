@@ -63,6 +63,15 @@ namespace HRI.Controllers
                     // If the user exists in IWS database
                     if((string)json["RegId"] != null)
                     {
+                        // Before attempt to create a user need to check the email and login uniqueness
+                        var existedUserWithUsername = Services.MemberService.GetByUsername(json["UserName"].ToString());
+                        var existedUserWithEmail = Services.MemberService.GetByEmail(json["EMail"].ToString());
+                        if (existedUserWithEmail != null || existedUserWithUsername != null)
+                        {
+                            ModelState.AddModelError("loginModel", "We cannot log you in with this user name. The email address of the user name you entered is associated with another user name. Please enter a valid user name and try again or contact Member Services for assistance.");
+                            return CurrentUmbracoPage();
+                        }
+
                         // Create the registration model
                         var registerModel = Members.CreateRegistrationModel();                        
                         // Member Name
