@@ -27,7 +27,7 @@ namespace HRI.Controllers
             // Check SSN number if it's a new member
             if (model.PlanId != null && String.IsNullOrEmpty(model.Ssn))
             {
-                ModelState.AddModelError("registerMode.Ssn", "The SSN field is required.");
+                ModelState.AddModelError("registerModel.Ssn", "The SSN field is required.");
                 error = true;
             }
             // The Y number / username / email should be unique

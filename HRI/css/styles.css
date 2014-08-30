@@ -2665,8 +2665,8 @@ button.disabled {
     width: 19%;
 }
 
-.hri-registration .short input {
-    width: 130px;
+.hri-registration input.short {
+    width: 150px !important;
 }
 
 .hri-registration .name {

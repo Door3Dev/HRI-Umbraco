@@ -62,15 +62,15 @@
                 <h3>Please enter your information.</h3>
                 @Umbraco.Field("Information")
             </div> 
-            <div class="span3 short @(isNewUser ? String.Empty : "hide")">
+            <div class="span3 @(isNewUser ? String.Empty : "hide")">
                 @Html.Label("Social Security Number")
-                @Html.TextBoxFor(m => registerModel.Ssn)
+                @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.Ssn)
             </div>
 
             <div class="span7 @(isNewUser ? "hide" : String.Empty)">
                 @Html.Label("Member ID")
-                @Html.TextBoxFor(m => registerModel.MemberId, new { @id = "memberId", maxlength = 9 })
+                @Html.TextBoxFor(m => registerModel.MemberId, new { @id = "memberId", maxlength = 9, @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.MemberId)
                 <div id="memberIdCheck"></div>
             </div>
