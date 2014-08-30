@@ -1,51 +1,68 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using HRI.Models;
 using System;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Models;
-using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
     public class RegisterSurfaceController : HriSufraceController
     {
-        
-
         [HttpPost]
         [AllowAnonymous]
-        public  ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")]RegisterModel model)
+        public  ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")]RegisterFormViewModel model)
         {
-            if (ModelState.IsValid == false)
-            {
-                TempData["IsNotValid"] = true;
-                return CurrentUmbracoPage();
-            }
+            // Save Plan Id for the view
+            ViewData["PlanId"] = model.PlanId;
+            var error = false;
 
-            var yNumber = model.MemberProperties.FirstOrDefault(p => p.Alias == "yNumber").Value;
-            var enrolledUser = model.MemberProperties.FirstOrDefault(p => p.Alias == "enrollmentpageafterlogin").Value;
-            if (yNumber.Length != 9 && enrolledUser == "0")
+            // Check the Member Id (Y number)
+            if (model.PlanId == null && String.IsNullOrEmpty(model.MemberId)
+                || !String.IsNullOrEmpty(model.MemberId) && model.MemberId.Length != 9)
             {
-                ModelState.AddModelError("registerModel", "The Member ID should equal to 9 characters.");
-                TempData["IsNotValid"] = true;
-                return CurrentUmbracoPage();
+                ModelState.AddModelError("registerModel.MemberId", "The Member ID should equal to 9 characters.");
+                error = true;
             }
-
+            // Check SSN number if it's a new member
+            if (model.PlanId != null && String.IsNullOrEmpty(model.Ssn))
+            {
+                ModelState.AddModelError("registerMode.Ssn", "The SSN field is required.");
+                error = true;
+            }
+            // The Y number / username / email should be unique
             var existedUser = MakeInternalApiCallJson("GetRegisteredUserByMemberId", new Dictionary<string, string> { { "memberId", model.Username } });
             if (existedUser != null
-                && existedUser.Value<string>("MemberId") == yNumber
+                && existedUser.Value<string>("MemberId") == model.MemberId
                 && existedUser.Value<string>("UserName") == model.Username
                 && existedUser.Value<string>("EMail") == model.Email)
             {
                 ModelState.AddModelError("registerModel", "The user with such Member Id, Username and Email has already been registered.");
-                TempData["IsNotValid"] = true;
-                return CurrentUmbracoPage();
+                error = true;
             }
 
-            model.Name = model.Username;
+            if (ModelState.IsValid == false || error)
+                return CurrentUmbracoPage();
+
+
+            var registerModel = RegisterModel.CreateModel();
+            registerModel.Name = model.Username;
+            registerModel.UsernameIsEmail = false;
+            registerModel.Email = model.Email;
+            registerModel.Username = model.Username;
+            registerModel.Password = model.Password;
+            registerModel.RedirectUrl = "for-members/verify-account/";
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName });
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId});
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = Convert.ToInt32(model.PlanId != null).ToString() });
+
             MembershipCreateStatus status;
-            Members.RegisterMember(model, out status, false);
+            Members.RegisterMember(registerModel, out status, false);
             
             switch (status)
             {
@@ -54,20 +71,17 @@ namespace HRI.Controllers
                     Session.Clear();
                     FormsAuthentication.SignOut();
                     // Set the user to be not approved
-                    MembershipUser memb = Membership.GetUser(model.Username);
+                    var memb = Membership.GetUser(model.Username);
                     memb.IsApproved = false;
                     Membership.UpdateUser(memb);
                     // Send the user a verification link to activate their account     
-                    SendVerificationLinkModel sendVerificationLinkModel = new SendVerificationLinkModel();
+                    var sendVerificationLinkModel = new SendVerificationLinkModel();
                     sendVerificationLinkModel.UserName = model.Username;
                     sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
                     return RedirectToAction("SendVerificationLink_GET", "EmailSurface", sendVerificationLinkModel);
 
                 case MembershipCreateStatus.InvalidUserName:
-                    ModelState.AddModelError((model.UsernameIsEmail || model.Username == null)
-                        ? "registerModel.Email"
-                        : "registerModel.Username",
-                        "Username is not valid");
+                    ModelState.AddModelError("registerModel.Username", "Username is not valid");
                     break;
                 case MembershipCreateStatus.InvalidPassword:
                     ModelState.AddModelError("registerModel.Password", "The password is not strong enough");
@@ -80,10 +94,7 @@ namespace HRI.Controllers
                     ModelState.AddModelError("registerModel.Email", "Email is invalid");
                     break;
                 case MembershipCreateStatus.DuplicateUserName:
-                    ModelState.AddModelError((model.UsernameIsEmail || model.Username == null)
-                        ? "registerModel.Email"
-                        : "registerModel.Username",
-                        "A member with this username already exists.");
+                    ModelState.AddModelError("registerModel.Username", "A member with this username already exists");
                     break;
                 case MembershipCreateStatus.DuplicateEmail:
                     ModelState.AddModelError("registerModel.Email", "A member with this e-mail address already exists");
@@ -98,9 +109,6 @@ namespace HRI.Controllers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            if (ModelState.Count > 0)
-                TempData["IsNotValid"] = true;
-
 
             return CurrentUmbracoPage();
         }

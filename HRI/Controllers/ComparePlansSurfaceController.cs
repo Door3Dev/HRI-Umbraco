@@ -456,11 +456,8 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult SelectPlan(string zipCode, string planId, string planPrice)
         {
-            TempData["NewUser"] = true;
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
-            TempData["PlanPrice"] = planPrice;
-            TempData["IsEnrolled"] = true;
             // Redirect to the registration page
             return RedirectToUmbracoPage(1343);
 
