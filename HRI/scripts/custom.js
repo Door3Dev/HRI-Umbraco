@@ -1997,13 +1997,23 @@ var preventCopyPaste = function (a) {
             }
         });
 
+        var initVisibilityFunc = function (id) {
+            return function () {
+                if (this.checked) {
+                    $(id).show();
+                } else {
+                    $(id).hide();
+                }
+            };
+        }
+
         $('#shop-coverself-check').click(function () {
             $("#shop-coverself").toggle(this.checked);
-        });
+        }).each(initVisibilityFunc("#shop-coverself"));
 
         $('#shop-coverpartner-check').click(function () {
             $("#shop-coverpartner").toggle(this.checked);
-        });
+        }).each(initVisibilityFunc("#shop-coverpartner"));
 
         var childTemplate = $('#shop-coverchild .template').clone().removeClass('template'),
           childAmmount = 1;
