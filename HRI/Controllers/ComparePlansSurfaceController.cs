@@ -367,8 +367,10 @@ namespace HRI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ShowPlans([Bind(Prefix = "viewModel")]ComparePlansViewModel model)
+        public ActionResult ShowPlans(ComparePlansViewModel model)
         {
+            TempData["model"] = model;
+
             // If the model is NOT valid
             if (ModelState.IsValid == false)
             {
@@ -377,7 +379,9 @@ namespace HRI.Controllers
             }
             if (model.CoverSelf && !model.CustomerAge.HasValue
                 || model.CoverSpouse && !model.SpouseAge.HasValue
-                || model.ChildrenAges != null && model.ChildrenAges.Count(x => x > 30) > 0)
+                || model.CoverChildren && model.ChildrenAges != null 
+                    && (model.ChildrenAges.Any(x => !x.HasValue) 
+                        || model.ChildrenAges.Any(x => x > 30)))
             {
                 // If the user does exist then it was a wrong password
                 //don't add a field level error, just model level
@@ -448,7 +452,6 @@ namespace HRI.Controllers
             model.Products = productList;
             model.County = county;
 
-            TempData["model"] = model;
             TempData["ShowPlans"] = true;
             return RedirectToCurrentUmbracoPage();
         }

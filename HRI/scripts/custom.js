@@ -2026,7 +2026,7 @@ var preventCopyPaste = function (a) {
 
             function addChild() {
                 var template = childTemplate.clone();
-                template.find('input').attr('name', 'viewModel.ChildrenAges');
+                template.find('input').attr('name', 'ChildrenAges');
                 template.find('.age').text(childAmmount);
                 template.find('.add-child').click(function (e) {
                     e.preventDefault();
@@ -2052,7 +2052,7 @@ var preventCopyPaste = function (a) {
                     $(child).find('.age').text(index);
                 });
             }
-        });
+        }).each(initVisibilityFunc("#shop-coverchild"));
 
         $('.hri-registration input[name=user_type]').change(function () {
             var type = $(this).val();
