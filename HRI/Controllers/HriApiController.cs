@@ -212,5 +212,12 @@ namespace HRI.Controllers
 
             return result["EBIXMemberId"].Value<string>();
         }
+
+        [HttpGet]
+        public bool IsEnrolledByMemberId(string memberId)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> { { "isEnrollByMemberID", memberId } });
+            return result.Value<bool>("Enrolled");
+        }
     }
 }
