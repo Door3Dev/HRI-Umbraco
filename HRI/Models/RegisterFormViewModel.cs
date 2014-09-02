@@ -20,7 +20,11 @@ namespace HRI.Models
         [Required]
         [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please enter a valid e-mail address")]
         public string Email {
-            set { _email = value.Trim().ToLower(); }
+            set
+            {
+                if (value != null)
+                    _email = value.Trim().ToLower();
+            }
             get { return _email;  }
         }
 
@@ -28,7 +32,11 @@ namespace HRI.Models
         [CompareAttribute("Email", ErrorMessage = "Confirm Email and Email do not match.")]
         public string ConfirmEmail
         {
-            set { _confirmEmail = value.Trim().ToLower(); }
+            set
+            {
+                if (value != null)
+                    _confirmEmail = value.Trim().ToLower();
+            }
             get { return _confirmEmail; }
         }
 
