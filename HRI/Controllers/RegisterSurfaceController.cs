@@ -25,11 +25,16 @@ namespace HRI.Controllers
                 error = true;
             }
 
-            var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId", new Dictionary<string, string> { { "memberId", model.MemberId } });
-            if (!enrolled)
+            if (model.PlanId == null)
             {
-                ModelState.AddModelError("registerModel.MemberId", "This Member Id is not enrolled.");
-                error = true;
+                var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId",
+                    new Dictionary<string, string> {{"memberId", model.MemberId}});
+
+                if (!enrolled)
+                {
+                    ModelState.AddModelError("registerModel.MemberId", "This Member Id is not enrolled.");
+                    error = true;
+                }
             }
 
             // Check SSN number if it's a new member
