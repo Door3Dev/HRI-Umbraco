@@ -41,9 +41,8 @@ namespace HRI.Controllers
             /////////////////////////////////////////////////////////////////////////
 
             // Attributes for US Script
-            if(partnerSP == "UsScript")
+            if(partnerSP == "USScript")
             {
-                attribs.Add("clientId", targetUrl);                ;
                 attribs.Add("urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString());
                 attribs.Add("urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString());
                 attribs.Add("urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString());
