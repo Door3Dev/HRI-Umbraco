@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
@@ -130,6 +131,11 @@ namespace HRI.Controllers
         {
             var result = MakeInternalApiCall(action, values);
             return result == "null" ? null : JObject.Parse(result);
+        }
+
+        protected T MakeInternalApiCall<T>(string action, Dictionary<string, string> values)
+        {
+            return JsonConvert.DeserializeObject<T>(MakeInternalApiCall(action, values));
         }
     }
 }
