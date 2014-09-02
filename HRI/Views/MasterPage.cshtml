@@ -1,13 +1,13 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
     Layout = null;
+    var pageTitle = Model.Content.GetProperty("menuItemName");
 }
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Health Republic Insurance of New York</title>
+    <title>Health Republic Insurance of New York @(pageTitle.HasValue ? "- " + pageTitle.Value : String.Empty)</title>
     <meta http-equiv="cache-control" content="public">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="follow, all">

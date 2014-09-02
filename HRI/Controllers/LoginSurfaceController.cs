@@ -98,9 +98,8 @@ namespace HRI.Controllers
                     if ((string)hriUser["RxGrpId"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
                     // Birthday
-                    if ((string)hriUser["DOB"] != null)
+                    if ((string) hriUser["DOB"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
-                        
 
                     // Create a random Guid
                     Guid key = Guid.NewGuid();
@@ -121,6 +120,7 @@ namespace HRI.Controllers
                     // Authenticate the user automatically as a registered user
                     newMember.IsApproved = true;
                     Roles.AddUserToRole(newMember.UserName, "Registered");
+                    Roles.AddUserToRole(model.Username, "Enrolled");
                         
                     // Reset the password and send an email to the user
                     SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
@@ -147,6 +147,11 @@ namespace HRI.Controllers
                 {
                     return Redirect("/your-account/enrollment/");
                 }
+                // Save Group Id and Birthday, add user as enrolled
+                member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
+                member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+                Roles.AddUserToRole(model.Username, "Enrolled");
+
                 member.SetValue("enrollmentpageafterlogin", String.Empty);
                 Services.MemberService.Save(member);
             }

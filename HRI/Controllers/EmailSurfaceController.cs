@@ -174,8 +174,11 @@ namespace HRI.Controllers
                     if ((string)hriUser["RxGrpId"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
                     // Birthday
-                    if ((string)hriUser["DOB"] != null)
+                    if ((string) hriUser["DOB"] != null)
+                    {
                         registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+                        Roles.AddUserToRole(model.UserName, "Enrolled");
+                    }
 
                     // Create a random Guid
                     Guid key = Guid.NewGuid();

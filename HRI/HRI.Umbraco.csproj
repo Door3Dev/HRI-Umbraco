@@ -397,6 +397,8 @@
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
+    <Compile Include="HriApplicationEventHandler.cs" />
+    <Compile Include="HriContentFinder.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
