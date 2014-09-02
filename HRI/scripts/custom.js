@@ -1997,13 +1997,23 @@ var preventCopyPaste = function (a) {
             }
         });
 
+        var initVisibilityFunc = function (id) {
+            return function () {
+                if (this.checked) {
+                    $(id).show();
+                } else {
+                    $(id).hide();
+                }
+            };
+        }
+
         $('#shop-coverself-check').click(function () {
             $("#shop-coverself").toggle(this.checked);
-        });
+        }).each(initVisibilityFunc("#shop-coverself"));
 
         $('#shop-coverpartner-check').click(function () {
             $("#shop-coverpartner").toggle(this.checked);
-        });
+        }).each(initVisibilityFunc("#shop-coverpartner"));
 
         var childTemplate = $('#shop-coverchild .template').clone().removeClass('template'),
           childAmmount = 1;
@@ -2016,7 +2026,7 @@ var preventCopyPaste = function (a) {
 
             function addChild() {
                 var template = childTemplate.clone();
-                template.find('input').attr('name', 'viewModel.ChildrenAges');
+                template.find('input').attr('name', 'ChildrenAges');
                 template.find('.age').text(childAmmount);
                 template.find('.add-child').click(function (e) {
                     e.preventDefault();
@@ -2042,7 +2052,7 @@ var preventCopyPaste = function (a) {
                     $(child).find('.age').text(index);
                 });
             }
-        });
+        }).each(initVisibilityFunc("#shop-coverchild"));
 
         $('.hri-registration input[name=user_type]').change(function () {
             var type = $(this).val();

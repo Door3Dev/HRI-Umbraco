@@ -20,7 +20,7 @@ namespace HRI.Models
         public string Email { get; set; }
         public int? CustomerAge { get; set; }
         public int? SpouseAge { get; set; }
-        public List<int> ChildrenAges { get; set; }
+        public List<int?> ChildrenAges { get; set; }
 
         public decimal? Income { get; set; }
         public int? NumberInHousehold { get; set; }

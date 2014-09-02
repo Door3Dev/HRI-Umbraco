@@ -1,11 +1,9 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoViewPage<ComparePlansViewModel>
 @using ClientDependency.Core.Mvc
 @using HRI.Models
 @using HRI.Controllers
 
 @{
-    var viewModel = new ComparePlansViewModel();
-
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
     
@@ -18,8 +16,8 @@
     <div class="span5 desc"><h3>Please enter your zip code.</h3></div>
     <div class="span7">
         <label>Zip Code</label>
-        @Html.TextBoxFor(m => viewModel.ZipCode, new { id = "shop-zipcode"})
-        @Html.ValidationMessageFor(m => viewModel.ZipCode)
+        @Html.TextBoxFor(m => m.ZipCode, new { id = "shop-zipcode"})
+        @Html.ValidationMessageFor(m => m.ZipCode)
         <div class="county" id="shop-county"></div>
     </div>
 </div>
@@ -40,31 +38,41 @@
     </div>
     <div class="span7">
         <label class="checkbox inline">
-            @Html.CheckBoxFor(m => viewModel.CoverSelf, new { id = "shop-coverself-check" }) Self
+            @Html.CheckBoxFor(m => m.CoverSelf, new { id = "shop-coverself-check" }) Self
         </label>
         <label class="checkbox inline pad">
-            @Html.CheckBoxFor(m => viewModel.CoverSpouse, new { id = "shop-coverpartner-check" }) Spouse/Partner
+            @Html.CheckBoxFor(m => m.CoverSpouse, new { id = "shop-coverpartner-check" }) Spouse/Partner
         </label>
         <label class="checkbox inline pad">
-            @Html.CheckBoxFor(m => viewModel.CoverChildren, new { id = "shop-coverchildren-check" }) Children
+            @Html.CheckBoxFor(m => m.CoverChildren, new { id = "shop-coverchildren-check" }) Children
         </label>
         <div class="span7 cover" id="shop-coverself">
             <label>How old are you?</label>
-            @Html.TextBoxFor(m => viewModel.CustomerAge)
+            @Html.TextBoxFor(m => m.CustomerAge)
         </div>
         <div class="span7 cover" id="shop-coverpartner">
             <label>How old is your spouse or partner?</label>
-            @Html.TextBoxFor(m => viewModel.SpouseAge)
+            @Html.TextBoxFor(m => m.SpouseAge)
         </div>
         <div id="shop-coverchild" class="span7 cover">
-            <div class="child template">
-                <label>How old is child #<span class="age"></span>?</label>
-                <input type="text" />
-                <div class="row-fluid">
-                    <div class="span5"><a href="#" class="shop-link add-child"><i class="fa fa-plus-circle"> </i>Add child</a></div>
-                    <div class="span5"><a href="#" class="shop-link remove-child"><i class="fa fa-minus-circle"> </i>Remove child</a></div>
+            @* i = -1 is to generate template, others for generating existing items *@
+            @for (var i = -1; i < (Model.ChildrenAges == null ? 0 : Model.ChildrenAges.Count); ++i)
+            {
+                <div class="child @(i < 0 ? "template" : string.Empty)">
+                    <label>How old is child #<span class="age">@(i < 0 ? string.Empty : (i + 1).ToString())</span>?</label>
+                    @{
+                        var inputAdditionalAttributes = i < 0 
+                            ? string.Empty 
+                            : "name=\"ChildrenAges\" value=\"" + 
+                                (!Model.ChildrenAges[i].HasValue ? string.Empty : Model.ChildrenAges[i].ToString()) + "\"";
+                    }
+                    <input type="text" @Html.Raw(inputAdditionalAttributes)/>
+                    <div class="row-fluid">
+                        <div class="span5"><a href="#" class="shop-link add-child"><i class="fa fa-plus-circle"> </i>Add child</a></div>
+                        <div class="span5"><a href="#" class="shop-link remove-child"><i class="fa fa-minus-circle"> </i>Remove child</a></div>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -74,7 +82,7 @@
     </div>
     <div class="span7">
         <label>Email Address</label>
-        @Html.TextBoxFor(m => viewModel.Email)
+        @Html.TextBoxFor(m => Model.Email)
     </div>
 </div>
 <div class="row-fluid block">
@@ -90,8 +98,8 @@
     </div>
     <div class="span7">
         <div class="controls controls-row">
-            <label class="span6">Annual Household Income @Html.TextBoxFor(m => viewModel.Income)</label>
-            <label class="span6"># of people in your household @Html.TextBoxFor(m => viewModel.NumberInHousehold)</label>
+            <label class="span6">Annual Household Income @Html.TextBoxFor(m => m.Income)</label>
+            <label class="span6"># of people in your household @Html.TextBoxFor(m => m.NumberInHousehold)</label>
         </div>
     </div>
 </div>

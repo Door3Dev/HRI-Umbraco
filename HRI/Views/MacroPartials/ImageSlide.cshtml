@@ -6,7 +6,7 @@
 
 <div class="@itemClass">
     <div class="slide">
-        <h1 style="white-space: pre-line">@Model.MacroParameters["caption"]</h1>
+        <h1 style="white-space: pre-line; font-size: @Model.MacroParameters["fontSize"]px; line-height: @Model.MacroParameters["lineHeight"]px;">@Model.MacroParameters["caption"]</h1>
         <a href='@Model.MacroParameters["href"]' class="btn btn-small hri-btn">
             @Model.MacroParameters["buttonText"]<span class="caret"></span>
         </a>
