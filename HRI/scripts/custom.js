@@ -2015,6 +2015,43 @@ var preventCopyPaste = function (a) {
             $("#shop-coverpartner").toggle(this.checked);
         }).each(initVisibilityFunc("#shop-coverpartner"));
 
+        var addChild = function () {
+            var template = childTemplate.clone();
+            template.find('input').attr('name', 'ChildrenAges');
+            template.find('.age').text(childAmmount);
+            attachHandlers(template);
+            
+            template.appendTo('#shop-coverchild');
+            childAmmount++;
+        };
+
+        var removeChild = function (element) {
+            $(element).parents('.child').remove();
+            if ($('#shop-coverchild').children().length == 1) {
+                $("#shop-coverchild").toggle(false);
+                $('#shop-coverchildren-check').prop('checked', false);
+            }
+            childAmmount--;
+
+            $.each($('#shop-coverchild .child'), function (index, child) {
+                $(child).find('.age').text(index);
+            });
+        };
+
+        var attachHandlers = function (parent) {
+            parent = $(parent);
+
+            parent.find('.add-child').click(function (e) {
+                e.preventDefault();
+                addChild();
+            });
+
+            parent.find('.remove-child').click(function (e) {
+                e.preventDefault();
+                removeChild(this);
+            });
+        };
+
         var childTemplate = $('#shop-coverchild .template').clone().removeClass('template'),
           childAmmount = 1;
         $('#shop-coverchildren-check').click(function () {
@@ -2023,36 +2060,12 @@ var preventCopyPaste = function (a) {
                 if ($('#shop-coverchild').children().length == 1)
                     addChild();
             }
-
-            function addChild() {
-                var template = childTemplate.clone();
-                template.find('input').attr('name', 'ChildrenAges');
-                template.find('.age').text(childAmmount);
-                template.find('.add-child').click(function (e) {
-                    e.preventDefault();
-                    addChild();
-                });
-                template.find('.remove-child').click(function (e) {
-                    e.preventDefault();
-                    removeChild(this);
-                });
-                template.appendTo('#shop-coverchild');
-                childAmmount++;
-            }
-
-            function removeChild(element) {
-                $(element).parents('.child').remove();
-                if ($('#shop-coverchild').children().length == 1) {
-                    $("#shop-coverchild").toggle(false);
-                    $('#shop-coverchildren-check').prop('checked', false);
-                }
-                childAmmount--;
-
-                $.each($('#shop-coverchild .child'), function (index, child) {
-                    $(child).find('.age').text(index);
-                });
-            }
         }).each(initVisibilityFunc("#shop-coverchild"));
+
+        $('#shop-coverchild').find('.child').not('.template').each(function () {
+            ++childAmmount;
+            attachHandlers(this);
+        });
 
         $('.hri-registration input[name=user_type]').change(function () {
             var type = $(this).val();

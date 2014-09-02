@@ -60,13 +60,15 @@
             {
                 <div class="child @(i < 0 ? "template" : string.Empty)">
                     <label>How old is child #<span class="age">@(i < 0 ? string.Empty : (i + 1).ToString())</span>?</label>
-                    @{
-                        var inputAdditionalAttributes = i < 0 
-                            ? string.Empty 
-                            : "name=\"ChildrenAges\" value=\"" + 
-                                (!Model.ChildrenAges[i].HasValue ? string.Empty : Model.ChildrenAges[i].ToString()) + "\"";
+                    @if (i < 0)
+                    {
+                        <input type="text">
                     }
-                    <input type="text" @Html.Raw(inputAdditionalAttributes)/>
+                    else
+                    {
+                        <input type="text" name="ChildrenAges" value=@(!Model.ChildrenAges[i].HasValue ? string.Empty : Model.ChildrenAges[i].ToString())>
+                    }
+
                     <div class="row-fluid">
                         <div class="span5"><a href="#" class="shop-link add-child"><i class="fa fa-plus-circle"> </i>Add child</a></div>
                         <div class="span5"><a href="#" class="shop-link remove-child"><i class="fa fa-minus-circle"> </i>Remove child</a></div>
