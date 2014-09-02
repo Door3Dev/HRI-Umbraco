@@ -47,7 +47,9 @@ namespace HRI.Controllers
                 attribs.Add("urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString());
                 attribs.Add("urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString());
                 attribs.Add("urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString());
-                attribs.Add("email", member.Email);
+                attribs.Add("urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString());
+                attribs.Add("urn:uss:saml:attrib::dateofbirth", member.GetValue("birthday").ToString());
+                attribs.Add("urn:uss:saml:attrib::email", member.Email);
 
                 
                 // Send an IdP initiated SAML assertion

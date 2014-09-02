@@ -44,7 +44,7 @@ namespace HRI.Controllers
             if (ModelState.IsValid == false || error)
                 return CurrentUmbracoPage();
 
-
+            // Create registration model and bind it with view model
             var registerModel = RegisterModel.CreateModel();
             registerModel.Name = model.Username;
             registerModel.UsernameIsEmail = false;

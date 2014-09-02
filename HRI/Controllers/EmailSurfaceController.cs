@@ -74,13 +74,11 @@ namespace HRI.Controllers
                     TempData["ForgotUsernameIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
                 }
-                else // The email has no member associated with it
-                {
-                    // Set the success flag to false and post back to the same page
-                    TempData["ForgotUsernameIsSuccessful"] = false;
-                    TempData["EmailNotFound"] = true;
-                    return RedirectToCurrentUmbracoPage();
-                }
+                // The email has no member associated with it
+                // Set the success flag to false and post back to the same page
+                TempData["ForgotUsernameIsSuccessful"] = false;
+                TempData["EmailNotFound"] = true;
+                return RedirectToCurrentUmbracoPage();
             }
             catch(Exception ex)
             {
@@ -114,109 +112,104 @@ namespace HRI.Controllers
                     TempData["ForgotPasswordIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
                     #endregion
-                }                                 
-                else // USERNAME DOESNT EXIST; Check if old IWS user
-                {
-                    #region User Not Found
-                    #region Checkolduser
-                    // Create a JSON object to receive the HRI API response
-                    JObject json;
-                    // Exectue a GET against the API
-                    using (var client = new WebClient())
-                    {
-                        try
-                        {
-                            // Read the response into a string
-                            string jsonString = client.DownloadString("http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/GetRegisteredUserByUsername?userName=" + model.UserName);
-                            // If the user existed create a JSON object
-                            if (jsonString != "null")
-                                json = JObject.Parse(jsonString);
-                            else // There is an API error
-                            {
-                                //don't add a field level error, just model level
-                                ModelState.AddModelError("model", "Sorry, that user name does not exist in our system.");
-                                return CurrentUmbracoPage();
-                            }
-                        }
-                        catch (Exception ex) // There was an error in connecting to or executing the function on the API
-                        {
-                            ModelState.AddModelError("model", "Error in API call GetRegisteredUserByUsername");
-                            return CurrentUmbracoPage();
-                        }
-                    }
-
-                    // If the user exists in IWS database
-                    if ((string)json["RegId"] != null)
-                    {
-                        // Create the registration model
-                        var registerModel = Members.CreateRegistrationModel();
-                        // Member Name
-                        registerModel.Name = json["FirstName"].ToString() + " " + json["LastName"].ToString();
-                        // Member Id
-                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "memberId").Value = json["RegId"].ToString();
-                        // User Name
-                        registerModel.Username = json["UserName"].ToString();
-                        // First Name
-                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "firstName").Value = json["FirstName"].ToString();
-                        // Last Name
-                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "lastName").Value = json["LastName"].ToString();
-                        // SSN
-                        if ((string)json["Ssn"] != null)
-                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ssn").Value = json["Ssn"].ToString();
-                        // SSN
-                        if ((string)json["EbixId"] != null)
-                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "ebixId").Value = json["ebixID"].ToString();
-                        // Email
-                        if ((string)json["EMail"] != null)
-                            registerModel.Email = json["EMail"].ToString();
-                        // Zip Code
-                        if ((string)json["ZipCode"] != null)
-                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "zipCode").Value = json["ZipCode"].ToString();
-                        // Phone Number
-                        if ((string)json["PhoneNumber"] != null)
-                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "phoneNumber").Value = json["PhoneNumber"].ToString();
-                        // Y Number
-                        if ((string)json["MemberId"] != null)
-                            registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "yNumber").Value = json["MemberId"].ToString();
-                        
-                        // Create a random Guid
-                        Guid key = Guid.NewGuid();
-                        // Update the user's Guid field
-                        registerModel.MemberProperties.FirstOrDefault(p => p.Alias == "guid").Value = key.ToString();
-
-                        registerModel.Password = Membership.GeneratePassword(12, 4);
-                        registerModel.LoginOnSuccess = false;
-                        registerModel.UsernameIsEmail = false;
-
-                        // Register the user with Door3 automatically
-                        MembershipCreateStatus status;
-                        var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
-                        // Force sign out (hack for Umbraco bug that automatically logs user in on registration
-                        Session.Clear();
-                        FormsAuthentication.SignOut();
-
-                        // Authenticate the user automatically as a registered user
-                        newMember.IsApproved = true;
-                        Roles.AddUserToRole(newMember.UserName, "Registered");
-                        #endregion
-
-                        // Reset the password and send an email to the user
-                        SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
-
-                        TempData["ForgotPasswordIsSuccessful"] = true;
-                        return RedirectToCurrentUmbracoPage();                      
-                    }
-                    return CurrentUmbracoPage();
-                    #endregion
                 }
-                
+
+                #region User Not Found
+
+                #region Checkolduser
+                // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
+                JObject hriUser;
+                try
+                {
+                    hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
+                        new Dictionary<string, string> { { "userName", model.UserName } });
+                }
+                catch // There was an error in connecting to or executing the function on the API
+                {
+                    ModelState.AddModelError("model", "Error in API call GetRegisteredUserByUsername");
+                    return CurrentUmbracoPage();
+                }
+
+                // There is an API error
+                if (hriUser == null)
+                {
+                    ModelState.AddModelError("model", "Sorry, that user name does not exist in our system.");
+                    return CurrentUmbracoPage();
+                }
+
+                // If the user exists in IWS database
+                if ((string)hriUser["RegId"] != null)
+                {
+                    // Create the registration model
+                    var registerModel = Members.CreateRegistrationModel();
+                    // Member Name
+                    registerModel.Name = hriUser["FirstName"].ToString() + " " + hriUser["LastName"].ToString();
+                    // Member Id
+                    registerModel.MemberProperties.First(p => p.Alias == "memberId").Value = hriUser["RegId"].ToString();
+                    // User Name
+                    registerModel.Username = hriUser["UserName"].ToString();
+                    // First Name
+                    registerModel.MemberProperties.First(p => p.Alias == "firstName").Value = hriUser["FirstName"].ToString();
+                    // Last Name
+                    registerModel.MemberProperties.First(p => p.Alias == "lastName").Value = hriUser["LastName"].ToString();
+                    // SSN
+                    if ((string)hriUser["Ssn"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "ssn").Value = hriUser["Ssn"].ToString();
+                    // SSN
+                    if ((string)hriUser["EbixId"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "ebixId").Value = hriUser["ebixID"].ToString();
+                    // Email
+                    if ((string)hriUser["EMail"] != null)
+                        registerModel.Email = hriUser["EMail"].ToString();
+                    // Zip Code
+                    if ((string)hriUser["ZipCode"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "zipCode").Value = hriUser["ZipCode"].ToString();
+                    // Phone Number
+                    if ((string)hriUser["PhoneNumber"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "phoneNumber").Value = hriUser["PhoneNumber"].ToString();
+                    // Y Number
+                    if ((string)hriUser["MemberId"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "yNumber").Value = hriUser["MemberId"].ToString();
+                    // Group Id
+                    if ((string)hriUser["RxGrpId"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
+                    // Birthday
+                    if ((string)hriUser["DOB"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+
+                    // Create a random Guid
+                    Guid key = Guid.NewGuid();
+                    // Update the user's Guid field
+                    registerModel.MemberProperties.First(p => p.Alias == "guid").Value = key.ToString();
+
+                    registerModel.Password = Membership.GeneratePassword(12, 4);
+                    registerModel.LoginOnSuccess = false;
+                    registerModel.UsernameIsEmail = false;
+
+                    // Register the user with Door3 automatically
+                    MembershipCreateStatus status;
+                    var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+                    // Force sign out (hack for Umbraco bug that automatically logs user in on registration
+                    Session.Clear();
+                    FormsAuthentication.SignOut();
+
+                    // Authenticate the user automatically as a registered user
+                    newMember.IsApproved = true;
+                    Roles.AddUserToRole(newMember.UserName, "Registered");
+                    #endregion
+
+                    // Reset the password and send an email to the user
+                    SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
+
+                    TempData["ForgotPasswordIsSuccessful"] = true;
+                    return RedirectToCurrentUmbracoPage();                      
+                }
+                return CurrentUmbracoPage();
+                #endregion
             }
-            else // The model was invalid
-            {
-                TempData["ForgotPasswordIsSuccessful"] = false;
-                return RedirectToCurrentUmbracoPage();
-            }
-            
+            // The model was invalid
+            TempData["ForgotPasswordIsSuccessful"] = false;
+            return RedirectToCurrentUmbracoPage();
         }
 
 
@@ -252,7 +245,7 @@ namespace HRI.Controllers
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
                 // Build a dictionary for all the dynamic text in the email template
-                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                var dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
                 dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
@@ -274,20 +267,16 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
 
                 // If there is a redirect url
-                if (model.RedirectUrl != "" && model.RedirectUrl != null)
+                if (!string.IsNullOrEmpty(model.RedirectUrl))
                     // Send the user to that page
                     return Redirect(model.RedirectUrl);
-                else
-                    // Otherwise send the user to the home page
-                    return Redirect("/");
-            }
-            else // Model was bad or user didnt exist
-            {
-                // Mark the method as failed
-                TempData["IsSuccessful"] = false;
-                // Return the user to the home page
                 return Redirect("/");
             }
+            // Model was bad or user didnt exist
+            // Mark the method as failed
+            TempData["IsSuccessful"] = false;
+            // Return the user to the home page
+            return Redirect("/");
         }
 
         /// <summary>
@@ -315,7 +304,7 @@ namespace HRI.Controllers
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;                
 
                 // Build a dictionary for all the dynamic text in the email template
-                Dictionary<string, string> dynamicText = new Dictionary<string, string>();
+                var dynamicText = new Dictionary<string, string>();
                 dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
                 dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
                 dynamicText.Add("<%VerificationUrl%>", root.GetProperty("HostUrl").Value.ToString() + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
@@ -337,20 +326,17 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
 
                 // If there is a redirect url
-                if (model.RedirectUrl != "" && model.RedirectUrl != null)
+                if (!string.IsNullOrEmpty(model.RedirectUrl))
                     // Send the user to that page
                     return Redirect(model.RedirectUrl);
-                else
-                    // Otherwise send the user to the home page
-                    return Redirect("/");
-            }
-            else // Model was bad or user didnt exist
-            {
-                // Mark the method as failed
-                TempData["IsSuccessful"] = false;
-                // Return the user to the home page
+                // Otherwise send the user to the home page
                 return Redirect("/");
             }
+            // Model was bad or user didnt exist
+            // Mark the method as failed
+            TempData["IsSuccessful"] = false;
+            // Return the user to the home page
+            return Redirect("/");
         }
     }
 }

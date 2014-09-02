@@ -4,6 +4,9 @@ namespace HRI.Models
 {
     public class RegisterFormViewModel
     {
+        private string _email;
+        private string _confirmEmail;
+
         public string MemberId { get; set; }
 
         public string Ssn { get; set; }
@@ -16,11 +19,18 @@ namespace HRI.Models
 
         [Required]
         [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please enter a valid e-mail address")]
-        public string Email { get; set; }
+        public string Email {
+            set { _email = value.Trim().ToLower(); }
+            get { return _email;  }
+        }
 
         [Required]
         [CompareAttribute("Email", ErrorMessage = "Confirm Email and Email do not match.")]
-        public string ConfirmEmail { get; set; }
+        public string ConfirmEmail
+        {
+            set { _confirmEmail = value.Trim().ToLower(); }
+            get { return _confirmEmail; }
+        }
 
         [Required]
         public string Zipcode { get; set; }
