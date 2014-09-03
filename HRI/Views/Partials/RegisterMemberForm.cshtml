@@ -181,7 +181,7 @@
             data: { memberId: $('#memberId').val() },
             success: function(data) {
                 if (data != 'null')
-                    $('#memberIdCheck').html('<span class="error">The Member Id you have entered is registered with existing user name: ' + data.username + '</span>');
+                    $('#memberIdCheck').html('<span class="error">The Member ID you have entered is registered with existing user name: ' + data.username + '</span>');
             }
         });
     });
