@@ -397,7 +397,8 @@ namespace HRI.Controllers
             var familyFactor = IndividualFactor;
             if (model.CoverSelf && model.CoverSpouse)
                 familyFactor = CoupleFactor;
-            if (model.ChildrenAges != null) {
+            if (model.CoverChildren && model.ChildrenAges != null)
+            {
                 if (model.CoverSelf && !model.CoverSpouse)
                 {
                     if (model.ChildrenAges.Count == 1)
@@ -420,7 +421,7 @@ namespace HRI.Controllers
 
             // Build products list
             var productList = new List<Product>();
-            if (model.ChildrenAges == null)
+            if (!model.CoverChildren || model.ChildrenAges == null)
             {
                 productList.Add(Products["EssentialCare"]);
                 productList.Add(Products["PrimarySelect"]);
