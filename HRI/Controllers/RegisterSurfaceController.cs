@@ -49,7 +49,7 @@ namespace HRI.Controllers
                 && existedUser.Value<string>("UserName") == model.Username
                 && existedUser.Value<string>("EMail") == model.Email)
             {
-                ModelState.AddModelError("registerModel", "The user with such Member Id, Username and Email has already been registered.");
+                ModelState.AddModelError("registerModel", "The user with such Member ID, Username and Email has already been registered.");
                 error = true;
             }
 

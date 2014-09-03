@@ -381,7 +381,8 @@ namespace HRI.Controllers
                 || model.CoverSpouse && !model.SpouseAge.HasValue
                 || model.CoverChildren && model.ChildrenAges != null 
                     && (model.ChildrenAges.Any(x => !x.HasValue) 
-                        || model.ChildrenAges.Any(x => x > 30)))
+                        || model.ChildrenAges.Any(x => x > 30))
+                || !model.CoverSelf && !model.CoverSpouse && !model.CoverChildren)
             {
                 // If the user does exist then it was a wrong password
                 //don't add a field level error, just model level
@@ -397,7 +398,8 @@ namespace HRI.Controllers
             var familyFactor = IndividualFactor;
             if (model.CoverSelf && model.CoverSpouse)
                 familyFactor = CoupleFactor;
-            if (model.ChildrenAges != null) {
+            if (model.CoverChildren && model.ChildrenAges != null)
+            {
                 if (model.CoverSelf && !model.CoverSpouse)
                 {
                     if (model.ChildrenAges.Count == 1)
@@ -420,7 +422,7 @@ namespace HRI.Controllers
 
             // Build products list
             var productList = new List<Product>();
-            if (model.ChildrenAges == null)
+            if (!model.CoverChildren || model.ChildrenAges == null)
             {
                 productList.Add(Products["EssentialCare"]);
                 productList.Add(Products["PrimarySelect"]);
