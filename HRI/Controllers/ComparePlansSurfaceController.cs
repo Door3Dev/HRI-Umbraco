@@ -381,7 +381,8 @@ namespace HRI.Controllers
                 || model.CoverSpouse && !model.SpouseAge.HasValue
                 || model.CoverChildren && model.ChildrenAges != null 
                     && (model.ChildrenAges.Any(x => !x.HasValue) 
-                        || model.ChildrenAges.Any(x => x > 30)))
+                        || model.ChildrenAges.Any(x => x > 30))
+                || !model.CoverSelf && !model.CoverSpouse && !model.CoverChildren)
             {
                 // If the user does exist then it was a wrong password
                 //don't add a field level error, just model level
