@@ -42,14 +42,12 @@ namespace HRI.Controllers
                 ModelState.AddModelError("registerModel.Ssn", "The SSN field is required.");
                 error = true;
             }
-            // The Y number / username / email should be unique
-            var existedUser = MakeInternalApiCallJson("GetRegisteredUserByMemberId", new Dictionary<string, string> { { "memberId", model.Username } });
-            if (existedUser != null
-                && existedUser.Value<string>("MemberId") == model.MemberId
-                && existedUser.Value<string>("UserName") == model.Username
-                && existedUser.Value<string>("EMail") == model.Email)
+
+            // The Y number should be unique
+            var existedUser = MakeInternalApiCallJson("GetRegisteredUserByMemberId", new Dictionary<string, string> { { "memberId", model.MemberId } });
+            if (existedUser != null)
             {
-                ModelState.AddModelError("registerModel", "The user with such Member ID, Username and Email has already been registered.");
+                ModelState.AddModelError("registerModel", "The user with such Member ID has already been registered.");
                 error = true;
             }
 
