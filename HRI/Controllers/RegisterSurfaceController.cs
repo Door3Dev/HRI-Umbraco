@@ -24,10 +24,9 @@ namespace HRI.Controllers
                 ModelState.AddModelError("registerModel.MemberId", "The Member ID should equal to 9 characters.");
                 error = true;
             }
-            else if (model.MemberId.Length == 9)
+            else if (String.IsNullOrEmpty(model.PlanId) && model.MemberId.Length == 9)
             {
-                var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId",
-                    new Dictionary<string, string> {{"memberId", model.MemberId}});
+                var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId", new Dictionary<string, string> {{"memberId", model.MemberId}});
 
                 if (!enrolled)
                 {

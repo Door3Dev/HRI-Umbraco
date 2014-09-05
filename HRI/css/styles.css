@@ -1222,6 +1222,11 @@ body {
     display: block;
 }
 
+
+.hri-common .cta.cancel-max-width {
+    max-width: none;
+}
+
 .hri-common .cta-arrow:after {
     content: "";
     width: 0;
