@@ -170,20 +170,4 @@
         } else
             $('#userNameCheck').html('');
     });
-
-    // Check member id uniquieness
-    $('#memberId').keyup(function () {
-        if ($('#memberId').val().length != 9) {
-            $('#memberIdCheck').html('');
-            return;
-        };
-        $.ajax({
-            url: "/umbraco/api/HriApi/IsUserWithMemberIdRegistered",
-            data: { memberId: $('#memberId').val() },
-            success: function(data) {
-                if (data != 'null')
-                    $('#memberIdCheck').html('<span class="error">The Member ID you have entered is registered with existing user name: ' + data.username + '</span>');
-            }
-        });
-    });
 </script>

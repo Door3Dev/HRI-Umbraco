@@ -11,27 +11,20 @@ namespace HRI.Controllers
     {
         [HttpPost]
         [AllowAnonymous]
-        public  ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")]RegisterFormViewModel model)
+        public ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")] RegisterFormViewModel model)
         {
             // Save Plan Id for the view
             ViewData["PlanId"] = model.PlanId;
             var error = false;
 
             // Check the Member Id (Y number)
-            if (model.PlanId == null && String.IsNullOrEmpty(model.MemberId)
-                || !String.IsNullOrEmpty(model.MemberId) && model.MemberId.Length != 9)
+            if (model.PlanId == null) // Enrolled user
             {
-                ModelState.AddModelError("registerModel.MemberId", "The Member ID should equal to 9 characters.");
-                error = true;
-            }
-            else if (model.MemberId.Length == 9)
-            {
-                var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId",
-                    new Dictionary<string, string> {{"memberId", model.MemberId}});
+                var errorMessage = ValidateMemberIdCore(model.MemberId);
 
-                if (!enrolled)
+                if (errorMessage != null)
                 {
-                    ModelState.AddModelError("registerModel.MemberId", "This Member ID is not enrolled.");
+                    ModelState.AddModelError("registerModel.MemberId", errorMessage);
                     error = true;
                 }
             }
@@ -40,14 +33,6 @@ namespace HRI.Controllers
             if (model.PlanId != null && String.IsNullOrEmpty(model.Ssn))
             {
                 ModelState.AddModelError("registerModel.Ssn", "The SSN field is required.");
-                error = true;
-            }
-
-            // The Y number should be unique
-            var existedUser = MakeInternalApiCallJson("GetRegisteredUserByMemberId", new Dictionary<string, string> { { "memberId", model.MemberId } });
-            if (existedUser != null)
-            {
-                ModelState.AddModelError("registerModel", "The user with such Member ID has already been registered.");
                 error = true;
             }
 
@@ -123,5 +108,38 @@ namespace HRI.Controllers
             return CurrentUmbracoPage();
         }
 
+        public JsonResult ValidateMemberId([Bind(Prefix = "registerModel")] RegisterFormViewModel model)
+        {
+            var errorMsg = ValidateMemberIdCore(model.MemberId);
+
+            return errorMsg == null 
+                ? Json(true, JsonRequestBehavior.AllowGet) : Json(errorMsg, JsonRequestBehavior.AllowGet);
+        }
+
+        private string ValidateMemberIdCore(string memberId)
+        {
+            if (memberId == null || memberId.Length != 9)
+            {
+                return "The Member ID should have 9 characters.";
+            }
+
+            var user = MakeInternalApiCallJson(
+                "IsUserWithMemberIdRegistered",
+                new Dictionary<string, string> { { "memberId", memberId } });
+
+            if (user != null)
+            {
+                var errorMsg = string.Format(
+                "The Member ID you have entered is registered with existing user name: {0}",
+                user.Value<string>("username"));
+
+                return errorMsg;
+            }
+
+            var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId",
+                    new Dictionary<string, string> { { "memberId", memberId } });
+
+            return enrolled ? null : "This Member ID is not enrolled.";
+        }
     }
 }
