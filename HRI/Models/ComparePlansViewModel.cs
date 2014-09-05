@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace HRI.Models
 {
     public class ComparePlansViewModel
     {
         [Required]
+        [Remote("ValidateZipCode", "ComparePlansSurface")]
         public string ZipCode { get; set; }
         public string County { get; set; }
 

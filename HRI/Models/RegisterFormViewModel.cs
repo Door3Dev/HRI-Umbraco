@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace HRI.Models
 {
@@ -7,6 +8,7 @@ namespace HRI.Models
         private string _email;
         private string _confirmEmail;
 
+        [Remote("ValidateMemberId", "RegisterSurface")]
         public string MemberId { get; set; }
 
         public string Ssn { get; set; }
@@ -29,7 +31,7 @@ namespace HRI.Models
         }
 
         [Required]
-        [CompareAttribute("Email", ErrorMessage = "Confirm Email and Email do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Email", ErrorMessage = "Confirm Email and Email do not match.")]
         public string ConfirmEmail
         {
             set

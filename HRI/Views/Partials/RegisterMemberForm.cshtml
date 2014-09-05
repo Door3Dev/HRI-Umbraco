@@ -21,11 +21,12 @@
     {
         registerModel.PlanId = ViewData["PlanId"].ToString();
     }
-    var isNewUser = !String.IsNullOrEmpty(registerModel.PlanId);
-    var formClass = isNewUser || !ViewData.ModelState.IsValid ? String.Empty : "display: none;";
-    var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : String.Empty;
+    var isNewUser = !string.IsNullOrEmpty(registerModel.PlanId);
+    var formClass = isNewUser || !ViewData.ModelState.IsValid ? string.Empty : "display: none;";
+    var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : string.Empty;
 }
 
+@Html.Raw(Html.RenderJsHere())
 
 @using (Html.BeginUmbracoForm<RegisterSurfaceController>("HandleRegisterMember"))
 {
@@ -62,13 +63,13 @@
                 <h3>Please enter your information.</h3>
                 @Umbraco.Field("Information")
             </div> 
-            <div class="span3 @(isNewUser ? String.Empty : "hide")">
+            <div class="span3 @(isNewUser ? string.Empty : "hide")">
                 @Html.Label("Social Security Number")
                 @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.Ssn)
             </div>
 
-            <div class="span7 @(isNewUser ? "hide" : String.Empty)">
+            <div class="span7 @(isNewUser ? "hide" : string.Empty)">
                 @Html.Label("Member ID")
                 @Html.TextBoxFor(m => registerModel.MemberId, new { @id = "memberId", maxlength = 9, @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.MemberId)
@@ -168,21 +169,5 @@
             });
         } else
             $('#userNameCheck').html('');
-    });
-
-    // Check member id uniquieness
-    $('#memberId').keyup(function () {
-        if ($('#memberId').val().length != 9) {
-            $('#memberIdCheck').html('');
-            return;
-        };
-        $.ajax({
-            url: "/umbraco/api/HriApi/IsUserWithMemberIdRegistered",
-            data: { memberId: $('#memberId').val() },
-            success: function(data) {
-                if (data != 'null')
-                    $('#memberIdCheck').html('<span class="error">The Member ID you have entered is registered with existing user name: ' + data.username + '</span>');
-            }
-        });
     });
 </script>
