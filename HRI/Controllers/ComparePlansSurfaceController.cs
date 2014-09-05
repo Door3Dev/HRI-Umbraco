@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using System.Xml.Serialization;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
@@ -390,6 +388,13 @@ namespace HRI.Controllers
                 return CurrentUmbracoPage();
             }
 
+            var zipCodeErrorMsg = ValidateZipCodeCore(model.ZipCode);
+            if (zipCodeErrorMsg != null)
+            {
+                ModelState.AddModelError("ZipCode", zipCodeErrorMsg);
+                return CurrentUmbracoPage();
+            }
+
             var county = ZipCodes.First(z => z.zipCode == model.ZipCode).county;
             var regionNumber = Regions[county];
             var regionFactor = RegionsFactor[regionNumber];
@@ -466,6 +471,20 @@ namespace HRI.Controllers
             // Redirect to the registration page
             return RedirectToUmbracoPage(1343);
 
+        }
+
+        public JsonResult ValidateZipCode(string ZipCode)
+        {
+            var errorMsg = ValidateZipCodeCore(ZipCode);
+
+            return errorMsg == null
+                ? Json(true, JsonRequestBehavior.AllowGet) : Json(errorMsg, JsonRequestBehavior.AllowGet);
+        }
+
+        private string ValidateZipCodeCore(string zipCode)
+        {
+            var zipCodeItem = ZipCodes.FirstOrDefault(z => z.zipCode == zipCode);
+            return zipCodeItem != null ? null : "Zip Code is incorrect.";
         }
     }
 }
