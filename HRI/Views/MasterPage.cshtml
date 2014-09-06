@@ -36,13 +36,21 @@
     <script src="/Scripts/jquery-1.9.1.js"></script>
 </head>
 <body lang="en" class="hri hri-common hri-newyork">
+    @if (((bool?)TempData["IsUserSuccessfullyRegistered"]).GetValueOrDefault())
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top flowbar" data-flowseconds="0" style="display: block;">
+            <div class="container">
+                <p>Your new Health Republic Insurance account has been verified successfully, you may now login using the user name and password set during registration.</p>
+            </div>
+        </div>
+    }
     <div class="container">
         @Html.Partial("TopBar")
         <div class="row-fluid">
             <div class="span12">
                 <div id="main">
                     @Html.Partial("Header")
-					@RenderBody()
+                    @RenderBody()
                     @Html.Partial("Footer")
                 </div>
             </div>

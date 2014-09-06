@@ -185,6 +185,7 @@ namespace HRI.Controllers
                     // Save the member
                     Services.MemberService.Save(member);                    
                     // Send the user to the login page
+                    TempData["IsUserSuccessfullyRegistered"] = true;
                     return Redirect("/for-members/login");
                 }
             }
