@@ -57,9 +57,11 @@ namespace HRI.Controllers
         [HttpGet]
         public bool IsUserNameAvailable(string username)
         {
-            var result = MakeApiCall(new Dictionary<string, string> {{"isUserNameAvailable", username}});
+            var resultHri = MakeApiCall(new Dictionary<string, string> {{"isUserNameAvailable", username}});
+            var hriAvailability = resultHri != null && Convert.ToBoolean(resultHri["isAvailable"]);
+            var localUser = Services.MemberService.GetByUsername(username);
 
-            return result != null && Convert.ToBoolean(result["isAvailable"]);
+            return hriAvailability && localUser == null;
         }
 
         /// <summary>
