@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Core.Models;
+using Umbraco.Web;
 
 namespace HRI.Controllers
 {
@@ -23,10 +24,8 @@ namespace HRI.Controllers
         {
             try
             {
-                // Get ahold of the root/home node
-                IPublishedContent root = Umbraco.ContentAtRoot().First();
                 // Get the contact us email value
-                string sendTo = root.GetProperty("incomingEmailAddress").Value.ToString();
+                var sendTo = CurrentPage.GetPropertyValue<string>("contactUsEmail");
 
                 SendEmail(sendTo, model.MessageType, model.Message);
 
@@ -34,7 +33,7 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
-            catch (Exception ex) // If the message failed to send
+            catch (Exception) // If the message failed to send
             {
                 // Set the success flag to false and post back to the same page
                 TempData["IsSuccessful"] = false;
