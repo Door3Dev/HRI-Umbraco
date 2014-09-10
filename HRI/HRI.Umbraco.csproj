@@ -302,13 +302,17 @@
     <Content Include="idp.cer" />
     <Content Include="SecCertMS070714.cer" />
     <Content Include="sp.pfx" />
-    <Content Include="App_Data\access.config" />
+    <Content Include="App_Data\access.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt.2014-06-30" />
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt.2014-07-01" />
     <Content Include="App_Data\NuGetBackup\20140630-143640\CopyLogs\UmbracoBinBackup.log" />
     <Content Include="App_Data\NuGetBackup\20140630-143708\Web.config" />
     <Content Include="App_Data\packages\installed\installedPackages.config" />
-    <Content Include="App_Data\umbraco.config" />
+    <Content Include="App_Data\umbraco.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Partials\RegisterMemberForm.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -397,8 +401,6 @@
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
-    <Compile Include="HriApplicationEventHandler.cs" />
-    <Compile Include="HriContentFinder.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
