@@ -23,6 +23,8 @@
         model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
     }
 }
+
+@Html.Raw(Html.RenderJsHere())
 	
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
@@ -37,8 +39,13 @@ else
         @Html.AntiForgeryToken()
     
 		@Html.Label("Message Topic", model.MessageTypes)
-        @Html.DropDownList("list", model.MessageTypes, new { placeholder = "Please choose a topic", id="messageTypes" })
-		@Html.ValidationMessageFor(m => model.MessageTypes)
+        @Html.DropDownListFor(
+            m => model.MessageType, 
+            new SelectList(
+                Enumerable
+                    .Repeat(new { Id = (string)null, Name = "Please choose a topic" }, 1)
+                    .Concat(model.MessageTypes.Select(s => new { Id = s, Name = s })), "Id", "Name"))
+		@Html.ValidationMessageFor(m => model.MessageType)
 
 		<div class="row-fluid">
 			<label class="span6 name">
@@ -65,13 +72,6 @@ else
 		@Html.TextAreaFor(m => model.Message, new {rows = 6})
 		@Html.ValidationMessageFor(m => model.Message)
     
-        @Html.HiddenFor(m=>model.MessageType, new{ id="messageType" })    
-    
         <input type="submit" value="Send" class="btn hri-btn" />
     }
-    <script>
-        $('#messageTypes').change(function(){
-            $('#messageType').val($('#messageTypes :selected').text());
-        })
-    </script>
 }
