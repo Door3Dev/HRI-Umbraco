@@ -11,24 +11,24 @@ namespace HRI.Models
     {
         public ContactFormViewModel()
         {
-            MessageTypes = new SelectList(new[]
+            MessageTypes = new[]
             {
-                new{ID = "0", Name = "Please Choose A Topic"},
-                new{ID = "1", Name = "Billing Questions"},
-                new{ID = "2", Name = "ID Cards"},
-                new{ID = "3", Name = "Benefits Questions"},
-                new{ID = "4", Name = "Provider Network"},
-                new{ID = "5", Name = "Techincal Issues"},
-                new{ID = "6", Name = "Claims"},
-                new{ID = "7", Name = "Cancellation"},
-                new{ID = "8", Name = "Update Information"},
-                new{ID = "9", Name = "Pharmacy"},
-            }, "ID", "Name", 0);
+                "Billing Questions",
+                "ID Cards",
+                "Benefits Questions",
+                "Provider Network",
+                "Techincal Issues",
+                "Claims",
+                "Cancellation",
+                "Update Information",
+                "Pharmacy"
+            };
         }
 
+        [Required]
         public string MessageType { get; set; }
 
-        public SelectList MessageTypes { get; set; }
+        public string[] MessageTypes { get; set; }
 
         [Required]
         public string FirstName { get; set; }
