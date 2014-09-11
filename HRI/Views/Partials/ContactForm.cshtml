@@ -44,7 +44,9 @@ else
             new SelectList(
                 Enumerable
                     .Repeat(new { Id = (string)null, Name = "Please choose a topic" }, 1)
-                    .Concat(model.MessageTypes.Select(s => new { Id = s, Name = s })), "Id", "Name"))
+                    .Concat(model.MessageTypes.Select(s => new { Id = s, Name = s })), 
+                "Id", 
+                "Name"))
 		@Html.ValidationMessageFor(m => model.MessageType)
 
 		<div class="row-fluid">
