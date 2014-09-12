@@ -298,7 +298,9 @@
     <Content Include="Views\AboutSurface\OurStaff.cshtml" />
     <Content Include="Views\AboutSurface\WhyWeAreDifferent.cshtml" />
     <Content Include="Views\Shared\MasterPage.cshtml" />
-    <Content Include="saml.config" />
+    <Content Include="saml.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="idp.cer" />
     <Content Include="SecCertMS070714.cer" />
     <Content Include="sp.pfx" />
@@ -314,12 +316,13 @@
     </Content>
     <Content Include="idp.pfx" />
     <Content Include="App_Data\zip-codes.csv" />
-    <Content Include="mc_saml.cer" />
+    <Content Include="mc_uatsaml_pub.cer" />
+    <Content Include="healthrepublicny.pfx" />
+    <Content Include="mc_prodsaml_pub.cer" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="SecCertMC071114.cer" />
     <Content Include="SecCertUS071514.cer" />
     <Content Include="Views\Broker.cshtml" />
     <Content Include="Views\Careers.cshtml" />
@@ -368,6 +371,7 @@
     <Content Include="Views\MacroPartials\ImageSlide.cshtml" />
     <Content Include="Views\MacroPartials\ImageSlideIndicator.cshtml" />
     <Content Include="Views\MacroPartials\UserHealthPolicyLink.cshtml" />
+    <Content Include="ussitsps_test_pub.asc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -384,7 +388,9 @@
     <Content Include="media\dummy.txt" />
     <Content Include="scripts\dummy.txt" />
     <Content Include="usercontrols\dummy.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
@@ -425,6 +431,12 @@
     <Folder Include="App_Data\packages\created\" />
     <Folder Include="App_Data\preview\" />
     <Folder Include="Views\AccountSurface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMMSAMLLibrary\CMMSAMLLibrary.csproj">
+      <Project>{B0895A78-818D-4FAB-AAAF-A8E6EC05C473}</Project>
+      <Name>CMMSAMLLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

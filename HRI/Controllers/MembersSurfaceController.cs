@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
+using CoverMyMeds.SAML.Library;
 using HRI.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -61,21 +62,17 @@ namespace HRI.Controllers
             // Attributes for MagnaCare
             if (partnerSP == "MagnaCare")
             {
-                // Create attribute list an populate with needed data
-                //var attrib = new List<SAMLAttribute>();
-                //attrib.Add(new SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version", "xs:string", "1"));
-                attribs.Add("member:id", member.GetValue("yNumber").ToString());                
-                attribs.Add("member:first_name", member.GetValue("firstName").ToString());                
-                attribs.Add("member:last_name", member.GetValue("lastName").ToString());
-                attribs.Add("member:product", "EPO");
+                // get the certificate
+                //var signCertificate = CertificateUtility.GetCertificateForSigning(@"C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\sp.pfx", "password");
+                var samlAttributes = new Dictionary<string, string>
+                {
+                    {"member:id", member.GetValue("yNumber").ToString()},
+                    {"member:first_name", member.GetValue("firstName").ToString()},
+                    {"member:last_name", member.GetValue("lastName").ToString()},
+                    {"member:product", "EPO"}
+                };
 
-                // Send an IdP initiated SAML assertion
-                SAMLIdentityProvider.InitiateSSO(
-                    Response,
-                    member.GetValue("yNumber").ToString(),
-                    attribs,
-                    "PRIMARYSELECT",
-                    partnerSP);
+                SAML20Assertion.GuideSSO(Response, partnerSP, member.GetValue("yNumber").ToString(), samlAttributes);
             }
 
             // Attributes for HealthX
