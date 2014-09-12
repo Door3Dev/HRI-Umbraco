@@ -29,17 +29,17 @@
                 foreach (var item in menuItems.Where("navigationVisibility!=13").Where("navigationVisibility!=15").Where("accessAvailability!=9"))
 			    {
                     @* if the number of non-hidden items is greater than 0 *@
-				    if(item.Children.Where("navigationVisibility!=15").Count() > 0)
+                    if (item.Children.Where("navigationVisibility!=15").WhereHasAccess().Count() > 0)
 				    {
                         @* Create the navigation item *@
 					    <li class="dropdown">
 					        <a href="" data-toggle="dropdown" class="dropdown-toggle">@Html.Raw(item.menuItemName)<span class="caret"></span></a>
                             @* Create all the sub items *@
 					        <ul class="dropdown-menu">
-                                @* For each item that is visible in the header and is for members12*@                       
-							    @foreach (var subpage in item.Children.Where("navigationVisibility!=13"))
+                                @* For each item that is visible in the header and is for members12*@
+							    @foreach (var subpage in item.Children.Where("navigationVisibility!=13").WhereHasAccess())
 							    {
-                                    @* If it is a media file link it to the document set in umbraco backend content panel *@                        
+                                    @* If it is a media file link it to the document set in umbraco backend content panel *@
 								    if(subpage.NodeTypeAlias == "ExternalFile")
 								    {
 									    <li class="sub-link"><a href="@subpage.Field("file")">@Html.Raw(subpage.menuItemName)</a></li>
@@ -57,7 +57,7 @@
 					    </li> 
 				    }
                     @* If there are no visible links under this nav item *@
-				    else
+				    else if (item.HasAccess())
 				    {
                         @* Create the nav item as a link to the first node under the Nav item in the Umbraco backend content panel *@
 					    <li>
