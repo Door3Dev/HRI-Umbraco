@@ -377,6 +377,7 @@
     <Content Include="Views\MacroPartials\ImageSlideIndicator.cshtml" />
     <Content Include="Views\MacroPartials\UserHealthPolicyLink.cshtml" />
     <Content Include="ussitsps_test_pub.asc" />
+    <Content Include="Views\Partials\RegistrationConfirmation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

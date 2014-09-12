@@ -23,7 +23,7 @@
     if(Convert.ToBoolean(TempData["ForgotUsernameIsSuccessful"]))
     {
         <h3>Membership information found!</h3>
-        <p>We were able to locate your account and an email has been sent to you containing your UserName</p>
+        <p>We were able to locate your account and an email has been sent to you containing your username</p>
     }
     else
     {
@@ -39,7 +39,7 @@
         {
             @Html.ValidationSummary(true)
             <h3>Membership look up failed.</h3>
-            <p>We apologize, but something seems to have gone wrong with looking up your UserName. Our site administrator has been notified.</p>
+            <p>We apologize, but something seems to have gone wrong with looking up your username. Our site administrator has been notified.</p>
             <p>Please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
             <p>@Html.ValidationSummary("forgotUserNameViewModel", false)</p>
         }

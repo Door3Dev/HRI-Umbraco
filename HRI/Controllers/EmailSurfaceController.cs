@@ -66,7 +66,7 @@ namespace HRI.Controllers
                     var emailTemplateId = root.GetProperty("forgotUserNameEmailTemplate").Value;
 
 
-                    SendEmail(member.Email, "Health Republic Insurance - UserName Recovery",
+                    SendEmail(member.Email, "Health Republic Insurance - Username Recovery",
                                              BuildEmail((int)emailTemplateId, dynamicText));
 
                     // Set the sucess flag to true and post back to the same page
