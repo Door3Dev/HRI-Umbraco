@@ -260,6 +260,7 @@
     <Content Include="EmailTemplates\ForgotPassword.txt" />
     <Content Include="EmailTemplates\ForgotUserName.txt" />
     <Content Include="EmailTemplates\ChangePassword.txt" />
+    <Content Include="NLog.dll" />
     <Content Include="packages.config" />
     <Content Include="scripts\custom.js" />
     <Content Include="Views\Web.config" />

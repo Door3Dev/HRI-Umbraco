@@ -34,8 +34,9 @@
     <Reference Include="ComponentSpace.SAML2">
       <HintPath>..\packages\ComponentSpace SAML v2.0 for .NET\Bin\dotNET40\ComponentSpace.SAML2.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\..\..\..\documents\visual studio 2013\Projects\saml2\packages\NLog.3.1.0.0\lib\net40\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HRI\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +59,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="NLog.dll" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
