@@ -20,14 +20,19 @@ namespace HRI.Models
         public string LastName { get; set; }
 
         [Required]
-        [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please enter a valid e-mail address")]
-        public string Email {
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Please enter a valid e-mail address")]
+        public string Email 
+        {
             set
             {
-                if (value != null)
-                    _email = value.Trim().ToLower();
+                _email = value == null ? null : value.Trim().ToLower();
             }
-            get { return _email;  }
+
+            get
+            {
+                return _email;
+            }
         }
 
         [Required]
