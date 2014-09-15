@@ -21,7 +21,8 @@ namespace HRI.Models
                 "Claims",
                 "Cancellation",
                 "Update Information",
-                "Pharmacy"
+                "Pharmacy",
+                "Other"
             };
         }
 
