@@ -2569,7 +2569,8 @@ body {
     color: green;
 }
 
-
+.warning {
+}
 
 button.disabled {
     background: #757575;

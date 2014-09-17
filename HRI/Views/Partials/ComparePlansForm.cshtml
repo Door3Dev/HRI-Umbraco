@@ -50,11 +50,15 @@
         </label>
         <div class="span7 cover" id="shop-coverself">
             <label>How old are you?</label>
-            @Html.TextBoxFor(m => m.CustomerAge)
+            @Html.TextBoxFor(m => m.CustomerAge, new { id = "customer-age" })
+            <div>@Html.ValidationMessageFor(m => m.CustomerAge)</div>
+            <div id="customer-age-warning" class='warning hri-hide'><b>Note:</b> You have indicated your age as 65 or above. Individuals 65 or older may enroll in an individual marketplace insurance plan if they are not eligible for Medicare.</div>
         </div>
         <div class="span7 cover" id="shop-coverpartner">
             <label>How old is your spouse or partner?</label>
-            @Html.TextBoxFor(m => m.SpouseAge)
+            @Html.TextBoxFor(m => m.SpouseAge, new { id = "spouse-age" })
+            <div>@Html.ValidationMessageFor(m => m.SpouseAge)</div>
+            <div id="spouse-age-warning" class='warning hri-hide'><b>Note:</b> You have indicated your spouse/partner's age as 65 or above. Individuals 65 or older may enroll in an individual marketplace insurance plan if they are not eligible for Medicare.</div>
         </div>
         <div id="shop-coverchild" class="span7 cover">
             @* i = -1 is to generate template, others for generating existing items *@
@@ -111,4 +115,20 @@
     @Html.ValidationSummary("viewModel", true)
     <input type="submit" class="btn cta cta-centered cancel-max-width" value="Compare Plans and Prices">
 </div>
+
+<script>
+    var ValidateAge = function (warningElementId) {
+        return function() {
+            var value = Number($(this).val());
+            if (isNaN(value) || value < 65) {
+                $(warningElementId).addClass("hri-hide");
+            } else {
+                $(warningElementId).removeClass("hri-hide");
+            }
+        };
+    };
+
+    $("#customer-age").change(ValidateAge("#customer-age-warning"));
+    $("#spouse-age").change(ValidateAge("#spouse-age-warning"));
+</script>
 }
