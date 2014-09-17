@@ -3,13 +3,18 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        string pdfLink = "/";
-        string policyNumber = @Members.GetCurrentMember().GetPropertyValue("healthPlanId").ToString();
-        string pdfFolderId = @Umbraco.ContentAtRoot().FirstOrDefault().GetPropertyValue("pdfFolder").ToString();
+        var pdfLink = "/";
+        var policyNumber = Members.GetCurrentMember().GetPropertyValue<string>("healthPlanId");
+        var pdfFolderId = Umbraco.ContentAtRoot().First().GetPropertyValue<string>("pdfFolder");
         var docs = Umbraco.Media(pdfFolderId).Children;
-        foreach (dynamic n in docs)
-            if (n.Name.ToUpper() == policyNumber.ToUpper() + ".PDF")
+        foreach (var n in docs)
+        {
+            if (string.Compare((string)n.Name, policyNumber + ".pdf", StringComparison.OrdinalIgnoreCase) == 0)
+            {
                 pdfLink = n.Url;
-        <ul><li><a href="@pdfLink"> Policy / Contract / Certificate of Coverage</a></li></ul>
+                break;
+            }
+        }
+        <ul><li><a href="@pdfLink">Policy / Contract / Certificate of Coverage</a></li></ul>
     }
 }

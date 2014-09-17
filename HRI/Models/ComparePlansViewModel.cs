@@ -17,8 +17,13 @@ namespace HRI.Models
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        
+        [Range(1, 110)]
         public int? CustomerAge { get; set; }
+
+        [Range(1, 110)]
         public int? SpouseAge { get; set; }
+
         public List<int?> ChildrenAges { get; set; }
 
         public decimal? Income { get; set; }
