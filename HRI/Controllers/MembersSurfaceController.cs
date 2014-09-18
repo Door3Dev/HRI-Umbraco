@@ -69,7 +69,7 @@ namespace HRI.Controllers
                     {"member:id", member.GetValue("yNumber").ToString()},
                     {"member:first_name", member.GetValue("firstName").ToString()},
                     {"member:last_name", member.GetValue("lastName").ToString()},
-                    {"member:product", "EPO"}
+                    {"member:product", member.GetValue("healthPlanName").ToString()}
                 };
 
                 SAML20Assertion.GuideSSO(Response, partnerSP, member.GetValue("yNumber").ToString(), samlAttributes);
