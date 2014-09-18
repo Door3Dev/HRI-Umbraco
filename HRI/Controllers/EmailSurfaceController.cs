@@ -178,6 +178,12 @@ namespace HRI.Controllers
                         registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
                         Roles.AddUserToRole(model.UserName, "Enrolled");
                     }
+                    // Plan Id
+                    if ((string)hriUser["PlanId"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
+                    // Plan Name
+                    if ((string)hriUser["PlanName"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
 
                     // Create a random Guid
                     Guid key = Guid.NewGuid();

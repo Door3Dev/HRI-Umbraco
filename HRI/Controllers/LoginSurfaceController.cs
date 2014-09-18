@@ -100,6 +100,12 @@ namespace HRI.Controllers
                     // Birthday
                     if ((string) hriUser["DOB"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+                    // Plan Id
+                    if ((string)hriUser["PlanId"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
+                    // Plan Name
+                    if ((string)hriUser["PlanName"] != null)
+                        registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
 
                     // Create a random Guid
                     Guid key = Guid.NewGuid();
@@ -147,9 +153,11 @@ namespace HRI.Controllers
                 {
                     return Redirect("/your-account/enrollment/");
                 }
-                // Save Group Id and Birthday, add user as enrolled
+                // Save Group Id, Birthday, Plan Id, Plan Name, add user as enrolled
                 member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
                 member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+                member.Properties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
+                member.Properties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
                 Roles.AddUserToRole(model.Username, "Enrolled");
 
                 member.SetValue("enrollmentpageafterlogin", String.Empty);
