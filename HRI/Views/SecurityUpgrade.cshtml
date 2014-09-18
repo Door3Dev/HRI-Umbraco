@@ -8,11 +8,9 @@
 <div id="hri-content">
     <div class="row-fluid">
         <div class="span4 offset4 well regular-form">
-            <h3>We are upgrading our security system</h3>
+            <h3>@Umbraco.Field("pageHeader", convertLineBreaks: true)</h3>
 
-            <p>In order to provide you with a more secure user experience, we are requiring members to update their passwords before they can log in.</p>
-            <p>We have sent a message to your registered email with a link that will allow you to reset your password and login.</p>
-                        
+            @Umbraco.Field("messageText", convertLineBreaks: true)            
         </div>
     </div>
 </div>
