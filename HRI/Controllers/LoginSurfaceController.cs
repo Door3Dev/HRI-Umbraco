@@ -11,7 +11,7 @@ namespace HRI.Controllers
     public class LoginSurfaceController : HriSufraceController
     {
         [HttpPost]
-        public ActionResult HandleLogin([Bind(Prefix = "loginModel")]LoginModel model)
+        public ActionResult HandleLogin([Bind(Prefix = "loginModel")] LoginModel model)
         {
             // If the model is NOT valid
             if (ModelState.IsValid == false)
@@ -27,11 +27,21 @@ namespace HRI.Controllers
                 // Check to make sure that the user exists
                 if (member != null)
                 {
+                    if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet
+                    {
+                        ModelState.AddModelError(
+                            "loginModel", 
+                            string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
+
+                        return CurrentUmbracoPage();
+                    }
+
                     // If the user does exist then it was a wrong password
                     // Don't add a field level error, just model level
                     ModelState.AddModelError("loginModel", "Invalid username or password");
                     return CurrentUmbracoPage();
                 }
+
                 // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
                 JObject hriUser;
                 try
