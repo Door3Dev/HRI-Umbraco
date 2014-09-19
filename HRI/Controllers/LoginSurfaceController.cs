@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
@@ -19,7 +21,36 @@ namespace HRI.Controllers
                 // Return the user to the login page
                 return CurrentUmbracoPage();
             }
-            var member = Services.MemberService.GetByUsername(model.Username); 
+
+            try
+            {
+                return HandleLoginCore(model);
+            }
+            catch (Exception ex)
+            {
+                var baseException = ex.GetBaseException();
+
+                var win32Ex = baseException as Win32Exception;
+                var handle = win32Ex != null 
+                    && string.Compare(win32Ex.Message, "The wait operation timed out", StringComparison.Ordinal) == 0;
+
+                var sqlTimeoutEx = baseException as SqlException;
+                handle |= sqlTimeoutEx != null && sqlTimeoutEx.Number == -2;
+
+                if (!handle)
+                {
+                    throw;
+                }
+                
+                // Handle timeout exceptions
+                ModelState.AddModelError("loginModel", "Oops, we ran into a problem, please try again or contact Member Services for assistance.");
+                return CurrentUmbracoPage();
+            }
+        }
+
+        private ActionResult HandleLoginCore(LoginModel model)
+        {
+            var member = Services.MemberService.GetByUsername(model.Username);
 
             // If the user is unable to login
             if (Members.Login(model.Username, model.Password) == false)
@@ -30,7 +61,7 @@ namespace HRI.Controllers
                     if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet
                     {
                         ModelState.AddModelError(
-                            "loginModel", 
+                            "loginModel",
                             string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
 
                         return CurrentUmbracoPage();
@@ -47,7 +78,7 @@ namespace HRI.Controllers
                 try
                 {
                     hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
-                        new Dictionary<string, string> {{"userName", model.Username}});
+                        new Dictionary<string, string> { { "userName", model.Username } });
                 }
                 catch // There was an error in connecting to or executing the function on the API
                 {
@@ -61,9 +92,9 @@ namespace HRI.Controllers
                     ModelState.AddModelError("loginModel", "There was trouble accessing your account, please contact us by telephone.");
                     return CurrentUmbracoPage();
                 }
-                                                          
+
                 // If the user exists in IWS database
-                if((string)hriUser["RegId"] != null)
+                if ((string)hriUser["RegId"] != null)
                 {
                     // Before attempt to create a user need to check the email and login uniqueness
                     var existedUserWithUsername = Services.MemberService.GetByUsername(hriUser["UserName"].ToString());
@@ -75,7 +106,7 @@ namespace HRI.Controllers
                     }
 
                     // Create the registration model
-                    var registerModel = Members.CreateRegistrationModel();                        
+                    var registerModel = Members.CreateRegistrationModel();
                     // Member Name
                     registerModel.Name = hriUser["FirstName"].ToString() + " " + hriUser["LastName"].ToString();
                     // Member Id
@@ -83,11 +114,11 @@ namespace HRI.Controllers
                     // User Name
                     registerModel.Username = hriUser["UserName"].ToString();
                     // First Name
-                    registerModel.MemberProperties.First(p => p.Alias=="firstName").Value = hriUser["FirstName"].ToString();
+                    registerModel.MemberProperties.First(p => p.Alias == "firstName").Value = hriUser["FirstName"].ToString();
                     // Last Name
                     registerModel.MemberProperties.First(p => p.Alias == "lastName").Value = hriUser["LastName"].ToString();
                     // SSN
-                    if((string)hriUser["Ssn"] != null)
+                    if ((string)hriUser["Ssn"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "ssn").Value = hriUser["Ssn"].ToString();
                     // SSN
                     if ((string)hriUser["EbixId"] != null)
@@ -108,7 +139,7 @@ namespace HRI.Controllers
                     if ((string)hriUser["RxGrpId"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
                     // Birthday
-                    if ((string) hriUser["DOB"] != null)
+                    if ((string)hriUser["DOB"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
                     // Plan Id
                     if ((string)hriUser["PlanId"] != null)
@@ -132,15 +163,15 @@ namespace HRI.Controllers
                     // Force sign out (hack for Umbraco bug that automatically logs user in on registration
                     Session.Clear();
                     FormsAuthentication.SignOut();
-                        
+
                     // Authenticate the user automatically as a registered user
                     newMember.IsApproved = true;
                     Roles.AddUserToRole(newMember.UserName, "Registered");
                     Roles.AddUserToRole(model.Username, "Enrolled");
-                        
+
                     // Reset the password and send an email to the user
                     SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
-                        
+
                     return Redirect("/for-members/security-upgrade/");
                 }
                 // The user doesnt exist locally or in IWS db
@@ -184,6 +215,5 @@ namespace HRI.Controllers
             TempData["LoginSuccess"] = true;
             return Redirect("/member-center/index");
         }
-
     }
 }
