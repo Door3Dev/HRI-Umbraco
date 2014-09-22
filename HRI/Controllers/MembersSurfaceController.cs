@@ -43,27 +43,22 @@ namespace HRI.Controllers
             // Attributes for US Script
             if(partnerSP == "USScript")
             {
-                attribs.Add("urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString());
-                attribs.Add("urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString());
-                attribs.Add("urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString());
-                attribs.Add("urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString());
-                attribs.Add("urn:uss:saml:attrib::dateofbirth", member.GetValue("birthday").ToString());
-                attribs.Add("urn:uss:saml:attrib::email", member.Email);
+                var samlAttributes = new Dictionary<string, string>
+                {
+                    {"urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString()},
+                    {"urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString()},
+                    {"urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString()},
+                    {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
+                    {"urn:uss:saml:attrib::dateofbirth", member.GetValue("birthday").ToString()},
+                    {"urn:uss:saml:attrib::email", member.Email}
+                };
 
-                // Send an IdP initiated SAML assertion
-                SAMLIdentityProvider.InitiateSSO(
-                    Response,
-                    targetUrl, // Use target URL as subject - trying to see how to fix usscript
-                    attribs,
-                    "",
-                    partnerSP);
+                PgpSAML20Assertion.GuideSSO(Response, partnerSP, String.Empty, samlAttributes);
             }
 
             // Attributes for MagnaCare
             if (partnerSP == "MagnaCare")
             {
-                // get the certificate
-                //var signCertificate = CertificateUtility.GetCertificateForSigning(@"C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\sp.pfx", "password");
                 var samlAttributes = new Dictionary<string, string>
                 {
                     {"member:id", member.GetValue("yNumber").ToString()},
