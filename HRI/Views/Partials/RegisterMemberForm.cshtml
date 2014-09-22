@@ -64,7 +64,7 @@
                 @Umbraco.Field("Information")
             </div> 
             <div class="span3 @(isNewUser ? string.Empty : "hide")">
-                @Html.Label("Social Security Number")
+                @Html.Label("Social Security Number (optional)")
                 @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.Ssn)
             </div>
