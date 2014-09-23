@@ -76,10 +76,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ComponentSpace.SAML2.dll" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NLog.dll" />
+    <Content Include="SecureBlackbox.dll" />
+    <Content Include="SecureBlackbox.PGP.dll" />
+    <Content Include="SecureBlackbox.XML.dll" />
+    <Content Include="SecureBlackbox.XMLSecurity.dll" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
