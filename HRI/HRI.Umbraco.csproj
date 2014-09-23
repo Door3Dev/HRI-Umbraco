@@ -62,8 +62,7 @@
     </Reference>
     <Reference Include="ComponentSpace.SAML2, Version=2.5.0.16, Culture=neutral, PublicKeyToken=7c51d97b3a0a8ff9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ComponentSpace SAML v2.0 for .NET\Bin\dotNET40\ComponentSpace.SAML2.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\ComponentSpace SAML v2.0 for .NET\Bin\dotNET40\ComponentSpace.SAML2.dll</HintPath>
     </Reference>
     <Reference Include="controls">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\controls.dll</HintPath>

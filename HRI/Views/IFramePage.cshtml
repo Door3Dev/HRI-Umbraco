@@ -16,7 +16,7 @@
     else if(@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
         sp = "AdamEbix";
     else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
-        sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+        sp = "HealthX";
     
     <!-- If the url needs the Ebix Id parameter added to it-->   
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            
@@ -25,8 +25,6 @@
 	if(frameHeight==""){ frameHeight = "900px";}
 	
 }
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 <div class="hri-common-hp row-fluid">
     <div class="span12">

@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ComponentSpace.SAML2">
-      <HintPath>..\packages\ComponentSpace SAML v2.0 for .NET\Bin\dotNET40\ComponentSpace.SAML2.dll</HintPath>
+    <Reference Include="ComponentSpace.SAML2, Version=2.5.0.18, Culture=neutral, PublicKeyToken=7c51d97b3a0a8ff9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ComponentSpace.SAML2.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -42,19 +43,19 @@
     </Reference>
     <Reference Include="SecureBlackbox, Version=12.0.260.0, Culture=neutral, PublicKeyToken=47aa36a947686fb6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\EldoS\SecureBlackbox.NET\Assemblies\NET_451_Desktop\SecureBlackbox.dll</HintPath>
+      <HintPath>.\SecureBlackbox.dll</HintPath>
     </Reference>
     <Reference Include="SecureBlackbox.PGP, Version=12.0.260.0, Culture=neutral, PublicKeyToken=47aa36a947686fb6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\EldoS\SecureBlackbox.NET\Assemblies\NET_451_Desktop\SecureBlackbox.PGP.dll</HintPath>
+      <HintPath>.\SecureBlackbox.PGP.dll</HintPath>
     </Reference>
     <Reference Include="SecureBlackbox.XML, Version=12.0.260.0, Culture=neutral, PublicKeyToken=47aa36a947686fb6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\EldoS\SecureBlackbox.NET\Assemblies\NET_451_Desktop\SecureBlackbox.XML.dll</HintPath>
+      <HintPath>.\SecureBlackbox.XML.dll</HintPath>
     </Reference>
     <Reference Include="SecureBlackbox.XMLSecurity, Version=12.0.260.0, Culture=neutral, PublicKeyToken=47aa36a947686fb6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\EldoS\SecureBlackbox.NET\Assemblies\NET_451_Desktop\SecureBlackbox.XMLSecurity.dll</HintPath>
+      <HintPath>.\SecureBlackbox.XMLSecurity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
