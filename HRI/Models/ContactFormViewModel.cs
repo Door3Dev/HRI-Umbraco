@@ -2,34 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace HRI.Models
 {
     public class ContactFormViewModel
     {
-        public ContactFormViewModel()
-        {
-            MessageTypes = new[]
-            {
-                "Billing Questions",
-                "ID Cards",
-                "Benefits Questions",
-                "Provider Network",
-                "Techincal Issues",
-                "Claims",
-                "Cancellation",
-                "Update Information",
-                "Pharmacy",
-                "Other"
-            };
-        }
-
         [Required]
         public string MessageType { get; set; }
-
-        public string[] MessageTypes { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -46,5 +25,24 @@ namespace HRI.Models
 
         [Required]
         public string Message { get; set; }
+
+        public static IList<Tuple<string, string>> GetCategoriesAndEmails(string categoriesAndEmails)
+        {
+            return (categoriesAndEmails ?? string.Empty)
+                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(catEm =>
+                {
+                    var strings = catEm.Split(new[] { ';' }).Select(s => s.Trim()).ToList();
+
+                    if (strings.Any(string.IsNullOrEmpty) || strings.Count != 2)
+                    {
+                        return null;
+                    }
+
+                    return Tuple.Create(strings[0], strings[1]);
+                })
+                .Where(i => i != null)
+                .ToList();
+        }
     }
 }
