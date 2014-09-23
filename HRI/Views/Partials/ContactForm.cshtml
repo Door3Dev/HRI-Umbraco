@@ -1,8 +1,9 @@
 ﻿@using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
+@using HRI.Models
 @using Umbraco.Web 
 @using HRI.Controllers
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@inherits UmbracoTemplatePage
 @{
     Layout = null;
 }
@@ -14,7 +15,7 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
-    var model = new HRI.Models.ContactFormViewModel();
+    var model = new ContactFormViewModel();
     if (User.Identity.IsAuthenticated)
     {
         model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
@@ -22,6 +23,9 @@
         model.Email = @Membership.GetUser().Email;
         model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
     }
+
+    var categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
+        (string)CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
 }
 
 @Html.Raw(Html.RenderJsHere())
@@ -30,50 +34,49 @@
 {
     <h1>Message Sent.</h1>
     <p>Thanks for sending your message, we will get back to you shortly.</p>
+    return;
 }
-else
+
+@using (Html.BeginUmbracoForm<EmailSurfaceController>("ContactUs"))
 {
-    using (Html.BeginUmbracoForm<EmailSurfaceController>("ContactUs"))
-    {
-        @Html.ValidationSummary(true)
-        @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
     
-		@Html.Label("Message Topic", model.MessageTypes)
-        @Html.DropDownListFor(
-            m => model.MessageType, 
-            new SelectList(
-                Enumerable
-                    .Repeat(new { Id = (string)null, Name = "Please choose a topic" }, 1)
-                    .Concat(model.MessageTypes.Select(s => new { Id = s, Name = s })), 
-                "Id", 
-                "Name"))
-        @Html.ValidationMessageFor(m => model.MessageType)
+	@Html.Label("Message Topic")
+    @Html.DropDownListFor(
+        m => model.MessageType, 
+        new SelectList(
+            Enumerable
+                .Repeat(new { Id = (string)null, Name = "Please choose a topic" }, 1)
+                .Concat(categoriesAndEmails.Select(c => new { Id = c.Item1, Name = c.Item1 })), 
+            "Id", 
+            "Name"))
+    @Html.ValidationMessageFor(m => model.MessageType)
 
-		<div class="row-fluid">
-			<label class="span6 name">
-				First Name<br>
-				@Html.TextBoxFor(m => model.FirstName)
-				@Html.ValidationMessageFor(m => model.FirstName)
-			</label>
-			<label class="span6">
-				Last Name<br>
-				@Html.TextBoxFor(m => model.LastName)
-				@Html.ValidationMessageFor(m => model.LastName)
-			</label>
-		</div>
+	<div class="row-fluid">
+		<label class="span6 name">
+			First Name<br>
+			@Html.TextBoxFor(m => model.FirstName)
+			@Html.ValidationMessageFor(m => model.FirstName)
+		</label>
+		<label class="span6">
+			Last Name<br>
+			@Html.TextBoxFor(m => model.LastName)
+			@Html.ValidationMessageFor(m => model.LastName)
+		</label>
+	</div>
 				
-		@Html.Label("Email", "Email")
-        @Html.TextBoxFor(m => model.Email)
-		@Html.ValidationMessageFor(m => model.Email)
+	@Html.Label("Email", "Email")
+    @Html.TextBoxFor(m => model.Email)
+	@Html.ValidationMessageFor(m => model.Email)
     
-		@Html.Label("Phone Number", "Phone Number")
-        @Html.TextBoxFor(m => model.PhoneNumber)
-		@Html.ValidationMessageFor(m => model.PhoneNumber)
+	@Html.Label("Phone Number", "Phone Number")
+    @Html.TextBoxFor(m => model.PhoneNumber)
+	@Html.ValidationMessageFor(m => model.PhoneNumber)
 
-		@Html.Label("Type Your Message", model.Message)
-		@Html.TextAreaFor(m => model.Message, new {rows = 6})
-		@Html.ValidationMessageFor(m => model.Message)
+	@Html.Label("Type Your Message", model.Message)
+	@Html.TextAreaFor(m => model.Message, new {rows = 6})
+	@Html.ValidationMessageFor(m => model.Message)
     
-        <input type="submit" value="Send" class="btn hri-btn" />
-    }
+    <input type="submit" value="Send" class="btn hri-btn" />
 }
