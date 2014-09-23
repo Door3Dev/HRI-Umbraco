@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -24,10 +23,15 @@ namespace HRI.Controllers
         {
             try
             {
-                // Get the contact us email value
-                var sendTo = CurrentPage.GetPropertyValue<string>("contactUsEmail");
+                var categoriesAndEmails =
+                    ContactFormViewModel.GetCategoriesAndEmails(
+                        CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
 
-                SendEmail(sendTo, model.MessageType, model.Message);
+                var email =
+                    categoriesAndEmails.First(
+                        c => string.Compare(c.Item1, model.MessageType, StringComparison.Ordinal) == 0).Item2;
+
+                SendEmail(email, model.MessageType, model.Message);
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;
