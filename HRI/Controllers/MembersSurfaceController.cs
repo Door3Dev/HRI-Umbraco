@@ -194,21 +194,21 @@ namespace HRI.Controllers
         /// <param name="model">Change Email model containing password and email address</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")]ChangeEmailViewModel model)
+        public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")] ChangeEmailViewModel model)
         {
             try
             {
-                // Get the current user
-                var user = Membership.GetUser();
                 // Verify the password is correct
                 if (model.Email == model.Email2)
-                {                  
-                    if (Membership.ValidateUser(User.Identity.Name, model.Password))
+                {
+                    // Get the current user
+                    var user = Membership.GetUser();
+                    if (user != null && Membership.ValidateUser(user.UserName, model.Password))
                     {
                         // Set the user's email address to the new supplied email address.
                         user.Email = model.Email;
                         // Update the User profile in the database
-                        Membership.UpdateUser((System.Web.Security.MembershipUser)user);
+                        Membership.UpdateUser(user);
                         // Set the success flag to true
                         TempData["IsSuccessful"] = true;
                         
@@ -229,7 +229,7 @@ namespace HRI.Controllers
 
                 return RedirectToCurrentUmbracoPage();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
@@ -237,15 +237,17 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")]ChangePasswordViewModel model)
+        public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")] ChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            var user = Membership.GetUser();
+
+            if (ModelState.IsValid && user != null && Membership.ValidateUser(user.UserName, model.OldPassword))
             {
-                var user = Membership.GetUser();
                 TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
                 // Update the User profile in the database
-                Membership.UpdateUser((System.Web.Security.MembershipUser)user);                
+                Membership.UpdateUser(user); 
             }
+
             return RedirectToCurrentUmbracoPage();
         }
 
