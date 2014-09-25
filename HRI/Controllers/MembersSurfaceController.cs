@@ -117,7 +117,7 @@ namespace HRI.Controllers
                     member.GetValue("yNumber").ToString(),
                     attrib.ToArray(),
                     "",
-                    "https://healthx.healthrepublic.us/PublicService/SSO/AutoLogin.aspx?bc=e6fa832c-fbd3-48c7-860f-e4f04b22bab7&amp;amp;serviceid=d99bfe58-3896-4eb6-9586-d2f9ae673052");
+                    partnerSP);
             }
 
             // Attributes for Morneau Shapell
