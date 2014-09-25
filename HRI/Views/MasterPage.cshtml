@@ -36,10 +36,8 @@
     <script src="/Scripts/jquery-1.9.1.js"></script>
 </head>
 <body lang="en" class="hri hri-common hri-newyork">
-    @if (((bool?)TempData["IsUserSuccessfullyRegistered"]).GetValueOrDefault())
-    {
-        @Html.Partial("RegistrationConfirmation")
-    }
+    @Html.Partial("RegistrationConfirmation")
+
     <div class="container">
         @Html.Partial("TopBar")
         <div class="row-fluid">

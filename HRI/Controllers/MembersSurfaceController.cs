@@ -174,7 +174,7 @@ namespace HRI.Controllers
                     // Set the user to be approved
                     member.IsApproved = true;                    
                     // Add the registered role to the user
-                    System.Web.Security.Roles.AddUserToRole(userName, "Registered");
+                    Roles.AddUserToRole(userName, "Registered");
                     // Save the member
                     Services.MemberService.Save(member);                    
                     // Send the user to the login page
@@ -184,9 +184,10 @@ namespace HRI.Controllers
             }
             catch (Exception)
             {
-                return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);     
             }
-            return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);            
+
+            TempData["IsUserSuccessfullyRegistered"] = false;
+            return Redirect("/for-members/login");
         }
 
         /// <summary>
