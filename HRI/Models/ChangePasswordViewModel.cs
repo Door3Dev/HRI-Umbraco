@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace HRI.Models
 {
@@ -13,6 +10,9 @@ namespace HRI.Models
 
         [Required]
         public string NewPassword { get; set; }
-
+        
+        [Required]
+        [Compare("NewPassword", ErrorMessage = "Confirm New Password and New Password do not match.")]
+        public string ConfirmNewPassword { get; set; }
     }
 }

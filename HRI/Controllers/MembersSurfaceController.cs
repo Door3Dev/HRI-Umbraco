@@ -15,6 +15,7 @@ namespace HRI.Controllers
 {
     public class MembersSurfaceController : SurfaceController
     {
+        private const string IncorrectPassword = "The password you entered does not match our records, please try again";
 
         [HttpGet]
         public ActionResult Logout()
@@ -215,15 +216,15 @@ namespace HRI.Controllers
                     }
                     else // The password was incorrect
                     {
-                        ModelState.AddModelError("changeEmailViewModel", "Incorrect Password");
+                        ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
                         // Mark the post as unsuccessful
                         TempData["IsSuccessful"] = false;
-                    }                    
+                    }
                 }
                 else // Email and confirmation email didnt match
                 {
                     // Mark the post as unsuccessful
-                    ModelState.AddModelError("changeEmailViewModel", "The email adresses you have entered do not mach");                    
+                    ModelState.AddModelError("changeEmailViewModel", "The email adresses you have entered do not mach");
                     //TempData["IsSuccessful"] = false;
                 }
 
@@ -240,15 +241,31 @@ namespace HRI.Controllers
         public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")] ChangePasswordViewModel model)
         {
             var user = Membership.GetUser();
+            if (user == null || !Membership.ValidateUser(user.UserName, model.OldPassword))
+            {
+                ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
+            }
 
-            if (ModelState.IsValid && user != null && Membership.ValidateUser(user.UserName, model.OldPassword))
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
+            try
             {
                 TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
                 // Update the User profile in the database
-                Membership.UpdateUser(user); 
+                Membership.UpdateUser(user);
+                return RedirectToCurrentUmbracoPage();
             }
+            catch (MembershipPasswordException)
+            {
+                ModelState.AddModelError(
+                    "changePasswordViewModel.NewPassword", 
+                    RegisterSurfaceController.PasswordNotStrongEnough);
 
-            return RedirectToCurrentUmbracoPage();
+                return CurrentUmbracoPage();
+            }
         }
 
         [HttpPost]

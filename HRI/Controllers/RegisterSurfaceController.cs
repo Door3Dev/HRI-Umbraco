@@ -9,6 +9,8 @@ namespace HRI.Controllers
 {
     public class RegisterSurfaceController : HriSufraceController
     {
+        public const string PasswordNotStrongEnough = "The password is not strong enough";
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")] RegisterFormViewModel model)
@@ -72,7 +74,7 @@ namespace HRI.Controllers
                     ModelState.AddModelError("registerModel.Username", "Username is not valid");
                     break;
                 case MembershipCreateStatus.InvalidPassword:
-                    ModelState.AddModelError("registerModel.Password", "The password is not strong enough");
+                    ModelState.AddModelError("registerModel.Password", PasswordNotStrongEnough);
                     break;
                 case MembershipCreateStatus.InvalidQuestion:
                 case MembershipCreateStatus.InvalidAnswer:
