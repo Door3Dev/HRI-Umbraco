@@ -15,7 +15,7 @@ namespace HRI.Controllers
 {
     public class MembersSurfaceController : SurfaceController
     {
-        private const string IncorrectPassword = "The password you entered does not match our records, please try again";
+        private const string IncorrectPassword = "The password you entered does not match our records, please try again.";
 
         [HttpGet]
         public ActionResult Logout()
@@ -197,37 +197,25 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")] ChangeEmailViewModel model)
         {
+            var user = Membership.GetUser();
+            if (user == null || !Membership.ValidateUser(user.UserName, model.Password))
+            {
+                ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
             try
             {
-                // Verify the password is correct
-                if (model.Email == model.Email2)
-                {
-                    // Get the current user
-                    var user = Membership.GetUser();
-                    if (user != null && Membership.ValidateUser(user.UserName, model.Password))
-                    {
-                        // Set the user's email address to the new supplied email address.
-                        user.Email = model.Email;
-                        // Update the User profile in the database
-                        Membership.UpdateUser(user);
-                        // Set the success flag to true
-                        TempData["IsSuccessful"] = true;
-                        
-                    }
-                    else // The password was incorrect
-                    {
-                        ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
-                        // Mark the post as unsuccessful
-                        TempData["IsSuccessful"] = false;
-                    }
-                }
-                else // Email and confirmation email didnt match
-                {
-                    // Mark the post as unsuccessful
-                    ModelState.AddModelError("changeEmailViewModel", "The email adresses you have entered do not mach");
-                    //TempData["IsSuccessful"] = false;
-                }
-
+                // Set the user's email address to the new supplied email address.
+                user.Email = model.Email;
+                // Update the User profile in the database
+                Membership.UpdateUser(user);
+                // Set the success flag to true
+                TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
             catch(Exception)
