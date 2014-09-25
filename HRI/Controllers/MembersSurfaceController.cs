@@ -166,9 +166,9 @@ namespace HRI.Controllers
                 if (regSuccess)
                 {
                     var member = Services.MemberService.GetByUsername(userName);
-                    if(member.GetValue("memberId") == null || member.GetValue("memberId") == "")
+                    if(member.GetValue("memberId").ToString() == null || member.GetValue("memberId").ToString() == "")
                         member.SetValue("memberId", json["RegId"].ToString());
-                    if (member.GetValue("yNumber") == null || member.GetValue("yNumber") == "")
+                    if (member.GetValue("yNumber").ToString() == null || member.GetValue("yNumber").ToString() == "")
                         member.SetValue("yNumber", json["MemberId"].ToString());
                     // Set the user to be approved
                     member.IsApproved = true;                    
