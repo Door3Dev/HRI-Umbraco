@@ -286,21 +286,44 @@ namespace HRI.Controllers
                 return Redirect("/");
             }
 
-            // Set the username and guid
-            TempData["username"] = userName;
-            TempData["guid"] = guid;
-            return Redirect("/for-members/reset-password/");                        
+            SetUserNameAndGuide(userName, guid);
+            return Redirect("/for-members/reset-password/");
         }
 
         [HttpPost]
-        public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")]ResetPasswordViewModel model)
+        public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")] ResetPasswordViewModel model)
         {
-            var member = Membership.GetUser(model.UserName);
-            string tempPassword = member.ResetPassword();
-            member.ChangePassword(tempPassword, model.NewPassword);
-            Membership.UpdateUser(member);
-            TempData["ResetPasswordIsSuccessful"] = true;
-            return RedirectToCurrentUmbracoPage();
+            if (!ModelState.IsValid)
+            {
+                SetUserNameAndGuide(model.UserName, model.Guid);
+                return CurrentUmbracoPage();
+            }
+
+            try
+            {
+                var member = Membership.GetUser(model.UserName);
+                var tempPassword = member.ResetPassword();
+                member.ChangePassword(tempPassword, model.NewPassword);
+                Membership.UpdateUser(member);
+                TempData["ResetPasswordIsSuccessful"] = true;
+                return RedirectToCurrentUmbracoPage();
+            }
+            catch (MembershipPasswordException)
+            {
+                ModelState.AddModelError(
+                    "resetPasswordViewModel.NewPassword",
+                    RegisterSurfaceController.PasswordNotStrongEnough);
+
+                SetUserNameAndGuide(model.UserName, model.Guid);
+                return CurrentUmbracoPage();
+            }
+        }
+
+        private void SetUserNameAndGuide(string userName, string guid)
+        {
+            // Set the username and guid
+            TempData["username"] = userName;
+            TempData["guid"] = guid;
         }
     }
 }
