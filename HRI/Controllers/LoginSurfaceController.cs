@@ -75,7 +75,7 @@ namespace HRI.Controllers
                     return CurrentUmbracoPage();
                 }
 
-                if (!Membership.ValidateUser(model.Username, model.Password))
+                if (Membership.GetUser(model.Username) == null)
                 {
                     ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
                     return CurrentUmbracoPage();
