@@ -74,6 +74,7 @@
     <Compile Include="SAMLSchema.cs" />
     <Compile Include="SAML20Assertion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringWriterWithEncoding.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ComponentSpace.SAML2.dll" />

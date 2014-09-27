@@ -73,7 +73,7 @@ namespace CoverMyMeds.SAML.Library
 
             XmlDocument XMLResponse = SerializeAndSignSAMLResponse(response, partnerSP);
 
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(XMLResponse.OuterXml));
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(XMLResponse.OuterXml.Replace("UTF-16", "UTF-8")));
         }
 
         public static void GuideSSO(HttpResponseBase httpResponse, string partnerSp, string subject, Dictionary<string, string> samlAttributes)
@@ -113,16 +113,17 @@ namespace CoverMyMeds.SAML.Library
         {
             // Set serializer and writers for action
             XmlSerializer responseSerializer = new XmlSerializer(Response.GetType());
-            StringWriter stringWriter = new StringWriter();
-            XmlWriter responseWriter = XmlTextWriter.Create(stringWriter, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true, Encoding = Encoding.UTF8 });
-            responseSerializer.Serialize(responseWriter, Response);
-            responseWriter.Close();
+            StringWriter stringWriter = new StringWriterWithEncoding();
+            MemoryStream stream = new MemoryStream();
+            //XmlWriter responseWriter = XmlTextWriter.Create(stringWriter, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true, Encoding = new UnicodeEncoding(false, false) });
+            responseSerializer.Serialize(stringWriter, Response);
+            //responseWriter.Close();
 
             SBUtils.Unit.SetLicenseKey("123A2EB227B191D0CCF215E707E9986BA63E23CB933F86547907FE2B26F2B05AAAA35C5DDD78628DE584D2BD34293FC8D99D48C6E5E63172813AAD1CBC07CEE7DBAB2E316C4548B166FBC8689C867CEABD61175494B039F15AE38A1A0C5AF9895624B45E396882C8B096F07B4163292C2ADFEC96CDCC814C900665BB0D0CCC083BCB68252BDE4C4C818E7AE14C5A897995C445D3CA4780858D7AF8F9E5218A4CB7431279293E39FA84820C09B740C5BE7A96B4DCEF8E03E53CC62C33D6D91A7750A55DF364B0A1DD36A0405D0E3EA9AED176B1DE3FDFC5837CDE346AC9065FF0D30351D85D6021A2834367BD74D5447D355EFDF3290F18B056E2CE43D3FDAB89");
 
             // Load SAML Response
             var fileStream = GenerateStreamFromString(stringWriter.ToString());
-            FXMLDocument.LoadFromStream(fileStream);
+            FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml:Assertion", true);
             SignElement(@"C:\Users\Eugene\Downloads\healthrepublicny.pfx", "hriny@123", assertionToSign);
@@ -235,17 +236,17 @@ namespace CoverMyMeds.SAML.Library
 
             Encryptor = new TElXMLEncryptor();
             Encryptor.EncryptKey = true;
-            Encryptor.EncryptionMethod = 0;
+            Encryptor.EncryptionMethod = 1;
             Encryptor.KeyName = String.Empty;
             Encryptor.EncryptedDataType = 0;
             Encryptor.KeyEncryptionType = 0;
-            Encryptor.KeyTransportMethod = 0;
+            Encryptor.KeyTransportMethod = 1;
             Encryptor.KeyWrapMethod = 0;
 
             SymKeyData = new TElXMLKeyInfoSymmetricData(true);
             // generate random Key & IV
-            SymKeyData.Key.Generate(SBDES.Unit.T3DESKeySize * 8);
-            SymKeyData.Key.GenerateIV(8 * 8);
+            SymKeyData.Key.Generate(32 * 8);
+            SymKeyData.Key.GenerateIV(16 * 8);
                      
             Encryptor.KeyData = SymKeyData;
 
