@@ -326,6 +326,7 @@
     <Content Include="mc_uatsaml_pub.cer" />
     <Content Include="healthrepublicny.pfx" />
     <Content Include="mc_prodsaml_pub.cer" />
+    <Content Include="DOOR3_LWPROD_SSO.cer" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
@@ -380,6 +381,10 @@
     <Content Include="Views\MacroPartials\UserHealthPolicyLink.cshtml" />
     <Content Include="ussitsps_test_pub.asc" />
     <Content Include="Views\Partials\RegistrationConfirmation.cshtml" />
+    <Content Include="production.saml.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="sso.healthx.com.crt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
