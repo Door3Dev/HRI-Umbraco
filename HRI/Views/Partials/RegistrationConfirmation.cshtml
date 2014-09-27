@@ -1,7 +1,23 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
+
+@{
+    var registeredSuccessfully = (bool?)TempData["IsUserSuccessfullyRegistered"];
+
+    if (!registeredSuccessfully.HasValue)
+    {
+        return;
+    }
+}
 
 <div class="navbar navbar-inverse navbar-fixed-top flowbar" data-flowseconds="0">
     <div class="container">
-        <p>Your new Health Republic Insurance of New York account has been verified successfully, <br />you may now login using the user name and password set during registration.</p>
+        @if (registeredSuccessfully.Value)
+        {
+            <p>Your new Health Republic Insurance of New York account has been verified successfully, <br />you may now login using the user name and password set during registration.</p>
+        }
+        else
+        {
+            <p>There was an error validating your account. Your account may have already been validated. <br />Please try logging in at the site or contact Health Republic New York.</p>
+        }
     </div>
 </div>

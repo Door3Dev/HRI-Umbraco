@@ -15,6 +15,7 @@ namespace HRI.Controllers
 {
     public class MembersSurfaceController : SurfaceController
     {
+        private const string IncorrectPassword = "The password you entered does not match our records, please try again.";
 
         [HttpGet]
         public ActionResult Logout()
@@ -173,7 +174,7 @@ namespace HRI.Controllers
                     // Set the user to be approved
                     member.IsApproved = true;                    
                     // Add the registered role to the user
-                    System.Web.Security.Roles.AddUserToRole(userName, "Registered");
+                    Roles.AddUserToRole(userName, "Registered");
                     // Save the member
                     Services.MemberService.Save(member);                    
                     // Send the user to the login page
@@ -183,9 +184,10 @@ namespace HRI.Controllers
             }
             catch (Exception)
             {
-                return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);     
             }
-            return Content("There was an error validating your account. Your account may have already been validated. Please try logging in at <a href='/' >the site</a> or contact Health Republic New York.<br><br>" + json["message"]);            
+
+            TempData["IsUserSuccessfullyRegistered"] = false;
+            return Redirect("/for-members/login");
         }
 
         /// <summary>
@@ -196,37 +198,25 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")] ChangeEmailViewModel model)
         {
+            var user = Membership.GetUser();
+            if (user == null || !Membership.ValidateUser(user.UserName, model.Password))
+            {
+                ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
             try
             {
-                // Verify the password is correct
-                if (model.Email == model.Email2)
-                {
-                    // Get the current user
-                    var user = Membership.GetUser();
-                    if (user != null && Membership.ValidateUser(user.UserName, model.Password))
-                    {
-                        // Set the user's email address to the new supplied email address.
-                        user.Email = model.Email;
-                        // Update the User profile in the database
-                        Membership.UpdateUser(user);
-                        // Set the success flag to true
-                        TempData["IsSuccessful"] = true;
-                        
-                    }
-                    else // The password was incorrect
-                    {
-                        ModelState.AddModelError("changeEmailViewModel", "Incorrect Password");
-                        // Mark the post as unsuccessful
-                        TempData["IsSuccessful"] = false;
-                    }                    
-                }
-                else // Email and confirmation email didnt match
-                {
-                    // Mark the post as unsuccessful
-                    ModelState.AddModelError("changeEmailViewModel", "The email adresses you have entered do not mach");                    
-                    //TempData["IsSuccessful"] = false;
-                }
-
+                // Set the user's email address to the new supplied email address.
+                user.Email = model.Email;
+                // Update the User profile in the database
+                Membership.UpdateUser(user);
+                // Set the success flag to true
+                TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
             catch(Exception)
@@ -240,15 +230,31 @@ namespace HRI.Controllers
         public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")] ChangePasswordViewModel model)
         {
             var user = Membership.GetUser();
+            if (user == null || !Membership.ValidateUser(user.UserName, model.OldPassword))
+            {
+                ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
+            }
 
-            if (ModelState.IsValid && user != null && Membership.ValidateUser(user.UserName, model.OldPassword))
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
+            try
             {
                 TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
                 // Update the User profile in the database
-                Membership.UpdateUser(user); 
+                Membership.UpdateUser(user);
+                return RedirectToCurrentUmbracoPage();
             }
+            catch (MembershipPasswordException)
+            {
+                ModelState.AddModelError(
+                    "changePasswordViewModel.NewPassword", 
+                    RegisterSurfaceController.PasswordNotStrongEnough);
 
-            return RedirectToCurrentUmbracoPage();
+                return CurrentUmbracoPage();
+            }
         }
 
         [HttpPost]
@@ -280,21 +286,44 @@ namespace HRI.Controllers
                 return Redirect("/");
             }
 
-            // Set the username and guid
-            TempData["username"] = userName;
-            TempData["guid"] = guid;
-            return Redirect("/for-members/reset-password/");                        
+            SetUserNameAndGuide(userName, guid);
+            return Redirect("/for-members/reset-password/");
         }
 
         [HttpPost]
-        public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")]ResetPasswordViewModel model)
+        public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")] ResetPasswordViewModel model)
         {
-            var member = Membership.GetUser(model.UserName);
-            string tempPassword = member.ResetPassword();
-            member.ChangePassword(tempPassword, model.NewPassword);
-            Membership.UpdateUser(member);
-            TempData["ResetPasswordIsSuccessful"] = true;
-            return RedirectToCurrentUmbracoPage();
+            if (!ModelState.IsValid)
+            {
+                SetUserNameAndGuide(model.UserName, model.Guid);
+                return CurrentUmbracoPage();
+            }
+
+            try
+            {
+                var member = Membership.GetUser(model.UserName);
+                var tempPassword = member.ResetPassword();
+                member.ChangePassword(tempPassword, model.NewPassword);
+                Membership.UpdateUser(member);
+                TempData["ResetPasswordIsSuccessful"] = true;
+                return RedirectToCurrentUmbracoPage();
+            }
+            catch (MembershipPasswordException)
+            {
+                ModelState.AddModelError(
+                    "resetPasswordViewModel.NewPassword",
+                    RegisterSurfaceController.PasswordNotStrongEnough);
+
+                SetUserNameAndGuide(model.UserName, model.Guid);
+                return CurrentUmbracoPage();
+            }
+        }
+
+        private void SetUserNameAndGuide(string userName, string guid)
+        {
+            // Set the username and guid
+            TempData["username"] = userName;
+            TempData["guid"] = guid;
         }
     }
 }

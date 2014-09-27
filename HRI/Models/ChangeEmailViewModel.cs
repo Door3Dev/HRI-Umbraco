@@ -19,6 +19,7 @@ namespace HRI.Models
         [Required]
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
+        [Compare("Email", ErrorMessage = "Confirm New Email and New Email do not match.")]
         public string Email2 { get; set; }
     }
 }

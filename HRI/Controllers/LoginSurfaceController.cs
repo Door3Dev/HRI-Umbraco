@@ -53,9 +53,11 @@ namespace HRI.Controllers
             var member = Services.MemberService.GetByUsername(model.Username);
 
             // If the user is unable to login
-            if (Members.Login(model.Username, model.Password) == false)
+            if (!Members.Login(model.Username, model.Password))
             {
                 // Check to make sure that the user exists
+                const string invalidUsernameOrPassword = "Invalid username or password.";
+
                 if (member != null)
                 {
                     if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet
@@ -69,7 +71,13 @@ namespace HRI.Controllers
 
                     // If the user does exist then it was a wrong password
                     // Don't add a field level error, just model level
-                    ModelState.AddModelError("loginModel", "Invalid username or password");
+                    ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
+                    return CurrentUmbracoPage();
+                }
+
+                if (Membership.GetUser(model.Username) == null)
+                {
+                    ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
                     return CurrentUmbracoPage();
                 }
 
@@ -176,7 +184,7 @@ namespace HRI.Controllers
                 }
                 // The user doesnt exist locally or in IWS db
                 //don't add a field level error, just model level
-                ModelState.AddModelError("loginModel", "Invalid username or password");
+                ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
                 return CurrentUmbracoPage();
             }
 
