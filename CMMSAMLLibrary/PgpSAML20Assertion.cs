@@ -111,6 +111,9 @@ namespace CoverMyMeds.SAML.Library
         /// <returns>XML Document with computed signature</returns>
         private static XmlDocument SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
         {
+            var signatureCertificatePath = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile;
+            var signaruteCertificatePassword = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificatePassword;
+            var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
             // Set serializer and writers for action
             XmlSerializer responseSerializer = new XmlSerializer(Response.GetType());
             StringWriter stringWriter = new StringWriterWithEncoding();
@@ -119,19 +122,19 @@ namespace CoverMyMeds.SAML.Library
             responseSerializer.Serialize(stringWriter, Response);
             //responseWriter.Close();
 
-            SBUtils.Unit.SetLicenseKey("123A2EB227B191D0CCF215E707E9986BA63E23CB933F86547907FE2B26F2B05AAAA35C5DDD78628DE584D2BD34293FC8D99D48C6E5E63172813AAD1CBC07CEE7DBAB2E316C4548B166FBC8689C867CEABD61175494B039F15AE38A1A0C5AF9895624B45E396882C8B096F07B4163292C2ADFEC96CDCC814C900665BB0D0CCC083BCB68252BDE4C4C818E7AE14C5A897995C445D3CA4780858D7AF8F9E5218A4CB7431279293E39FA84820C09B740C5BE7A96B4DCEF8E03E53CC62C33D6D91A7750A55DF364B0A1DD36A0405D0E3EA9AED176B1DE3FDFC5837CDE346AC9065FF0D30351D85D6021A2834367BD74D5447D355EFDF3290F18B056E2CE43D3FDAB89");
+            SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
 
             // Load SAML Response
             var fileStream = GenerateStreamFromString(stringWriter.ToString());
             FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml:Assertion", true);
-            SignElement(@"C:\Users\Eugene\Downloads\healthrepublicny.pfx", "hriny@123", assertionToSign);
+            SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
             // Assertion encryption
-            EncryptAssertion(@"C:\Users\Eugene\Downloads\ussitsps_test_pub.asc");
+            EncryptAssertion(encryptionKeyPath);
             // Response signature
             var responseToSign = FXMLDocument.FindNode("Response", true);
-            SignElement(@"C:\Users\Eugene\Downloads\healthrepublicny.pfx", "hriny@123", responseToSign);
+            SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
             var xmlResponse = new XmlDocument();
             xmlResponse.LoadXml(FXMLDocument.OuterXML);

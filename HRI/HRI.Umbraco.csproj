@@ -253,6 +253,9 @@
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
     <Content Include="css\styles.css" />
+    <Content Include="eldos-key.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="EmailTemplates\ResetPasswordEmailTemplate.txt" />
     <Content Include="EmailTemplates\VerificationEmailTemplate.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />
