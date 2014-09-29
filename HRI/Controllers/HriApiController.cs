@@ -191,6 +191,7 @@ namespace HRI.Controllers
                 member.SetValue("memberId", json["RegId"].ToString());                
                 // Assign their Morneau Shapell Y Number
                 member.SetValue("yNumber", json["MemberId"].ToString());
+                member.SetValue("market", json["Market"].ToString());
                 Services.MemberService.Save(member);
                 // Return successful registration
                 json.Add("error", "false");

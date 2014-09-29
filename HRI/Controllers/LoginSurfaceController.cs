@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using Newtonsoft.Json.Linq;
+using log4net;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Newtonsoft.Json.Linq;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers
 {
     public class LoginSurfaceController : HriSufraceController
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(LoginSurfaceController));
+
         [HttpPost]
         public ActionResult HandleLogin([Bind(Prefix = "loginModel")] LoginModel model)
         {
             // If the model is NOT valid
-            if (ModelState.IsValid == false)
+            if (!ModelState.IsValid)
             {
                 // Return the user to the login page
                 return CurrentUmbracoPage();
@@ -28,21 +29,7 @@ namespace HRI.Controllers
             }
             catch (Exception ex)
             {
-                var baseException = ex.GetBaseException();
-
-                var win32Ex = baseException as Win32Exception;
-                var handle = win32Ex != null 
-                    && string.Compare(win32Ex.Message, "The wait operation timed out", StringComparison.Ordinal) == 0;
-
-                var sqlTimeoutEx = baseException as SqlException;
-                handle |= sqlTimeoutEx != null && sqlTimeoutEx.Number == -2;
-
-                if (!handle)
-                {
-                    throw;
-                }
-                
-                // Handle timeout exceptions
+                Logger.Error("Exception during login", ex);
                 ModelState.AddModelError("loginModel", "Oops, we ran into a problem, please try again or contact Member Services for assistance.");
                 return CurrentUmbracoPage();
             }
@@ -51,6 +38,8 @@ namespace HRI.Controllers
         private ActionResult HandleLoginCore(LoginModel model)
         {
             var member = Services.MemberService.GetByUsername(model.Username);
+
+            JObject hriUser;
 
             // If the user is unable to login
             if (!Members.Login(model.Username, model.Password))
@@ -82,17 +71,8 @@ namespace HRI.Controllers
                 }
 
                 // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
-                JObject hriUser;
-                try
-                {
-                    hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
-                        new Dictionary<string, string> { { "userName", model.Username } });
-                }
-                catch // There was an error in connecting to or executing the function on the API
-                {
-                    ModelState.AddModelError("loginModel", "Error in API call GetRegisteredUserByUsername");
-                    return CurrentUmbracoPage();
-                }
+                hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
+                    new Dictionary<string, string> { { "userName", model.Username } });
 
                 // There is an API error
                 if (hriUser == null)
@@ -156,6 +136,8 @@ namespace HRI.Controllers
                     if ((string)hriUser["PlanName"] != null)
                         registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
 
+                    registerModel.MemberProperties.First(p => p.Alias == "market").Value = hriUser["Market"].ToString();
+
                     // Create a random Guid
                     Guid key = Guid.NewGuid();
                     // Update the user's Guid field
@@ -182,10 +164,36 @@ namespace HRI.Controllers
 
                     return Redirect("/for-members/security-upgrade/");
                 }
+
                 // The user doesnt exist locally or in IWS db
                 //don't add a field level error, just model level
                 ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
                 return CurrentUmbracoPage();
+            }
+
+            hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
+                new Dictionary<string, string> { { "userName", model.Username } });
+
+            var market = hriUser["Market"].ToString();
+            if (string.Compare(member.GetValue<string>("market"), market, StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                member.SetValue("market", market);
+                Services.MemberService.Save(member);
+            }
+
+            if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                if (Roles.IsUserInRole(model.Username, "Billing"))
+                {
+                    Roles.RemoveUserFromRole(model.Username, "Billing");
+                }
+            }
+            else
+            {
+                if (!Roles.IsUserInRole(model.Username, "Billing") && Roles.IsUserInRole(model.Username, "Enrolled"))
+                {
+                    Roles.AddUserToRole(model.Username, "Billing");
+                }
             }
 
             // User should pass enrollment process
@@ -194,8 +202,6 @@ namespace HRI.Controllers
                 // Each time when user trying to login and he is in the enrollment process
                 // has no Group Id and Birthday
                 // we should check the enrollment status through the API call
-                var hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
-                        new Dictionary<string, string> { { "userName", model.Username } });
 
                 if (String.IsNullOrEmpty(hriUser.Value<string>("RxGrpId"))
                     || String.IsNullOrEmpty(hriUser.Value<string>("DOB")))
