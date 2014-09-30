@@ -16,7 +16,7 @@
     else if(@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
         sp = "AdamEbix";
     else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
-        sp = "HealthX";
+		sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
     
     <!-- If the url needs the Ebix Id parameter added to it-->   
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            

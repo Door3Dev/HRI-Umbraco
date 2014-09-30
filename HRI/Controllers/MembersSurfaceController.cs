@@ -72,7 +72,7 @@ namespace HRI.Controllers
             }
 
             // Attributes for HealthX
-            if (partnerSP == "HealthX")
+			if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
             {
                 // Create attribute list an populate with needed data
                 var attrib = new List<SAMLAttribute>
