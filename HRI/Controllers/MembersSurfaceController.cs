@@ -50,7 +50,7 @@ namespace HRI.Controllers
                     {"urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString()},
                     {"urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString()},
                     {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
-                    {"urn:uss:saml:attrib::dateofbirth", member.GetValue("birthday").ToString()},
+                    {"urn:uss:saml:attrib::dateofbirth", Convert.ToDateTime(member.GetValue("birthday")).ToString("yyyy-MM-dd")},
                     {"urn:uss:saml:attrib::email", member.Email}
                 };
 
