@@ -7,16 +7,18 @@
     <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
     var targetUrl = @Umbraco.Field("samlTargetUrl");
     var sp = "";
-    if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")    
+    if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")
         sp = "SBCSystems";
-    else if(@Umbraco.Field("serviceProvider").ToString() == "MagnaCare")
+    else if (@Umbraco.Field("serviceProvider").ToString() == "MagnaCare")
         sp = "MagnaCare";
-    else if(@Umbraco.Field("serviceProvider").ToString() == "US Script")
+    else if (@Umbraco.Field("serviceProvider").ToString() == "US Script")
         sp = "USScript";
-    else if(@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
+    else if (@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
         sp = "AdamEbix";
     else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
-		sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+        sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+    else 
+        throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
     
     <!-- If the url needs the Ebix Id parameter added to it-->   
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            
