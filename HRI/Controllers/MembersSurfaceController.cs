@@ -50,7 +50,7 @@ namespace HRI.Controllers
                     {"urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString()},
                     {"urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString()},
                     {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
-                    {"urn:uss:saml:attrib::dateofbirth", member.GetValue("birthday").ToString()},
+                    {"urn:uss:saml:attrib::dateofbirth", Convert.ToDateTime(member.GetValue("birthday")).ToString("yyyy-MM-dd")},
                     {"urn:uss:saml:attrib::email", member.Email}
                 };
 
@@ -72,7 +72,7 @@ namespace HRI.Controllers
             }
 
             // Attributes for HealthX
-            if (partnerSP == "HealthX")
+            if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
             {
                 // Create attribute list an populate with needed data
                 var attrib = new List<SAMLAttribute>

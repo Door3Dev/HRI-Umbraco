@@ -237,6 +237,20 @@ namespace CoverMyMeds.SAML.Library
             FileStream F;
             TElXMLDOMNode EncNode;
 
+            /* partner side:
+             * Encryptor.EncryptKey = true;
+                Encryptor.EncryptionMethod = SBXMLSec.Unit.xemAES;
+                Encryptor.EncryptedDataType = SBXMLSec.Unit.xedtElement;
+
+                Encryptor.KeyEncryptionType = SBXMLSec.Unit.xetKeyTransport;
+                Encryptor.KeyTransportMethod = SBXMLSec.Unit.xktRSAOAEP;
+
+                SymKeyData = new TElXMLKeyInfoSymmetricData(true);
+                SymKeyData.Key.Generate(32 * 8);
+                SymKeyData.Key.GenerateIV(16 * 8);
+                Encryptor.KeyData = SymKeyData;
+             */
+
             Encryptor = new TElXMLEncryptor();
             Encryptor.EncryptKey = true;
             Encryptor.EncryptionMethod = 1;
@@ -259,34 +273,35 @@ namespace CoverMyMeds.SAML.Library
             X509KeyData = new TElXMLKeyInfoX509Data(true);
             PGPKeyData = new TElXMLKeyInfoPGPData(true);
 
+            certificate = "ussitsps_test_pub.asc";
             F = new FileStream(certificate, FileMode.Open, FileAccess.Read);
 
-            try
-            {
-                RSAKeyData.RSAKeyMaterial.LoadPublic(F, 0);
-            }
-            catch { }
+            //try
+            //{
+                //RSAKeyData.RSAKeyMaterial.LoadPublic(F, 0);
+            //}
+            //catch { }
 
-            if (!RSAKeyData.RSAKeyMaterial.PublicKey)
-            {
-                F.Position = 0;
-                try
-                {
-                    RSAKeyData.RSAKeyMaterial.LoadSecret(F, 0);
-                }
-                catch { }
-            }
+            //if (!RSAKeyData.RSAKeyMaterial.PublicKey)
+            //{
+            //    F.Position = 0;
+            //    try
+            //    {
+            //        RSAKeyData.RSAKeyMaterial.LoadSecret(F, 0);
+            //    }
+            //    catch { }
+            //}
 
-            if (!RSAKeyData.RSAKeyMaterial.PublicKey)
-            {
-                F.Position = 0;
-                LoadCertificate(F, String.Empty, X509KeyData);
-            }
+            //if (!RSAKeyData.RSAKeyMaterial.PublicKey)
+            //{
+            //    F.Position = 0;
+            //    LoadCertificate(F, String.Empty, X509KeyData);
+            //}
 
-            if (!RSAKeyData.RSAKeyMaterial.PublicKey &&
-                (X509KeyData.Certificate == null))
+                //if (!RSAKeyData.RSAKeyMaterial.PublicKey &&
+                //    (X509KeyData.Certificate == null))
             {
-                F.Position = 0;
+                //F.Position = 0;
                 PGPKeyData.PublicKey = new TElPGPPublicKey();
                 try
                 {
@@ -298,33 +313,33 @@ namespace CoverMyMeds.SAML.Library
                     PGPKeyData.PublicKey = null;
                 }
 
-                if (PGPKeyData.PublicKey == null)
-                {
-                    F.Position = 0;
-                    PGPKeyData.SecretKey = new TElPGPSecretKey();
-                    PGPKeyData.SecretKey.Passphrase = String.Empty;
-                    try
-                    {
-                        ((TElPGPSecretKey)PGPKeyData.SecretKey).LoadFromStream(F);
-                    }
-                    catch
-                    {
-                        PGPKeyData.SecretKey = null;
-                    }
-                }
+                //if (PGPKeyData.PublicKey == null)
+                //{
+                //    F.Position = 0;
+                //    PGPKeyData.SecretKey = new TElPGPSecretKey();
+                //    PGPKeyData.SecretKey.Passphrase = String.Empty;
+                //    try
+                //    {
+                //        ((TElPGPSecretKey)PGPKeyData.SecretKey).LoadFromStream(F);
+                //    }
+                //    catch
+                //    {
+                //        PGPKeyData.SecretKey = null;
+                //    }
+                //}
             }
 
             F.Close();
 
-            if (RSAKeyData.RSAKeyMaterial.PublicKey)
-                Encryptor.KeyEncryptionKeyData = RSAKeyData;
-            else
-                if (X509KeyData.Certificate != null)
-                    Encryptor.KeyEncryptionKeyData = X509KeyData;
+            //if (RSAKeyData.RSAKeyMaterial.PublicKey)
+            //    Encryptor.KeyEncryptionKeyData = RSAKeyData;
+            //else
+            //    if (X509KeyData.Certificate != null)
+            //        Encryptor.KeyEncryptionKeyData = X509KeyData;
 
-                else
-                    if ((PGPKeyData.PublicKey != null) ||
-                    (PGPKeyData.SecretKey != null))
+            //    else
+            //        if ((PGPKeyData.PublicKey != null) ||
+            //        (PGPKeyData.SecretKey != null))
                         Encryptor.KeyEncryptionKeyData = PGPKeyData;
 
             //Encrypt Node
