@@ -64,19 +64,18 @@ namespace HRI.Controllers
                     return CurrentUmbracoPage();
                 }
 
-                if (Membership.GetUser(model.Username) == null)
-                {
-                    ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
-                    return CurrentUmbracoPage();
-                }
-
                 // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
                 hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
                     new Dictionary<string, string> { { "userName", model.Username } });
 
-                // There is an API error
                 if (hriUser == null)
                 {
+                    if (Membership.GetUser(model.Username) == null)
+                    {
+                        ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
+                        return CurrentUmbracoPage();
+                    }
+
                     ModelState.AddModelError("loginModel", "There was trouble accessing your account, please contact us by telephone.");
                     return CurrentUmbracoPage();
                 }
