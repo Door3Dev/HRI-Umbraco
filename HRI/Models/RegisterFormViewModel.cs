@@ -54,7 +54,6 @@ namespace HRI.Models
         public string Username { get; set; }
 
         [Required]
-        [RegularExpression(".{8,}", ErrorMessage = "Password do not match the pattern")]
         public string Password { get; set; }
 
         public string PlanId { get; set; }
