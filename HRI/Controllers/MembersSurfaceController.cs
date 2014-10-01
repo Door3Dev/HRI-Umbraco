@@ -231,6 +231,11 @@ namespace HRI.Controllers
                 ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
             }
 
+            if (string.Compare(model.OldPassword, model.NewPassword, StringComparison.Ordinal) == 0)
+            {
+                ModelState.AddModelError("changePasswordViewModel.NewPassword", "Your new password cannot be the same as your current password.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return CurrentUmbracoPage();
