@@ -1,12 +1,12 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using HRI.Controllers
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
     // Grab a handle to the homepage
     var homePage = CurrentPage.AncestorsOrSelf(1).First();
 
     // The menu items we want are all of the children of the homepage unless marked not visible
-    var menuItems = homePage.Children.Where("navigationVisibility!=15");      
-
+    var menuItems = homePage.Children.Where("navigationVisibility!=15");
 }
 	
 <div class="footer row">
@@ -52,7 +52,7 @@
                                 }
                                 else
                                 {
-                                    <li><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.Url" @Utils.GetTarget(subpage)>@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                             }
                         </ul>
@@ -90,7 +90,7 @@
                                 }
                                 else
                                 {
-                                    <li><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.Url" @Utils.GetTarget(subpage)>@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                             }
                         }
