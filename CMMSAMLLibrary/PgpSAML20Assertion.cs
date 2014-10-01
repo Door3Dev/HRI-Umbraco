@@ -441,16 +441,17 @@ namespace CoverMyMeds.SAML.Library
                 }
 
             Ref.TransformChain.Add(new TElXMLEnvelopedSignatureTransform());
+            Ref.TransformChain.Add(new TElXMLC14NTransform());
             Refs.Add(Ref);
 
-            Signer = new TElXMLSigner();
+            Signer = new TElXMLSigner(); // https://www.eldos.com/documentation/sbb/documentation/ref_cl_xmlsigner_prp_signaturemethodtype.html
             try
             {
-                Signer.SignatureType = 4;
-                Signer.CanonicalizationMethod = 1;
-                Signer.SignatureMethodType = 0;
-                Signer.SignatureMethod = 2;
-                Signer.MACMethod = 1;
+                Signer.SignatureType = 4;           // Enveloped signature is used
+                Signer.CanonicalizationMethod = 1;  // Canonicalization without comments
+                Signer.SignatureMethodType = 0; // The data is signed
+                Signer.SignatureMethod = 2;     // RSA with SHA1 is used
+                Signer.MACMethod = 1;           // HMAC with SHA1 is used
                 Signer.References = Refs;
                 Signer.KeyName = String.Empty;
                 Signer.IncludeKey = true;
@@ -511,7 +512,7 @@ namespace CoverMyMeds.SAML.Library
                 else if (X509KeyData.Certificate != null)
                 {
                     if (!X509KeyData.Certificate.PrivateKeyExists)
-                    {
+                        {
                         throw new Exception("The selected certificate doesn''t contain a private key");
                     }
 
