@@ -3415,3 +3415,25 @@ ComponentSpace.SAML2 Verbose: 0 : 11:49:39 AM: Initiation of SSO to the partner 
 Content initialized (was already in context)
 Content initialized (was already in context)
 Content initialized (was already in context)
+ComponentSpace.SAML2 Verbose: 0 : 11:58:24 AM: The configuration C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\saml.config has changed and the application is being unloaded.
+Content initialized (was already in context)
+Content initialized (was already in context)
+Content initialized (was already in context)
+Content initialized (was already in context)
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: ComponentSpace.SAML2, Version=2.5.0.18, Culture=neutral, PublicKeyToken=7c51d97b3a0a8ff9 (retail license).
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: Loading the SAML configuration file C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\saml.config.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: The local identity provider is HRIAuth.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: The partner service provider SBCSystems has been added.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: The partner service provider MagnaCare has been added.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: The partner service provider USScript has been added.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: The partner service provider https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx has been added.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:32 PM: Loading the X.509 certificate from the file C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\sp.pfx.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: The X.509 certificate CN=www.sp.com has been loaded.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: Loading the X.509 certificate from the file C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\DOOR3_LWPROD_SSO.cer.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: The X.509 certificate CN=DOOR3_LWPROD_SSO has been loaded.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: Loading the X.509 certificate from the file C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\mc_prodsaml_pub.cer.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: The X.509 certificate CN=VAWebApps-Prod.magnacare.com has been loaded.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: Loading the X.509 certificate from the file C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI\SecCertHX080714.cer.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: The X.509 certificate CN=www.sp.com has been loaded.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: SAML configuration changes in the directory C:\Users\matthew.wood\Documents\GitHub\HRI-Umbraco\HRI are being monitored.
+ComponentSpace.SAML2 Verbose: 0 : 12:00:33 PM: The SAML configuration has been successfully loaded.
