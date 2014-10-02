@@ -71,10 +71,10 @@ namespace CoverMyMeds.SAML.Library
             // Put SAML 2.0 Assertion in Response
             response.Items = new AssertionType[] { CreateSAML20Assertion(Issuer, AssertionExpirationMinutes, Audience, Subject, Recipient, Attributes) };
 
-            XmlDocument XMLResponse = SerializeAndSignSAMLResponse(response, partnerSP);
-            string txtResponse = XMLResponse.OuterXml.Replace("UTF-16", "UTF-8");
+            byte[] binaryResponse = SerializeAndSignSAMLResponse(response, partnerSP);
+            //string txtResponse = XMLResponse.OuterXml.Replace("UTF-16", "UTF-8");
 
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(txtResponse));
+            return Convert.ToBase64String(binaryResponse);
         }
 
         public static void GuideSSO(HttpResponseBase httpResponse, string partnerSp, string subject, Dictionary<string, string> samlAttributes)
@@ -110,27 +110,32 @@ namespace CoverMyMeds.SAML.Library
         /// <param name="Response">SAML 2.0 Response</param>
         /// <param name="SigningCert">X509 certificate</param>
         /// <returns>XML Document with computed signature</returns>
-        private static XmlDocument SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
+        private static byte[] SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
         {
             var signatureCertificatePath = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile;
             var signaruteCertificatePassword = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificatePassword;
             var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
-            // Set serializer and writers for action
-            XmlSerializer responseSerializer = new XmlSerializer(Response.GetType());
-            StringWriter stringWriter = new StringWriterWithEncoding();
-            MemoryStream stream = new MemoryStream();
-            //XmlWriter responseWriter = XmlTextWriter.Create(stringWriter, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true, Encoding = new UnicodeEncoding(false, false) });
-            var ns = new XmlSerializerNamespaces();
-            ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
-            ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion");
-            responseSerializer.Serialize(stringWriter, Response, ns);
-            //responseWriter.Close();
+
+            using (var stream = new MemoryStream())
+            using (var writer = XmlTextWriter.Create(stream, new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true, Encoding = Encoding.UTF8 }))
+            {
+                var ns = new XmlSerializerNamespaces();
+                ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
+                ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion");
+
+                var responseSerializer = new XmlSerializer(Response.GetType());
+                responseSerializer.Serialize(writer, Response, ns);
+
+                writer.Flush();
+                stream.Seek(0, SeekOrigin.Begin);
+                FXMLDocument.LoadFromStream(stream);
+            }
 
             SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
 
             // Load SAML Response
-            var fileStream = GenerateStreamFromString(stringWriter.ToString());
-            FXMLDocument.LoadFromStream(fileStream, "UTF-8");
+            //var fileStream = GenerateStreamFromString(responseWriter.ToString());
+            //FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
@@ -140,9 +145,36 @@ namespace CoverMyMeds.SAML.Library
             var responseToSign = FXMLDocument.FindNode("saml2p:Response", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
-            var xmlResponse = new XmlDocument();
-            xmlResponse.LoadXml(FXMLDocument.OuterXML);
-            return xmlResponse;
+            //var xmlResponse = new XmlDocument();
+            //xmlResponse.LoadXml(FXMLDocument.OuterXML);
+            //return xmlResponse;
+            using (var stream = new MemoryStream())
+            {
+                FXMLDocument.SaveToStream(stream);
+                return stream.ToArray();
+            }
+        }
+
+        static bool ValidateSignature(TElXMLDOMElement element) // this should be in separate unit test project
+        {
+            using (var X509KeyData = new TElXMLKeyInfoX509Data(true))
+            {
+                using (var stream = new FileStream("hrinyorg-pub.cer", FileMode.Open, FileAccess.Read))
+                    LoadCertificate(stream, "", X509KeyData);
+
+                using (var verifier = new TElXMLVerifier())
+                {
+                    verifier.KeyData = X509KeyData;
+                    verifier.Load(element);
+                    return verifier.ValidateSignature();
+                }
+            }
+        }
+        static bool ValidateSignature(string path)
+        {
+            var doc = new TElXMLDOMDocument();
+            doc.LoadFromFile(path);
+            return ValidateSignature(doc.DocumentElement);
         }
 
         /// <summary>
@@ -455,14 +487,14 @@ namespace CoverMyMeds.SAML.Library
             Signer = new TElXMLSigner(); // https://www.eldos.com/documentation/sbb/documentation/ref_cl_xmlsigner_prp_signaturemethodtype.html
             try
             {
-                Signer.SignatureType = 4;           // Enveloped signature is used
-                Signer.CanonicalizationMethod = 1;  // Canonicalization without comments
-                Signer.SignatureMethodType = 0; // The data is signed
-                Signer.SignatureMethod = 2;     // RSA with SHA1 is used
-                Signer.MACMethod = 1;           // HMAC with SHA1 is used
+                Signer.SignatureType = SBXMLSec.Unit.xstEnveloped;
+                Signer.CanonicalizationMethod = SBXMLDefs.Unit.xcmExclCanonComment;
+                Signer.SignatureMethodType = SBXMLSec.Unit.xmtSig;
+                Signer.SignatureMethod = SBXMLSec.Unit.xsmRSA_SHA1;
+                Signer.MACMethod = SBXMLSec.Unit.xmmHMAC_MD5;
                 Signer.References = Refs;
                 Signer.KeyName = String.Empty;
-                Signer.IncludeKey = true;
+                Signer.IncludeKey = false;
 
                 Signer.OnFormatElement += FormatElement;
                 Signer.OnFormatText += FormatText;
