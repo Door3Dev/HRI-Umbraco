@@ -72,8 +72,9 @@ namespace CoverMyMeds.SAML.Library
             response.Items = new AssertionType[] { CreateSAML20Assertion(Issuer, AssertionExpirationMinutes, Audience, Subject, Recipient, Attributes) };
 
             XmlDocument XMLResponse = SerializeAndSignSAMLResponse(response, partnerSP);
+            string txtResponse = XMLResponse.OuterXml.Replace("UTF-16", "UTF-8");
 
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(XMLResponse.OuterXml.Replace("UTF-16", "UTF-8")));
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(txtResponse));
         }
 
         public static void GuideSSO(HttpResponseBase httpResponse, string partnerSp, string subject, Dictionary<string, string> samlAttributes)
@@ -119,7 +120,10 @@ namespace CoverMyMeds.SAML.Library
             StringWriter stringWriter = new StringWriterWithEncoding();
             MemoryStream stream = new MemoryStream();
             //XmlWriter responseWriter = XmlTextWriter.Create(stringWriter, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true, Encoding = new UnicodeEncoding(false, false) });
-            responseSerializer.Serialize(stringWriter, Response);
+            var ns = new XmlSerializerNamespaces();
+            ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
+            ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion");
+            responseSerializer.Serialize(stringWriter, Response, ns);
             //responseWriter.Close();
 
             SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
@@ -128,12 +132,12 @@ namespace CoverMyMeds.SAML.Library
             var fileStream = GenerateStreamFromString(stringWriter.ToString());
             FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
-            var assertionToSign = FXMLDocument.FindNode("saml:Assertion", true);
+            var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
             // Assertion encryption
-            EncryptAssertion(encryptionKeyPath);
+            EncryptAssertion(encryptionKeyPath, assertionToSign);
             // Response signature
-            var responseToSign = FXMLDocument.FindNode("Response", true);
+            var responseToSign = FXMLDocument.FindNode("saml2p:Response", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
             var xmlResponse = new XmlDocument();
@@ -225,9 +229,9 @@ namespace CoverMyMeds.SAML.Library
             return stream;
         }
 
-        private static void EncryptAssertion(string certificate)
+        private static void EncryptAssertion(string certificate, TElXMLDOMNode nodeToEnrypt)
         {
-            var nodeToEnrypt = FXMLDocument.FindNode("saml:Assertion", true);
+            //var nodeToEnrypt = FXMLDocument.FindNode("saml2:Assertion", true);
 
             TElXMLEncryptor Encryptor;
             TElXMLKeyInfoSymmetricData SymKeyData;
@@ -348,7 +352,11 @@ namespace CoverMyMeds.SAML.Library
             EncNode = Encryptor.Save(FXMLDocument);
 
             //Replacing selected node with encrypted node
-            var encryptedAssertion = FXMLDocument.CreateElementNS("urn:oasis:names:tc:SAML:2.0:assertion", "EncryptedAssertion");
+            var encryptedAssertion = FXMLDocument.CreateElementNS("urn:oasis:names:tc:SAML:2.0:assertion", "saml2:EncryptedAssertion");
+
+            var nsAttr = FXMLDocument.CreateAttribute("xmlns:saml2");
+            nsAttr.Value = "urn:oasis:names:tc:SAML:2.0:assertion";
+            encryptedAssertion.Attributes.Add(nsAttr);
             encryptedAssertion.AppendChild(EncNode);
             nodeToEnrypt.ParentNode.ReplaceChild(encryptedAssertion, nodeToEnrypt);
             
