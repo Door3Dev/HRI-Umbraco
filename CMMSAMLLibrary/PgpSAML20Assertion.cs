@@ -49,7 +49,7 @@ namespace CoverMyMeds.SAML.Library
         /// <param name="Attributes">Dictionary of attributes to send through for user SSO</param>
         /// <param name="SigningCert">X509 Certificate used to sign Assertion</param>
         /// <returns></returns>
-        public static string CreateSAML20Response(string Issuer,
+        public static string CreateSAML20ResponseAsBase64(string Issuer,
             int AssertionExpirationMinutes,
             string Audience,
             string Subject,
@@ -72,7 +72,6 @@ namespace CoverMyMeds.SAML.Library
             response.Items = new AssertionType[] { CreateSAML20Assertion(Issuer, AssertionExpirationMinutes, Audience, Subject, Recipient, Attributes) };
 
             byte[] binaryResponse = SerializeAndSignSAMLResponse(response, partnerSP);
-            //string txtResponse = XMLResponse.OuterXml.Replace("UTF-16", "UTF-8");
 
             return Convert.ToBase64String(binaryResponse);
         }
@@ -83,7 +82,7 @@ namespace CoverMyMeds.SAML.Library
             var issuer = SAMLConfiguration.Current.IdentityProviderConfiguration.Name;
             var partner = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSp);
 
-            var saml = CreateSAML20Response(issuer, 5, partnerSp,
+            var saml = CreateSAML20ResponseAsBase64(issuer, 5, partnerSp,
                     subject,
                     partner.AssertionConsumerServiceUrl,
                     samlAttributes,
@@ -108,8 +107,8 @@ namespace CoverMyMeds.SAML.Library
         /// Accepts SAML Response, serializes it to XML and signs using the supplied certificate
         /// </summary>
         /// <param name="Response">SAML 2.0 Response</param>
-        /// <param name="SigningCert">X509 certificate</param>
-        /// <returns>XML Document with computed signature</returns>
+        /// <param name="partnerSP"></param>
+        /// <returns>Serialized XML Document with computed signature as byte array.</returns>
         private static byte[] SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
         {
             var signatureCertificatePath = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile;
@@ -117,7 +116,7 @@ namespace CoverMyMeds.SAML.Library
             var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
 
             using (var stream = new MemoryStream())
-            using (var writer = XmlTextWriter.Create(stream, new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true, Encoding = Encoding.UTF8 }))
+            using (var writer = new StreamWriter(stream, new UTF8Encoding(false))) // cannot use XmlTextWriter because it adds BOM we don't want
             {
                 var ns = new XmlSerializerNamespaces();
                 ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
@@ -133,9 +132,6 @@ namespace CoverMyMeds.SAML.Library
 
             SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
 
-            // Load SAML Response
-            //var fileStream = GenerateStreamFromString(responseWriter.ToString());
-            //FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
@@ -145,12 +141,14 @@ namespace CoverMyMeds.SAML.Library
             var responseToSign = FXMLDocument.FindNode("saml2p:Response", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
-            //var xmlResponse = new XmlDocument();
-            //xmlResponse.LoadXml(FXMLDocument.OuterXML);
-            //return xmlResponse;
+            // TElXMLDOMDocument.SaveToStream() adds BOM as well so we recreate the document with .NET API and save it via text writer
             using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream, new UTF8Encoding(false)))
             {
-                FXMLDocument.SaveToStream(stream);
+                var xmlResponse = new XmlDocument();
+                xmlResponse.LoadXml(FXMLDocument.OuterXML);
+                xmlResponse.Save(writer);
+                writer.Flush();
                 return stream.ToArray();
             }
         }

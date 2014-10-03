@@ -60,7 +60,7 @@ namespace CoverMyMeds.SAML.Library
             m_signature.SignatureValue = description.CreateFormatter(signingKey).CreateSignature(hash);
         }
 
-        public new XmlElement GetXml(string prefix)
+        public XmlElement GetXml(string prefix)
         {
             XmlElement e = GetXml();
             SetPrefix(prefix, e);
