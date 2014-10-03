@@ -2289,6 +2289,13 @@ namespace CoverMyMeds.SAML.Library.Schema
                 this.encryptedKeyField = value;
             }
         }
+
+        [XmlNamespaceDeclarations]
+        public XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
+        public EncryptedElementType()
+        {
+            xmlns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion");
+        }
     }
 
     /// <remarks/>
@@ -4602,7 +4609,7 @@ namespace CoverMyMeds.SAML.Library.Schema
         public XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
         public ResponseType()
         {
-            xmlns.Add("saml", "urn:oasis:names:tc:SAML:2.0:assertion");
+//            xmlns.Add("saml", "urn:oasis:names:tc:SAML:2.0:assertion");
             xmlns.Add("ds", "http://www.w3.org/2000/09/xmldsig#");
         }
     }

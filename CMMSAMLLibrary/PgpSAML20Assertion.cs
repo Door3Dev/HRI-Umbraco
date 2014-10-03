@@ -49,7 +49,7 @@ namespace CoverMyMeds.SAML.Library
         /// <param name="Attributes">Dictionary of attributes to send through for user SSO</param>
         /// <param name="SigningCert">X509 Certificate used to sign Assertion</param>
         /// <returns></returns>
-        public static string CreateSAML20Response(string Issuer,
+        public static string CreateSAML20ResponseAsBase64(string Issuer,
             int AssertionExpirationMinutes,
             string Audience,
             string Subject,
@@ -71,9 +71,9 @@ namespace CoverMyMeds.SAML.Library
             // Put SAML 2.0 Assertion in Response
             response.Items = new AssertionType[] { CreateSAML20Assertion(Issuer, AssertionExpirationMinutes, Audience, Subject, Recipient, Attributes) };
 
-            XmlDocument XMLResponse = SerializeAndSignSAMLResponse(response, partnerSP);
+            byte[] binaryResponse = SerializeAndSignSAMLResponse(response, partnerSP);
 
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(XMLResponse.OuterXml.Replace("UTF-16", "UTF-8")));
+            return Convert.ToBase64String(binaryResponse);
         }
 
         public static void GuideSSO(HttpResponseBase httpResponse, string partnerSp, string subject, Dictionary<string, string> samlAttributes)
@@ -82,7 +82,7 @@ namespace CoverMyMeds.SAML.Library
             var issuer = SAMLConfiguration.Current.IdentityProviderConfiguration.Name;
             var partner = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSp);
 
-            var saml = CreateSAML20Response(issuer, 5, partnerSp,
+            var saml = CreateSAML20ResponseAsBase64(issuer, 5, partnerSp,
                     subject,
                     partner.AssertionConsumerServiceUrl,
                     samlAttributes,
@@ -107,38 +107,68 @@ namespace CoverMyMeds.SAML.Library
         /// Accepts SAML Response, serializes it to XML and signs using the supplied certificate
         /// </summary>
         /// <param name="Response">SAML 2.0 Response</param>
-        /// <param name="SigningCert">X509 certificate</param>
-        /// <returns>XML Document with computed signature</returns>
-        private static XmlDocument SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
+        /// <param name="partnerSP"></param>
+        /// <returns>Serialized XML Document with computed signature as byte array.</returns>
+        private static byte[] SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
         {
             var signatureCertificatePath = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile;
             var signaruteCertificatePassword = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificatePassword;
             var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
-            // Set serializer and writers for action
-            XmlSerializer responseSerializer = new XmlSerializer(Response.GetType());
-            StringWriter stringWriter = new StringWriterWithEncoding();
-            MemoryStream stream = new MemoryStream();
-            //XmlWriter responseWriter = XmlTextWriter.Create(stringWriter, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true, Encoding = new UnicodeEncoding(false, false) });
-            responseSerializer.Serialize(stringWriter, Response);
-            //responseWriter.Close();
+
+            using (var stream = new MemoryStream())
+            {
+                var ns = new XmlSerializerNamespaces();
+                // namespace prefixes so that output layout is like in their sample (SAML_Response_Unencoded_IWS_Working.xml)
+                ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
+                ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion"); 
+
+                var responseSerializer = new XmlSerializer(Response.GetType());
+                responseSerializer.Serialize(stream, Response, ns);
+
+                stream.Seek(0, SeekOrigin.Begin);
+                FXMLDocument.LoadFromStream(stream);
+            }
 
             SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
 
-            // Load SAML Response
-            var fileStream = GenerateStreamFromString(stringWriter.ToString());
-            FXMLDocument.LoadFromStream(fileStream, "UTF-8");
             // Assertion signature
-            var assertionToSign = FXMLDocument.FindNode("saml:Assertion", true);
+            var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
             // Assertion encryption
-            EncryptAssertion(encryptionKeyPath);
+            EncryptAssertion(encryptionKeyPath, assertionToSign);
             // Response signature
-            var responseToSign = FXMLDocument.FindNode("Response", true);
+            var responseToSign = FXMLDocument.FindNode("saml2p:Response", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
-            var xmlResponse = new XmlDocument();
-            xmlResponse.LoadXml(FXMLDocument.OuterXML);
-            return xmlResponse;
+            using (var stream = new MemoryStream())
+            {
+                FXMLDocument.SaveToStream(stream, SBXMLDefs.Unit.xcmExclCanonComment, new SBXMLCharsets.TElXMLUTF8Codec { WriteBOM = false });
+                return stream.ToArray();
+            }
+        }
+
+        static bool ValidateSignature(TElXMLDOMElement element) // this should be in separate unit test project
+        {
+            using (var X509KeyData = new TElXMLKeyInfoX509Data(true))
+            {
+                using (var stream = new FileStream("hrinyorg-prod-public.cer", FileMode.Open, FileAccess.Read))
+                    LoadCertificate(stream, "", X509KeyData);
+
+                using (var verifier = new TElXMLVerifier())
+                {
+                    verifier.KeyData = X509KeyData;
+                    verifier.Load(element);
+                    return verifier.ValidateSignature();
+                }
+            }
+        }
+        static bool ValidateSignature(string path)
+        {
+            using (var doc = new TElXMLDOMDocument())
+            {
+                doc.LoadFromFile(path, "UTF-8");
+                return ValidateSignature(doc.DocumentElement);
+            }
         }
 
         /// <summary>
@@ -225,9 +255,9 @@ namespace CoverMyMeds.SAML.Library
             return stream;
         }
 
-        private static void EncryptAssertion(string certificate)
+        private static void EncryptAssertion(string certificate, TElXMLDOMNode nodeToEnrypt)
         {
-            var nodeToEnrypt = FXMLDocument.FindNode("saml:Assertion", true);
+            //var nodeToEnrypt = FXMLDocument.FindNode("saml2:Assertion", true);
 
             TElXMLEncryptor Encryptor;
             TElXMLKeyInfoSymmetricData SymKeyData;
@@ -348,7 +378,11 @@ namespace CoverMyMeds.SAML.Library
             EncNode = Encryptor.Save(FXMLDocument);
 
             //Replacing selected node with encrypted node
-            var encryptedAssertion = FXMLDocument.CreateElementNS("urn:oasis:names:tc:SAML:2.0:assertion", "EncryptedAssertion");
+            var encryptedAssertion = FXMLDocument.CreateElementNS("urn:oasis:names:tc:SAML:2.0:assertion", "saml2:EncryptedAssertion");
+
+            var nsAttr = FXMLDocument.CreateAttribute("xmlns:saml2");
+            nsAttr.Value = "urn:oasis:names:tc:SAML:2.0:assertion";
+            encryptedAssertion.Attributes.Add(nsAttr);
             encryptedAssertion.AppendChild(EncNode);
             nodeToEnrypt.ParentNode.ReplaceChild(encryptedAssertion, nodeToEnrypt);
             
@@ -441,19 +475,20 @@ namespace CoverMyMeds.SAML.Library
                 }
 
             Ref.TransformChain.Add(new TElXMLEnvelopedSignatureTransform());
+            Ref.TransformChain.Add(new TElXMLC14NTransform());
             Refs.Add(Ref);
 
-            Signer = new TElXMLSigner();
+            Signer = new TElXMLSigner(); // https://www.eldos.com/documentation/sbb/documentation/ref_cl_xmlsigner_prp_signaturemethodtype.html
             try
             {
-                Signer.SignatureType = 4;
-                Signer.CanonicalizationMethod = 1;
-                Signer.SignatureMethodType = 0;
-                Signer.SignatureMethod = 2;
-                Signer.MACMethod = 1;
+                Signer.SignatureType = SBXMLSec.Unit.xstEnveloped;
+                Signer.CanonicalizationMethod = SBXMLDefs.Unit.xcmExclCanonComment;
+                Signer.SignatureMethodType = SBXMLSec.Unit.xmtSig;
+                Signer.SignatureMethod = SBXMLSec.Unit.xsmRSA_SHA1;
+                Signer.MACMethod = SBXMLSec.Unit.xmmHMAC_MD5;
                 Signer.References = Refs;
                 Signer.KeyName = String.Empty;
-                Signer.IncludeKey = true;
+                Signer.IncludeKey = false;
 
                 Signer.OnFormatElement += FormatElement;
                 Signer.OnFormatText += FormatText;
@@ -511,7 +546,7 @@ namespace CoverMyMeds.SAML.Library
                 else if (X509KeyData.Certificate != null)
                 {
                     if (!X509KeyData.Certificate.PrivateKeyExists)
-                    {
+                        {
                         throw new Exception("The selected certificate doesn''t contain a private key");
                     }
 
