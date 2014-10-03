@@ -65,7 +65,7 @@
             </div> 
             <div class="span3 @(isNewUser ? string.Empty : "hide")">
                 @Html.Label("Social Security Number (optional)")
-                @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short" })
+                @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short", data_inputmask = "'mask': '999-99-9999'" })
                 @Html.ValidationMessageFor(m => registerModel.Ssn)
             </div>
 
@@ -169,5 +169,9 @@
             });
         } else
             $('#userNameCheck').html('');
+    });
+
+    $(document).ready(function () {
+        $("#registerModel_Ssn").inputmask();
     });
 </script>
