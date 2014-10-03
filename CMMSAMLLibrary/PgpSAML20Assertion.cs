@@ -116,16 +116,15 @@ namespace CoverMyMeds.SAML.Library
             var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
 
             using (var stream = new MemoryStream())
-            using (var writer = new StreamWriter(stream, new UTF8Encoding(false))) // cannot use XmlTextWriter because it adds BOM we don't want
             {
                 var ns = new XmlSerializerNamespaces();
+                // namespace prefixes so that output layout is like in their sample (SAML_Response_Unencoded_IWS_Working.xml)
                 ns.Add("saml2p", "urn:oasis:names:tc:SAML:2.0:protocol");
-                ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion");
+                ns.Add("saml2", "urn:oasis:names:tc:SAML:2.0:assertion"); 
 
                 var responseSerializer = new XmlSerializer(Response.GetType());
-                responseSerializer.Serialize(writer, Response, ns);
+                responseSerializer.Serialize(stream, Response, ns);
 
-                writer.Flush();
                 stream.Seek(0, SeekOrigin.Begin);
                 FXMLDocument.LoadFromStream(stream);
             }
@@ -141,14 +140,9 @@ namespace CoverMyMeds.SAML.Library
             var responseToSign = FXMLDocument.FindNode("saml2p:Response", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, responseToSign);
 
-            // TElXMLDOMDocument.SaveToStream() adds BOM as well so we recreate the document with .NET API and save it via text writer
             using (var stream = new MemoryStream())
-            using (var writer = new StreamWriter(stream, new UTF8Encoding(false)))
             {
-                var xmlResponse = new XmlDocument();
-                xmlResponse.LoadXml(FXMLDocument.OuterXML);
-                xmlResponse.Save(writer);
-                writer.Flush();
+                FXMLDocument.SaveToStream(stream, SBXMLDefs.Unit.xcmExclCanonComment, new SBXMLCharsets.TElXMLUTF8Codec { WriteBOM = false });
                 return stream.ToArray();
             }
         }
@@ -170,9 +164,12 @@ namespace CoverMyMeds.SAML.Library
         }
         static bool ValidateSignature(string path)
         {
-            var doc = new TElXMLDOMDocument();
-            doc.LoadFromFile(path);
-            return ValidateSignature(doc.DocumentElement);
+            using (var doc = new TElXMLDOMDocument())
+            {
+                //doc.LoadFromFile(path); // if there is no BOM it throws "Additional information: XML parse error at position 39 (0x27): got unexpected string instead of '?>'"
+                doc.LoadFromFile(path, "UTF-8");
+                return ValidateSignature(doc.DocumentElement);
+            }
         }
 
         /// <summary>
