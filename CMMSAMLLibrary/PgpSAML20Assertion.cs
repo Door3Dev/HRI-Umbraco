@@ -151,7 +151,7 @@ namespace CoverMyMeds.SAML.Library
         {
             using (var X509KeyData = new TElXMLKeyInfoX509Data(true))
             {
-                using (var stream = new FileStream("hrinyorg-pub.cer", FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream("hrinyorg-prod-public.cer", FileMode.Open, FileAccess.Read))
                     LoadCertificate(stream, "", X509KeyData);
 
                 using (var verifier = new TElXMLVerifier())
@@ -166,7 +166,6 @@ namespace CoverMyMeds.SAML.Library
         {
             using (var doc = new TElXMLDOMDocument())
             {
-                //doc.LoadFromFile(path); // if there is no BOM it throws "Additional information: XML parse error at position 39 (0x27): got unexpected string instead of '?>'"
                 doc.LoadFromFile(path, "UTF-8");
                 return ValidateSignature(doc.DocumentElement);
             }
