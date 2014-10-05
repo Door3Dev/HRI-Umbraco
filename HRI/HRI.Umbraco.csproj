@@ -265,12 +265,6 @@
     <Content Include="NLog.dll" />
     <Content Include="packages.config" />
     <Content Include="scripts\custom.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.date.extensions.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.extensions.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.numeric.extensions.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.phone.extensions.js" />
-    <Content Include="scripts\jquery.inputmask\jquery.inputmask.regex.extensions.js" />
     <Content Include="Views\Web.config" />
     <Content Include="macroScripts\Web.config" />
     <Content Include="config\UrlRewriting.config" />

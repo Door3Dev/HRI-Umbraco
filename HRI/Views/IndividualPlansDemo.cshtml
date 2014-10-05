@@ -1,0 +1,102 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterPageDemo.cshtml";
+}
+<div class="hri-common-plans-providers">
+        <div class="row-fluid">
+          <div class="span10 offset1">
+              <div class="row-fluid">
+                  <div class="span4">
+                      <span class="page-breadcrumbs"><a href="/">Home</a> ›</span>
+                      <span class="page-breadcrumbs breadcrumb-end">Individual Plans</span>
+                      <br><br>
+                  </div>
+                  <div class="main-lead">
+                      <div class="span8 offset2">
+                          @Umbraco.Field("Header")
+                      </div>
+                  </div>
+              </div>
+
+            <div class="row-fluid">
+              <div class="span12">
+
+                <div class="plans-block-copy">
+                  @Umbraco.Field("Section1Content")
+                </div>
+              </div>
+              <div class="find-a-plan">
+                <!-- Row 1 -->
+                <div class="span4">
+					@Umbraco.Field("Section2Column1Content")
+                </div>
+
+                <!-- Row 2 -->
+                <div class="span4">
+					@Umbraco.Field("Section2Column2Content")
+                </div>
+
+                <!-- Row 3 -->
+                <div class="span4">
+					@Umbraco.Field("Section2Column3Content")
+				</div>
+
+                <!-- Row 4 -->
+                <div class="span4 offset4">
+					<p><a class="cta" href="/shop-for-plans/compare-plans/">Find a plan for you</a></p>
+				</div>
+
+
+                <!-- Fair health -->
+                <div class="span12">
+
+                </div>
+              </div>
+
+              <ul class="unstyled inline inline-list">
+                <li class="span6">
+                  <div class="left">
+                    @Umbraco.Field("Section3Column1Content")
+                  </div>
+                </li>
+
+                <li class="span6">
+                  <div class="">
+                    @Umbraco.Field("Section3Column2Content")
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="row-fluid">
+              <div class="span12">
+
+                <div class="plans-block-copy">
+					@Umbraco.Field("Section4Content")
+                </div>
+                <div class="plans-block-copy">
+                	@Umbraco.Field("Section5Content")
+                </div>
+                <div class="plans-block-copy">
+					@Umbraco.Field("Section6Content")
+                </div>
+              </div>
+
+              <ul class="unstyled inline inline-list">
+                <li class="span6">
+                  <div class="left">
+					  @Umbraco.Field("Section7Column1Content")
+                  </div>
+                </li>
+
+                <li class="span6">
+                  <div class="">
+					  @Umbraco.Field("Section7Column2Content")
+				  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
