@@ -44,9 +44,13 @@ namespace HRI.Controllers
             // Attributes for US Script
             if(partnerSP == "USScript")
             {
+                string yNumber = member.GetValue("yNumber").ToString();
+                if (yNumber.Length > 7)
+                    yNumber = yNumber.Substring(0, 7);
+
                 var samlAttributes = new Dictionary<string, string>
                 {
-                    {"urn:uss:saml:attrib::id", member.GetValue("yNumber").ToString()},
+                    {"urn:uss:saml:attrib::id", yNumber},
                     {"urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString()},
                     {"urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString()},
                     {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
