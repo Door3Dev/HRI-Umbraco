@@ -253,6 +253,7 @@
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
     <Content Include="css\styles.css" />
+    <Content Include="css\stylesDev.css" />
     <Content Include="eldos-key.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
