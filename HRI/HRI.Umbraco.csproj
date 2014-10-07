@@ -391,6 +391,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="sso.healthx.com.crt" />
+    <Content Include="Views\MasterPageDev.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
