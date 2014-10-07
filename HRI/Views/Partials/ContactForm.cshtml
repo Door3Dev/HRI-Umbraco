@@ -3,7 +3,9 @@
 @using HRI.Models
 @using Umbraco.Web 
 @using HRI.Controllers
+
 @inherits UmbracoTemplatePage
+
 @{
     Layout = null;
 }
@@ -18,10 +20,15 @@
     var model = new ContactFormViewModel();
     if (User.Identity.IsAuthenticated)
     {
-        model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
-        model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("lastName").ToString();
-        model.Email = @Membership.GetUser().Email;
-        model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
+        var member = Members.GetByUsername(User.Identity.Name);
+        model.FirstName = member.GetPropertyValue<string>("firstName");
+        model.LastName = member.GetPropertyValue<string>("lastName");
+        var user = Membership.GetUser();
+        model.Email = user.Email;
+        model.PhoneNumber = member.GetPropertyValue<string>("phoneNumber");
+        model.Username = user.UserName;
+        model.MemberId = member.GetPropertyValue<string>("memberId");
+        model.YNumber = member.GetPropertyValue<string>("yNumber");
     }
 
     var categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
@@ -80,6 +87,10 @@
     @Html.TextAreaFor(m => model.Message, new {rows = 6})
     @Html.ValidationMessageFor(m => model.Message)
     
+    @Html.HiddenFor(m => model.MemberId)
+    @Html.HiddenFor(m => model.YNumber)
+    @Html.HiddenFor(m => model.Username)
+
     <input type="submit" value="Send" class="btn hri-btn" />
 }
 
