@@ -31,7 +31,20 @@ namespace HRI.Controllers
                     categoriesAndEmails.First(
                         c => string.Compare(c.Item1, model.MessageType, StringComparison.Ordinal) == 0).Item2;
 
-                SendEmail(email, model.MessageType, model.Message);
+                const string na = "N/A";
+                var message = string.Join(
+                    Environment.NewLine,
+                    string.Format("Member ID: {0}", model.MemberId ?? na),
+                    string.Format("First Name: {0}", model.FirstName),
+                    string.Format("Last Name: {0}", model.LastName),
+                    string.Format("Y Number: {0}", model.YNumber ?? na),
+                    string.Format("Username: {0}", model.Username ?? na),
+                    string.Format("Phone Number: {0}", model.PhoneNumber),
+                    "Message:",
+                    Environment.NewLine,
+                    model.Message);
+
+                SendEmail(email, model.MessageType, message);
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;

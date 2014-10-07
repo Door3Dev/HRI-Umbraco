@@ -3,7 +3,9 @@
 @using HRI.Models
 @using Umbraco.Web 
 @using HRI.Controllers
+
 @inherits UmbracoTemplatePage
+
 @{
     Layout = null;
 }
@@ -18,10 +20,15 @@
     var model = new ContactFormViewModel();
     if (User.Identity.IsAuthenticated)
     {
-        model.FirstName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName").ToString();
-        model.LastName = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("lastName").ToString();
-        model.Email = @Membership.GetUser().Email;
-        model.PhoneNumber = @Members.GetByUsername(User.Identity.Name).GetPropertyValue("phoneNumber").ToString();
+        var member = Members.GetByUsername(User.Identity.Name);
+        model.FirstName = member.GetPropertyValue<string>("firstName");
+        model.LastName = member.GetPropertyValue<string>("lastName");
+        var user = Membership.GetUser();
+        model.Email = user.Email;
+        model.PhoneNumber = member.GetPropertyValue<string>("phoneNumber");
+        model.Username = user.UserName;
+        model.MemberId = member.GetPropertyValue<string>("memberId");
+        model.YNumber = member.GetPropertyValue<string>("yNumber");
     }
 
     var categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
@@ -29,7 +36,7 @@
 }
 
 @Html.Raw(Html.RenderJsHere())
-	
+    
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
     <h1>Message Sent.</h1>
@@ -42,7 +49,7 @@
     @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
     
-	@Html.Label("Message Topic")
+    @Html.Label("Message Topic")
     @Html.DropDownListFor(
         m => model.MessageType, 
         new SelectList(
@@ -53,30 +60,42 @@
             "Name"))
     @Html.ValidationMessageFor(m => model.MessageType)
 
-	<div class="row-fluid">
-		<label class="span6 name">
-			First Name<br>
-			@Html.TextBoxFor(m => model.FirstName)
-			@Html.ValidationMessageFor(m => model.FirstName)
-		</label>
-		<label class="span6">
-			Last Name<br>
-			@Html.TextBoxFor(m => model.LastName)
-			@Html.ValidationMessageFor(m => model.LastName)
-		</label>
-	</div>
-				
-	@Html.Label("Email", "Email")
+    <div class="row-fluid">
+        <label class="span6 name">
+            First Name<br>
+            @Html.TextBoxFor(m => model.FirstName)
+            @Html.ValidationMessageFor(m => model.FirstName)
+        </label>
+        <label class="span6">
+            Last Name<br>
+            @Html.TextBoxFor(m => model.LastName)
+            @Html.ValidationMessageFor(m => model.LastName)
+        </label>
+    </div>
+                
+    @Html.Label("Email", "Email")
     @Html.TextBoxFor(m => model.Email)
-	@Html.ValidationMessageFor(m => model.Email)
+    @Html.ValidationMessageFor(m => model.Email)
     
-	@Html.Label("Phone Number", "Phone Number")
-    @Html.TextBoxFor(m => model.PhoneNumber)
-	@Html.ValidationMessageFor(m => model.PhoneNumber)
+    @Html.Label("Phone Number", "Phone Number")
+    @Html.TextBoxFor(
+        m => model.PhoneNumber,
+            new { data_inputmask = string.Format("'mask': '{0}'", RegisterFormViewModel.PhoneInputMask) })
+    @Html.ValidationMessageFor(m => model.PhoneNumber)
 
-	@Html.Label("Type Your Message", model.Message)
-	@Html.TextAreaFor(m => model.Message, new {rows = 6})
-	@Html.ValidationMessageFor(m => model.Message)
+    @Html.Label("Type Your Message", model.Message)
+    @Html.TextAreaFor(m => model.Message, new {rows = 6})
+    @Html.ValidationMessageFor(m => model.Message)
     
+    @Html.HiddenFor(m => model.MemberId)
+    @Html.HiddenFor(m => model.YNumber)
+    @Html.HiddenFor(m => model.Username)
+
     <input type="submit" value="Send" class="btn hri-btn" />
 }
+
+<script>
+    $(document).ready(function () {
+        $("#PhoneNumber").inputmask();
+    });
+</script>

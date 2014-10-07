@@ -5,6 +5,8 @@ namespace HRI.Models
 {
     public class RegisterFormViewModel
     {
+        public const string PhoneInputMask = "(999) 999-9999";
+
         private string _email;
         private string _confirmEmail;
 

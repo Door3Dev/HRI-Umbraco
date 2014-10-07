@@ -26,6 +26,12 @@ namespace HRI.Models
         [Required]
         public string Message { get; set; }
 
+        public string Username { get; set; }
+
+        public string MemberId { get; set; }
+
+        public string YNumber { get; set; }
+
         public static IList<Tuple<string, string>> GetCategoriesAndEmails(string categoriesAndEmails)
         {
             return (categoriesAndEmails ?? string.Empty)
