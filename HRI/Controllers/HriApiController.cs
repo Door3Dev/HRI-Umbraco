@@ -211,9 +211,12 @@ namespace HRI.Controllers
         public string GetEbixIdByYNumber(string username)
         {
             string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
-            var result = MakeApiCall(new Dictionary<string, string> { { "EbixMemberId", ynumber } });
+            JObject result = MakeApiCall(new Dictionary<string, string> { { "EbixMemberId", ynumber } });
+            JToken id = result["EBIXMemberId"];
+            if (!id.HasValues)
+                throw new InvalidOperationException(string.Format("There is no EBIXMemberId for YNumber '{0}' (user '{1}').", ynumber, username));
 
-            return result["EBIXMemberId"].Value<string>();
+            return id.Value<string>();
         }
 
         [HttpGet]
