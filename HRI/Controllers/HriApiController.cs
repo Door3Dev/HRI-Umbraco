@@ -213,7 +213,7 @@ namespace HRI.Controllers
             string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
             JObject result = MakeApiCall(new Dictionary<string, string> { { "EbixMemberId", ynumber } });
             JToken id = result["EBIXMemberId"];
-            if (!id.HasValues)
+            if (id == null)
                 throw new InvalidOperationException(string.Format("There is no EBIXMemberId for YNumber '{0}' (user '{1}').", ynumber, username));
 
             return id.Value<string>();
