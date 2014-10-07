@@ -46,7 +46,7 @@
             {            
                 <script>
                     $.ajax({
-                        url: "/umbraco/api/HriApi/GetEbixIdByYNumber?username=@Membership.GetUser().UserName",
+                        url: "/umbraco/api/HriApi/GetEbixIdByUserName?username=@Membership.GetUser().UserName",
                         success: function (data) {
                             var url = '@url' + '&amp;uid=' + data.replace(/\"/g, "");
                             console.log(url);
