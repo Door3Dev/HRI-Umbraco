@@ -31,16 +31,6 @@ namespace HRI.Controllers
                 IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(mailData);
                 IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
-                foreach (string email in emails)
-                    try
-                    {
-                        SendEmail(email, model.MessageType, model.Message);
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Send failed to " + email, ex);
-                    }
-
                 const string na = "N/A";
                 var message = string.Join(
                     Environment.NewLine,
@@ -54,7 +44,15 @@ namespace HRI.Controllers
                     Environment.NewLine,
                     model.Message);
 
-                SendEmail(email, model.MessageType, message);
+                foreach (string email in emails)
+                    try
+                    {
+                        SendEmail(email, model.MessageType, model.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Send failed to " + email, ex);
+                    }
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;

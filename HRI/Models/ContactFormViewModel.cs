@@ -28,12 +28,11 @@ namespace HRI.Models
 
         public string Username { get; set; }
 
-        public static IDictionary<string, IEnumerable<string>> GetCategoriesAndEmails(string categoriesAndEmails)
         public string MemberId { get; set; }
 
         public string YNumber { get; set; }
 
-        public static IList<Tuple<string, string>> GetCategoriesAndEmails(string categoriesAndEmails)
+        public static IDictionary<string, IEnumerable<string>> GetCategoriesAndEmails(string categoriesAndEmails)
         {
             return (categoriesAndEmails ?? string.Empty)
                 .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
