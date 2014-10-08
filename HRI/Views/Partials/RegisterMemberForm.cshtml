@@ -139,7 +139,9 @@
             <div class="span5 desc"><h3>Optional.</h3></div>
             <div class="span7">
                 @Html.Label("Phone Number")
-                @Html.TextBoxFor(m => registerModel.Phone)
+                @Html.TextBoxFor(
+                    m => registerModel.Phone, 
+                    new { data_inputmask = string.Format("'mask': '{0}'", RegisterFormViewModel.PhoneInputMask) })
                 @Html.ValidationMessageFor(m => registerModel.Phone)
             </div>
         </div>
@@ -173,5 +175,6 @@
 
     $(document).ready(function () {
         $("#registerModel_Ssn").inputmask();
+        $("#registerModel_Phone").inputmask();
     });
 </script>
