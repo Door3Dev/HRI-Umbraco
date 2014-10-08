@@ -253,6 +253,7 @@
     <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
     <Content Include="css\styles.css" />
+    <Content Include="css\stylesDev.css" />
     <Content Include="eldos-key.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -391,6 +392,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="sso.healthx.com.crt" />
+    <Content Include="Views\MasterPageDev.cshtml" />
+    <Content Include="Views\IndividualPlans2015.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
