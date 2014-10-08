@@ -8,11 +8,14 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using log4net;
 
 namespace HRI.Controllers
 {
     public class EmailSurfaceController : HriSufraceController
     {
+        static readonly ILog logger = LogManager.GetLogger(typeof(EmailSurfaceController));
+
         /// <summary>
         /// Emails the Web Administrator with a message from a member
         /// </summary>
@@ -23,13 +26,19 @@ namespace HRI.Controllers
         {
             try
             {
-                IDictionary<string, IEnumerable<string>> categoriesAndEmails =
-                    ContactFormViewModel.GetCategoriesAndEmails(CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
-
+                string mailData = CurrentPage.GetPropertyValue<string>("categoriesAndEmails");
+                IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(mailData);
                 IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
                 foreach (string email in emails)
-                    SendEmail(email, model.MessageType, model.Message);
+                    try
+                    {
+                        SendEmail(email, model.MessageType, model.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Send failed to " + email, ex);
+                    }
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;
