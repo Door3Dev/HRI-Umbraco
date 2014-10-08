@@ -23,15 +23,13 @@ namespace HRI.Controllers
         {
             try
             {
-                var categoriesAndEmails =
-                    ContactFormViewModel.GetCategoriesAndEmails(
-                        CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
+                IDictionary<string, IEnumerable<string>> categoriesAndEmails =
+                    ContactFormViewModel.GetCategoriesAndEmails(CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
 
-                var email =
-                    categoriesAndEmails.First(
-                        c => string.Compare(c.Item1, model.MessageType, StringComparison.Ordinal) == 0).Item2;
+                IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
-                SendEmail(email, model.MessageType, model.Message);
+                foreach (string email in emails)
+                    SendEmail(email, model.MessageType, model.Message);
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;
