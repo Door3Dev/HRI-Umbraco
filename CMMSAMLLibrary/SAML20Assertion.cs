@@ -115,6 +115,10 @@ namespace CoverMyMeds.SAML.Library
             XmlDocument xmlResponse = new XmlDocument(); 
             xmlResponse.LoadXml(stringWriter.ToString());
             XmlElement elementToEncrypt = xmlResponse.GetElementsByTagName("saml:Assertion")[0] as XmlElement;
+            if (elementToEncrypt == null)
+            {
+                elementToEncrypt = xmlResponse.GetElementsByTagName("Assertion")[0] as XmlElement;
+            }
 
             //////////////////////////////////////////////////
             // Create a new instance of the EncryptedXml class 
