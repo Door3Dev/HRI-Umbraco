@@ -232,5 +232,12 @@ namespace HRI.Controllers
             var result = MakeApiCall(new Dictionary<string, string> { { "isEnrollByMemberID", memberId } });
             return result.Value<bool>("Enrolled");
         }
+
+        [HttpGet]
+        public string GetHealthPlanIdByMemberId(string memberId)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> { { "HealthPlan", memberId } });
+            return result.Value<string>("planId");
+        }
     }
 }
