@@ -7,11 +7,14 @@ using System.Net.Mail;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using log4net;
 
 namespace HRI.Controllers
 {
     public class EmailSurfaceController : HriSufraceController
     {
+        static readonly ILog logger = LogManager.GetLogger(typeof(EmailSurfaceController));
+
         private const string UsernameDoesNotExist = "Sorry, that user name does not exist in our system.";
 
         /// <summary>
@@ -24,13 +27,9 @@ namespace HRI.Controllers
         {
             try
             {
-                var categoriesAndEmails =
-                    ContactFormViewModel.GetCategoriesAndEmails(
-                        CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
-
-                var email =
-                    categoriesAndEmails.First(
-                        c => string.Compare(c.Item1, model.MessageType, StringComparison.Ordinal) == 0).Item2;
+                string mailData = CurrentPage.GetPropertyValue<string>("categoriesAndEmails");
+                IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(mailData);
+                IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
                 const string na = "N/A";
                 var message = string.Join(
@@ -45,7 +44,15 @@ namespace HRI.Controllers
                     Environment.NewLine,
                     model.Message);
 
-                SendEmail(email, model.MessageType, message);
+                foreach (string email in emails)
+                    try
+                    {
+                        SendEmail(email, model.MessageType, model.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Send failed to " + email, ex);
+                    }
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;

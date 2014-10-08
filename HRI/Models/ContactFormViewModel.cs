@@ -32,23 +32,13 @@ namespace HRI.Models
 
         public string YNumber { get; set; }
 
-        public static IList<Tuple<string, string>> GetCategoriesAndEmails(string categoriesAndEmails)
+        public static IDictionary<string, IEnumerable<string>> GetCategoriesAndEmails(string categoriesAndEmails)
         {
             return (categoriesAndEmails ?? string.Empty)
                 .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(catEm =>
-                {
-                    var strings = catEm.Split(new[] { ';' }).Select(s => s.Trim()).ToList();
-
-                    if (strings.Any(string.IsNullOrEmpty) || strings.Count != 2)
-                    {
-                        return null;
-                    }
-
-                    return Tuple.Create(strings[0], strings[1]);
-                })
-                .Where(i => i != null)
-                .ToList();
+                .Select(line => line.Split(';').Select(x => x.Trim())) // Billing Questions; ContactUs@healthrepublicny.org; door3-a@mailinator.com;door3-a@reconmail.com
+                .Where(x => x.Count() > 1)
+                .ToDictionary(x => x.First(), x => x.Skip(1));  // note, will throw an error if there are duplicated categorie in the input
         }
     }
 }

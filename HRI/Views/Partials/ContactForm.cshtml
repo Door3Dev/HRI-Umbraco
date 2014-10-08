@@ -31,7 +31,7 @@
         model.YNumber = member.GetPropertyValue<string>("yNumber");
     }
 
-    var categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
+    IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
         (string)CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
 }
 
@@ -55,7 +55,7 @@
         new SelectList(
             Enumerable
                 .Repeat(new { Id = (string)null, Name = "Please choose a topic" }, 1)
-                .Concat(categoriesAndEmails.Select(c => new { Id = c.Item1, Name = c.Item1 })), 
+                .Concat(categoriesAndEmails.Keys.Select(c => new { Id = c, Name = c})), 
             "Id", 
             "Name"))
     @Html.ValidationMessageFor(m => model.MessageType)
