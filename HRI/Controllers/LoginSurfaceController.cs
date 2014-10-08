@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using Newtonsoft.Json.Linq;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers
@@ -39,8 +38,6 @@ namespace HRI.Controllers
         {
             var member = Services.MemberService.GetByUsername(model.Username);
 
-            JObject hriUser;
-
             // If the user is unable to login
             if (!Members.Login(model.Username, model.Password))
             {
@@ -49,7 +46,7 @@ namespace HRI.Controllers
 
                 if (member != null)
                 {
-                    if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet
+                    if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet or in process of security upgrade
                     {
                         ModelState.AddModelError(
                             "loginModel",
@@ -65,112 +62,17 @@ namespace HRI.Controllers
                 }
 
                 // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
-                hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
-                    new Dictionary<string, string> { { "userName", model.Username } });
-
-                if (hriUser == null)
+                var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("loginModel", model.Username);
+                if (currentUmbracoPage != null)
                 {
-                    if (Membership.GetUser(model.Username) == null)
-                    {
-                        ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
-                        return CurrentUmbracoPage();
-                    }
-
-                    ModelState.AddModelError("loginModel", "There was trouble accessing your account, please contact us by telephone.");
-                    return CurrentUmbracoPage();
-                }
-
-                // If the user exists in IWS database
-                if ((string)hriUser["RegId"] != null)
-                {
-                    // Before attempt to create a user need to check the email and login uniqueness
-                    var existedUserWithUsername = Services.MemberService.GetByUsername(hriUser["UserName"].ToString());
-                    var existedUserWithEmail = Services.MemberService.GetByEmail(hriUser["EMail"].ToString());
-                    if (existedUserWithEmail != null || existedUserWithUsername != null)
-                    {
-                        ModelState.AddModelError("loginModel", "We cannot log you in with this user name. The email address of the user name you entered is associated with another user name. Please enter a valid user name and try again or contact Member Services for assistance.");
-                        return CurrentUmbracoPage();
-                    }
-
-                    // Create the registration model
-                    var registerModel = Members.CreateRegistrationModel();
-                    // Member Name
-                    registerModel.Name = hriUser["FirstName"].ToString() + " " + hriUser["LastName"].ToString();
-                    // Member Id
-                    registerModel.MemberProperties.First(p => p.Alias == "memberId").Value = hriUser["RegId"].ToString();
-                    // User Name
-                    registerModel.Username = hriUser["UserName"].ToString();
-                    // First Name
-                    registerModel.MemberProperties.First(p => p.Alias == "firstName").Value = hriUser["FirstName"].ToString();
-                    // Last Name
-                    registerModel.MemberProperties.First(p => p.Alias == "lastName").Value = hriUser["LastName"].ToString();
-                    // SSN
-                    if ((string)hriUser["Ssn"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "ssn").Value = hriUser["Ssn"].ToString();
-                    // SSN
-                    if ((string)hriUser["EbixId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "ebixId").Value = hriUser["ebixID"].ToString();
-                    // Email
-                    if ((string)hriUser["EMail"] != null)
-                        registerModel.Email = hriUser["EMail"].ToString();
-                    // Zip Code
-                    if ((string)hriUser["ZipCode"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "zipCode").Value = hriUser["ZipCode"].ToString();
-                    // Phone Number
-                    if ((string)hriUser["PhoneNumber"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "phoneNumber").Value = hriUser["PhoneNumber"].ToString();
-                    // Y Number
-                    if ((string)hriUser["MemberId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "yNumber").Value = hriUser["MemberId"].ToString();
-                    // Group Id
-                    if ((string)hriUser["RxGrpId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
-                    // Birthday
-                    if ((string)hriUser["DOB"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
-                    // Plan Id
-                    if ((string)hriUser["PlanId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
-                    // Plan Name
-                    if ((string)hriUser["PlanName"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
-
-                    registerModel.MemberProperties.First(p => p.Alias == "market").Value = hriUser["Market"].ToString();
-
-                    // Create a random Guid
-                    Guid key = Guid.NewGuid();
-                    // Update the user's Guid field
-                    registerModel.MemberProperties.First(p => p.Alias == "guid").Value = key.ToString();
-
-                    registerModel.Password = Membership.GeneratePassword(12, 4);
-                    registerModel.LoginOnSuccess = false;
-                    registerModel.UsernameIsEmail = false;
-
-                    // Register the user with Door3 automatically
-                    MembershipCreateStatus status;
-                    var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
-                    // Force sign out (hack for Umbraco bug that automatically logs user in on registration
-                    Session.Clear();
-                    FormsAuthentication.SignOut();
-
-                    // Authenticate the user automatically as a registered user
-                    newMember.IsApproved = true;
-                    Roles.AddUserToRole(newMember.UserName, "Registered");
-                    Roles.AddUserToRole(model.Username, "Enrolled");
-
-                    // Reset the password and send an email to the user
-                    SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
-
-                    return Redirect("/for-members/security-upgrade/");
-                }
-
-                // The user doesnt exist locally or in IWS db
-                //don't add a field level error, just model level
+                    return currentUmbracoPage;
+                } 
+                
                 ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
                 return CurrentUmbracoPage();
             }
 
-            hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
+            var hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
                 new Dictionary<string, string> { { "userName", model.Username } });
 
             var market = hriUser["Market"].ToString();
