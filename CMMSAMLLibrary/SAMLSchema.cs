@@ -4607,10 +4607,17 @@ namespace CoverMyMeds.SAML.Library.Schema
         }
         [XmlNamespaceDeclarations]
         public XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
-        public ResponseType()
+        public ResponseType(bool useSamlNamespace)
         {
-//            xmlns.Add("saml", "urn:oasis:names:tc:SAML:2.0:assertion");
-            xmlns.Add("ds", "http://www.w3.org/2000/09/xmldsig#");
+            if (useSamlNamespace)
+                xmlns.Add("saml", "urn:oasis:names:tc:SAML:2.0:assertion");
+            else
+                xmlns.Add("ds", "http://www.w3.org/2000/09/xmldsig#");
+        }
+
+        public ResponseType() : this(false)
+        {
+            
         }
     }
 
