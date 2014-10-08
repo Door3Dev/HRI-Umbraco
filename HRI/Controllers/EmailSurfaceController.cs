@@ -1,11 +1,10 @@
-﻿using HRI.Models;
-using Newtonsoft.Json.Linq;
+﻿using System.Web.Security;
+using HRI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Web.Mvc;
-using System.Web.Security;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
@@ -13,6 +12,8 @@ namespace HRI.Controllers
 {
     public class EmailSurfaceController : HriSufraceController
     {
+        private const string UsernameDoesNotExist = "Sorry, that user name does not exist in our system.";
+
         /// <summary>
         /// Emails the Web Administrator with a message from a member
         /// </summary>
@@ -108,135 +109,45 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // If the username exists
-                if (Services.MemberService.GetByUsername(model.UserName) != null)
-                {
-                    #region User Exists
-                    // Get the member
-                    var member = Services.MemberService.GetByUsername(model.UserName);
-                    // Create a random Guid
-                    Guid key = Guid.NewGuid();
-                    // Update the user's Guid field
-                    member.SetValue("guid", key.ToString());
-                    // Save the updated information
-                    Services.MemberService.Save(member);
+                return CurrentUmbracoPage();
+            }
 
-                    SendResetPasswordEmail(member.Email, member.Username, key.ToString());
+            // Get the member
+            var member = Services.MemberService.GetByUsername(model.UserName);
 
-                    TempData["ForgotPasswordIsSuccessful"] = true;
-                    return RedirectToCurrentUmbracoPage();
-                    #endregion
-                }
-
-                #region User Not Found
-
-                #region Checkolduser
+            if (member == null)
+            {
                 // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
-                JObject hriUser;
-                try
+                var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("model", model.UserName);
+                if (currentUmbracoPage != null)
                 {
-                    hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
-                        new Dictionary<string, string> { { "userName", model.UserName } });
-                }
-                catch // There was an error in connecting to or executing the function on the API
-                {
-                    ModelState.AddModelError("model", "Error in API call GetRegisteredUserByUsername");
-                    return CurrentUmbracoPage();
+                    return currentUmbracoPage;
                 }
 
                 // There is an API error
-                if (hriUser == null)
-                {
-                    ModelState.AddModelError("model", "Sorry, that user name does not exist in our system.");
-                    return CurrentUmbracoPage();
-                }
-
-                // If the user exists in IWS database
-                if ((string)hriUser["RegId"] != null)
-                {
-                    // Create the registration model
-                    var registerModel = Members.CreateRegistrationModel();
-                    // Member Name
-                    registerModel.Name = hriUser["FirstName"].ToString() + " " + hriUser["LastName"].ToString();
-                    // Member Id
-                    registerModel.MemberProperties.First(p => p.Alias == "memberId").Value = hriUser["RegId"].ToString();
-                    // User Name
-                    registerModel.Username = hriUser["UserName"].ToString();
-                    // First Name
-                    registerModel.MemberProperties.First(p => p.Alias == "firstName").Value = hriUser["FirstName"].ToString();
-                    // Last Name
-                    registerModel.MemberProperties.First(p => p.Alias == "lastName").Value = hriUser["LastName"].ToString();
-                    // SSN
-                    if ((string)hriUser["Ssn"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "ssn").Value = hriUser["Ssn"].ToString();
-                    // SSN
-                    if ((string)hriUser["EbixId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "ebixId").Value = hriUser["ebixID"].ToString();
-                    // Email
-                    if ((string)hriUser["EMail"] != null)
-                        registerModel.Email = hriUser["EMail"].ToString();
-                    // Zip Code
-                    if ((string)hriUser["ZipCode"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "zipCode").Value = hriUser["ZipCode"].ToString();
-                    // Phone Number
-                    if ((string)hriUser["PhoneNumber"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "phoneNumber").Value = hriUser["PhoneNumber"].ToString();
-                    // Y Number
-                    if ((string)hriUser["MemberId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "yNumber").Value = hriUser["MemberId"].ToString();
-                    // Group Id
-                    if ((string)hriUser["RxGrpId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
-                    // Birthday
-                    if ((string) hriUser["DOB"] != null)
-                    {
-                        registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
-                        Roles.AddUserToRole(model.UserName, "Enrolled");
-                    }
-                    // Plan Id
-                    if ((string)hriUser["PlanId"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
-                    // Plan Name
-                    if ((string)hriUser["PlanName"] != null)
-                        registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
-
-                    // Create a random Guid
-                    Guid key = Guid.NewGuid();
-                    // Update the user's Guid field
-                    registerModel.MemberProperties.First(p => p.Alias == "guid").Value = key.ToString();
-
-                    registerModel.Password = Membership.GeneratePassword(12, 4);
-                    registerModel.LoginOnSuccess = false;
-                    registerModel.UsernameIsEmail = false;
-
-                    // Register the user with Door3 automatically
-                    MembershipCreateStatus status;
-                    var newMember = Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
-                    // Force sign out (hack for Umbraco bug that automatically logs user in on registration
-                    Session.Clear();
-                    FormsAuthentication.SignOut();
-
-                    // Authenticate the user automatically as a registered user
-                    newMember.IsApproved = true;
-                    Roles.AddUserToRole(newMember.UserName, "Registered");
-                    #endregion
-
-                    // Reset the password and send an email to the user
-                    SendResetPasswordEmail(newMember.Email, newMember.UserName, key.ToString());
-
-                    TempData["ForgotPasswordIsSuccessful"] = true;
-                    return RedirectToCurrentUmbracoPage();                      
-                }
+                ModelState.AddModelError("model", UsernameDoesNotExist);
                 return CurrentUmbracoPage();
-                #endregion
             }
-            // The model was invalid
-            TempData["ForgotPasswordIsSuccessful"] = false;
+
+            if (member.IsApproved && !Roles.IsUserInRole(model.UserName, "Registered"))
+            { // User is in process of security upgrade
+                return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+            }
+
+            // Create a random Guid
+            Guid key = Guid.NewGuid();
+            // Update the user's Guid field
+            member.SetValue("guid", key.ToString());
+            // Save the updated information
+            Services.MemberService.Save(member);
+
+            SendResetPasswordEmail(member.Email, member.Username, key.ToString());
+
+            TempData["ForgotPasswordIsSuccessful"] = true;
             return RedirectToCurrentUmbracoPage();
         }
-
 
         /// <summary>
         /// This version is called from the resend email page. It sends them a new verification email
@@ -244,64 +155,86 @@ namespace HRI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SendVerificationLink([Bind(Prefix = "sendVerificationLinkModel")]SendVerificationLinkModel model)
+        public ActionResult SendVerificationLink([Bind(Prefix = "sendVerificationLinkModel")] SendVerificationLinkModel model)
         {
             // If the user model is valid and the user exists
-            if (ModelState.IsValid && Services.MemberService.GetByUsername(model.UserName) != null)
-            {  
-                // If this user has already been verified
-                if(Services.MemberService.GetByUsername(model.UserName).IsApproved)
-                {
-                    TempData["ResendEmailAlreadyVefiried"] = true;
-                    return CurrentUmbracoPage();
-                }
-                // Get a handle on the member
-                var member = Services.MemberService.GetByUsername(model.UserName);               
-                // Create a random Guid
-                Guid key = Guid.NewGuid();
-                // Update the user's Guid field
-                member.SetValue("guid", key.ToString());
-                // Save the updated information
-                Services.MemberService.Save(member);
-
-                // Get ahold of the root/home node
-                IPublishedContent root = Umbraco.ContentAtRoot().First();
-                // Get the Verification Email Template ID
-                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
-
-                // Build a dictionary for all the dynamic text in the email template
-                var dynamicText = new Dictionary<string, string>();
-                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
-                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationUrl%>", "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
-
-                // Try to send the message
-                try
-                {
-                    SendEmail(member.Email, "Health Republic Insurance - Member Verification Link",
-                                            BuildEmail((int)emailTemplateId, dynamicText));
-                }
-                catch(SmtpException ex)
-                {
-                    //don't add a field level error, just model level
-                    ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
-                    return CurrentUmbracoPage();
-                }
-
-                // Mark this method as successful for the next page
-                TempData["IsSuccessful"] = true;
-
-                // If there is a redirect url
-                if (!string.IsNullOrEmpty(model.RedirectUrl))
-                    // Send the user to that page
-                    return Redirect(model.RedirectUrl);
-                return Redirect("/");
+            if (!ModelState.IsValid)
+            {
+                // Return the user to the home page
+                return CurrentUmbracoPage();
             }
-            // Model was bad or user didnt exist
-            // Mark the method as failed
-            TempData["IsSuccessful"] = false;
-            // Return the user to the home page
-            return Redirect("/");
+
+            // Get a handle on the member
+            var member = Services.MemberService.GetByUsername(model.UserName);
+
+            if (member == null)
+            {
+                // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
+                var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("sendVerificationLinkModel", model.UserName);
+                if (currentUmbracoPage != null)
+                {
+                    return currentUmbracoPage;
+                }
+
+                // There is an API error
+                ModelState.AddModelError("sendVerificationLinkModel", UsernameDoesNotExist);
+                return CurrentUmbracoPage();
+            }
+
+            if (member.IsApproved)
+            { 
+                if (!Roles.IsUserInRole(model.UserName, "Registered"))
+                { // User is in process of security upgrade
+                    return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+                }
+
+                TempData["ResendEmailAlreadyVerified"] = true;
+                return CurrentUmbracoPage();
+            }
+
+            // Create a random Guid
+            Guid key = Guid.NewGuid();
+            // Update the user's Guid field
+            member.SetValue("guid", key.ToString());
+            // Save the updated information
+            Services.MemberService.Save(member);
+
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the Verification Email Template ID
+            var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
+
+            // Build a dictionary for all the dynamic text in the email template
+            var dynamicText = new Dictionary<string, string>
+            {
+                { "<%FirstName%>", member.GetValue("firstName").ToString() },
+                { "<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString() },
+                {
+                    "<%VerificationUrl%>",
+                    "http://" + Request.Url.Host + ":" + Request.Url.Port +
+                        "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" +
+                        key
+                }
+            };
+
+            // Try to send the message
+            try
+            {
+                SendEmail(member.Email, "Health Republic Insurance - Member Verification Link",
+                    BuildEmail((int)emailTemplateId, dynamicText));
+            }
+            catch(SmtpException ex)
+            {
+                //don't add a field level error, just model level
+                ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
+                return CurrentUmbracoPage();
+            }
+
+            // Mark this method as successful for the next page
+            TempData["IsSuccessful"] = true;
+
+            // If there is a redirect url
+            return Redirect(!string.IsNullOrEmpty(model.RedirectUrl) ? model.RedirectUrl : "/");
         }
 
         /// <summary>

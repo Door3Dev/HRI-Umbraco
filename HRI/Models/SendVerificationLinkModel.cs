@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HRI.Models
 {
     public class SendVerificationLinkModel
     {
+        [Required]
         public string UserName { get; set; }
         public string RedirectUrl { get; set; }
     }

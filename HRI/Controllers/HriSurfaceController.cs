@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
@@ -136,6 +138,135 @@ namespace HRI.Controllers
         protected T MakeInternalApiCall<T>(string action, Dictionary<string, string> values)
         {
             return JsonConvert.DeserializeObject<T>(MakeInternalApiCall(action, values));
+        }
+
+        protected ActionResult InitiateSecurityUpgradeForIwsUser(string model, string username)
+        {
+            var hriUser = MakeInternalApiCallJson("GetRegisteredUserByUsername",
+                new Dictionary<string, string> { { "userName", username } });
+
+            // Check if the user exists in IWS database
+            if (hriUser == null || hriUser["RegId"] == null)
+            {
+                return null;
+            }
+
+            // Before attempt to create a user need to check the email and login uniqueness
+            var existedUserWithEmail = Services.MemberService.GetByEmail(hriUser["EMail"].ToString());
+            if (existedUserWithEmail != null)
+            {
+                ModelState.AddModelError(
+                    model,
+                    "We cannot log you in with this user name. The email address of the user name you entered is associated with another user name. Please enter a valid user name and try again or contact Member Services for assistance.");
+
+                return CurrentUmbracoPage();
+            }
+
+            // Create the registration model
+            var registerModel = Members.CreateRegistrationModel();
+            // Member Name
+            registerModel.Name = hriUser["FirstName"] + " " + hriUser["LastName"];
+            // Member Id
+            registerModel.MemberProperties.First(p => p.Alias == "memberId").Value = hriUser["RegId"].ToString();
+            // User Name
+            registerModel.Username = hriUser["UserName"].ToString();
+            // First Name
+            registerModel.MemberProperties.First(p => p.Alias == "firstName").Value = hriUser["FirstName"].ToString();
+            // Last Name
+            registerModel.MemberProperties.First(p => p.Alias == "lastName").Value = hriUser["LastName"].ToString();
+            // SSN
+            if ((string)hriUser["Ssn"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "ssn").Value = hriUser["Ssn"].ToString();
+            }
+            // SSN
+            if ((string)hriUser["EbixId"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "ebixId").Value = hriUser["ebixID"].ToString();
+            }
+            // Email
+            if ((string)hriUser["EMail"] != null)
+            {
+                registerModel.Email = hriUser["EMail"].ToString();
+            }
+            // Zip Code
+            if ((string)hriUser["ZipCode"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "zipCode").Value = hriUser["ZipCode"].ToString();
+            }
+            // Phone Number
+            if ((string)hriUser["PhoneNumber"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "phoneNumber").Value =
+                    hriUser["PhoneNumber"].ToString();
+            }
+            // Y Number
+            if ((string)hriUser["MemberId"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "yNumber").Value = hriUser["MemberId"].ToString();
+            }
+            // Group Id
+            if ((string)hriUser["RxGrpId"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
+            }
+            // Birthday
+            if ((string)hriUser["DOB"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
+            }
+            // Plan Id
+            if ((string)hriUser["PlanId"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
+            }
+            // Plan Name
+            if ((string)hriUser["PlanName"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value =
+                    hriUser["PlanName"].ToString();
+            }
+
+            registerModel.MemberProperties.First(p => p.Alias == "market").Value = hriUser["Market"].ToString();
+
+            registerModel.Password = Membership.GeneratePassword(12, 4);
+            registerModel.LoginOnSuccess = false;
+            registerModel.UsernameIsEmail = false;
+
+            // Register the user with automatically
+            MembershipCreateStatus status;
+            Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
+
+            if ((string)hriUser["DOB"] != null)
+            {
+                Roles.AddUserToRole(username, "Enrolled");
+            }
+
+            // Force sign out (hack for Umbraco bug that automatically logs user in on registration
+            Session.Clear();
+            FormsAuthentication.SignOut();
+
+            return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(username);
+        }
+
+        protected ActionResult SendResetPasswordEmailAndRedirectToSecurityUpgradePage(string username)
+        {
+            var member = Services.MemberService.GetByUsername(username);
+
+            // Create a random Guid
+            var key = Guid.NewGuid();
+            // Update the user's Guid field
+            member.SetValue("guid", key.ToString());
+
+            // Distinguishe not activated user from user in process of security upgrade
+            member.IsApproved = true;
+
+            Services.MemberService.Save(member);
+
+            // Reset the password and send an email to the user
+            SendResetPasswordEmail(member.Email, username, key.ToString());
+
+            return Redirect("/for-members/security-upgrade/");
         }
     }
 }

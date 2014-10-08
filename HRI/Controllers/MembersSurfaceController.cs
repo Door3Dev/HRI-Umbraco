@@ -250,6 +250,7 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
                 // Update the User profile in the database
                 Membership.UpdateUser(user);
+                Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
                 return RedirectToCurrentUmbracoPage();
             }
             catch (MembershipPasswordException)
