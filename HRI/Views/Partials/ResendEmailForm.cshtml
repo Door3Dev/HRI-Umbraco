@@ -1,14 +1,13 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-    
-@using System.Web.Mvc.Html
+﻿@using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using HRI.Controllers
 @using HRI.Models
 
+@inherits UmbracoTemplatePage
+
 @{
-    var sendVerificationLinkModel = new SendVerificationLinkModel();
-    sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
+    var sendVerificationLinkModel = new SendVerificationLinkModel { RedirectUrl = "/for-members/verify-account/" };
 
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
@@ -17,28 +16,29 @@
     Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 }
 
-@if (TempData["ResendEmailAlreadyVefiried"] != null)
+@Html.Raw(Html.RenderJsHere())
+
+@if (((bool?)TempData["ResendEmailAlreadyVerified"]).GetValueOrDefault())
 {
     <p>This account has already been verified!</p>
+    return;
 }
-else 
-{ 
-    using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
-    {
-        <fieldset>
-            @Html.ValidationSummary("sendVerificationLinkModel", true)
-            @Html.AntiForgeryToken()
 
-            @Html.LabelFor(m => sendVerificationLinkModel.UserName)
-            @Html.TextBoxFor(m => sendVerificationLinkModel.UserName, new { id = "focus" })
-            @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
+@using (Html.BeginUmbracoForm<EmailSurfaceController>("SendVerificationLink"))
+{
+    <fieldset>
+        @Html.ValidationSummary("sendVerificationLinkModel", true)
+        @Html.AntiForgeryToken()
 
-            @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
-            <button class="btn hri-btn disable-after-click">Send Verification Email</button>
-        </fieldset>
-    }
+        @Html.LabelFor(m => sendVerificationLinkModel.UserName)
+        @Html.TextBoxFor(m => sendVerificationLinkModel.UserName, new { id = "focus" })
+        @Html.ValidationMessageFor(m => sendVerificationLinkModel.UserName)
 
-    <script>
-        document.getElementById('focus').focus();
-    </script>
+        @Html.HiddenFor(m => sendVerificationLinkModel.RedirectUrl)
+        <button class="btn hri-btn disable-after-click">Send Verification Email</button>
+    </fieldset>
 }
+
+<script>
+    document.getElementById('focus').focus();
+</script>
