@@ -176,6 +176,8 @@ namespace HRI.Controllers
                     json = JObject.Parse(result);
                     // Determine the result of the registration
                     regSuccess = !Convert.ToBoolean(json["error"]);
+                    if (!regSuccess)
+                        logger.ErrorFormat("API error: {0}", json);
                 }
                 // If a success
                 if (regSuccess)
