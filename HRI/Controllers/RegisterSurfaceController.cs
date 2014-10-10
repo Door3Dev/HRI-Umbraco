@@ -29,6 +29,15 @@ namespace HRI.Controllers
                     ModelState.AddModelError("registerModel.MemberId", errorMessage);
                     error = true;
                 }
+
+                // if there's no error, try to get plan ID from api
+                var planId = MakeInternalApiCall<string>("GetHealthPlanIdByMemberId",
+                    new Dictionary<string, string> { { "memberId", model.MemberId } });
+                if (planId != null)
+                {
+                    ViewData["PlanId"] = model.PlanId;
+                    model.PlanId = planId;
+                }
             }
 
             if (ModelState.IsValid == false || error)
