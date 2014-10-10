@@ -250,13 +250,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Logs\UmbracoTraceLog.txt" />
+    <Content Include="App_Data\eldos-key.txt" />
     <Content Include="App_Data\Umbraco.sdf" />
     <Content Include="css\styles.css" />
     <Content Include="css\stylesDev.css" />
-    <Content Include="eldos-key.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="EmailTemplates\ResetPasswordEmailTemplate.txt" />
     <Content Include="EmailTemplates\VerificationEmailTemplate.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />
@@ -311,14 +308,9 @@
     <Content Include="saml.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="idp.cer" />
-    <Content Include="SecCertMS070714.cer" />
-    <Content Include="sp.pfx" />
     <Content Include="App_Data\access.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Logs\UmbracoTraceLog.txt.2014-06-30" />
-    <Content Include="App_Data\Logs\UmbracoTraceLog.txt.2014-07-01" />
     <Content Include="App_Data\NuGetBackup\20140630-143640\CopyLogs\UmbracoBinBackup.log" />
     <Content Include="App_Data\NuGetBackup\20140630-143708\Web.config" />
     <Content Include="App_Data\packages\installed\installedPackages.config" />
@@ -328,17 +320,25 @@
     <Content Include="Views\Partials\RegisterMemberForm.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="idp.pfx" />
     <Content Include="App_Data\zip-codes.csv" />
-    <Content Include="mc_uatsaml_pub.cer" />
-    <Content Include="healthrepublicny.pfx" />
-    <Content Include="mc_prodsaml_pub.cer" />
-    <Content Include="DOOR3_LWPROD_SSO.cer" />
+    <Content Include="App_Data\healthrepublicny.pfx" />
+    <Content Include="App_Data\hrinyorg-prod-public.cer" />
+    <Content Include="App_Data\hrinyorg-prod-public64.cer" />
+    <Content Include="App_Data\hrinyorg.pfx" />
+    <Content Include="App_Data\idp.cer" />
+    <Content Include="App_Data\idp.pfx" />
+    <Content Include="App_Data\mc_prodsaml_pub.cer" />
+    <Content Include="App_Data\mc_uatsaml_pub.cer" />
+    <Content Include="App_Data\SecCertHX080714.cer" />
+    <Content Include="App_Data\SecCertMS070714.cer" />
+    <Content Include="App_Data\SecCertUS071514.cer" />
+    <Content Include="App_Data\sp.pfx" />
+    <Content Include="App_Data\sso.healthx.com.crt" />
+    <Content Include="App_Data\DOOR3_LWPROD_SSO.cer" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="SecCertUS071514.cer" />
     <Content Include="Views\Broker.cshtml" />
     <Content Include="Views\Careers.cshtml" />
     <Content Include="Views\ChangeEmail.cshtml" />
@@ -380,18 +380,15 @@
     <Content Include="Views\ResetPassword.cshtml" />
     <Content Include="Views\Partials\PlansList.cshtml" />
     <Content Include="Views\Partials\ComparePlansForm.cshtml" />
-    <Content Include="SecCertHX080714.cer" />
     <Content Include="Views\VerifyAccount.cshtml" />
     <Content Include="Views\SecurityUpgrade.cshtml" />
     <Content Include="Views\MacroPartials\ImageSlide.cshtml" />
     <Content Include="Views\MacroPartials\ImageSlideIndicator.cshtml" />
     <Content Include="Views\MacroPartials\UserHealthPolicyLink.cshtml" />
-    <Content Include="ussitsps_test_pub.asc" />
     <Content Include="Views\Partials\RegistrationConfirmation.cshtml" />
     <Content Include="production.saml.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="sso.healthx.com.crt" />
     <Content Include="Views\MasterPageDev.cshtml" />
     <Content Include="Views\IndividualPlans2015.cshtml" />
     <None Include="Web.Debug.config">
@@ -447,6 +444,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Logs\" />
     <Folder Include="App_Data\NuGetBackup\20140630-143640\bin\" />
     <Folder Include="App_Data\NuGetBackup\20140630-143708\CopyLogs\" />
     <Folder Include="App_Data\packages\created\" />
