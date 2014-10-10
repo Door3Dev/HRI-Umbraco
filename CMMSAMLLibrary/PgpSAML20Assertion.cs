@@ -22,6 +22,7 @@ using SBXMLEnc;
 using SBXMLSec;
 using SBXMLSig;
 using SBXMLTransform;
+using System.Web.Hosting;
 
 namespace CoverMyMeds.SAML.Library
 {
@@ -112,9 +113,10 @@ namespace CoverMyMeds.SAML.Library
         /// <returns>Serialized XML Document with computed signature as byte array.</returns>
         private static byte[] SerializeAndSignSAMLResponse(ResponseType Response, string partnerSP)
         {
-            var signatureCertificatePath = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile;
+            // saml.config contains relative paths not virtual
+            var signatureCertificatePath = HostingEnvironment.MapPath("~/" + SAMLConfiguration.Current.IdentityProviderConfiguration.CertificateFile);
             var signaruteCertificatePassword = SAMLConfiguration.Current.IdentityProviderConfiguration.CertificatePassword;
-            var encryptionKeyPath = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile;
+            var encryptionKeyPath = HostingEnvironment.MapPath("~/" + SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSP).CertificateFile);
 
             using (var stream = new MemoryStream())
             {
@@ -130,7 +132,7 @@ namespace CoverMyMeds.SAML.Library
                 FXMLDocument.LoadFromStream(stream);
             }
 
-            SBUtils.Unit.SetLicenseKey(File.ReadAllText("eldos-key.txt"));
+            SBUtils.Unit.SetLicenseKey(File.ReadAllText(HostingEnvironment.MapPath("~/App_Data/eldos-key.txt")));
 
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
@@ -152,7 +154,7 @@ namespace CoverMyMeds.SAML.Library
         {
             using (var X509KeyData = new TElXMLKeyInfoX509Data(true))
             {
-                using (var stream = new FileStream("hrinyorg-prod-public.cer", FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream(HostingEnvironment.MapPath("~/App_Data/hrinyorg-prod-public.cer"), FileMode.Open, FileAccess.Read))
                     LoadCertificate(stream, "", X509KeyData);
 
                 using (var verifier = new TElXMLVerifier())
@@ -304,7 +306,7 @@ namespace CoverMyMeds.SAML.Library
             X509KeyData = new TElXMLKeyInfoX509Data(true);
             PGPKeyData = new TElXMLKeyInfoPGPData(true);
 
-            certificate = "ussitsps_test_pub.asc";
+            certificate = HostingEnvironment.MapPath("~/App_Data/ussitsps_test_pub.asc");
             F = new FileStream(certificate, FileMode.Open, FileAccess.Read);
 
             //try
@@ -435,7 +437,7 @@ namespace CoverMyMeds.SAML.Library
             }
         }
 
-        private static void SignElement(string certificate, string password, object element)
+        private static void SignElement(string absoluteCertFilePath, string password, object element)
         {
             TElXMLSigner Signer;
             TElXAdESSigner XAdESSigner = null;
@@ -507,7 +509,7 @@ namespace CoverMyMeds.SAML.Library
                 X509KeyData = new TElXMLKeyInfoX509Data(true);
                 PGPKeyData = new TElXMLKeyInfoPGPData(true);
 
-                F = new FileStream(certificate, FileMode.Open, FileAccess.Read);
+                F = new FileStream(absoluteCertFilePath, FileMode.Open, FileAccess.Read);
 
                 try
                 {
