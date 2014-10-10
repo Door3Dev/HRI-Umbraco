@@ -10,11 +10,15 @@ using System.Net;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Mvc;
+using Umbraco.Core.Models;
+using log4net;
 
 namespace HRI.Controllers
 {
     public class MembersSurfaceController : SurfaceController
     {
+        static readonly ILog logger = LogManager.GetLogger(typeof(MembersSurfaceController));
+        
         private const string IncorrectPassword = "The password you entered does not match our records, please try again.";
 
         [HttpGet]
@@ -156,6 +160,12 @@ namespace HRI.Controllers
             JObject json = new JObject();
             try
             {
+                // validate guid passed
+                IMember member = Services.MemberService.GetByUsername(userName);
+                string userGuid = member.GetValue("guid").ToString();
+                if (!string.Equals(userGuid, guid, StringComparison.OrdinalIgnoreCase))
+                    throw new InvalidOperationException(string.Format("Guid '{0}' does not match user '{1}'", guid, userName));
+
                 using (var client = new WebClient())
                 {
                     // Call the register function (Registers user with HRI API)
@@ -166,11 +176,12 @@ namespace HRI.Controllers
                     json = JObject.Parse(result);
                     // Determine the result of the registration
                     regSuccess = !Convert.ToBoolean(json["error"]);
+                    if (!regSuccess)
+                        logger.ErrorFormat("API error: {0}", json);
                 }
                 // If a success
                 if (regSuccess)
                 {
-                    var member = Services.MemberService.GetByUsername(userName);
                     // Set the user to be approved
                     member.IsApproved = true;                    
                     // Add the registered role to the user
@@ -182,8 +193,9 @@ namespace HRI.Controllers
                     return Redirect("/for-members/login");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.Error(ex);
             }
 
             TempData["IsUserSuccessfullyRegistered"] = false;
