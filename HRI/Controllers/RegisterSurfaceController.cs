@@ -19,6 +19,8 @@ namespace HRI.Controllers
             ViewData["PlanId"] = model.PlanId;
             var error = false;
 
+            var enrollAfterLogin = Convert.ToInt32(model.PlanId != null).ToString();
+
             // Check the Member Id (Y number)
             if (model.PlanId == null) // Enrolled user
             {
@@ -58,7 +60,7 @@ namespace HRI.Controllers
             registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone});
             registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId});
             registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = Convert.ToInt32(model.PlanId != null).ToString() });
+            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = enrollAfterLogin });
 
             MembershipCreateStatus status;
             Members.RegisterMember(registerModel, out status, false);
