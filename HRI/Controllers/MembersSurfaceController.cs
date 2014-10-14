@@ -182,6 +182,7 @@ namespace HRI.Controllers
                 // If a success
                 if (regSuccess)
                 {
+                    member = Services.MemberService.GetByUsername(userName);
                     // Set the user to be approved
                     member.IsApproved = true;                    
                     // Add the registered role to the user
