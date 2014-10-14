@@ -182,10 +182,16 @@ namespace HRI.Controllers
                 // If a success
                 if (regSuccess)
                 {
+                    member = Services.MemberService.GetByUsername(userName);
                     // Set the user to be approved
                     member.IsApproved = true;                    
                     // Add the registered role to the user
                     Roles.AddUserToRole(userName, "Registered");
+                    // Add the enrolled role to the user, if "enrollmentpageafterlogin" != 1
+                    if (member.GetValue<string>("enrollmentpageafterlogin") != "1")
+                    {
+                        Roles.AddUserToRole(userName, "Enrolled");
+                    }
                     // Save the member
                     Services.MemberService.Save(member);                    
                     // Send the user to the login page
