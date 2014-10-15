@@ -228,8 +228,6 @@ namespace HRI.Controllers
             }
 
             registerModel.MemberProperties.First(p => p.Alias == "market").Value = hriUser["Market"].ToString();
-
-            registerModel.MemberProperties.First(p => p.Alias == "enrollmentpageafterlogin").Value = String.Empty;
             
             registerModel.Password = Membership.GeneratePassword(12, 4);
             registerModel.LoginOnSuccess = false;
