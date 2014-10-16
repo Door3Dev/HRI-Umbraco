@@ -54,6 +54,7 @@ namespace HRI.Controllers
             {"Kings", 4},
             {"Queens", 4},
             {"Richmond", 4},
+            {"Bronx", 4},
             {"Monroe", 5},
             {"Wayne", 5},
             {"Seneca", 5},
@@ -336,7 +337,7 @@ namespace HRI.Controllers
                     var splits = rd.ReadLine().Split(',');
                     var endsWithAny = splits[0].Contains('*');
                     var zip = endsWithAny ? splits[0].Substring(0, splits[0].Length - 1) : splits[0];
-                    var county = textInfo.ToTitleCase(splits[19].ToLower());
+                    var county = textInfo.ToTitleCase(splits[7].ToLower().Trim());
                     zips.Add(new ZipCode(zip, county));
                 }
             }
