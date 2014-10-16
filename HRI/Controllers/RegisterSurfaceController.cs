@@ -42,6 +42,13 @@ namespace HRI.Controllers
                 }
             }
 
+            // Validate ZipCode
+            if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
+            {
+                ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
+                error = true;
+            }
+
             if (ModelState.IsValid == false || error)
                 return CurrentUmbracoPage();
 
