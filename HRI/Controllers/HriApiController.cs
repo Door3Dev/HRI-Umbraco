@@ -187,11 +187,7 @@ namespace HRI.Controllers
             // If the user was created
             if (json["MemberId"] != null)
             {
-                // Assign this user their member id                
-                member.SetValue("memberId", json["RegId"].ToString());                
-                // Assign their Morneau Shapell Y Number
-                member.SetValue("yNumber", json["MemberId"].ToString());
-                member.SetValue("market", json["Market"].ToString());
+                SetMemberProperties(member);
                 Services.MemberService.Save(member);
                 // Return successful registration
                 json.Add("error", "false");
@@ -200,6 +196,40 @@ namespace HRI.Controllers
 
             // Member was not registered with HRI           
             return json.ToString(Formatting.None);
+        }
+
+        private void SetMemberProperties(IMember member)
+        {
+            var hriUser = GetRegisteredUserByUsername(member.Username);
+
+            // Assign this user their member id                
+            member.SetValue("memberId", hriUser["RegId"].ToString());
+            // Assign their Morneau Shapell Y Number
+            member.SetValue("yNumber", hriUser["MemberId"].ToString());
+            member.SetValue("market", hriUser["Market"].ToString());
+            if ((string)hriUser["EbixId"] != null)
+            {
+                member.SetValue("ebixId", hriUser["EbixId"].ToString());
+            }
+            if ((string)hriUser["RxGrpId"] != null)
+            {
+                member.SetValue("groupId", hriUser["RxGrpId"].ToString());
+            }
+            // Birthday
+            if ((string)hriUser["DOB"] != null)
+            {
+                member.SetValue("birthday", hriUser["DOB"].ToString());
+            }
+            // Plan Id
+            if ((string)hriUser["PlanId"] != null)
+            {
+                member.SetValue("healthplanid", hriUser["PlanId"].ToString());
+            }
+            // Plan Name
+            if ((string)hriUser["PlanName"] != null)
+            {
+                member.SetValue("healthPlanName", hriUser["PlanName"].ToString());
+            }
         }
 
         /// <summary>
