@@ -1,13 +1,12 @@
-﻿Hello <%FirstName%>! 
+Hello <%FirstName%>! 
 
-We received your request to recover your user name.
+We received your request to recover your username.
 
-Your user name is: <%UserName%>
+Your username is: <%UserName%>
 
-If you have any problems or questions, or if you did not request to have your user name sent to you,
-contact Health Republic Insurance New York immeadiately.
+If you have any problems or questions, or if you did not request to have your username sent to you, contact Health Republic Insurance of New York immediately.  You can call us at 888-990-5702 prompt 2, or by email at questions@healthrepublicny.org .
 
-Health Republic Insurance New York
+Health Republic Insurance of New York
 <%PhoneNumber%>
 
-Thank you!
+Thank you
