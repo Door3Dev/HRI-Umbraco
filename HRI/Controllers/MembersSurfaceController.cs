@@ -29,6 +29,14 @@ namespace HRI.Controllers
             return Redirect("/");
         }
 
+        private bool IsInInitialEnrollmentPeriod()
+        {
+            var startYear = DateTime.Now.Month >= 4 ? DateTime.Now.Year : DateTime.Now.Year - 1;
+            var start = new DateTime(startYear, 11, 15);
+            var end = new DateTime(startYear + 1, 3, 31);
+            return DateTime.Now.Date >= start && DateTime.Now.Date <= end;
+        }
+
         public ActionResult SingleSignOn(string attributes, string targetUrl, string partnerSP)
         {
             // Initiate single sign-on to the service provider (IdP-initiated SSO)]
@@ -135,6 +143,13 @@ namespace HRI.Controllers
                 // Replace the template variables in the url
                 if (targetUrl.IndexOf("<%PLANID%>") != -1)
                     targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthplanid").ToString());
+
+                // Replace "initialEnrollment" with "specialEnrollmentSelect" if outside of 11/15-3/31
+                if (targetUrl.Contains("initialEnrollment") && !IsInInitialEnrollmentPeriod())
+                {
+                    targetUrl = targetUrl.Replace("initialEnrollment", "specialEnrollmentSelect");
+                }
+
                 // Send an IdP initiated SAML assertion
                 SAMLIdentityProvider.InitiateSSO(
                     Response,
