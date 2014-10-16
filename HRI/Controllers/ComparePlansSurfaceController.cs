@@ -320,6 +320,12 @@ namespace HRI.Controllers
 
         public ComparePlansSurfaceController()
         {
+            ZipCodes = GetZipCodes();
+        }
+
+        private static List<ZipCode> GetZipCodes()
+        {
+            var zips = new List<ZipCode>();
             var zipCodePath = HostingEnvironment.MapPath("~/App_Data/zip-codes.csv");
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             using (var rd = new StreamReader(zipCodePath))
@@ -331,9 +337,10 @@ namespace HRI.Controllers
                     var endsWithAny = splits[0].Contains('*');
                     var zip = endsWithAny ? splits[0].Substring(0, splits[0].Length - 1) : splits[0];
                     var county = textInfo.ToTitleCase(splits[19].ToLower());
-                    ZipCodes.Add(new ZipCode(zip, county));
+                    zips.Add(new ZipCode(zip, county));
                 }
             }
+            return zips;
         }
 
         /// <summary>
@@ -483,8 +490,21 @@ namespace HRI.Controllers
 
         private string ValidateZipCodeCore(string zipCode)
         {
-            var zipCodeItem = ZipCodes.FirstOrDefault(z => z.zipCode == zipCode);
+            return ValidateZipCodeCore(zipCode, ZipCodes);
+        }
+
+        private static string ValidateZipCodeCore(string zipCode, List<ZipCode> zips)
+        {
+            var zipCodeItem = zips.FirstOrDefault(z => z.zipCode == zipCode);
             return zipCodeItem != null ? null : "Zip Code is incorrect.";
         }
+        
+        // internal static function for validating zip codes from other controllers
+        internal static bool IsValidZipCodeInternal(string zipCode)
+        {
+            var zips = GetZipCodes();
+            return ValidateZipCodeCore(zipCode, zips) == null;
+        }
+
     }
 }
