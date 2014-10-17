@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
 using System.Web.Configuration;
+using log4net;
 
 namespace HRI.Controllers
 {
@@ -112,6 +113,10 @@ namespace HRI.Controllers
         /// <returns></returns>
         protected string MakeInternalApiCall(string action, Dictionary<string, string> values)
         {
+            // Trust to the certificates during the call
+            ServicePointManager.ServerCertificateValidationCallback = ((sender, certificate, chain, sslPolicyErrors) => true);
+            // Set the HTTPS
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             // Exectue a GET against the API
             using (var client = new WebClient())
             {
@@ -119,6 +124,7 @@ namespace HRI.Controllers
                 var valuesList = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
                 var restUrl = WebConfigurationManager.AppSettings["umbracoRestApiUrl"];
                 string url = String.Format("{0}/umbraco/api/HriApi/{1}?{2}", restUrl, action, String.Join("&", valuesList));
+
                 return client.DownloadString(url);
             }
         }
