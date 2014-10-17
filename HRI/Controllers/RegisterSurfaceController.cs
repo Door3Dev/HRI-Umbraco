@@ -34,16 +34,26 @@ namespace HRI.Controllers
 
                 // if there's no error, try to get plan ID from api
                 var planId = MakeInternalApiCall<string>("GetHealthPlanIdByMemberId",
-                    new Dictionary<string, string> { { "memberId", model.MemberId } });
+                    new Dictionary<string, string> {{"memberId", model.MemberId}});
                 if (planId != null)
                 {
                     ViewData["PlanId"] = model.PlanId;
                     model.PlanId = planId;
                 }
             }
+            else
+            {
+                // is new user
+                // Validate ZipCode
+                if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
+                {
+                    ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
+                    error = true;
+                }
+            }
 
-            // Validate ZipCode
-            if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
+            // Validate ZipCode Length, mask from front-end might have 5 characters, but contains "_" so check for that
+            if (!String.IsNullOrWhiteSpace(model.Zipcode) && (model.Zipcode.Length != 5 || model.Zipcode.Contains("_")))
             {
                 ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
                 error = true;

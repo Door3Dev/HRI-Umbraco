@@ -156,22 +156,41 @@
 
 <script>
     // Check valid zipCode
+    @{if (isNewUser) 
+    {
+        <text>
+        $('#zipCode').blur(function() {
+            $.ajax({
+                url: '/Umbraco/Surface/ComparePlansSurface/ValidateZipCode',
+                data: { ZipCode: $('#zipCode').val() },
+                success: function(data) {
+                    if (data == 'true')
+                        $('#zipCodeCheck').html('');
+                    else 
+                        $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
+                },
+                error: function() {
+                    $('#zipCodeCheck').html('<span class="error">There was an error validating the Zip Code</span>');
+                },
+                dataType: 'html'
+            });
+        });
+        </text>
+    }
+    else
+    {
+        <text>
     $('#zipCode').blur(function() {
-        $.ajax({
-            url: '/Umbraco/Surface/ComparePlansSurface/ValidateZipCode',
-            data: { ZipCode: $('#zipCode').val() },
-            success: function(data) {
-                if (data == 'true')
-                    $('#zipCodeCheck').html('');
-                else 
-                    $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
-            },
-            error: function() {
-                $('#zipCodeCheck').html('<span class="error">There was an error validating the Zip Code</span>');
-            },
-            dataType: 'html'
-        })
-    });
+        console.log('zip code length: ', $(this).val().length, "'" + $(this).val() + "'");
+        // length is always 5 from input mask, so check if there are any _
+            if ($(this).val().length == 5 && $(this).val().indexOf('_') < 0) {
+                $('#zipCodeCheck').html('');
+            } else {
+                $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
+            }
+        });    
+        </text>
+    }}
 
     // Check user uniqueness
     $("#username").keyup(function() {
