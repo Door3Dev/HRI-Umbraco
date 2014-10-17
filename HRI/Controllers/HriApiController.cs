@@ -91,6 +91,15 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
+        public JObject GetRegisteredUserByEmail(string email)
+        {
+            var result = MakeApiCall(new Dictionary<string, string> { { "eMail", email } });
+            var hasRegId = result.Value<int?>("RegId").HasValue;
+
+            return hasRegId ? result : null;
+        }
+
+        [HttpGet]
         public JObject GetRegisteredUserByUsername(string username)
         {
             var result = MakeApiCall(new Dictionary<string, string> { { "userName", username } });

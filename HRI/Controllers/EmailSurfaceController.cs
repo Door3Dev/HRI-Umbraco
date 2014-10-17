@@ -69,35 +69,55 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ForgotUserName([Bind(Prefix = "forgotUserNameViewModel")]ForgotUserNameViewModel model)
         {
-            try 
+            try
             {
+                Dictionary<string,string> dynamicText = new Dictionary<string, string>();
                 // Attempt to get the member based on the given email address
                 var member = Services.MemberService.GetByEmail(model.Email);
+                
                 // If a member with that email exists
                 if (member != null)
                 {
-                    // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
-                    IPublishedContent root = Umbraco.TypedContentAtRoot().First();
-                   
                     // Build a dictionary for all teh dynamic text in the email template
-                    var dynamicText = new Dictionary<string,string>
+                    dynamicText = new Dictionary<string,string>
                     {
                         {"<%FirstName%>", member.GetValue("firstName").ToString()},
-                        {"<%UserName%>", member.Username},
-                        {"<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString()}
+                        {"<%UserName%>", member.Username}
                     };
+                }
+                else
+                {
+                    // try get user from API
+                    var hriUser = MakeInternalApiCallJson("GetRegisteredUserByEmail", new Dictionary<string, string> { { "email", model.Email } });
+                    if (hriUser != null)
+                    {
+                        dynamicText = new Dictionary<string, string>
+                        {
+                            {"<%FirstName%>", hriUser["FirstName"].ToString()},
+                            {"<%UserName%>", hriUser["UserName"].ToString()}
+                        };
+                    }
+                }
+
+                if (dynamicText.Any())
+                {
+                    // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+                    IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+
+                    // add phone number to dynamic text
+                    dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
 
                     //Get the Verification Email Template ID
                     var emailTemplateId = root.GetProperty("forgotUserNameEmailTemplate").Value;
-
-
-                    SendEmail(member.Email, "Health Republic Insurance - Username Recovery",
-                                             BuildEmail((int)emailTemplateId, dynamicText));
+                    
+                    SendEmail(model.Email, "Health Republic Insurance - Username Recovery",
+                        BuildEmail((int) emailTemplateId, dynamicText));
 
                     // Set the sucess flag to true and post back to the same page
                     TempData["ForgotUsernameIsSuccessful"] = true;
                     return RedirectToCurrentUmbracoPage();
                 }
+
                 // The email has no member associated with it
                 // Set the success flag to false and post back to the same page
                 TempData["ForgotUsernameIsSuccessful"] = false;
