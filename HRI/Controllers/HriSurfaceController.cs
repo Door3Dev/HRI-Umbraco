@@ -111,6 +111,8 @@ namespace HRI.Controllers
         /// <returns></returns>
         protected string MakeInternalApiCall(string action, Dictionary<string, string> values)
         {
+            // Trust to the certificates during the call
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = ((sender, certificate, chain, sslPolicyErrors) => true);
             // Exectue a GET against the API
             using (var client = new WebClient())
             {
