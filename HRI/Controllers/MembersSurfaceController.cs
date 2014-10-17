@@ -170,8 +170,9 @@ namespace HRI.Controllers
         {
             // Variable to hold status of registering user against HRI API
             bool regSuccess;
+            var protocol = Request.IsSecureConnection ? "https" : "http";
             // String to api call to register the current user
-            string registerApiUrl = "http://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
+            string registerApiUrl = protocol + "://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
             JObject json = new JObject();
             try
             {

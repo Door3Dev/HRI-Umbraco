@@ -211,6 +211,7 @@ namespace HRI.Controllers
             // Get the Verification Email Template ID
             var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
+            var protocol = Request.IsSecureConnection ? "https" : "http";
             // Build a dictionary for all the dynamic text in the email template
             var dynamicText = new Dictionary<string, string>
             {
@@ -218,7 +219,7 @@ namespace HRI.Controllers
                 { "<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString() },
                 {
                     "<%VerificationUrl%>",
-                    "http://" + Request.Url.Host + ":" + Request.Url.Port +
+                    protocol + "://" + Request.Url.Host + ":" + Request.Url.Port +
                         "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" +
                         key
                 }

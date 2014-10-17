@@ -84,6 +84,7 @@ namespace HRI.Controllers
             // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
             IPublishedContent root = Umbraco.TypedContentAtRoot().First();
 
+            var protocol = Request.IsSecureConnection ? "https" : "http";
             // Build a dictionary for all the dynamic text in the email template
             var dynamicText = new Dictionary<string, string>
             {
@@ -91,7 +92,7 @@ namespace HRI.Controllers
                 {"<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString()},
                 {
                     "<%ResetPasswordLink%>",
-                    "http://" + Request.Url.Host + ":" + Request.Url.Port +
+                    protocol + "://" + Request.Url.Host + ":" + Request.Url.Port +
                     "/umbraco/Surface/MembersSurface/ResetPassword?userName=" + username + "&guid=" + guid
                 }
             };
