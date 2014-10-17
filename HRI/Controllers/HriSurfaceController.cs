@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
+using System.Web.Configuration;
 
 namespace HRI.Controllers
 {
@@ -111,16 +112,13 @@ namespace HRI.Controllers
         /// <returns></returns>
         protected string MakeInternalApiCall(string action, Dictionary<string, string> values)
         {
-            // Trust to the certificates during the call
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = ((sender, certificate, chain, sslPolicyErrors) => true);
             // Exectue a GET against the API
             using (var client = new WebClient())
             {
                 // Read the response into a string
                 var valuesList = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
-                var protocol = Request.IsSecureConnection ? "https" : "http";
-                string url = String.Format("{0}://{1}:{2}/umbraco/api/HriApi/{3}?{4}", protocol, Request.Url.Host,
-                    Request.Url.Port, action, String.Join("&", valuesList));
+                var restUrl = WebConfigurationManager.AppSettings["umbracoRestApiUrl"];
+                string url = String.Format("{0}/umbraco/api/HriApi/{1}?{2}", restUrl, action, String.Join("&", valuesList));
                 return client.DownloadString(url);
             }
         }
