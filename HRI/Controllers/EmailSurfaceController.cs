@@ -39,6 +39,7 @@ namespace HRI.Controllers
                     string.Format("Last Name: {0}", model.LastName),
                     string.Format("Y Number: {0}", model.YNumber ?? na),
                     string.Format("Username: {0}", model.Username ?? na),
+                    string.Format("Email: {0}", model.Email),
                     string.Format("Phone Number: {0}", model.PhoneNumber),
                     "Message:",
                     Environment.NewLine,
@@ -47,7 +48,7 @@ namespace HRI.Controllers
                 foreach (string email in emails)
                     try
                     {
-                        SendEmail(email, model.MessageType, model.Message);
+                        SendEmail(email, model.MessageType, message);
                     }
                     catch (Exception ex)
                     {
