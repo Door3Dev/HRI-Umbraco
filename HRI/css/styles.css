@@ -1681,6 +1681,7 @@ body {
 
 .hri-common .hri-common-hp .hp-plan-desc p{
     padding: 0 30px 0 0;
+    color: #fff;
 }
 
 .hri-common .hri-common-hp .hp-plan-desc h3 {
@@ -1691,24 +1692,12 @@ body {
     background-color: #79c8aa;
 }
 
-.hri-common .hri-common-hp .hp-plan-desc.green p {
-    color: #e4f3ed;
-}
-
 .hri-common .hri-common-hp .hp-plan-desc.purple {
     background-color: #451d5c;
 }
 
-.hri-common .hri-common-hp .hp-plan-desc.purple p {
-    color: #b597c6;
-}
-
 .hri-common .hri-common-hp .hp-plan-desc.blue {
     background-color: #7dbce5;
-}
-
-.hri-common .hri-common-hp .hp-plan-desc.blue p {
-    color: #3d6a8a;
 }
 
 .hri-common .expand-all {
