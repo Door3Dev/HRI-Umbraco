@@ -23,7 +23,7 @@
     if(Convert.ToBoolean(TempData["ForgotUsernameIsSuccessful"]))
     {
         <h3>Membership information found!</h3>
-        <p>We have located your account and sent you an email containing your username.</p>
+        <p>@Umbraco.Field("SuccessMessage")</p>
     }
     else
     {
