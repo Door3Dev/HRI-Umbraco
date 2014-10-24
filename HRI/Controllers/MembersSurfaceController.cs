@@ -284,7 +284,8 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
                 // Update the User profile in the database
                 Membership.UpdateUser(user);
-                Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
+                if (!Roles.IsUserInRole(user.UserName, "Registered"))
+                    Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
                 return RedirectToCurrentUmbracoPage();
             }
             catch (MembershipPasswordException)
@@ -345,6 +346,9 @@ namespace HRI.Controllers
                 var tempPassword = member.ResetPassword();
                 member.ChangePassword(tempPassword, model.NewPassword);
                 Membership.UpdateUser(member);
+                if(!Roles.IsUserInRole(model.UserName, "Registered"))
+                    Roles.AddUserToRole(model.UserName, "Registered"); // This is needed to end security upgrade process
+                
                 TempData["ResetPasswordIsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
