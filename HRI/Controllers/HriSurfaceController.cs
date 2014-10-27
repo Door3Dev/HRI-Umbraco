@@ -235,8 +235,17 @@ namespace HRI.Controllers
             // Plan Name
             if ((string)hriUser["PlanName"] != null)
             {
-                registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value =
-                    hriUser["PlanName"].ToString();
+                registerModel.MemberProperties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
+            }
+            // Morneau Shepell First Name
+            if ((string)hriUser["MSFirstName"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
+            }
+            // Morneau Shepell Last Name
+            if ((string)hriUser["MSLastName"] != null)
+            {
+                registerModel.MemberProperties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
             }
 
             registerModel.MemberProperties.First(p => p.Alias == "market").Value = hriUser["Market"].ToString();

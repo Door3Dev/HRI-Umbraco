@@ -63,8 +63,8 @@ namespace HRI.Controllers
                 var samlAttributes = new Dictionary<string, string>
                 {
                     {"urn:uss:saml:attrib::id", yNumber},
-                    {"urn:uss:saml:attrib::firstname", member.GetValue("firstName").ToString()},
-                    {"urn:uss:saml:attrib::lastname", member.GetValue("lastName").ToString()},
+                    {"urn:uss:saml:attrib::firstname", member.GetValue("msFirstName").ToString()},
+                    {"urn:uss:saml:attrib::lastname", member.GetValue("msLastName").ToString()},
                     {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
                     {"urn:uss:saml:attrib::dateofbirth", Convert.ToDateTime(member.GetValue("birthday")).ToString("yyyy-MM-dd")},
                     {"urn:uss:saml:attrib::email", member.Email}
@@ -79,8 +79,8 @@ namespace HRI.Controllers
                 var samlAttributes = new Dictionary<string, string>
                 {
                     {"member:id", member.GetValue("yNumber").ToString()},
-                    {"member:first_name", member.GetValue("firstName").ToString()},
-                    {"member:last_name", member.GetValue("lastName").ToString()},
+                    {"member:first_name", member.GetValue("msFirstName").ToString()},
+                    {"member:last_name", member.GetValue("msLastName").ToString()},
                     {"member:product", member.GetValue("healthPlanName").ToString()}
                 };
 
@@ -107,13 +107,13 @@ namespace HRI.Controllers
                     new SAMLAttribute("UserId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserId", "xs:string",
                         member.GetValue("yNumber").ToString().ToUpper()),
                     new SAMLAttribute("MemberLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "MemberLastName", "xs:string", member.GetValue("lastName").ToString().ToUpper()),
+                        "MemberLastName", "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
                     new SAMLAttribute("MemberFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "MemberFirstName", "xs:string", member.GetValue("firstName").ToString().ToUpper()),
+                        "MemberFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper()),
                     new SAMLAttribute("UserLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserLastName",
-                        "xs:string", member.GetValue("lastName").ToString().ToUpper()),
+                        "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
                     new SAMLAttribute("UserFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "UserFirstName", "xs:string", member.GetValue("firstName").ToString().ToUpper())
+                        "UserFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper())
                 };
 
                 // Nest a node named ServiceId in the RedirectInfo attribute 
