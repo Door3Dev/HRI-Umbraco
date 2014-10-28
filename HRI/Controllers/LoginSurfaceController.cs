@@ -114,6 +114,8 @@ namespace HRI.Controllers
                 member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
                 member.Properties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
                 member.Properties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
+                member.Properties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
+                member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
                 Roles.AddUserToRole(model.Username, "Enrolled");
 
                 member.SetValue("enrollmentpageafterlogin", String.Empty);

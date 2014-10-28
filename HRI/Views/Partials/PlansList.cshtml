@@ -59,8 +59,9 @@
                                                 <th>
                                                     @plan.MetalTier<br>
                                                     @*This will allow the user to hide enrollment buttons based on the checkbox in the Home Page under Extra Settings*@
-                                                    
-                                                        @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan", @style = "@displayStatus"}))
+                                                    @if(!Convert.ToBoolean(Umbraco.ContentAtRoot().First().GetPropertyValue("preventEnrollment")))
+                                                    {
+                                                        using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan", @style = "@displayStatus"}))
                                                         {
                                                             @Html.AntiForgeryToken()
                                                             @Html.Hidden("ZipCode", Model.ZipCode)
@@ -68,7 +69,7 @@
                                                             @Html.Hidden("PlanPrice", plan.Price)
                                                             <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
                                                         }
-                                                    
+                                                    }
                                             </th>
                                             }
                                         </tr>

@@ -239,6 +239,16 @@ namespace HRI.Controllers
             {
                 member.SetValue("healthPlanName", hriUser["PlanName"].ToString());
             }
+            // Morneau Shepell First Name
+            if ((string)hriUser["MSFirstName"] != null)
+            {
+                member.SetValue("msFirstName", hriUser["MSFirstName"].ToString());
+            }
+            // Morneau Shepell Last Name
+            if ((string)hriUser["MSLastName"] != null)
+            {
+                member.SetValue("msLastName", hriUser["MSLastName"].ToString());
+            }
         }
 
         /// <summary>
