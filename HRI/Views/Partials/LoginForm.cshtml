@@ -22,8 +22,10 @@
 {
     <fieldset>
         <h3>Member Login</h3>
-        
-        @Html.ValidationSummary("loginModel", true)
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary("loginModel", true).ToHtmlString()))
+        }
         @Html.AntiForgeryToken()
 
         @Html.LabelFor(m => loginModel.Username)

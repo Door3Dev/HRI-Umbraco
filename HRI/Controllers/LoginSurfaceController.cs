@@ -46,6 +46,24 @@ namespace HRI.Controllers
 
                 if (member != null)
                 {
+                    if (member.FailedPasswordAttempts >= 2 && member.FailedPasswordAttempts <= 4)
+                    {
+                        ModelState.AddModelError(
+                            "loginModel",
+                            string.Format("Your account will be locked after 5 unsuccessful login attempts, please consider resetting your password using <a href='/for-members/forgot-password'>Forgot Password?</a>"));
+
+                        return CurrentUmbracoPage();
+                    }
+
+                    if (member.IsLockedOut)
+                    {              
+                        ModelState.AddModelError(
+                            "loginModel",
+                            string.Format("Your account was locked, please consider resetting your password using <a href='/for-members/forgot-password'>Forgot Password?</a>'"));
+
+                        return CurrentUmbracoPage();
+                    }
+
                     if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet or in process of security upgrade
                     {
                         ModelState.AddModelError(
