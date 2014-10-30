@@ -5,7 +5,12 @@
     Layout = "MasterPage.cshtml";
 
     <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
-    var targetUrl = @Umbraco.Field("samlTargetUrl");
+    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString()); 
+    var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
+    var pageType = @Umbraco.Field("pageType").ToString();
+    if (pageType == "Redirect into same tab")
+        Response.Redirect(targetUrl);
+    
     var sp = "";
     if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")
         sp = "SBCSystems";
@@ -20,9 +25,7 @@
     else 
         throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
     
-    <!-- If the url needs the Ebix Id parameter added to it-->   
-    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString());            
-		
+    <!-- If the url needs the Ebix Id parameter added to it-->          
 	var frameHeight = Umbraco.Field("frameHeight").ToString();
 	if(frameHeight==""){ frameHeight = "900px";}
 	
