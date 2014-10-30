@@ -46,6 +46,15 @@ namespace HRI.Controllers
 
                 if (member != null)
                 {
+                    if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet or in process of security upgrade
+                    {
+                        ModelState.AddModelError(
+                            "loginModel",
+                            string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
+
+                        return CurrentUmbracoPage();
+                    }
+
                     if (member.FailedPasswordAttempts >= 2 && member.FailedPasswordAttempts <= 4)
                     {
                         ModelState.AddModelError(
@@ -60,15 +69,6 @@ namespace HRI.Controllers
                         ModelState.AddModelError(
                             "loginModel",
                             string.Format("Your account was locked, please consider resetting your password using <a href='/for-members/forgot-password'>Forgot Password?</a>'"));
-
-                        return CurrentUmbracoPage();
-                    }
-
-                    if (!Roles.IsUserInRole(model.Username, "Registered")) // User is not activated yet or in process of security upgrade
-                    {
-                        ModelState.AddModelError(
-                            "loginModel",
-                            string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
 
                         return CurrentUmbracoPage();
                     }
