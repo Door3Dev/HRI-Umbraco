@@ -6,26 +6,23 @@
 }
 
 <div class="hri-contact-us">
-   <h4>
-     Send us a message and we'll get back to you usually within two business days. Or give us a call to speak
-     with someone immediately.
-   </h4>
+    @Umbraco.Field("HeaderMessage")
  
-   <div class="row-fluid">
-	   <div class="span6">
-     @{Html.RenderPartial("ContactForm");}
- 	   </div>
-     <div class="span6 help">
-       <div class="row">
-         <p class="phone">
-           <span>@Umbraco.Field("Phone")</span><br>
-           @Umbraco.Field("Schedule")</p><br>
+    <div class="row-fluid">
+        <div class="span6">
+            @{Html.RenderPartial("ContactForm");}
+        </div>
+        <div class="span6 help">
+            <div class="row">
+                <p class="phone">
+                    <span>@Umbraco.Field("Phone")</span><br>
+                    @Umbraco.Field("Schedule")</p><br>
  
-           @Umbraco.Field("Address")<br>
+                @Umbraco.Field("Address")<br>
          
-         @Umbraco.Field("AdditionalInformation")
+                @Umbraco.Field("AdditionalInformation")
  
-       </div>
-     </div>
-   </div>
- </div>
+            </div>
+        </div>
+    </div>
+</div>
