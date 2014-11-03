@@ -46,13 +46,14 @@
                             @* Go through each navigation item that is visible in the footer(12 = header only) and is for members(9 = public only) *@
                             @foreach (var subpage in item.Children.Where("navigationVisibility!=12").Where("navigationVisibility!=15").WhereHasAccess())
                             {
+                                var target = subpage.openInTheNewTab == null ? "" : subpage.openInTheNewTab ? "_blank" : "";
                                 if (subpage.NodeTypeAlias == "ExternalFile")
                                 {
-                                    <li><a href="@subpage.file" target="_blank">@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.file" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="@subpage.Url" @Utils.GetTarget(subpage)>@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.Url" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                             }
                         </ul>
@@ -60,10 +61,11 @@
                 }
                 else if (item.HasAccess() && item.Children.Count() > 0)
                 {
+                    var target = item.openInTheNewTab == null ? "" : item.openInTheNewTab ? "_blank" : "";
                     <div>
                         <ul>
                             <li>@Html.Raw(item.menuItemName)</li>
-                            <li><a href="@item.Children.First().Url">@Html.Raw(@item.Children.First().menuItemName)</a></li>
+                            <li><a href="@item.Children.First().Url" target="@target">@Html.Raw(@item.Children.First().menuItemName)</a></li>
                         </ul>
                     </div>
                 }
@@ -84,13 +86,14 @@
                             @* Go through each navigation item that is visible in the footer(12 = header only) and is for public(10 = members only) *@
                             foreach (var subpage in item.Children.Where("navigationVisibility!=12").Where("navigationVisibility!=15"))
                             {
+                                var target = subpage.openInTheNewTab == null ? "" : subpage.openInTheNewTab ? "_blank" : "";
                                 if (subpage.NodeTypeAlias == "ExternalFile")
                                 {
-                                    <li><a href="@subpage.file" target="_blank">@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.file" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="@subpage.Url" @Utils.GetTarget(subpage)>@Html.Raw(subpage.menuItemName)</a></li>
+                                    <li><a href="@subpage.Url" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                 }
                             }
                         }
@@ -98,7 +101,8 @@
                         {
                             if (item.Children.Count() > 0)
                             {
-                                <li><a href="@item.Children.First().Url">@Html.Raw(@item.Children.First().menuItemName)</a></li>
+                                var target = item.openInTheNewTab == null ? "" : item.openInTheNewTab ? "_blank" : "";
+                                <li><a href="@item.Children.First().Url" target="@target">@Html.Raw(@item.Children.First().menuItemName)</a></li>
                             }
                         }
                     </ul>

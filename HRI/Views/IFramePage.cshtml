@@ -8,8 +8,7 @@
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString()); 
     var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
     var pageType = @Umbraco.Field("pageType").ToString();
-    if (pageType == "Redirect into same tab")
-        Response.Redirect(targetUrl);
+    var formTarget = (pageType == "Redirect into same tab") ? "" : "serviceProviderIFrame";
     
     var sp = "";
     if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")
@@ -72,7 +71,7 @@
    
     <br />
     
-    @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = "serviceProviderIFrame" }))
+    @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = @formTarget }))
     {
         <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
     }

@@ -39,14 +39,15 @@
                                 @* For each item that is visible in the header and is for members12*@
 							    @foreach (var subpage in item.Children.Where("navigationVisibility!=13").WhereHasAccess())
 							    {
-                                    @* If it is a media file link it to the document set in umbraco backend content panel *@
+                                    var target = subpage.openInTheNewTab == null ? "" : subpage.openInTheNewTab ? "_blank" : "";
+							        @* If} it is a media file link it to the document set in umbraco backend content panel *@
 								    if(subpage.NodeTypeAlias == "ExternalFile")
 								    {
-									    <li class="sub-link"><a href="@subpage.Field("file")">@Html.Raw(subpage.menuItemName)</a></li>
+									    <li class="sub-link"><a href="@subpage.Field("file")" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
 								    }
 								    else
 								    {
-									    <li class="sub-link"><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+									    <li class="sub-link"><a href="@subpage.Url" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                         @*string text = subpage.menuItemName;
                                         string action = subpage.Name;
                                         string surfaceController = item.Name + "SurfaceController";                                    
@@ -59,9 +60,10 @@
                     @* If there are no visible links under this nav item *@
 				    else if (item.HasAccess())
 				    {
+                        var target = item.openInTheNewTab == null ? "" : item.openInTheNewTab ? "_blank" : "";
                         @* Create the nav item as a link to the first node under the Nav item in the Umbraco backend content panel *@
 					    <li>
-						    <a href='@(item.Children.Count() > 0 ? @item.Children.First().Url : "#")' class="dropdown-toggle">@Html.Raw(item.menuItemName)</a>
+						    <a href='@(item.Children.Count() > 0 ? @item.Children.First().Url : "#")' class="dropdown-toggle" target="@target">@Html.Raw(item.menuItemName)</a>
 					    </li>
 				    }                    
 			    }    
@@ -84,13 +86,14 @@
                             <ul class="dropdown-menu">
                                 @foreach (var subpage in item.Children.Where("navigationVisibility!=13").Where("navigationVisibility!=15"))
                                 {
+                                    var target = subpage.openInTheNewTab == null ? "" : subpage.openInTheNewTab ? "_blank" : "";
                                     if (subpage.NodeTypeAlias == "ExternalFile")
                                     {
-                                        <li class="sub-link"><a href="@subpage.Field("file")">@Html.Raw(subpage.menuItemName)</a></li>
+                                        <li class="sub-link"><a href="@subpage.Field("file")" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                     }
                                     else
                                     {
-                                        <li class="sub-link"><a href="@subpage.Url">@Html.Raw(subpage.menuItemName)</a></li>
+                                        <li class="sub-link"><a href="@subpage.Url" target="@target">@Html.Raw(subpage.menuItemName)</a></li>
                                         @*string text = subpage.menuItemName;
                                         string action = subpage.Name;
                                         string surfaceController = item.Name + "SurfaceController";
@@ -101,8 +104,9 @@
                         </li>
                     }
                     else
-                    {                        
-                        <li><a href='@(item.Children.Count() > 0 ? @item.Children.First().Url : "#")' class="dropdown-toggle">@Html.Raw(item.menuItemName)</a></li>
+                    {
+                        var target = item.openInTheNewTab == null ? "" : item.openInTheNewTab ? "_blank" : "";                       
+                        <li><a href='@(item.Children.Count() > 0 ? @item.Children.First().Url : "#")' target="@target" class="dropdown-toggle">@Html.Raw(item.menuItemName)</a></li>
                     }
                 }
             }                
