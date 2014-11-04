@@ -159,6 +159,9 @@ namespace HRI.Controllers
                 return CurrentUmbracoPage();
             }
 
+            if (member.IsLockedOut)
+                Membership.Provider.UnlockUser(model.UserName);
+
             if (member.IsApproved && !Roles.IsUserInRole(model.UserName, "Registered"))
             { // User is in process of security upgrade
                 return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
