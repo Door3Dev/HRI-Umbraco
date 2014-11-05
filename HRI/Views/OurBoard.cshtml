@@ -1,17 +1,11 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
   Layout = "MasterPage.cshtml";
 }
 <div class="hri-common-board">
    <div class="row-fluid">
      <div class="main-lead">
-       <div class="span4">
-         <h3>Board of Directors</h3>
-         <ul class="unstyled inline breadcrumbs">
-           <li><a href="/">Home</a></li> ›
-           <li>Board of Directors</li>
-         </ul>
-       </div>
+         @Umbraco.RenderMacro("breadcrumb", new {Span = "span4"})
 
        <div class="span7 offset1">
          <p>@Umbraco.Field("Header")</p>
