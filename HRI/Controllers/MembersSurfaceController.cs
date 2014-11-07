@@ -343,6 +343,8 @@ namespace HRI.Controllers
             try
             {
                 var member = Membership.GetUser(model.UserName);
+                if (member.IsLockedOut)
+                    Membership.Provider.UnlockUser(model.UserName);
                 var tempPassword = member.ResetPassword();
                 member.ChangePassword(tempPassword, model.NewPassword);
                 Membership.UpdateUser(member);
