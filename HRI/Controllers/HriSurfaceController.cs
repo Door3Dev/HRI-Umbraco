@@ -22,6 +22,8 @@ namespace HRI.Controllers
     /// </summary>
     public class HriSufraceController : SurfaceController
     {
+        static readonly ILog logger = LogManager.GetLogger(typeof(HriSufraceController));
+
         /// <summary>
         /// Build an email message from a template.
         /// </summary>
@@ -258,8 +260,12 @@ namespace HRI.Controllers
             MembershipCreateStatus status;
             Members.RegisterMember(registerModel, out status, registerModel.LoginOnSuccess);
 
+
+            
             if ((string)hriUser["DOB"] != null)
             {
+                logger.Info("Adding role for '" + username + "'");
+                logger.Info(hriUser);
                 Roles.AddUserToRole(username, "Enrolled");
             }
 
