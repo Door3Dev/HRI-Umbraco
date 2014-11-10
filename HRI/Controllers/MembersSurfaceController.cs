@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Security;
+using Umbraco.Core;
 using Umbraco.Web.Mvc;
 using Umbraco.Core.Models;
 using log4net;
@@ -344,7 +345,7 @@ namespace HRI.Controllers
             {
                 var member = Membership.GetUser(model.UserName);
                 if (member.IsLockedOut)
-                    Membership.Provider.UnlockUser(model.UserName);
+                    member.UnlockUser();
                 var tempPassword = member.ResetPassword();
                 member.ChangePassword(tempPassword, model.NewPassword);
                 Membership.UpdateUser(member);
