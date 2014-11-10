@@ -89,17 +89,17 @@ namespace HRI.Controllers
         #endregion
 
         #region Base Rates
-        private double BaseRate = 214.578957;
+        private double BaseRate = 322.73;
         private Dictionary<int, double> RegionsFactor = new Dictionary<int, double>
         {
-            {1, 1.086664},
-            {2, 1.017235},
-            {3, 1.220650},
-            {4, 1.431276},
-            {5, 1.00},
-            {6, 1.056058},
-            {7, 1.027582},
-            {8, 1.431276}
+            {1, 0.8408},
+            {2, 0.7483},
+            {3, 0.9445},
+            {4, 1.0865},
+            {5, 0.7737},
+            {6, 0.7232},
+            {7, 0.7950},
+            {8, 1.0865}
         };
         private double ConversionFactor = 1.00;   
         private double IndividualFactor = 1.00;
@@ -110,6 +110,7 @@ namespace HRI.Controllers
         private double CoupleAnd1DependentFactor = 2.85;
         private double CoupleAnd2DependentFactor = 2.85;
         private double CoupleAnd3DependentFactor = 2.85;
+        private double ChildOnly = 0.412;
         #endregion
 
         #region Products Data
@@ -118,24 +119,24 @@ namespace HRI.Controllers
                 "EssentialCare",
                 new Product {
                     Name = "EssentialCare Plan",
-                    Description = "Benefits, deductibles, co-pays, and all other plan features adhere to the NYS requirements for the “standard plan,” allowing you to make a true comparison across insurers.",
+                    Description = "EssentialCare is our standard plan offering, aligning with state and federal requirements for deductibles, copays, and other coverage benefits, allowing consumers to compare EssentialCare “apples to apples” with plans from other insurers.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0010004-00",
                             MetalTier = "Platinum",
-                            RateFactor = 1.679497,
+                            RateFactor = 1.6795,
                             Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0010003-00",
                             MetalTier = "Gold",
-                            RateFactor = 1.428384,
+                            RateFactor = 1.4284,
                             Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0010002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.261463,
+                            RateFactor = 1.2224,
                             Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
@@ -147,8 +148,35 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0010005-00",
                             MetalTier = "Catastrophic",
-                            RateFactor = 0.692666,
+                            RateFactor = 0.5253,
                             Description = PlansDescriptioData.EssentialCareCatastrophicPlanDescription
+                        }
+                    }
+                }
+            },
+             { 
+                "TotalIndependence",
+                new Product {
+                    Name = "TotalIndependence Plan",
+                    Description = "This low premium, high deductible plan is a basic option for individuals.",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0730001-00",
+                            MetalTier = "Gold",
+                            RateFactor = 1.2787,
+                            Description = PlansDescriptioData.TotalIndependenceGoldPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0700001-00",
+                            MetalTier = "Silver",
+                            RateFactor = 1.0838,
+                            Description = PlansDescriptioData.TotalIndependenceSilverPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0670001-00",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.9514,
+                            Description = PlansDescriptioData.TotalIndependenceBronzePlanDescription
                         }
                     }
                 }
@@ -157,30 +185,30 @@ namespace HRI.Controllers
                 "PrimarySelect", 
                 new Product {
                     Name = "PrimarySelect Plan",
-                    Description = "Breaks down barriers to accessing the healthcare you deserve - visits to your selected primary care physician are free and you get access to the full MagnaCare Extra network of specialty care providers without a referral.",
+                    Description = "PrimarySelect is Health Republic’s signature program, emphasizing the role of a primary care physician in our members’ health. After selecting a primary care physician, visits are always free of charge. This promotes preventive care and wellness screenings, which leads to better health outcomes for patients and lower costs for everyone.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0030004-00",
                             MetalTier = "Platinum",
-                            RateFactor = 1.610092,
+                            RateFactor = 1.6101,
                             Description = PlansDescriptioData.PrimarySelectPlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030003-00",
                             MetalTier = "Gold",
-                            RateFactor = 1.427252,
+                            RateFactor = 1.4273,
                             Description = PlansDescriptioData.PrimarySelectGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.260554,
+                            RateFactor = 1.2216,
                             Description = PlansDescriptioData.PrimarySelectSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0030001-00",
                             MetalTier = "Bronze",
-                            RateFactor = 0.866851,
+                            RateFactor = 1.1218,
                             Description = PlansDescriptioData.PrimarySelectBronzePlanDescription
                         },
                     }
@@ -188,16 +216,16 @@ namespace HRI.Controllers
             },
 
             { 
-                "PrimarySelectEPO", 
+                "PrimarySelectPCMH", 
                 new Product {
-                    Name = "PrimarySelect EPO Plan",
-                    Description = "Choose your primary care physician from our list of patient-centered medical homes to help you manage your health options and still enjoy direct access to the full MagnaCare Extra network, too.",
+                    Name = "PrimarySelect PCMH Plan",
+                    Description = "Similar in structure to PrimarySelect, PrimarySelect PCMH (Patient Centered Medical Homes) focuses on comprehensive patient care with a specialized network of patient centered medical homes certified by the National Committee for Quality Assurance (NCQA). Only available at the Silver level, PrimarySelect PCMH is a cost-friendly option for those looking to get the most out of their health plan.",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0040002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.189375,
-                            Description = PlansDescriptioData.PrimarySelectSilverEPOPlanDescription
+                            RateFactor = 1.1526,
+                            Description = PlansDescriptioData.PrimarySelectSilverPCMHPlanDescription
                         }
                     }
                 }
@@ -211,26 +239,53 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0020004-00",
                             MetalTier = "Platinum",
-                            RateFactor = 0.691953,
+                            RateFactor = 1.6795,
                             Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020003-00",
                             MetalTier = "Gold",
-                            RateFactor = 0.588494,
+                            RateFactor = 1.4284,
                             Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020002-00",
                             MetalTier = "Silver",
-                            RateFactor = 0.519723,
+                            RateFactor = 1.2224,
                             Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0020001-00",
                             MetalTier = "Bronze",
-                            RateFactor = 0.412000,
+                            RateFactor = 1.0000,
                             Description = PlansDescriptioData.EssentialCareBronzePlanDescription
+                        }
+                    }
+                }
+            },
+
+              { 
+                "TotalIndependenceChildOnly", 
+                new Product {
+                    Name = "TotalIndependence Child Only Plan",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0740001-00",
+                            MetalTier = "Gold",
+                            RateFactor = 1.2787,
+                            Description = PlansDescriptioData.TotalIndependenceGoldPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0710001-00",
+                            MetalTier = "Silver",
+                            RateFactor = 1.0838,
+                            Description = PlansDescriptioData.TotalIndependenceSilverPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0680001-00",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.9514,
+                            Description = PlansDescriptioData.TotalIndependenceBronzePlanDescription
                         }
                     }
                 }
@@ -244,19 +299,19 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0090004-00",
                             MetalTier = "Platinum",
-                            RateFactor = 1.679497,
+                            RateFactor = 1.6795,
                             Description = PlansDescriptioData.EssentialCarePlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0090003-00",
                             MetalTier = "Gold",
-                            RateFactor = 1.428384,
+                            RateFactor = 1.4284,
                             Description = PlansDescriptioData.EssentialCareGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0090002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.261463,
+                            RateFactor = 1.2224,
                             Description = PlansDescriptioData.EssentialCareSilverPlanDescription
                         },
                         new Plan {
@@ -264,6 +319,39 @@ namespace HRI.Controllers
                             MetalTier = "Bronze",
                             RateFactor = 1.000000,
                             Description = PlansDescriptioData.EssentialCareBronzePlanDescription
+                        }
+                    }
+                }
+            },
+
+             { 
+                "TotalIndependence29", 
+                new Product {
+                    Name = "TotalIndependence Plan 29",
+                    Plans = new List<Plan> {
+                        new Plan {
+                            HiosId = "71644NY0850001-00",
+                            MetalTier = "Platinum",
+                            RateFactor = 1.6314,
+                            Description = PlansDescriptioData.TotalIndependencePlatinumPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0750001-00",
+                            MetalTier = "Gold",
+                            RateFactor = 1.2787,
+                            Description = PlansDescriptioData.TotalIndependenceGoldPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0720001-00",
+                            MetalTier = "Silver",
+                            RateFactor = 1.0838,
+                            Description = PlansDescriptioData.TotalIndependenceSilverPlanDescription
+                        },
+                        new Plan {
+                            HiosId = "71644NY0690001-00",
+                            MetalTier = "Bronze",
+                            RateFactor = 0.9514,
+                            Description = PlansDescriptioData.TotalIndependenceBronzePlanDescription
                         }
                     }
                 }
@@ -277,25 +365,25 @@ namespace HRI.Controllers
                         new Plan {
                             HiosId = "71644NY0130004-00",
                             MetalTier = "Platinum",
-                            RateFactor = 1.610092,
+                            RateFactor = 1.6101,
                             Description = PlansDescriptioData.PrimarySelectPlatinumPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130003-00",
                             MetalTier = "Gold",
-                            RateFactor = 1.427252,
+                            RateFactor = 1.4273,
                             Description = PlansDescriptioData.PrimarySelectGoldPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.260554,
+                            RateFactor = 1.2216,
                             Description = PlansDescriptioData.PrimarySelectSilverPlanDescription
                         },
                         new Plan {
                             HiosId = "71644NY0130001-00",
                             MetalTier = "Bronze",
-                            RateFactor = 0.866851,
+                            RateFactor = 1.1218,
                             Description = PlansDescriptioData.PrimarySelectBronzePlanDescription
                         }
                     }
@@ -303,15 +391,15 @@ namespace HRI.Controllers
             },
 
             { 
-                "PrimarySelectEPO29", 
+                "PrimarySelectPCMH29", 
                 new Product {
-                    Name = "PrimarySelect EPO Plan 29",
+                    Name = "PrimarySelect PCMH Plan 29",
                     Plans = new List<Plan> {
                         new Plan {
                             HiosId = "71644NY0150002-00",
                             MetalTier = "Silver",
-                            RateFactor = 1.189375,
-                            Description = PlansDescriptioData.PrimarySelectSilverEPOPlanDescription
+                            RateFactor = 1.1526,
+                            Description = PlansDescriptioData.PrimarySelectSilverPCMHPlanDescription
                         }
                     }
                 }
@@ -409,6 +497,7 @@ namespace HRI.Controllers
 
             // Family factor calculation
             var familyFactor = IndividualFactor;
+
             if (model.CoverSelf && model.CoverSpouse)
                 familyFactor = CoupleFactor;
             if (model.CoverChildren && model.ChildrenAges != null)
@@ -431,41 +520,156 @@ namespace HRI.Controllers
                     else if (model.ChildrenAges.Count == 3)
                         familyFactor = CoupleAnd3DependentFactor;
                 }
+              
+                       
             }
 
             // Build products list
+            var productListAll = new List<Product>();
+            if (!model.CoverChildren || model.ChildrenAges == null)
+            {
+                productListAll.Add(Products["EssentialCare"]);
+                productListAll.Add(Products["PrimarySelect"]);
+                productListAll.Add(Products["PrimarySelectPCMH"]);
+                productListAll.Add(Products["TotalIndependence"]);
+            }
+            else if (model.CoverSelf && model.CoverChildren && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productListAll.Add(Products["EssentialCare"]);
+                productListAll.Add(Products["PrimarySelect"]);
+                productListAll.Add(Products["PrimarySelectPCMH"]);
+                productListAll.Add(Products["TotalIndependence"]);
+            }
+            else if (model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productListAll.Add(Products["EssentialCareChildOnly"]);
+                productListAll.Add(Products["TotalIndependenceChildOnly"]);
+            }
+            else if (model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0 
+                || !model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
+                
+            {
+                productListAll.Add(Products["EssentialCare29"]);
+                productListAll.Add(Products["PrimarySelect29"]);
+                productListAll.Add(Products["PrimarySelectPCMH29"]);
+                productListAll.Add(Products["TotalIndependence29"]);
+            }
+
+
+            // Build PCMH products list
             var productList = new List<Product>();
             if (!model.CoverChildren || model.ChildrenAges == null)
             {
                 productList.Add(Products["EssentialCare"]);
                 productList.Add(Products["PrimarySelect"]);
-                productList.Add(Products["PrimarySelectEPO"]);
+                productList.Add(Products["TotalIndependence"]);
             }
-            else if (model.CoverSelf
-                && model.ChildrenAges.Count >= 1
-                && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
+            else if (model.CoverSelf && model.CoverChildren && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productList.Add(Products["EssentialCare"]);
+                productList.Add(Products["PrimarySelect"]);
+                productList.Add(Products["TotalIndependence"]);
+            }
+           else if (model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0
+                || !model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
             {
                 productList.Add(Products["EssentialCare29"]);
                 productList.Add(Products["PrimarySelect29"]);
-                productList.Add(Products["PrimarySelectEPO29"]);
-            }
-            else if (model.ChildrenAges.Count >= 1)
-            {
-                productList.Add(Products["EssentialCareChildOnly"]);
+                productList.Add(Products["TotalIndependence29"]);
             }
 
-            // Calculate price for each plan
-            foreach (var product in productList)
+
+            // Calculate price for each plan in productListAll
+            foreach (var product in productListAll)
             {
                 foreach (var plan in product.Plans)
                 {
+                   
+                    if (product.Name == "EssentialCare Child Only Plan" || product.Name == "TotalIndependence Child Only Plan")
+                    // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Child Only Factor =
+                        plan.Price = Math.Round(BaseRate * ConversionFactor * plan.RateFactor * regionFactor * ChildOnly, 0);
+
+                    else 
+
                     // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
                     plan.Price = Math.Round(BaseRate * ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
                 }
             }
 
-            model.Products = productList;
-            model.County = county;
+            // Calculate price for each plan in productList
+            foreach (var product in productList)
+            {
+                foreach (var plan in product.Plans)
+                {
+                    
+                        // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
+                        plan.Price = Math.Round(BaseRate * ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
+                }
+            }
+
+         // show rates based on county            
+            if (county == "Bronx")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+           else if (county == "Essex")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+             else if (county == "Hamilton")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+             else if (county == "Kings")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Nassau")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "New York")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+             else if (county == "Queens")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+             else if (county == "Richmond")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+              else if (county == "Rockland")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+             else if (county == "Suffolk")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Westchester")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+
+            else 
+            {
+                model.Products = productList;
+                model.County = county;
+            }
+
 
             TempData["ShowPlans"] = true;
             return RedirectToCurrentUmbracoPage();
