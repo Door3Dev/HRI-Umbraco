@@ -1,4 +1,5 @@
-﻿using System.Web.Security;
+﻿using System.Text.RegularExpressions;
+using System.Web.Security;
 using HRI.Models;
 using System;
 using System.Collections.Generic;
@@ -333,8 +334,12 @@ namespace HRI.Controllers
 
         private static string ValidateZipCodeCore(string zipCode, List<ZipCode> zips)
         {
+            var regex = new Regex(@"^\d{5}$");
+            if (!regex.Match(zipCode).Success)
+                return "Zip Code is invalid.";
+
             var zipCodeItem = zips.FirstOrDefault(z => z.zipCode == zipCode);
-            return zipCodeItem != null ? null : "Zip Code is incorrect.";
+            return zipCodeItem != null ? null : "Zip Code not in service area.";
         }
         
         // internal static function for validating zip codes from other controllers
