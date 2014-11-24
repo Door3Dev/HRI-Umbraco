@@ -130,7 +130,7 @@ namespace HRI.Controllers
                 if (String.IsNullOrEmpty(hriUser.Value<string>("RxGrpId"))
                     || String.IsNullOrEmpty(hriUser.Value<string>("DOB")))
                 {
-                    return Redirect("/your-account/enrollment/");
+                    return Redirect("/your-account/enrollment-plan-confirmation/");
                 }
                 // Save Group Id, Birthday, Plan Id, Plan Name, add user as enrolled
                 member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();

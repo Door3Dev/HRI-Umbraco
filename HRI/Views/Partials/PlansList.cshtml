@@ -6,6 +6,7 @@
     IPublishedContent root = Umbraco.ContentAtRoot().First();
     bool showButton = Convert.ToBoolean(root.GetPropertyValue("preventEnrollment"));
     string displayStatus = showButton ? "" : "display: none";
+    var backToEnrollment = TempData["enrollment"];
 }
 
 <div class="span10 offset1">
@@ -61,12 +62,13 @@
                                                     @*This will allow the user to hide enrollment buttons based on the checkbox in the Home Page under Extra Settings*@
                                                     @if(!Convert.ToBoolean(Umbraco.ContentAtRoot().First().GetPropertyValue("preventEnrollment")))
                                                     {
-                                                        using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new {}, new { @class = "selectplan", @style = "@displayStatus"}))
+                                                        using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new { }, new { @class = "selectplan", @style = "@displayStatus" }))
                                                         {
                                                             @Html.AntiForgeryToken()
                                                             @Html.Hidden("ZipCode", Model.ZipCode)
                                                             @Html.Hidden("PlanId", plan.HiosId)
                                                             @Html.Hidden("PlanPrice", plan.Price)
+                                                            @Html.Hidden("Enrollment", backToEnrollment)
                                                             <input class="btn btn-small hri-btn" type="submit" value="Select Plan">
                                                         }
                                                     }
@@ -335,7 +337,7 @@
                                              
                                             @foreach (var plan in product.Plans) { 
                                             <td>                                                
-                                                @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new { }, new { @class = "selectplan" }))
+                                                @using (Html.BeginUmbracoForm<ComparePlansSurfaceController>("SelectPlan", new { enrollment = backToEnrollment }, new { @class = "selectplan" }))
                                                     {
                                                         @Html.AntiForgeryToken()
                                                         @Html.Hidden("ZipCode", Model.ZipCode)

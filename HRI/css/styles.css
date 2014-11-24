@@ -2676,4 +2676,21 @@ button.disabled {
     width: 330px;
 }
 
+.enrollment-confirmation .regular-form {
+    padding: 30px;
+}
+
+.enrollment-confirmation .hri-btn {
+    font-size: 16px;
+}
+
+.enrollment-confirmation .hri-btn span {
+    padding-top: 8px;
+    display: block;
+}
+
+.enrollment-confirmation .form {
+    margin-top: 20px;
+}
+
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

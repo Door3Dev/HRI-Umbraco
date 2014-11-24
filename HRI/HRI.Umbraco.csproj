@@ -444,6 +444,7 @@
     </Content>
     <Content Include="Views\MasterPageDev.cshtml" />
     <Content Include="Views\IndividualPlans2015.cshtml" />
+    <Content Include="Views\EnrollmentPlanConfirmation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -491,6 +492,7 @@
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\PlansDescriptioData.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductsData.cs" />
     <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SendVerificationLinkModel.cs" />

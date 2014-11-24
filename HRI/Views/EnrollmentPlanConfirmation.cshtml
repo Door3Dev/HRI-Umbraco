@@ -1,0 +1,39 @@
+﻿@using HRI.Models
+@using Member = umbraco.cms.businesslogic.member.Member
+@inherits UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+    var member = Member.GetCurrentMember();
+    var healthPlanId = member.getProperty("healthplanid").Value.ToString();
+    var data = new ProductsData();
+    string planName = string.Empty;
+    foreach (var product in data.Products)
+    {
+        var selectedPlan = product.Value.Plans.FirstOrDefault(plan => plan.HiosId == healthPlanId);
+        if (selectedPlan != null)
+        {
+            planName = string.Format("{0} {1}", product.Value.Name, selectedPlan.MetalTier);
+            break;
+        }
+    }
+
+}
+
+<div id="hri-content" class="enrollment-confirmation">
+    <div class="row-fluid form">
+        <div class="span5 offset4 well regular-form">
+            <p><b>Selected Plan:</b> @planName</p>
+            
+            <div class="row-fluid">
+                <div class="span5">
+                    <a href="/shop-for-plans/compare-plans/?enrollment=true" class="btn hri-btn"><span>Change Plan</span></a>
+                </div>
+                
+                <div class="span5 offset1">
+                    <a href="/your-account/enrollment" class="btn hri-btn">Continue Enrollment</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
