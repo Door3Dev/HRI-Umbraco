@@ -84,7 +84,7 @@
                                             <td>$@plan.Price</td> }
                                         </tr>
                                         <tr>
-                                            <th>Deductible</th>
+                                            <th>Individual Deductible</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.Deductible</td> }
@@ -96,47 +96,22 @@
                                             <td>@plan.Description.Coinsurance</td> }
                                         </tr>
                                         <tr>
-                                            <th>Out of Pocket Maximum</th>
+                                            <th>Individual Out of Pocket Maximum</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.OutofPocketMaximum</td> }
                                         </tr>
                                         <tr>
-                                            <th>
-                                                Allergy Testing <br>
-                                                Bone Density Testing<br>
-                                                Cervical Cytology<br>
-                                                Colonoscopy Screening<br>
-                                                Gynecological Screening<br>
-                                                Immunizations<br>
-                                                Mammography<br>
-                                                Prenatal Maternity Care<br>
-                                                Prostate Cancer Screening<br>
-                                                Routine Exams<br>
-                                                Women's Preventive Health Services<br>
-                                                Other Services Noted in Section 2713 of ACA
-                                            </th>
+                                            <th>Preventative Care</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.PreventiveServices</td> }
                                         </tr>
                                         <tr>
-                                            <th>Out of Pocket Maximum</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.OutofPocketMaximum</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Office Visit</th>
+                                            <th>Primary Care Office Visit</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.OfficeVisit</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Outpatient Surgical Procedures (in physician's office)</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.OutpatientSurgicalProcedures</td> }
                                         </tr>
                                         <tr>
                                             <th>Emergency Room</th>
@@ -157,7 +132,7 @@
                                             <td>@plan.Description.UrgentCareCenter</td> }
                                         </tr>
                                         <tr>
-                                            <th>Inpatient Hospital</th>
+                                            <th>Inpatient Hospital Admission</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.InpatientHospital</td> }
@@ -181,28 +156,10 @@
                                             <td>@plan.Description.LaboratoryTesting</td> }
                                         </tr>
                                         <tr>
-                                            <th>EKG</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.EKG</td> }
-                                        </tr>
-                                        <tr>
                                             <th>Routine Radiology</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.RoutineRadiology</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Advanced Radiology</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.AdvancedRadiology</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Inpatient Maternity</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.InpatientMaternity</td> }
                                         </tr>
                                         <tr>
                                             <th>Inpatient Mental Health</th>
@@ -217,36 +174,6 @@
                                             <td>@plan.Description.OutpatientMentalHealth</td> }
                                         </tr>
                                         <tr>
-                                            <th>Inpatient Substance Abuse - Rehab</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.InpatientSubstanceAbuseRehab</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Inpatient Substance Abuse - Detox</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.InpatientSubstanceAbuseDetox</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Outpatient Substance Abuse</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.OutpatientSubstanceAbuse</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Insulin and Other Oral Agents</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.InsulinandOtherOralAgents</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Diabetic Medical Supplies (Test Strips, Syringes, etc.)</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.DiabeticMedicalSupplies</td> }
-                                        </tr>
-                                        <tr>
                                             <th>Chiropractic Services</th>
                                             @foreach (var plan in product.Plans)
                                             {
@@ -259,28 +186,10 @@
                                             <td>@plan.Description.PhysicalOccupationalSpeechTherapies</td> }
                                         </tr>
                                         <tr>
-                                            <th>Cardiac Rehabilitation</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.CardiacRehabilitation</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Pulmonary Rehabilitation</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.PulmonaryRehabilitation</td> }
-                                        </tr>
-                                        <tr>
                                             <th>Durable Medical Equipment</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.DurableMedicalEquipment</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Prosthetics and Appliances</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.ProstheticsandAppliances</td> }
                                         </tr>
                                         <tr>
                                             <th>Chemotherapy</th>
@@ -295,19 +204,13 @@
                                             <td>@plan.Description.HomeHealthCare</td> }
                                         </tr>
                                         <tr>
-                                            <th>Prescription Plan</th>
+                                            <th>Prescription Drugs</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.PrescriptionPlan</td> }
                                         </tr>
                                         <tr>
-                                            <th>Maintenance Medications</th>
-                                            @foreach (var plan in product.Plans)
-                                            {
-                                            <td>@plan.Description.MaintenanceMedications</td> }
-                                        </tr>
-                                        <tr>
-                                            <th>Medical Exam</th>
+                                            <th>Pediatric Vision Medical Exam</th>
                                             @foreach (var plan in product.Plans)
                                             {
                                             <td>@plan.Description.MedicalExam</td> }

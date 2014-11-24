@@ -23,7 +23,7 @@ namespace HRI.Controllers
         private List<ZipCode> ZipCodes = new List<ZipCode>();
         private ProductsData Data = new ProductsData();
 
-        
+
         public ComparePlansSurfaceController()
         {
             ZipCodes = GetZipCodes();
@@ -91,8 +91,8 @@ namespace HRI.Controllers
             }
             if (model.CoverSelf && !model.CustomerAge.HasValue
                 || model.CoverSpouse && !model.SpouseAge.HasValue
-                || model.CoverChildren && model.ChildrenAges != null 
-                    && (model.ChildrenAges.Any(x => !x.HasValue) 
+                || model.CoverChildren && model.ChildrenAges != null
+                    && (model.ChildrenAges.Any(x => !x.HasValue)
                         || model.ChildrenAges.Any(x => x > 30))
                 || !model.CoverSelf && !model.CoverSpouse && !model.CoverChildren)
             {
@@ -115,6 +115,7 @@ namespace HRI.Controllers
 
             // Family factor calculation
             var familyFactor = Data.IndividualFactor;
+
             if (model.CoverSelf && model.CoverSpouse)
                 familyFactor = Data.CoupleFactor;
             if (model.CoverChildren && model.ChildrenAges != null)
@@ -137,41 +138,155 @@ namespace HRI.Controllers
                     else if (model.ChildrenAges.Count == 3)
                         familyFactor = Data.CoupleAnd3DependentFactor;
                 }
+
+
             }
 
             // Build products list
+            var productListAll = new List<Product>();
+            if (!model.CoverChildren || model.ChildrenAges == null)
+            {
+                productListAll.Add(Data.Products["EssentialCare"]);
+                productListAll.Add(Data.Products["PrimarySelect"]);
+                productListAll.Add(Data.Products["PrimarySelectPCMH"]);
+                productListAll.Add(Data.Products["TotalIndependence"]);
+            }
+            else if (model.CoverSelf && model.CoverChildren && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productListAll.Add(Data.Products["EssentialCare"]);
+                productListAll.Add(Data.Products["PrimarySelect"]);
+                productListAll.Add(Data.Products["PrimarySelectPCMH"]);
+                productListAll.Add(Data.Products["TotalIndependence"]);
+            }
+            else if (model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productListAll.Add(Data.Products["EssentialCareChildOnly"]);
+                productListAll.Add(Data.Products["TotalIndependenceChildOnly"]);
+            }
+            else if (model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0
+                || !model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
+            {
+                productListAll.Add(Data.Products["EssentialCare29"]);
+                productListAll.Add(Data.Products["PrimarySelect29"]);
+                productListAll.Add(Data.Products["PrimarySelectPCMH29"]);
+                productListAll.Add(Data.Products["TotalIndependence29"]);
+            }
+
+
+            // Build PCMH products list
             var productList = new List<Product>();
             if (!model.CoverChildren || model.ChildrenAges == null)
             {
                 productList.Add(Data.Products["EssentialCare"]);
                 productList.Add(Data.Products["PrimarySelect"]);
-                productList.Add(Data.Products["PrimarySelectEPO"]);
+                productList.Add(Data.Products["TotalIndependence"]);
             }
-            else if (model.CoverSelf
-                && model.ChildrenAges.Count >= 1
-                && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
+            else if (model.CoverSelf && model.CoverChildren && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productList.Add(Data.Products["EssentialCare"]);
+                productList.Add(Data.Products["PrimarySelect"]);
+                productList.Add(Data.Products["TotalIndependence"]);
+            }
+            else if (model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0
+                 || !model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
             {
                 productList.Add(Data.Products["EssentialCare29"]);
                 productList.Add(Data.Products["PrimarySelect29"]);
-                productList.Add(Data.Products["PrimarySelectEPO29"]);
-            }
-            else if (model.ChildrenAges.Count >= 1)
-            {
-                productList.Add(Data.Products["EssentialCareChildOnly"]);
+                productList.Add(Data.Products["TotalIndependence29"]);
             }
 
-            // Calculate price for each plan
+
+            // Calculate price for each plan in productListAll
+            foreach (var product in productListAll)
+            {
+                foreach (var plan in product.Plans)
+                {
+
+                    if (product.Name == "EssentialCare Child Only Plan" || product.Name == "TotalIndependence Child Only Plan")
+                        // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Child Only Factor =
+                        plan.Price = Math.Round(Data.BaseRate * Data.ConversionFactor * plan.RateFactor * regionFactor * Data.ChildOnly, 0);
+
+                    else
+
+                        // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
+                        plan.Price = Math.Round(Data.BaseRate * Data.ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
+                }
+            }
+
+            // Calculate price for each plan in productList
             foreach (var product in productList)
             {
                 foreach (var plan in product.Plans)
                 {
+
                     // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
                     plan.Price = Math.Round(Data.BaseRate * Data.ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
                 }
             }
 
-            model.Products = productList;
-            model.County = county;
+            // show rates based on county            
+            if (county == "Bronx")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Essex")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Hamilton")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Kings")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Nassau")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "New York")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Queens")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Richmond")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Rockland")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Suffolk")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+            else if (county == "Westchester")
+            {
+                model.Products = productListAll;
+                model.County = county;
+            }
+
+            else
+            {
+                model.Products = productList;
+                model.County = county;
+            }
+
 
             TempData["ShowPlans"] = true;
             return RedirectToCurrentUmbracoPage();
@@ -181,7 +296,7 @@ namespace HRI.Controllers
         public ActionResult SelectPlan(string zipCode, string planId, string planPrice, bool enrollment)
         {
             if (enrollment)
-            {
+        {
                 var username = Membership.GetUser().UserName;
                 var member = ApplicationContext.Services.MemberService.GetByUsername(username);
                 member.SetValue("zipCode", zipCode);
