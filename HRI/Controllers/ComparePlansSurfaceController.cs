@@ -92,13 +92,19 @@ namespace HRI.Controllers
             if (model.CoverSelf && !model.CustomerAge.HasValue
                 || model.CoverSpouse && !model.SpouseAge.HasValue
                 || model.CoverChildren && model.ChildrenAges != null
-                    && (model.ChildrenAges.Any(x => !x.HasValue)
-                        || model.ChildrenAges.Any(x => x > 30))
+                    && model.ChildrenAges.Any(x => !x.HasValue)
                 || !model.CoverSelf && !model.CoverSpouse && !model.CoverChildren)
             {
                 // If the user does exist then it was a wrong password
                 //don't add a field level error, just model level
                 ModelState.AddModelError("viewModel", "The information you have entered is incomplete. Please enter details of the person you want to cover and submit the form again.");
+                return CurrentUmbracoPage();
+            }
+
+            // Children cannot be age 30 or above.
+            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
+            {
+                ModelState.AddModelError("viewModel", "Children cannot be age 30 or above.");
                 return CurrentUmbracoPage();
             }
 
