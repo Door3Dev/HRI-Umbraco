@@ -8,6 +8,7 @@
 
 @{
     var loginModel = new LoginModel();
+    var autoLogOff = Request["autologoff"] != null;
     
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
@@ -22,6 +23,12 @@
 {
     <fieldset>
         <h3>Member Login</h3>
+        @if (autoLogOff)
+        {
+            <div id="autologoff-message">
+                In order to protect your account, you've been logged out automatically after 15 minutes of inactivity.
+            </div>
+        }
         @if (!ViewData.ModelState.IsValid)
         {
             @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary("loginModel", true).ToHtmlString()))
@@ -44,4 +51,7 @@
 
 <script>
     document.getElementById('focus').focus();
+    $('#focus').keydown(function() {
+        $('#autologoff-message').hide();
+    });
 </script>
