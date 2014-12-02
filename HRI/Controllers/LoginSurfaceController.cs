@@ -68,7 +68,7 @@ namespace HRI.Controllers
                     {              
                         ModelState.AddModelError(
                             "loginModel",
-                            string.Format("Your account was locked, please consider resetting your password using <a href='/for-members/forgot-password'>Forgot Password?</a>'"));
+                            string.Format("Your account has been locked, please use <a href='/for-members/forgot-password'>Forgot Password?</a> and follow the steps provided to update password and then login in order to unlock your account."));
 
                         return CurrentUmbracoPage();
                     }
