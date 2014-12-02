@@ -300,7 +300,7 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectPlan(string zipCode, string planId, string planPrice, bool enrollment)
+        public void SelectPlan(string zipCode, string planId, string planPrice, bool enrollment)
         {
             if (enrollment)
         {
@@ -310,13 +310,12 @@ namespace HRI.Controllers
                 member.SetValue("healthplanid", planId);
                 ApplicationContext.Services.MemberService.Save(member);
                 // Redirect to the Enrollment Plan Confirmation
-                return RedirectToUmbracoPage(4170);
+                Response.Redirect(@"/your-account/enrollment-plan-confirmation/");
             }
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
             // Redirect to the registration page
-            return RedirectToUmbracoPage(1343);
-
+            Response.Redirect(@"/for-members/register/");
         }
 
         public JsonResult ValidateZipCode(string ZipCode)
