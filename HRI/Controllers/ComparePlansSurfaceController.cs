@@ -135,6 +135,8 @@ namespace HRI.Controllers
                         familyFactor = Data.PrimarySubscriberAnd2DependentFactor;
                     else if (model.ChildrenAges.Count == 3)
                         familyFactor = Data.PrimarySubscriberAnd3DependentFactor;
+                    else if (model.ChildrenAges.Count >= 4)
+                        familyFactor = Data.PrimarySubscriberAnd4DependentFactor;
                 }
                 if (model.CoverSelf && model.CoverSpouse)
                 {
@@ -144,6 +146,8 @@ namespace HRI.Controllers
                         familyFactor = Data.CoupleAnd2DependentFactor;
                     else if (model.ChildrenAges.Count == 3)
                         familyFactor = Data.CoupleAnd3DependentFactor;
+                    else if (model.ChildrenAges.Count >= 4)
+                        familyFactor = Data.CoupleAnd4DependentFactor;
                 }
 
 
@@ -300,7 +304,7 @@ namespace HRI.Controllers
         }
 
         [HttpPost]
-        public void SelectPlan(string zipCode, string planId, string planPrice, bool enrollment)
+        public ActionResult SelectPlan(string zipCode, string planId, string planPrice, bool enrollment)
         {
             if (enrollment)
         {
@@ -310,12 +314,13 @@ namespace HRI.Controllers
                 member.SetValue("healthplanid", planId);
                 ApplicationContext.Services.MemberService.Save(member);
                 // Redirect to the Enrollment Plan Confirmation
-                Response.Redirect(@"/your-account/enrollment-plan-confirmation/");
+                return RedirectToUmbracoPage(4170);
             }
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
             // Redirect to the registration page
-            Response.Redirect(@"/for-members/register/");
+            return RedirectToUmbracoPage(1343);
+
         }
 
         public JsonResult ValidateZipCode(string ZipCode)

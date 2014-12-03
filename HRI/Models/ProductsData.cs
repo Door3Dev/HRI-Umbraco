@@ -89,9 +89,11 @@ namespace HRI.Models
         public double PrimarySubscriberAnd1DependentFactor = 1.70;
         public double PrimarySubscriberAnd2DependentFactor = 1.70;
         public double PrimarySubscriberAnd3DependentFactor = 1.70;
+        public double PrimarySubscriberAnd4DependentFactor = 1.70;
         public double CoupleAnd1DependentFactor = 2.85;
         public double CoupleAnd2DependentFactor = 2.85;
         public double CoupleAnd3DependentFactor = 2.85;
+        public double CoupleAnd4DependentFactor = 2.85;
         public double ChildOnly = 0.412;
         #endregion
 
