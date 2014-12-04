@@ -32,28 +32,34 @@ namespace HRI.Controllers
                 IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
                 const string na = "N/A";
-                var message = string.Join(
-                    Environment.NewLine,
-                    string.Format("Member ID: {0}", model.MemberId ?? na),
-                    string.Format("First Name: {0}", model.FirstName),
-                    string.Format("Last Name: {0}", model.LastName),
-                    string.Format("Y Number: {0}", model.YNumber ?? na),
-                    string.Format("Username: {0}", model.Username ?? na),
-                    string.Format("Email: {0}", model.Email),
-                    string.Format("Phone Number: {0}", model.PhoneNumber),
-                    "Message:",
-                    Environment.NewLine,
-                    model.Message);
+                // Build a dictionary for all teh dynamic text in the email template
+                var dynamicText = new Dictionary<string, string>
+                    {
+                        {"<%MemberId%>", model.MemberId ?? na},
+                        {"<%FirstName%>", model.FirstName},
+                        {"<%LastName%>", model.LastName},
+                        {"<%YNumber%>", model.YNumber ?? na},
+                        {"<%Username%>", model.Username ?? na},
+                        {"<%Email%>", model.Email},
+                        {"<%Phone%>", model.PhoneNumber},
+                        {"<%MessageBody%>", model.Message}
+                    };
+                // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
+                IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+                //Get the Contact Us Email Template ID
+                var emailTemplateId = root.GetProperty("contactUsEmailTemplate").Value;
 
                 foreach (string email in emails)
+                {
                     try
                     {
-                        SendEmail(email, model.MessageType, message);
+                        SendEmail(email, "Health Republic Insurance - Contact Us", BuildEmail((int)emailTemplateId, dynamicText));
                     }
                     catch (Exception ex)
                     {
                         logger.Error("Send failed to " + email, ex);
                     }
+                }
 
                 // Set the sucess flag to true and post back to the same page
                 TempData["IsSuccessful"] = true;

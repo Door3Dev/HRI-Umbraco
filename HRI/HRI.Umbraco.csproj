@@ -255,6 +255,7 @@
     <Content Include="App_Data\Umbraco.sdf" />
     <Content Include="css\styles.css" />
     <Content Include="css\stylesDev.css" />
+    <Content Include="EmailTemplates\Contact Us Email Template.txt" />
     <Content Include="EmailTemplates\ResetPasswordEmailTemplate.txt" />
     <Content Include="EmailTemplates\VerificationEmailTemplate.txt" />
     <Content Include="EmailTemplates\SecurityUpgrade.txt" />

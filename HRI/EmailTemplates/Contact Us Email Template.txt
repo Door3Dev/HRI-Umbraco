@@ -1,0 +1,8 @@
+Member ID: <%MemberId%>
+First Name: <%FirstName%>
+Last Name: <%LastName%>
+Y Number: <%YNumber%>
+Username: <%Username%>
+Email: <%Email%>
+Phone: <%Phone%>
+Message: <%MessageBody%>
