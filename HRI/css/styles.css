@@ -2346,6 +2346,10 @@ body {
     color: #ffffff;
 }
 
+.regular-form .compare-plans-link {
+    margin-top: 10px;
+}
+
 /* ------------ MEMBER CENTER ------------ */
 
 .hri-member-center ul.expand-list li.expand-group {
@@ -2692,5 +2696,7 @@ button.disabled {
 .enrollment-confirmation .form {
     margin-top: 20px;
 }
+
+
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

@@ -5,6 +5,10 @@
     Layout = "MasterPage.cshtml";
     var member = Member.GetCurrentMember();
     var healthPlanId = member.getProperty("healthplanid").Value.ToString();
+    var firstName = member.getProperty("firstName").Value.ToString();
+    var lastName = member.getProperty("lastName").Value.ToString();
+    var zipCode = member.getProperty("zipCode").Value.ToString();
+    
     var data = new ProductsData();
     string planName = string.Empty;
     foreach (var product in data.Products)
@@ -22,17 +26,30 @@
 <div id="hri-content" class="enrollment-confirmation">
     <div class="row-fluid form">
         <div class="span5 offset4 well regular-form">
-            <p><b>Selected Plan:</b> @planName</p>
-            
+            <h3>Please Confirm</h3>
+
             <div class="row-fluid">
-                <div class="span5">
-                    <a href="/shop-for-plans/compare-plans/?enrollment=true" class="btn hri-btn"><span>Change Plan</span></a>
-                </div>
-                
-                <div class="span5 offset1">
+                <div class="span3">Name</div>
+                <div class="span7">@firstName @lastName</div>
+            </div>
+            <div class="row-fluid">
+                <div class="span3">Zip Code:</div>
+                <div class="span7">@zipCode</div>
+            </div>
+            <div class="row-fluid">
+                <div class="span3">Plan:</div>
+                <div class="span7">@planName</div>
+            </div>
+            <div class="row-fluid">
+                <div class="span5 offset3">
                     <a href="/your-account/enrollment" class="btn hri-btn">Continue Enrollment</a>
                 </div>
-
+            </div>
+            <div class="row-fluid">
+                <div class="span12 text-right compare-plans-link">
+                    <a href="/shop-for-plans/compare-plans/?enrollment=true"><span>This is not correct</span></a>
+                    
+                </div>
             </div>
         </div>
     </div>
