@@ -26,6 +26,74 @@
     var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : string.Empty;
 }
 
+<script>
+    var monthtext = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+    function createDOBdropdown() {
+        var setMonth, setDay, setYear;
+        var startDOB = $('#dateOfBirth').val();
+
+        if (startDOB.indexOf('1/1/0001') != 0) {
+            var startDate = new Date(startDOB);
+            setMonth = startDate.getMonth();
+            setDay = startDate.getDate();
+            setYear = startDate.getFullYear();
+        }
+
+        document.write('<select id="dobMonth" style="width: 80px"><option value="">Month</option>')
+        for (var i = 1; i <= 12; i++) {
+            var sel = i == setMonth ? ' selected="selected"' : '';
+            document.write('<option value="' + i + '"' + sel + '>' + monthtext[i-1] + '</option>');
+        }
+        document.write('</select> <select id="dobDay" style="width: 80px"><option value="">Day</option>');
+        for (var i = 1; i <= 31; i++) {
+            var sel = i == setDay ? ' selected="selected"' : '';
+            document.write('<option value="' + i + '"' + sel + '>' + i + '</option>');
+        }
+        document.write('</select> <select id="dobYear" style="width: 100px"><option value="">Year</option>');
+        for (var i = new Date().getFullYear() ; i >= 1900; i--) {
+            var sel = i == setYear ? ' selected="selected"' : '';
+            document.write('<option value="' + i + '"' + sel + '>' + i + '</option>');
+        }
+        document.write('</select>');
+
+        $('#dobMonth, #dobDay, #dobYear').change(function () {
+            var month = $('#dobMonth').val();
+            var day = $('#dobDay').val();
+            var year = $('#dobYear').val();
+            var dob = month + '/' + day + '/' + year;
+            $('#dateOfBirth').val(dob);
+            @if (!isNewUser)
+            {
+                @:validateMemberId();
+                                    }
+        });
+    }
+
+    function validateMemberId() {
+        $.ajax({
+            url: "/umbraco/Surface/RegisterSurface/ValidateMemberId",
+            data: {
+                'registerModel.MemberId': $('#memberId').val(),
+                'registerModel.DateOfBirth': $('#dateOfBirth').val()
+            },
+            success: function(data) {
+                if (data == 'true')
+                    $('#memberIdCheck').text('');
+                else {
+                    $('#memberIdCheck').text(JSON.parse(data));
+                }
+                $('#memberId').next('span.field-validation-error').text('');
+            },
+            error: function() {
+                $('#memberIdCheck').text("Error checking member ID / Date of birth.");
+                $('#memberId').next('span.field-validation-error').text('');
+            },
+            dataType: 'html'
+        });
+    }
+</script>
+
 @Html.Raw(Html.RenderJsHere())
 
 @using (Html.BeginUmbracoForm<RegisterSurfaceController>("HandleRegisterMember"))
@@ -73,10 +141,19 @@
                 @Html.Label("Member ID")
                 @Html.TextBoxFor(m => registerModel.MemberId, new { @id = "memberId", maxlength = 9, @class = "short" })
                 @Html.ValidationMessageFor(m => registerModel.MemberId)
-                <div id="memberIdCheck"></div>
+                <div class="field-validation-error"><div id="memberIdCheck"></div></div>
             </div>
         </div>
 
+        <div class="row-fluid @(isNewUser ? "hide" : string.Empty)">
+            <div class="span7 offset5">
+                @Html.Label("DOB")
+                @Html.HiddenFor(m => registerModel.DateOfBirth, new { @id = "dateOfBirth", value = registerModel.DateOfBirth })
+                <script>
+                    createDOBdropdown();
+                </script>
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="span3 offset5 name">
                 @Html.Label("First Name")
@@ -181,6 +258,8 @@
     else
     {
         <text>
+    $('#memberId').blur(validateMemberId);
+
     $('#zipCode').blur(function() {
         console.log('zip code length: ', $(this).val().length, "'" + $(this).val() + "'");
         // length is always 5 from input mask, so check if there are any _
@@ -190,6 +269,7 @@
                 $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
             }
         });    
+        
         </text>
     }}
 
@@ -217,4 +297,5 @@
         $("#zipCode").inputmask();
         $("#registerModel_Phone").inputmask();
     });
+
 </script>

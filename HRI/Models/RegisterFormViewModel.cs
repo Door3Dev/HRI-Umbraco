@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace HRI.Models
@@ -10,7 +11,7 @@ namespace HRI.Models
         private string _email;
         private string _confirmEmail;
 
-        [Remote("ValidateMemberId", "RegisterSurface")]
+        //[Remote("ValidateMemberId", "RegisterSurface", AdditionalFields = "DateOfBirth")]
         public string MemberId { get; set; }
 
         public string Ssn { get; set; }
@@ -61,5 +62,7 @@ namespace HRI.Models
         public string PlanId { get; set; }
 
         public string Phone { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }

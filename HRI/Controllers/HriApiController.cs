@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
@@ -25,8 +26,10 @@ namespace HRI.Controllers
             IPublishedContent root = Umbraco.ContentAtRoot().First();
             // Get the API uri
             string apiUri = root.GetProperty("apiUri").Value.ToString();
+            
             // Apend the command to determine user availability
-            var valuesList  = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
+            var valuesList = values.Select(_ => String.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
+
             string userNameCheckApiString = apiUri + "/Registration?" + String.Join("&", valuesList);
             // Create a web client to access the API
             try
@@ -276,9 +279,10 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
-        public bool IsEnrolledByMemberId(string memberId)
+        public bool IsEnrolledByMemberId(string memberId, string DOB)
         {
-            var result = MakeApiCall(new Dictionary<string, string> { { "isEnrollByMemberID", memberId } });
+            var keyAction = String.IsNullOrWhiteSpace(DOB) ? "isEnrollByMemberID" : "isEnrollMemberID";
+            var result = MakeApiCall(new Dictionary<string, string> { { keyAction, memberId }, { "DOB", DOB }});
             return result.Value<bool>("Enrolled");
         }
 
