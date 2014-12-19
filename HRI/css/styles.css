@@ -2418,6 +2418,11 @@ body {
 
 /* ------------ REGISTER ------------ */
 
+#register-form .submit-idle-helper {
+    padding-top: 23px;
+    display: none;
+}
+
 .hri-register .already-member {
   border-bottom: 1px dashed #848484;
   text-align: right;

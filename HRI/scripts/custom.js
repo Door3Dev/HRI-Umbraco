@@ -2080,7 +2080,9 @@ var preventCopyPaste = function (a) {
 
     // Disable buttons after click
     $('form').submit(function (e) {
-        if ($(this).valid && $(this).valid() || !$(this).valid)
+        if ($(this).valid && $(this).valid() || !$(this).valid) {
             $(this).find('.disable-after-click').prop('disabled', true).addClass('disabled');
+            $(this).find('.submit-idle-helper').show();
+        }
     });
 })();

@@ -146,10 +146,11 @@
                 @Html.ValidationMessageFor(m => registerModel.Phone)
             </div>
         </div>
-            
+        <div class="row-fuild">
+            <div class="span2 offset5"><button class="btn cta cta-centered disable-after-click">Submit</button></div>
+            <div class="span4 submit-idle-helper"><span>Please Wait a Moment while we process your Registration</span></div>
+        </div>
         @Html.HiddenFor(m => registerModel.PlanId, new { value = registerModel.PlanId })
-            
-        <button class="btn cta cta-centered">Submit</button>
     </div>
 </fieldset>
 }
