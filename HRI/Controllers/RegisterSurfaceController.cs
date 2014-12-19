@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlTypes;
 using HRI.Models;
 using System;
 using System.Web.Mvc;
@@ -24,7 +25,7 @@ namespace HRI.Controllers
             // Check the Member Id (Y number)
             if (model.PlanId == null) // Enrolled user
             {
-                var errorMessage = ValidateMemberIdCore(model.MemberId);
+                var errorMessage = ValidateMemberIdCore(model.MemberId, model.DateOfBirth, true);
 
                 if (errorMessage != null)
                 {
@@ -133,13 +134,13 @@ namespace HRI.Controllers
 
         public JsonResult ValidateMemberId([Bind(Prefix = "registerModel")] RegisterFormViewModel model)
         {
-            var errorMsg = ValidateMemberIdCore(model.MemberId);
+            var errorMsg = ValidateMemberIdCore(model.MemberId, model.DateOfBirth);
 
             return errorMsg == null 
                 ? Json(true, JsonRequestBehavior.AllowGet) : Json(errorMsg, JsonRequestBehavior.AllowGet);
         }
 
-        private string ValidateMemberIdCore(string memberId)
+        private string ValidateMemberIdCore(string memberId, DateTime dateOfBirth, bool forceDOB = false)
         {
             if (memberId == null || memberId.Length != 9)
             {
@@ -148,21 +149,30 @@ namespace HRI.Controllers
 
             var user = MakeInternalApiCallJson(
                 "IsUserWithMemberIdRegistered",
-                new Dictionary<string, string> { { "memberId", memberId } });
+                new Dictionary<string, string> {{"memberId", memberId}});
 
             if (user != null)
             {
                 var errorMsg = string.Format(
-                "The Member ID you have entered is registered with existing user name: {0}",
-                user.Value<string>("username"));
+                    "The Member ID you have entered is registered with existing user name: {0}",
+                    user.Value<string>("username"));
 
                 return errorMsg;
             }
 
-            var enrolled = MakeInternalApiCall<bool>("IsEnrolledByMemberId",
-                    new Dictionary<string, string> { { "memberId", memberId } });
+            var dob = (dateOfBirth == default(DateTime)) ? null : dateOfBirth.ToString("yyyy-MM-dd");
 
-            return enrolled ? null : "This Member ID is not enrolled.";
+            if (forceDOB && dob == null) dob = SqlDateTime.MinValue.Value.ToString("yyyy-MM-dd");
+
+            var enrolled = 
+            MakeInternalApiCall<bool>("IsEnrolledByMemberId",
+                new Dictionary<string, string> {{"memberId", memberId}, {"DOB", dob }});
+
+            return enrolled
+                ? null
+                : ((dob == null)
+                    ? "This Member ID is not enrolled."
+                    : "Our records don't match this Member ID with this DOB, please be sure these are accurate. This verification is necessary to protect the identity of our members.");
         }
     }
 }
