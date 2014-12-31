@@ -14,9 +14,6 @@ namespace HRI.Models
         public bool CoverSelf { get; set; }
         public bool CoverSpouse { get; set; }
         public bool CoverChildren { get; set; }
-
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
         
         [Range(1, 110)]
         public int? CustomerAge { get; set; }
