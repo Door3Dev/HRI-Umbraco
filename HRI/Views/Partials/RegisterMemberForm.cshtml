@@ -130,11 +130,6 @@
             <div class="span5 desc info">
                 <h3>Please enter your information.</h3>
                 @Umbraco.Field("Information")
-            </div> 
-            <div class="span3 @(isNewUser ? string.Empty : "hide")">
-                @Html.Label("Social Security Number (optional)")
-                @Html.TextBoxFor(m => registerModel.Ssn, new { @class = "short", data_inputmask = "'mask': '999-99-9999'" })
-                @Html.ValidationMessageFor(m => registerModel.Ssn)
             </div>
 
             <div class="span7 @(isNewUser ? "hide" : string.Empty)">
@@ -143,6 +138,19 @@
                 @Html.ValidationMessageFor(m => registerModel.MemberId)
                 <div class="field-validation-error"><div id="memberIdCheck"></div></div>
             </div>
+            @if (isNewUser)
+            {
+                <div class="span3 name">
+                    @Html.Label("First Name")
+                    @Html.TextBoxFor(m => registerModel.FirstName)
+                    @Html.ValidationMessageFor(m => registerModel.FirstName)
+                </div>
+                <div class="span3 name">
+                    @Html.Label("Last Name")
+                    @Html.TextBoxFor(m => registerModel.LastName)
+                    @Html.ValidationMessageFor(m => registerModel.LastName)
+                </div>
+            }
         </div>
 
         <div class="row-fluid @(isNewUser ? "hide" : string.Empty)">
@@ -154,18 +162,21 @@
                 </script>
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span3 offset5 name">
-                @Html.Label("First Name")
-                @Html.TextBoxFor(m => registerModel.FirstName)
-                @Html.ValidationMessageFor(m => registerModel.FirstName)
+        @if (!isNewUser)
+        {
+            <div class="row-fluid">
+                <div class="span3 offset5 name">
+                    @Html.Label("First Name")
+                    @Html.TextBoxFor(m => registerModel.FirstName)
+                    @Html.ValidationMessageFor(m => registerModel.FirstName)
+                </div>
+                <div class="span3 name">
+                    @Html.Label("Last Name")
+                    @Html.TextBoxFor(m => registerModel.LastName)
+                    @Html.ValidationMessageFor(m => registerModel.LastName)
+                </div>
             </div>
-            <div class="span3 name">
-                @Html.Label("Last Name")
-                @Html.TextBoxFor(m => registerModel.LastName)
-                @Html.ValidationMessageFor(m => registerModel.LastName)
-            </div>
-        </div>
+        }
         <div class="row-fluid">
             <div class="span7 offset5">
                 @Html.Label("Email")
