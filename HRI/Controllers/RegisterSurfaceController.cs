@@ -60,6 +60,14 @@ namespace HRI.Controllers
                 error = true;
             }
 
+            // Validate Phone Length
+            var cleanPhone = model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
+            if (!String.IsNullOrWhiteSpace(cleanPhone) && (cleanPhone.Length != 10))
+            {
+                ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
+                error = true;
+            }
+
             if (ModelState.IsValid == false || error)
                 return CurrentUmbracoPage();
 
