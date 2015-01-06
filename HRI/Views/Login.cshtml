@@ -10,19 +10,25 @@
 }
 
 <div id="hri-content" class="hri-login">
+    <div class="row-fluid">
         <div class="row-fluid">
-          <div class="span4 offset4 well">            
-              
-            @{Html.RenderPartial("LoginForm");}
+            <div class="span4 well login-form">
+                @{Html.RenderPartial("LoginForm");}
+            </div>
 
-            Enrolled in a Health Republic Plan? <a href="~/for-members/register">Register for an account.</a>
-            <br><br>
-            Forgot <a href="~/for-members/forgot-username">Username?</a> <span>|</span>
-            Forgot <a href="~/for-members/forgot-password">Password?</a><br>
-            Resend <a href="~/for-members/resend-email">Email Verification Link</a>
-            <br><br>
-            If you are having trouble logging in or registering, call us at <b>888-990-5702</b>.
-
-          </div>
+            <div class="span5 well login-description">
+                <h3>Need to register?</h3>
+                <a href="~/for-members/register">Click here</a> to register for an online account.
+                <br><br>
+                <i>*Requires a valid Member ID</i>
+                <br><br>
+                Need Us to Resend the Verification Email?
+                <br><br>
+                <a href="~/for-members/resend-email">Click here</a> (and be sure to check your SPAM or Promotions folder)
+            </div>
         </div>
-      </div>
+        <div class="row-fluid">
+            <div class="span10 login-footer">If you are having trouble logging in or registering, call us at <b>888-990-5702</b>.</div>
+        </div>
+    </div>
+</div>

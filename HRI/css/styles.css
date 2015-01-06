@@ -2249,6 +2249,21 @@ body {
   background-color: #451d5c;
 }
 
+.hri-login .login-form {
+    margin-left: 15%!important;
+}
+
+.hri-login .login-description {
+    height: 284px !important;
+    margin-left: 6%;
+    width: 33%;
+}
+
+.hri-login .login-footer {
+    margin-left: 15%!important;
+}
+
+
 /* ------------ CONTACT US ------------ */
 
 .hri-contact-us h4,

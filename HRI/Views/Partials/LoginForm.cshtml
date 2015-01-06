@@ -35,18 +35,22 @@
         }
         @Html.AntiForgeryToken()
 
-        @Html.LabelFor(m => loginModel.Username)
-        @Html.TextBoxFor(m => loginModel.Username, new{id="focus"})
-        @Html.ValidationMessageFor(m => loginModel.Username)
-        <br />
+        <div class="row-fluid">
+            <div class="span5">@Html.LabelFor(m => loginModel.Username)</div>
+            <div class="span7 text-right"><a href="~/for-members/forgot-username">Forgot Username?</a></div>
+            @Html.TextBoxFor(m => loginModel.Username, new { id = "focus" })
+            @Html.ValidationMessageFor(m => loginModel.Username)
+        </div>
+        <div class="row-fluid">
+            <div class="span5">@Html.LabelFor(m => loginModel.Password)</div>
+            <div class="span7 text-right"><a href="~/for-members/forgot-password">Forgot Password?</a></div>
+            @Html.PasswordFor(m => loginModel.Password)
+            @Html.ValidationMessageFor(m => loginModel.Password)
 
-        @Html.LabelFor(m => loginModel.Password)
-        @Html.PasswordFor(m => loginModel.Password)
-        @Html.ValidationMessageFor(m => loginModel.Password)
-        <br />
+        </div>
 
         <button class="btn hri-btn disable-after-click">Login</button>
-    </fieldset>  
+    </fieldset>
 }
 
 <script>
