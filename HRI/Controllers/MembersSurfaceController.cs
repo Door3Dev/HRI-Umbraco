@@ -1,4 +1,7 @@
-﻿using System.Xml;
+﻿using System.Linq;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Xml;
 using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
 using CoverMyMeds.SAML.Library;
@@ -9,7 +12,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Security;
-using Umbraco.Core;
 using Umbraco.Web.Mvc;
 using Umbraco.Core.Models;
 using log4net;
@@ -234,6 +236,8 @@ namespace HRI.Controllers
         public ActionResult ChangeEmail([Bind(Prefix = "changeEmailViewModel")] ChangeEmailViewModel model)
         {
             var user = Membership.GetUser();
+            var member = Services.MemberService.GetByUsername(user.UserName);
+
             if (user == null || !Membership.ValidateUser(user.UserName, model.Password))
             {
                 ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
@@ -250,6 +254,10 @@ namespace HRI.Controllers
                 user.Email = model.Email;
                 // Update the User profile in the database
                 Membership.UpdateUser(user);
+
+                // Update Email with API
+                SyncEmail(member.GetValue("yNumber").ToString(), model.Email);
+
                 // Set the success flag to true
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
@@ -307,7 +315,6 @@ namespace HRI.Controllers
             // http://stackoverflow.com/questions/1001491/is-it-possible-to-change-the-username-with-the-membership-api
             //
             var user = Membership.GetUser();
-            var user2 = Services.MemberService.GetByUsername("kjfdg");
             //user.UserName = model.UserName;
             // Update the User profile in the database
             Membership.UpdateUser((System.Web.Security.MembershipUser)user);
@@ -374,6 +381,28 @@ namespace HRI.Controllers
             // Set the username and guid
             TempData["username"] = userName;
             TempData["guid"] = guid;
+        }
+
+        protected void SyncEmail(string memberId, string email)
+        {
+            var jsonData = new Dictionary<string, string> {{"MemberId", memberId}, {"EmailAddress", email}};
+            // Convert the dictionary to JSON
+            string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
+
+            // Get ahold of the root/home node
+            IPublishedContent root = Umbraco.ContentAtRoot().First();
+            // Get the API uri
+            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            // Apend the command to invoke the register function
+            string registerUserApi = apiUri + "/Registration?p1=" + email;
+
+            // Create a webclient object to post the user data
+            using (var client = new WebClient())
+            {
+                // Set the format to JSON
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                client.UploadString(registerUserApi, myJsonString);
+            }
         }
     }
 }

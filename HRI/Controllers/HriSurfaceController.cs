@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
-using System.Web.Configuration;
 using log4net;
 
 namespace HRI.Controllers
