@@ -198,6 +198,11 @@ namespace HRI.Controllers
                 productList.Add(Data.Products["PrimarySelect"]);
                 productList.Add(Data.Products["TotalIndependence"]);
             }
+            else if (model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 1 && age <= 25) > 0)
+            {
+                productList.Add(Data.Products["EssentialCareChildOnly"]);
+                productList.Add(Data.Products["TotalIndependenceChildOnly"]);
+            }
             else if (model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0
                  || !model.CoverSelf && model.ChildrenAges.Count >= 1 && model.ChildrenAges.Count(age => age >= 26 && age <= 29) > 0)
             {
@@ -229,6 +234,13 @@ namespace HRI.Controllers
             {
                 foreach (var plan in product.Plans)
                 {
+
+                    if (product.Name == "EssentialCare Child Only Plan" || product.Name == "TotalIndependence Child Only Plan")
+                        // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Child Only Factor =
+                        plan.Price = Math.Round(Data.BaseRate * Data.ConversionFactor * plan.RateFactor * regionFactor * Data.ChildOnly, 0);
+
+                    else
+
 
                     // Base Rate x Conversion Factor x Platinum Select Factor x Region 2 Factor x Couple and Two Dependents Factor =
                     plan.Price = Math.Round(Data.BaseRate * Data.ConversionFactor * plan.RateFactor * regionFactor * familyFactor, 0);
@@ -314,7 +326,7 @@ namespace HRI.Controllers
                 member.SetValue("healthplanid", planId);
                 ApplicationContext.Services.MemberService.Save(member);
                 // Redirect to the Enrollment Plan Confirmation
-                return RedirectToUmbracoPage(4170);
+                return RedirectToUmbracoPage(31568);
             }
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
