@@ -1,4 +1,4 @@
-@using System.Web.Mvc.Html
+﻿@using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using HRI.Models
 @using Umbraco.Web
@@ -128,8 +128,8 @@
     <div id="register-form" style="@formClass">
         <div class="row-fluid block group">
             <div class="span5 desc info">
-                <h3>Please enter your information.</h3>
-                @Umbraco.Field("Information")
+				<h3>@Umbraco.Field("InformationHeader")</h3>
+                @Umbraco.Field("InformationContent")
             </div>
 
             <div class="span7 @(isNewUser ? "hide" : string.Empty)">
@@ -200,7 +200,10 @@
             </div>
         </div>
         <div class="row-fluid block">
-            <div class="span5 desc"><h3>Create a username.</h3></div>
+            <div class="span5 desc">				
+				<h3>@Umbraco.Field("UsernameHeader")</h3>
+                @Umbraco.Field("UsernameContent")
+			</div>
             <div class="span7">
                 @Html.Label("Username")
                 @Html.TextBoxFor(m => registerModel.Username, new { @id = "username" })
@@ -210,13 +213,9 @@
         </div>
 
         <div class="row-fluid block">
-            <div class="span5 desc">
-                <h3>Create a password.</h3>
-                <ul class="password-help">
-                    <li>Password must be at least 8 characters long.</li>
-                    <li>Contain 1 uppercase and 1 lowercase letter.</li>
-                    <li>1 number or special character.</li>
-                </ul>
+            <div class="span5 desc">                
+				<h3>@Umbraco.Field("PasswordHeader")</h3>
+                <div class="password-help">@Umbraco.Field("PasswordContent")</div>
             </div>
             <div class="span7">
                 @Html.LabelFor(m => registerModel.Password)
@@ -225,7 +224,10 @@
             </div>
         </div>
         <div class="row-fluid block">
-            <div class="span5 desc"><h3>Optional.</h3></div>
+            <div class="span5 desc">				
+				<h3>@Umbraco.Field("OptionalHeader")<h3>
+                @Umbraco.Field("OptionalContent")
+			</div>
             <div class="span7">
                 @Html.Label("Phone Number")
                 @Html.TextBoxFor(
