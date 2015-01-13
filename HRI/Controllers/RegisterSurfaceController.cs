@@ -16,128 +16,138 @@ namespace HRI.Controllers
         [AllowAnonymous]
         public ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")] RegisterFormViewModel model)
         {
-            // Save Plan Id for the view
-            ViewData["PlanId"] = model.PlanId;
-            var error = false;
-
-            var enrollAfterLogin = Convert.ToInt32(model.PlanId != null).ToString();
-
-            // Check the Member Id (Y number)
-            if (model.PlanId == null) // Enrolled user
+            try
             {
-                var errorMessage = ValidateMemberIdCore(model.MemberId, model.DateOfBirth, true);
+                // Save Plan Id for the view
+                ViewData["PlanId"] = model.PlanId;
+                var error = false;
 
-                if (errorMessage != null)
+                var enrollAfterLogin = Convert.ToInt32(model.PlanId != null).ToString();
+
+                // Check the Member Id (Y number)
+                if (model.PlanId == null) // Enrolled user
                 {
-                    ModelState.AddModelError("registerModel.MemberId", errorMessage);
-                    error = true;
+                    var errorMessage = ValidateMemberIdCore(model.MemberId, model.DateOfBirth, true);
+
+                    if (errorMessage != null)
+                    {
+                        ModelState.AddModelError("registerModel.MemberId", errorMessage);
+                        error = true;
+                    }
+
+                    // if there's no error, try to get plan ID from api
+                    var planId = MakeInternalApiCall<string>("GetHealthPlanIdByMemberId",
+                        new Dictionary<string, string> { { "memberId", model.MemberId } });
+                    if (planId != null)
+                    {
+                        ViewData["PlanId"] = model.PlanId;
+                        model.PlanId = planId;
+                    }
+                }
+                else
+                {
+                    // is new user
+                    // Validate ZipCode
+                    if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
+                    {
+                        ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
+                        error = true;
+                    }
                 }
 
-                // if there's no error, try to get plan ID from api
-                var planId = MakeInternalApiCall<string>("GetHealthPlanIdByMemberId",
-                    new Dictionary<string, string> {{"memberId", model.MemberId}});
-                if (planId != null)
-                {
-                    ViewData["PlanId"] = model.PlanId;
-                    model.PlanId = planId;
-                }
-            }
-            else
-            {
-                // is new user
-                // Validate ZipCode
-                if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
+                // Validate ZipCode Length, mask from front-end might have 5 characters, but contains "_" so check for that
+                if (!String.IsNullOrWhiteSpace(model.Zipcode) && (model.Zipcode.Length != 5 || model.Zipcode.Contains("_")))
                 {
                     ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
                     error = true;
                 }
-            }
 
-            // Validate ZipCode Length, mask from front-end might have 5 characters, but contains "_" so check for that
-            if (!String.IsNullOrWhiteSpace(model.Zipcode) && (model.Zipcode.Length != 5 || model.Zipcode.Contains("_")))
-            {
-                ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
-                error = true;
-            }
+                // Validate Phone Length
+                var cleanPhone = model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
+                if (!String.IsNullOrWhiteSpace(cleanPhone) && (cleanPhone.Length != 10))
+                {
+                    ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
+                    error = true;
+                }
 
-            // Validate Phone Length
-            var cleanPhone = model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
-            if (!String.IsNullOrWhiteSpace(cleanPhone) && (cleanPhone.Length != 10))
-            {
-                ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
-                error = true;
-            }
+                if (ModelState.IsValid == false || error)
+                    return CurrentUmbracoPage();
 
-            if (ModelState.IsValid == false || error)
+                // Create registration model and bind it with view model
+                var registerModel = RegisterModel.CreateModel();
+                registerModel.Name = model.Username;
+                registerModel.UsernameIsEmail = false;
+                registerModel.Email = model.Email;
+                registerModel.Username = model.Username;
+                registerModel.Password = model.Password;
+                registerModel.RedirectUrl = "for-members/verify-account/";
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = enrollAfterLogin });
+
+                MembershipCreateStatus status;
+                Members.RegisterMember(registerModel, out status, false);
+
+                switch (status)
+                {
+                    case MembershipCreateStatus.Success:
+                        // Sign the user out (Umbraco wont stop auto logging in - this is a hack to fix)
+                        Session.Clear();
+                        FormsAuthentication.SignOut();
+                        // Set the user to be not approved
+                        var memb = Membership.GetUser(model.Username);
+                        memb.IsApproved = false;
+                        Membership.UpdateUser(memb);
+                        // Send the user a verification link to activate their account     
+                        var sendVerificationLinkModel = new SendVerificationLinkModel();
+                        sendVerificationLinkModel.UserName = model.Username;
+                        sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
+                        return RedirectToAction("SendVerificationLink_GET", "EmailSurface", sendVerificationLinkModel);
+
+                    case MembershipCreateStatus.InvalidUserName:
+                        ModelState.AddModelError("registerModel.Username", "Username is not valid");
+                        break;
+                    case MembershipCreateStatus.InvalidPassword:
+                        ModelState.AddModelError("registerModel.Password", PasswordNotStrongEnough);
+                        break;
+                    case MembershipCreateStatus.InvalidQuestion:
+                    case MembershipCreateStatus.InvalidAnswer:
+                        //TODO: Support q/a http://issues.umbraco.org/issue/U4-3213
+                        throw new NotImplementedException(status.ToString());
+                    case MembershipCreateStatus.InvalidEmail:
+                        ModelState.AddModelError("registerModel.Email", "Email is invalid");
+                        break;
+                    case MembershipCreateStatus.DuplicateUserName:
+                        ModelState.AddModelError("registerModel.Username", "A member with this username already exists");
+                        break;
+                    case MembershipCreateStatus.DuplicateEmail:
+                        ModelState.AddModelError("registerModel.Email", "A member with this e-mail address already exists");
+                        break;
+                    case MembershipCreateStatus.UserRejected:
+                    case MembershipCreateStatus.InvalidProviderUserKey:
+                    case MembershipCreateStatus.DuplicateProviderUserKey:
+                    case MembershipCreateStatus.ProviderError:
+                        //don't add a field level error, just model level
+                        ModelState.AddModelError("registerModel", "An error occurred creating the member: " + status);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 return CurrentUmbracoPage();
-
-            // Create registration model and bind it with view model
-            var registerModel = RegisterModel.CreateModel();
-            registerModel.Name = model.Username;
-            registerModel.UsernameIsEmail = false;
-            registerModel.Email = model.Email;
-            registerModel.Username = model.Username;
-            registerModel.Password = model.Password;
-            registerModel.RedirectUrl = "for-members/verify-account/";
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName });
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId});
-            registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = enrollAfterLogin });
-
-            MembershipCreateStatus status;
-            Members.RegisterMember(registerModel, out status, false);
-            
-            switch (status)
-            {
-                case MembershipCreateStatus.Success:
-                    // Sign the user out (Umbraco wont stop auto logging in - this is a hack to fix)
-                    Session.Clear();
-                    FormsAuthentication.SignOut();
-                    // Set the user to be not approved
-                    var memb = Membership.GetUser(model.Username);
-                    memb.IsApproved = false;
-                    Membership.UpdateUser(memb);
-                    // Send the user a verification link to activate their account     
-                    var sendVerificationLinkModel = new SendVerificationLinkModel();
-                    sendVerificationLinkModel.UserName = model.Username;
-                    sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
-                    return RedirectToAction("SendVerificationLink_GET", "EmailSurface", sendVerificationLinkModel);
-
-                case MembershipCreateStatus.InvalidUserName:
-                    ModelState.AddModelError("registerModel.Username", "Username is not valid");
-                    break;
-                case MembershipCreateStatus.InvalidPassword:
-                    ModelState.AddModelError("registerModel.Password", PasswordNotStrongEnough);
-                    break;
-                case MembershipCreateStatus.InvalidQuestion:
-                case MembershipCreateStatus.InvalidAnswer:
-                    //TODO: Support q/a http://issues.umbraco.org/issue/U4-3213
-                    throw new NotImplementedException(status.ToString());
-                case MembershipCreateStatus.InvalidEmail:
-                    ModelState.AddModelError("registerModel.Email", "Email is invalid");
-                    break;
-                case MembershipCreateStatus.DuplicateUserName:
-                    ModelState.AddModelError("registerModel.Username", "A member with this username already exists");
-                    break;
-                case MembershipCreateStatus.DuplicateEmail:
-                    ModelState.AddModelError("registerModel.Email", "A member with this e-mail address already exists");
-                    break;
-                case MembershipCreateStatus.UserRejected:
-                case MembershipCreateStatus.InvalidProviderUserKey:
-                case MembershipCreateStatus.DuplicateProviderUserKey:
-                case MembershipCreateStatus.ProviderError:
-                    //don't add a field level error, just model level
-                    ModelState.AddModelError("registerModel", "An error occurred creating the member: " + status);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
-
-            return CurrentUmbracoPage();
+            catch (Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "Could not register user " + model.Username + ".";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                return CurrentUmbracoPage();
+            }
         }
 
         public JsonResult ValidateMemberId([Bind(Prefix = "registerModel")] RegisterFormViewModel model)

@@ -27,9 +27,22 @@ namespace HRI.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            Session.Clear();
-            FormsAuthentication.SignOut();
-            return Redirect("/");
+            try
+            {
+                Session.Clear();
+                FormsAuthentication.SignOut();
+                return Redirect("/");
+            }
+            catch(Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "Error when user " + User.Identity.Name + " attempted to log out.";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("Log out erro", ex);
+                return Redirect("/");
+            }
         }
 
         private bool IsInInitialEnrollmentPeriod()
@@ -42,28 +55,30 @@ namespace HRI.Controllers
 
         public ActionResult SingleSignOn(string attributes, string targetUrl, string partnerSP)
         {
-            // Initiate single sign-on to the service provider (IdP-initiated SSO)]
-            // by sending a SAML response containing a SAML assertion to the SP.
-            
-            // get the member id (was IWS number) from the database 
-            var member = Services.MemberService.GetByUsername(User.Identity.Name);            
-
-            // Create a dictionary of attributes to add to the SAML assertion
-            var attribs = new Dictionary<string, string>();
-            
-            
-            /////////////////////////////////////////////////////////////////////////
-            // SAML Parameter Configurations
-            /////////////////////////////////////////////////////////////////////////
-
-            // Attributes for US Script
-            if(partnerSP == "USScript")
+            try
             {
-                string yNumber = member.GetValue("yNumber").ToString();
-                if (yNumber.Length > 7)
-                    yNumber = yNumber.Substring(0, 7);
+                // Initiate single sign-on to the service provider (IdP-initiated SSO)]
+                // by sending a SAML response containing a SAML assertion to the SP.
 
-                var samlAttributes = new Dictionary<string, string>
+                // get the member id (was IWS number) from the database 
+                var member = Services.MemberService.GetByUsername(User.Identity.Name);
+
+                // Create a dictionary of attributes to add to the SAML assertion
+                var attribs = new Dictionary<string, string>();
+
+
+                /////////////////////////////////////////////////////////////////////////
+                // SAML Parameter Configurations
+                /////////////////////////////////////////////////////////////////////////
+
+                // Attributes for US Script
+                if (partnerSP == "USScript")
+                {
+                    string yNumber = member.GetValue("yNumber").ToString();
+                    if (yNumber.Length > 7)
+                        yNumber = yNumber.Substring(0, 7);
+
+                    var samlAttributes = new Dictionary<string, string>
                 {
                     {"urn:uss:saml:attrib::id", yNumber},
                     {"urn:uss:saml:attrib::firstname", member.GetValue("msFirstName").ToString()},
@@ -73,13 +88,13 @@ namespace HRI.Controllers
                     {"urn:uss:saml:attrib::email", member.Email}
                 };
 
-                PgpSAML20Assertion.GuideSSO(Response, partnerSP, String.Empty, samlAttributes);
-            }
+                    PgpSAML20Assertion.GuideSSO(Response, partnerSP, String.Empty, samlAttributes);
+                }
 
-            // Attributes for MagnaCare
-            if (partnerSP == "MagnaCare")
-            {
-                var samlAttributes = new Dictionary<string, string>
+                // Attributes for MagnaCare
+                if (partnerSP == "MagnaCare")
+                {
+                    var samlAttributes = new Dictionary<string, string>
                 {
                     {"member:id", member.GetValue("yNumber").ToString()},
                     {"member:first_name", member.GetValue("msFirstName").ToString()},
@@ -87,14 +102,14 @@ namespace HRI.Controllers
                     {"member:product", member.GetValue("healthPlanName").ToString()}
                 };
 
-                SAML20Assertion.GuideSSO(Response, partnerSP, member.GetValue("yNumber").ToString(), samlAttributes);
-            }
+                    SAML20Assertion.GuideSSO(Response, partnerSP, member.GetValue("yNumber").ToString(), samlAttributes);
+                }
 
-            // Attributes for HealthX
-            if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
-            {
-                // Create attribute list an populate with needed data
-                var attrib = new List<SAMLAttribute>
+                // Attributes for HealthX
+                if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
+                {
+                    // Create attribute list an populate with needed data
+                    var attrib = new List<SAMLAttribute>
                 {
                     // Version 1 is constant value set by HealthX 
                     new SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version",
@@ -119,54 +134,66 @@ namespace HRI.Controllers
                         "UserFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper())
                 };
 
-                // Nest a node named ServiceId in the RedirectInfo attribute 
-                // Add a serializer to allow the nesting of the serviceid attribute without it being url encoded    
-                if (!AttributeType.IsAttributeValueSerializerRegistered("RedirectInfo", null))
-                    AttributeType.RegisterAttributeValueSerializer("RedirectInfo", null, new XmlAttributeValueSerializer());
+                    // Nest a node named ServiceId in the RedirectInfo attribute 
+                    // Add a serializer to allow the nesting of the serviceid attribute without it being url encoded    
+                    if (!AttributeType.IsAttributeValueSerializerRegistered("RedirectInfo", null))
+                        AttributeType.RegisterAttributeValueSerializer("RedirectInfo", null, new XmlAttributeValueSerializer());
 
-                // Add Redirect Info xml
-                var xmlRedirectInfo = new XmlDocument {PreserveWhitespace = true};
-                xmlRedirectInfo.LoadXml(targetUrl);
-                var attrRedirectInfo = new SAMLAttribute("RedirectInfo", "urn:oasis:names:tc:SAML:2.0:attrname-format:basic", "RedirectInfo");
-                attrRedirectInfo.Values.Add(new AttributeValue(xmlRedirectInfo.DocumentElement));
-                attrib.Add(attrRedirectInfo);
+                    // Add Redirect Info xml
+                    var xmlRedirectInfo = new XmlDocument { PreserveWhitespace = true };
+                    xmlRedirectInfo.LoadXml(targetUrl);
+                    var attrRedirectInfo = new SAMLAttribute("RedirectInfo", "urn:oasis:names:tc:SAML:2.0:attrname-format:basic", "RedirectInfo");
+                    attrRedirectInfo.Values.Add(new AttributeValue(xmlRedirectInfo.DocumentElement));
+                    attrib.Add(attrRedirectInfo);
 
-                // Send an IdP initiated SAML assertion
-                SAMLIdentityProvider.InitiateSSO(
-                    Response,
-                    member.GetValue("yNumber").ToString(),
-                    attrib.ToArray(),
-                    "",
-                    partnerSP);
-            }
-
-            // Attributes for Morneau Shapell
-            if (partnerSP == "SBCSystems")
-            {
-                // Replace the template variables in the url
-                if (targetUrl.IndexOf("<%PLANID%>") != -1)
-                    targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthplanid").ToString());
-
-                // Replace "initialEnrollment" with "specialEnrollmentSelect" if outside of 11/15-3/31
-                if (targetUrl.Contains("initialEnrollment") && !IsInInitialEnrollmentPeriod())
-                {
-                    targetUrl = targetUrl.Replace("initialEnrollment", "specialEnrollmentSelect");
+                    // Send an IdP initiated SAML assertion
+                    SAMLIdentityProvider.InitiateSSO(
+                        Response,
+                        member.GetValue("yNumber").ToString(),
+                        attrib.ToArray(),
+                        "",
+                        partnerSP);
                 }
 
-                // Send an IdP initiated SAML assertion
-                SAMLIdentityProvider.InitiateSSO(
-                    Response,
-                    member.GetValue("memberId").ToString(),
-                    attribs,
-                    targetUrl,
-                    partnerSP);
-            }
+                // Attributes for Morneau Shapell
+                if (partnerSP == "SBCSystems")
+                {
+                    // Replace the template variables in the url
+                    if (targetUrl.IndexOf("<%PLANID%>") != -1)
+                        targetUrl = targetUrl.Replace("<%PLANID%>", member.GetValue("healthplanid").ToString());
 
-            // Add the response to the ViewBag so we can access it on the front end if we need to
-            ViewBag.Response = Response;
-            TempData["response"] = Response;
-            // Return an empty response since we wait for the SAML consumer to send us the requested page
-            return new EmptyResult();
+                    // Replace "initialEnrollment" with "specialEnrollmentSelect" if outside of 11/15-3/31
+                    if (targetUrl.Contains("initialEnrollment") && !IsInInitialEnrollmentPeriod())
+                    {
+                        targetUrl = targetUrl.Replace("initialEnrollment", "specialEnrollmentSelect");
+                    }
+
+                    // Send an IdP initiated SAML assertion
+                    SAMLIdentityProvider.InitiateSSO(
+                        Response,
+                        member.GetValue("memberId").ToString(),
+                        attribs,
+                        targetUrl,
+                        partnerSP);
+                }
+
+                // Add the response to the ViewBag so we can access it on the front end if we need to
+                ViewBag.Response = Response;
+                TempData["response"] = Response;
+                // Return an empty response since we wait for the SAML consumer to send us the requested page
+                return new EmptyResult();
+            }
+            catch(Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "SSO Error for user " + User.Identity.Name + ". Partner: " + partnerSP + ". TargetUrl: " + targetUrl + ".";                                
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("Unable to send verification link.", ex);
+
+                return new EmptyResult();
+            }
         }        
 
         public ActionResult ActivateUser(string userName, string guid)
@@ -262,8 +289,9 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                logger.Error(ex);
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
             }
@@ -272,37 +300,49 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")] ChangePasswordViewModel model)
         {
-            var user = Membership.GetUser();
-            if (user == null || !Membership.ValidateUser(user.UserName, model.OldPassword))
-            {
-                ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
-            }
-
-            if (string.Compare(model.OldPassword, model.NewPassword, StringComparison.Ordinal) == 0)
-            {
-                ModelState.AddModelError("changePasswordViewModel.NewPassword", "Your new password cannot be the same as your current password.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return CurrentUmbracoPage();
-            }
-
             try
             {
-                TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
-                // Update the User profile in the database
-                Membership.UpdateUser(user);
-                if (!Roles.IsUserInRole(user.UserName, "Registered"))
-                    Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
-                return RedirectToCurrentUmbracoPage();
-            }
-            catch (MembershipPasswordException)
-            {
-                ModelState.AddModelError(
-                    "changePasswordViewModel.NewPassword", 
-                    RegisterSurfaceController.PasswordNotStrongEnough);
+                var user = Membership.GetUser();
+                if (user == null || !Membership.ValidateUser(user.UserName, model.OldPassword))
+                {
+                    ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
+                }
 
+                if (string.Compare(model.OldPassword, model.NewPassword, StringComparison.Ordinal) == 0)
+                {
+                    ModelState.AddModelError("changePasswordViewModel.NewPassword", "Your new password cannot be the same as your current password.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return CurrentUmbracoPage();
+                }
+
+                try
+                {
+                    TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
+                    // Update the User profile in the database
+                    Membership.UpdateUser(user);
+                    if (!Roles.IsUserInRole(user.UserName, "Registered"))
+                        Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
+                    return RedirectToCurrentUmbracoPage();
+                }
+                catch (MembershipPasswordException)
+                {
+                    ModelState.AddModelError(
+                        "changePasswordViewModel.NewPassword",
+                        RegisterSurfaceController.PasswordNotStrongEnough);
+
+                    return CurrentUmbracoPage();
+                }
+            }
+            catch(Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "User " + User.Identity.Name + " was unable to change their password.";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                logger.Error(ex);
                 return CurrentUmbracoPage();
             }
         }
@@ -310,6 +350,7 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangeUserName(ChangeUserNameViewModel model)
         {
+            try { 
             // TO-DO: Either extend the membership provider to support username changes
             // or create a new user and copy all the data as per 
             // http://stackoverflow.com/questions/1001491/is-it-possible-to-change-the-username-with-the-membership-api
@@ -319,29 +360,43 @@ namespace HRI.Controllers
             // Update the User profile in the database
             Membership.UpdateUser((System.Web.Security.MembershipUser)user);
             return RedirectToCurrentUmbracoPage();
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex);
+                return RedirectToCurrentUmbracoPage();
+            }
         }
 
         [HttpGet]
         public ActionResult ResetPassword(string userName, string guid)
         {
-            // Verify the member exists
-            var member = Membership.GetUser(userName);            
-            if(member == null)
-                return Redirect("/");
-
-            // Verify the user provided the correct guid
-            if (Services.MemberService.GetByUsername(userName).GetValue("guid").ToString() != guid.ToString())
+            try
             {
-                return Redirect("/");
-            }
+                // Verify the member exists
+                var member = Membership.GetUser(userName);
+                if (member == null)
+                    return Redirect("/");
 
-            SetUserNameAndGuide(userName, guid);
-            return Redirect("/for-members/reset-password/");
+                // Verify the user provided the correct guid
+                if (Services.MemberService.GetByUsername(userName).GetValue("guid").ToString() != guid.ToString())
+                {
+                    return Redirect("/");
+                }
+
+                SetUserNameAndGuide(userName, guid);
+                return Redirect("/for-members/reset-password/");
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex);
+                return Redirect("/for-members/reset-password/");
+            }
         }
 
         [HttpPost]
         public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")] ResetPasswordViewModel model)
-        {
+        {            
             if (!ModelState.IsValid)
             {
                 SetUserNameAndGuide(model.UserName, model.Guid);
@@ -385,23 +440,30 @@ namespace HRI.Controllers
 
         protected void SyncEmail(string memberId, string email)
         {
-            var jsonData = new Dictionary<string, string> {{"MemberId", memberId}, {"EmailAddress", email}};
-            // Convert the dictionary to JSON
-            string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
-
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the API uri
-            string apiUri = root.GetProperty("apiUri").Value.ToString();
-            // Apend the command to invoke the register function
-            string registerUserApi = apiUri + "/Registration?p1=" + email;
-
-            // Create a webclient object to post the user data
-            using (var client = new WebClient())
+            try
             {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                client.UploadString(registerUserApi, myJsonString);
+                var jsonData = new Dictionary<string, string> { { "MemberId", memberId }, { "EmailAddress", email } };
+                // Convert the dictionary to JSON
+                string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
+
+                // Get ahold of the root/home node
+                IPublishedContent root = Umbraco.ContentAtRoot().First();
+                // Get the API uri
+                string apiUri = root.GetProperty("apiUri").Value.ToString();
+                // Apend the command to invoke the register function
+                string registerUserApi = apiUri + "/Registration?p1=" + email;
+
+                // Create a webclient object to post the user data
+                using (var client = new WebClient())
+                {
+                    // Set the format to JSON
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    client.UploadString(registerUserApi, myJsonString);
+                }
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex);
             }
         }
     }

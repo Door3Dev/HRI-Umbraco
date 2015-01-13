@@ -37,7 +37,9 @@ namespace HRI.Controllers
                 doc.Properties["lastName"].Value = model.LastName;
                 doc.Properties["email"].Value = model.Email;
                 doc.Properties["phoneNumber"].Value = model.PhoneNumber;
-                doc.Properties["message"].Value = model.Message;                
+                doc.Properties["message"].Value = model.Message;  
+                // If this is a logged in user
+                if (User.Identity.IsAuthenticated) doc.Properties["memberId"].Value = model.MemberId;
                 // Save (but do not publish) the contact submision
                 ApplicationContext.Services.ContentService.Save(doc);
 
@@ -71,7 +73,12 @@ namespace HRI.Controllers
                     }
                     catch (Exception ex)
                     {
-                        logger.Error("Send failed to " + email, ex);
+                        // Create an error message with sufficient info to contact the user
+                        string additionalInfo = model.FirstName + " " + model.LastName + " could not send a contact us email request. Please contact at " + model.Email;
+                        // Add the error message to the log4net output
+                        log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                        // Log the error
+                        logger.Error("Unable to complete Contact Us submission due to SMTP error", ex);
                     }
                 }
 
@@ -79,8 +86,14 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
-            catch (Exception) // If the message failed to send
+            catch (Exception ex) // If the message failed to send
             {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = model.FirstName + " " + model.LastName + " could not send a contact us email request. Please contact at " + model.Email;
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("Unable to complete Contact Us submission", ex);
                 // Set the success flag to false and post back to the same page
                 TempData["IsSuccessful"] = false;
                 return RedirectToCurrentUmbracoPage();
@@ -146,7 +159,14 @@ namespace HRI.Controllers
                 return RedirectToCurrentUmbracoPage();
             }
             catch(Exception ex)
-            {
+            {                
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "A user was trying to retrieve a username for the email " + model.Email + ".";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("User unable to retrieve forgotten user name.", ex);
+
                 ModelState.AddModelError("forgotUserNameViewModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
                 // Set the success flag to false and post back to the same page
                 TempData["ForgotUsernameIsSuccessful"] = false;
@@ -157,47 +177,62 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return CurrentUmbracoPage();
-            }
-
-            // Get the member
-            var member = Services.MemberService.GetByUsername(model.UserName);
-
-            if (member == null)
-            {
-                // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
-                var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("model", model.UserName);
-                if (currentUmbracoPage != null)
+                if (!ModelState.IsValid)
                 {
-                    return currentUmbracoPage;
+                    return CurrentUmbracoPage();
                 }
 
-                // There is an API error
-                ModelState.AddModelError("model", UsernameDoesNotExist);
-                return CurrentUmbracoPage();
+                // Get the member
+                var member = Services.MemberService.GetByUsername(model.UserName);
+
+                if (member == null)
+                {
+                    // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
+                    var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("model", model.UserName);
+                    if (currentUmbracoPage != null)
+                    {
+                        return currentUmbracoPage;
+                    }
+
+                    // There is an API error
+                    ModelState.AddModelError("model", UsernameDoesNotExist);
+                    return CurrentUmbracoPage();
+                }
+
+                if (member.IsLockedOut)
+                    Membership.Provider.UnlockUser(model.UserName);
+
+                if (member.IsApproved && !Roles.IsUserInRole(model.UserName, "Registered"))
+                { // User is in process of security upgrade
+                    return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+                }
+
+                // Create a random Guid
+                Guid key = Guid.NewGuid();
+                // Update the user's Guid field
+                member.SetValue("guid", key.ToString());
+                // Save the updated information
+                Services.MemberService.Save(member);
+
+                SendResetPasswordEmail(member.Email, member.Username, key.ToString());
+
+                TempData["ForgotPasswordIsSuccessful"] = true;
+                return RedirectToCurrentUmbracoPage();
             }
+            catch(Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "A user was trying to retrieve a password for the username " + model.UserName + ".";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("User unable to retrieve forgotten user name.", ex);
 
-            if (member.IsLockedOut)
-                Membership.Provider.UnlockUser(model.UserName);
-
-            if (member.IsApproved && !Roles.IsUserInRole(model.UserName, "Registered"))
-            { // User is in process of security upgrade
-                return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+                TempData["ForgotPasswordIsSuccessful"] = false;
+                return RedirectToCurrentUmbracoPage();
             }
-
-            // Create a random Guid
-            Guid key = Guid.NewGuid();
-            // Update the user's Guid field
-            member.SetValue("guid", key.ToString());
-            // Save the updated information
-            Services.MemberService.Save(member);
-
-            SendResetPasswordEmail(member.Email, member.Username, key.ToString());
-
-            TempData["ForgotPasswordIsSuccessful"] = true;
-            return RedirectToCurrentUmbracoPage();
         }
 
         /// <summary>
@@ -208,56 +243,58 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult SendVerificationLink([Bind(Prefix = "sendVerificationLinkModel")] SendVerificationLinkModel model)
         {
-            // If the user model is valid and the user exists
-            if (!ModelState.IsValid)
+            try
             {
-                // Return the user to the home page
-                return CurrentUmbracoPage();
-            }
-
-            // Get a handle on the member
-            var member = Services.MemberService.GetByUsername(model.UserName);
-
-            if (member == null)
-            {
-                // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
-                var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("sendVerificationLinkModel", model.UserName);
-                if (currentUmbracoPage != null)
+                // If the user model is valid and the user exists
+                if (!ModelState.IsValid)
                 {
-                    return currentUmbracoPage;
+                    // Return the user to the home page
+                    return CurrentUmbracoPage();
                 }
 
-                // There is an API error
-                ModelState.AddModelError("sendVerificationLinkModel", UsernameDoesNotExist);
-                return CurrentUmbracoPage();
-            }
+                // Get a handle on the member
+                var member = Services.MemberService.GetByUsername(model.UserName);
 
-            if (member.IsApproved)
-            { 
-                if (!Roles.IsUserInRole(model.UserName, "Registered"))
-                { // User is in process of security upgrade
-                    return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+                if (member == null)
+                {
+                    // If the user doesn't exists, check the HRI API to see if this is a returning IWS user
+                    var currentUmbracoPage = InitiateSecurityUpgradeForIwsUser("sendVerificationLinkModel", model.UserName);
+                    if (currentUmbracoPage != null)
+                    {
+                        return currentUmbracoPage;
+                    }
+
+                    // There is an API error
+                    ModelState.AddModelError("sendVerificationLinkModel", UsernameDoesNotExist);
+                    return CurrentUmbracoPage();
                 }
 
-                TempData["ResendEmailAlreadyVerified"] = true;
-                return CurrentUmbracoPage();
-            }
+                if (member.IsApproved)
+                {
+                    if (!Roles.IsUserInRole(model.UserName, "Registered"))
+                    { // User is in process of security upgrade
+                        return SendResetPasswordEmailAndRedirectToSecurityUpgradePage(model.UserName);
+                    }
 
-            // Create a random Guid
-            Guid key = Guid.NewGuid();
-            // Update the user's Guid field
-            member.SetValue("guid", key.ToString());
-            // Save the updated information
-            Services.MemberService.Save(member);
+                    TempData["ResendEmailAlreadyVerified"] = true;
+                    return CurrentUmbracoPage();
+                }
 
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the Verification Email Template ID
-            var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
+                // Create a random Guid
+                Guid key = Guid.NewGuid();
+                // Update the user's Guid field
+                member.SetValue("guid", key.ToString());
+                // Save the updated information
+                Services.MemberService.Save(member);
 
-            var protocol = Request.IsSecureConnection ? "https" : "http";
-            // Build a dictionary for all the dynamic text in the email template
-            var dynamicText = new Dictionary<string, string>
+                // Get ahold of the root/home node
+                IPublishedContent root = Umbraco.ContentAtRoot().First();
+                // Get the Verification Email Template ID
+                var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
+
+                var protocol = Request.IsSecureConnection ? "https" : "http";
+                // Build a dictionary for all the dynamic text in the email template
+                var dynamicText = new Dictionary<string, string>
             {
                 { "<%FirstName%>", member.GetValue("firstName").ToString() },
                 { "<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString() },
@@ -269,24 +306,44 @@ namespace HRI.Controllers
                 }
             };
 
-            // Try to send the message
-            try
-            {
-                SendEmail(member.Email, "Health Republic Insurance - Member Verification Link",
-                    BuildEmail((int)emailTemplateId, dynamicText));
+                // Try to send the message
+                try
+                {
+                    SendEmail(member.Email, "Health Republic Insurance - Member Verification Link",
+                        BuildEmail((int)emailTemplateId, dynamicText));
+                }
+                catch (SmtpException ex)
+                {
+                    // Create an error message with sufficient info to contact the user
+                    string additionalInfo = "Failed to send verification link to user" + model.UserName+ " due to a the SMTP server failing.";
+                    // Add the error message to the log4net output
+                    log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                    // Log the error
+                    logger.Error("Unable to send verification link.", ex);
+
+                    //don't add a field level error, just model level
+                    ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
+                    return CurrentUmbracoPage();
+                }
+
+                // Mark this method as successful for the next page
+                TempData["IsSuccessful"] = true;
+
+                // If there is a redirect url
+                return Redirect(!string.IsNullOrEmpty(model.RedirectUrl) ? model.RedirectUrl : "/");
             }
-            catch(SmtpException ex)
+            catch(Exception ex)
             {
-                //don't add a field level error, just model level
-                ModelState.AddModelError("sendVerificationLinkModel", ex.Message + "\n" + ex.InnerException.Message + "\n");
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "Could not send a verification link to user " + model.UserName + ".";
+                // Add the error message to the log4net output
+                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                // Log the error
+                logger.Error("Unable to send verification link.", ex);
+
+                TempData["IsSuccessful"] = false;
                 return CurrentUmbracoPage();
             }
-
-            // Mark this method as successful for the next page
-            TempData["IsSuccessful"] = true;
-
-            // If there is a redirect url
-            return Redirect(!string.IsNullOrEmpty(model.RedirectUrl) ? model.RedirectUrl : "/");
         }
 
         /// <summary>
