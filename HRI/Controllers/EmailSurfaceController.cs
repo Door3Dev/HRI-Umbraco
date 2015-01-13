@@ -27,12 +27,26 @@ namespace HRI.Controllers
         {
             try
             {
+                // This code will create a Document of type Contact Submission and add it to the Contact Us Submissions list in the Umbraco Back end
+                // This is done in case there are any issues with the emailer.
+                // Create a new ContactSubmission document and title it the users name
+                IContent doc = ApplicationContext.Services.ContentService.CreateContent(model.FirstName + " " + model.LastName, 37326, "ContactSubmission");
+                // Populate all the data                
+                doc.Properties["messageTopic"].Value = model.MessageType;
+                doc.Properties["firstName"].Value = model.FirstName;
+                doc.Properties["lastName"].Value = model.LastName;
+                doc.Properties["email"].Value = model.Email;
+                doc.Properties["phoneNumber"].Value = model.PhoneNumber;
+                doc.Properties["message"].Value = model.Message;                
+                // Save (but do not publish) the contact submision
+                ApplicationContext.Services.ContentService.Save(doc);
+
                 string mailData = CurrentPage.GetPropertyValue<string>("categoriesAndEmails");
                 IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(mailData);
                 IEnumerable<string> emails = categoriesAndEmails[model.MessageType];
 
                 const string na = "N/A";
-                // Build a dictionary for all teh dynamic text in the email template
+                // Build a dictionary for all the dynamic text in the email template
                 var dynamicText = new Dictionary<string, string>
                     {
                         {"<%MemberId%>", model.MemberId ?? na},
