@@ -124,6 +124,8 @@ namespace HRI.Controllers
                 // Keep Ms First Name and Last Name always up to date
                 member.Properties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
                 member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
+                member.Properties.First(p=>p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
+                member.Properties.First(p=>p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
                 Services.MemberService.Save(member);
 
                 // User should pass enrollment process
