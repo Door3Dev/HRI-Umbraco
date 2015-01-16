@@ -234,6 +234,7 @@
                     m => registerModel.Phone, 
                     new { data_inputmask = string.Format("'mask': '{0}'", RegisterFormViewModel.PhoneInputMask) })
                 @Html.ValidationMessageFor(m => registerModel.Phone)
+                <div id="phoneNumberCheck"></div>
             </div>
         </div>
         <div class="row-fuild">
@@ -283,8 +284,17 @@
             }
         });    
         
-        </text>
+    </text>
     }}
+
+    $('#registerModel_Phone').blur(function () {
+        // If the phone number is not blank and less than 10 digits
+        if ($(this).val().indexOf('_') > -1) {
+            $('#phoneNumberCheck').html('<span class="error">Invalid Phone Number</span>');
+        } else {
+            $('#phoneNumberCheck').html('');
+        }
+    })
 
     // Check user uniqueness
     $("#username").keyup(function() {
