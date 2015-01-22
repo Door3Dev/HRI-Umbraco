@@ -299,18 +299,23 @@
     // Check user uniqueness
     $("#username").keyup(function() {
         if ($('#username').val().length > 0) {
-            $.ajax({
-                url: "/umbraco/api/HriApi/IsUserNameAvailable",
-                data: { username: $('#username').val() },
-                success: function(data) {
-                    if (data == 'true' && $('#username').val().length > 5)
-                        $('#userNameCheck').html("<span class='success'>Username is available</span>");
-                    else
-                        $('#userNameCheck').html("<span class='error'>Username not available</span>");
-                },
-                error: function() { $('#userNameCheck').html("<span class='error'>Username not available</span>"); },
-                dataType: 'html'
-            });
+            if ($('#username').val().indexOf(' ') > -1) {
+                $('#userNameCheck').html("<span class='error'>Username may not contain spaces</span>");
+            }
+            else {
+                $.ajax({
+                    url: "/umbraco/api/HriApi/IsUserNameAvailable",
+                    data: { username: $('#username').val() },
+                    success: function (data) {
+                        if (data == 'true' && $('#username').val().length > 5)
+                            $('#userNameCheck').html("<span class='success'>Username is available</span>");
+                        else
+                            $('#userNameCheck').html("<span class='error'>Username not available</span>");
+                    },
+                    error: function () { $('#userNameCheck').html("<span class='error'>Username not available</span>"); },
+                    dataType: 'html'
+                });
+            }
         } else
             $('#userNameCheck').html('');
     });

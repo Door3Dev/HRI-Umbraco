@@ -70,6 +70,12 @@ namespace HRI.Controllers
                     error = true;
                 }
 
+                // Verify no spaces in UserName
+                if(model.Username.Contains(" "))
+                {
+                    ModelState.AddModelError("registerModel.Username", "Username may not contain spaces");
+                }
+
                 if (ModelState.IsValid == false || error)
                     return CurrentUmbracoPage();
 
