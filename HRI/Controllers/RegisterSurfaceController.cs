@@ -18,6 +18,12 @@ namespace HRI.Controllers
         {
             try
             {
+                // Verify that username and password arent the same.
+                if (model.Username == model.Password)
+                {
+                    ModelState.AddModelError("registerModel.Password", "Password cannot be the same as Username");
+                }
+
                 // Save Plan Id for the view
                 ViewData["PlanId"] = model.PlanId;
                 var error = false;
@@ -75,6 +81,8 @@ namespace HRI.Controllers
                 {
                     ModelState.AddModelError("registerModel.Username", "Username may not contain spaces");
                 }
+
+                
 
                 if (ModelState.IsValid == false || error)
                     return CurrentUmbracoPage();
