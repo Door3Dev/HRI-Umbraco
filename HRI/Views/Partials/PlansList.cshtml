@@ -290,30 +290,30 @@
                 <table id="shop-summary" class="table table-condensed">
                     <thead></thead>
                     <tbody>
-                        <tr>
-                            <th>
-                                <span class="purple"><strong>Financial assistance</strong></span>
-                            </th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Annual Salary:</th>
-                            <td>@(Model.Income.HasValue ? "$" + Model.Income : "N/A")</td>
-                        </tr>
-                        <tr>
-                            <th># of people in household:</th>
-                            <td>@(Model.NumberInHousehold.HasValue ? Model.NumberInHousehold.ToString() : "N/A")</td>
-                        </tr>
-                        <tr>
-                            <th>May be eligible for financial assistance? :</th>
-                            <td>
+                        @*<tr>
+        <th>
+            <span class="purple"><strong>Financial assistance</strong></span>
+        </th>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Annual Salary:</th>
+        <td>@(Model.Income.HasValue ? "$" + Model.Income : "N/A")</td>
+    </tr>
+    <tr>
+        <th># of people in household:</th>
+        <td>@(Model.NumberInHousehold.HasValue ? Model.NumberInHousehold.ToString() : "N/A")</td>
+    </tr>
+    <tr>
+        <th>May be eligible for financial assistance? :</th>
+        <td>
 
-                                N/A&nbsp;
+            N/A&nbsp;
 
-                                (<a href="http://www.nystateofhealth.ny.gov/" target="_blank">Learn More</a>)
-                            </td>
-                        </tr>
-                        <tr><td colspan="2"></td></tr>
+            (<a href="http://www.nystateofhealth.ny.gov/" target="_blank">Learn More</a>)
+        </td>
+    </tr>
+    <tr><td colspan="2"></td></tr>*@
                         <tr>
                             <th>
                                 <span class="purple"><strong>Summary</strong></span>
@@ -355,18 +355,7 @@
             <div class="span12">
                 <br><br>
                 <small>
-                    <p>
-                        Health Republic Insurance of New York has provided this tax credit eligibility information based on the information provided by the website user and guidelines provided by the Federal Government.  The determination of tax credit eligibility and amount is made on and available <strong><u>only</u></strong> through the New York State Health Benefit Exchange, called the New York State of Health, at the following website: <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>.
-                    </p>
-                    <p>
-                        The tool provided herein on this website may not be considered or used as legal or tax advice. Any information provided is not intended to be used as such and cannot be considered in any payment or tax dispute.
-                    </p>
-                    <p>
-                        To ensure access to financial assistance, you <strong><u>must</u></strong> purchase insurance through the New York State Health Benefit Exchange, at <a href="http://www.nystateofhealth.ny.gov" target="_blank">www.nystateofhealth.ny.gov</a>. Any other health insurance purchases — including through this website — will not enable you to tax credits or cost sharing reductions, if available to you.
-                    </p>
-                    <p>
-                        Your privacy is important to us.  The information provided for this tool is not stored, nor is it provided to any external partner of any kind.  Please click to review our <a href="/media/1029/ny-privacypolicy.pdf" target="_blank">privacy policy</a> in complete detail.
-                    </p>
+                    @Umbraco.Field("financialAssistanceMessage")                    
                 </small>
             </div>
         </div>

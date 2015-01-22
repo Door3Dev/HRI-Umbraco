@@ -87,21 +87,10 @@
     </div>
 </div>
 <div class="row-fluid block">
-    <div class="span5 desc">
-        <h3>Optional</h3>
-        <span class="desc">Are you eligible for a tax credit?</span>
-        <div class="expand-group">
-            <h3 class="expand-link"><span class="expand-toggle">[ + ]</span> <span class="link">More info</span></h3>
-            <div class="expand-content" style="display: none;">
-                <p>Please enter the information to the right to find out if you might be eligible for the federal APTC tax credit. You can use this tax credit to help pay your health insurance premiums. Please note that this is only an estimate. To access the tax credit you must receive an eligibility determination and purchase your plan from New York's health plan marketplace, <a href="http://www.nystateofhealth.ny.gov/">New York State of Health.</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="span7">
-        <div class="controls controls-row">
-            <label class="span6">Annual Household Income @Html.TextBoxFor(m => m.Income)</label>
-            <label class="span6"># of people in your household @Html.TextBoxFor(m => m.NumberInHousehold)</label>
-        </div>
+    <div class="span12">
+        <small>
+            @Umbraco.Field("financialAssistanceMessage")
+        </small>
     </div>
 </div>
 <div class="find">
