@@ -1,0 +1,7 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+		<span>@Members.GetCurrentMember().GetPropertyValue<string>("email")</span>
+	}
+}

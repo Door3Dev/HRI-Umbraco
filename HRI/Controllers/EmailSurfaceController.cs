@@ -219,6 +219,7 @@ namespace HRI.Controllers
                 SendResetPasswordEmail(member.Email, member.Username, key.ToString());
 
                 TempData["ForgotPasswordIsSuccessful"] = true;
+                TempData["memberEmail"] = member.Email;
                 return RedirectToCurrentUmbracoPage();
             }
             catch(Exception ex)
