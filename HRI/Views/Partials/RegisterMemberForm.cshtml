@@ -187,7 +187,7 @@
         <div class="row-fluid">
             <div class="span7 offset5">
                 @Html.Label("Confirm Email")
-                @Html.TextBoxFor(m => registerModel.ConfirmEmail)
+                @Html.TextBoxFor(m => registerModel.ConfirmEmail, new { @class = "nopaste" })
                 @Html.ValidationMessageFor(m => registerModel.ConfirmEmail)
             </div>
         </div>
@@ -324,6 +324,11 @@
         $("#registerModel_Ssn").inputmask();
         $("#zipCode").inputmask();
         $("#registerModel_Phone").inputmask();
+
+        // Prevent paste in confirm email text box
+        $('.nopaste').bind('paste', function (e) {
+            e.preventDefault();
+        });
     });
 
 </script>
