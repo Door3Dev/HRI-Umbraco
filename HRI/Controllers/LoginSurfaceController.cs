@@ -48,7 +48,7 @@ namespace HRI.Controllers
                 if (!Members.Login(model.Username, model.Password))
                 {
                     // Check to make sure that the user exists
-                    const string invalidUsernameOrPassword = "Invalid username or password.";
+                    const string invalidUsernameOrPassword = "Invalid credentials. Need to <a href='/for-members/register'>register</a>?";
 
                     if (member != null)
                     {
