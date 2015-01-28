@@ -103,7 +103,7 @@ namespace HRI.Controllers
             }
 
             // Children cannot be age 30 or above.
-            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
+            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 29))
             {
                 ModelState.AddModelError("viewModel", "Children cannot be age 30 or above.");
                 return CurrentUmbracoPage();
