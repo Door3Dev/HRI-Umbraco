@@ -48,7 +48,8 @@ namespace HRI.Controllers
                 if (!Members.Login(model.Username, model.Password))
                 {
                     // Check to make sure that the user exists
-                    const string invalidUsernameOrPassword = "Invalid credentials. Need to <a href='/for-members/register'>register</a>?";
+                    const string invalidUsername = "Invalid . Need to <a href='/for-members/register'>register</a>?";
+                    const string invalidPassword = "Invalid credentials. <a href='/for-members/forgot-password'>Click here</a> if you forgot your password?";
 
                     if (member != null)
                     {
@@ -81,7 +82,7 @@ namespace HRI.Controllers
 
                         // If the user does exist then it was a wrong password
                         // Don't add a field level error, just model level
-                        ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
+                        ModelState.AddModelError("loginModel", invalidPassword);
                         return CurrentUmbracoPage();
                     }
 
@@ -92,7 +93,7 @@ namespace HRI.Controllers
                         return currentUmbracoPage;
                     }
 
-                    ModelState.AddModelError("loginModel", invalidUsernameOrPassword);
+                    ModelState.AddModelError("loginModel", invalidUsername);
                     return CurrentUmbracoPage();
                 }
 
