@@ -41,6 +41,8 @@
             @Html.TextBoxFor(m => loginModel.Username, new { id = "focus" })
             @Html.ValidationMessageFor(m => loginModel.Username)
         </div>
+
+        <br />
         <div class="row-fluid">
             <div class="span5">@Html.LabelFor(m => loginModel.Password)</div>
             <div class="span7 text-right"><a href="~/for-members/forgot-password">Forgot Password?</a></div>

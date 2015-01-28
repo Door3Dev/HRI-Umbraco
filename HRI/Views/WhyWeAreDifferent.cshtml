@@ -6,7 +6,13 @@
 <div class="hri-common-single">
   <div class="row-fluid">
     <div class="main-lead">
-      @Umbraco.RenderMacro("breadcrumb", new { Span = "span4" })
+        <div class="span4">
+            <h3>OUR STORY</h3>
+            <ul class="unstyled inline breadcrumbs">
+                <li><a href="/">Home</a></li> ›
+                <li>Provider</li>
+            </ul>
+        </div>
 
       <div class="span7 offset1">
         @Umbraco.Field("Header")

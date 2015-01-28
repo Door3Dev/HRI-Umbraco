@@ -9,7 +9,13 @@
       <div class="faq-banner"></div>
     </div>
     <div class="main-lead">
-      @Umbraco.RenderMacro("breadcrumb", new { Span = "span3" })
+        <div class="span3">
+            <h3>CAREERS</h3>
+            <ul class="unstyled inline breadcrumbs">
+                <li><a href="/">Home</a></li> ›
+                <li>Provider</li>
+            </ul>
+        </div>
       <div class="span7">
         @Umbraco.Field("Header")
       </div>
