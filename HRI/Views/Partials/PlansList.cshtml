@@ -340,10 +340,6 @@
                             <th>Dependents:</th>
                             <td>@(Model.ChildrenAges != null ? Model.ChildrenAges.Count : 0) dependent(s)</td>
                         </tr>
-                        <tr>
-                            <th>Annual Salary:</th>
-                            <td>@(Model.Income.HasValue ? "$" + Model.Income : "N/A")</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
