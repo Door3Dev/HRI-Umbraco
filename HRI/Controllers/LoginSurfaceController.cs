@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Models;
+using HRI.Models;
 
 namespace HRI.Controllers
 {
@@ -48,7 +49,7 @@ namespace HRI.Controllers
                 if (!Members.Login(model.Username, model.Password))
                 {
                     // Check to make sure that the user exists
-                    const string invalidUsername = "Invalid . Need to <a href='/for-members/register'>register</a>?";
+                    const string invalidUsername = "Invalid username. Need to <a href='/for-members/register'>register</a>?";
                     const string invalidPassword = "Invalid credentials. <a href='/for-members/forgot-password'>Click here</a> if you forgot your password?";
 
                     if (member != null)
@@ -58,6 +59,7 @@ namespace HRI.Controllers
                             ModelState.AddModelError(
                                 "loginModel",
                                 string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
+                            SendVerificationLinkModel resendModel = new SendVerificationLinkModel();
 
                             return CurrentUmbracoPage();
                         }
