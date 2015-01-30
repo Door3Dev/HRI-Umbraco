@@ -21,6 +21,8 @@
         sp = "AdamEbix";
     else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+    else if (@Umbraco.Field("serviceProvider").ToString() == "StatDoctors")
+        sp = "StatDoctors";
     else 
         throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
     
