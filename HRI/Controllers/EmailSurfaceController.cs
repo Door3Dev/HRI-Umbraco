@@ -62,8 +62,16 @@ namespace HRI.Controllers
                     };
                 // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
                 IPublishedContent root = Umbraco.TypedContentAtRoot().First();
+
                 //Get the Contact Us Email Template ID
-                var emailTemplateId = root.GetProperty("contactUsEmailTemplate").Value;
+                object emailTemplateId = null;
+                string template = CurrentPage.GetPropertyValue<string>("emailTemplate");
+                if(template == "Member")
+                    emailTemplateId = root.GetProperty("memberContactUsTemplate").Value;
+                if (template == "Provider")
+                    emailTemplateId = root.GetProperty("providerContactUsTemplate").Value;
+                if (template == "Broker")
+                    emailTemplateId = root.GetProperty("brokerContactUsTemplate").Value;
 
                 foreach (string email in emails)
                 {

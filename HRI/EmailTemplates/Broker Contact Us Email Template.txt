@@ -1,0 +1,5 @@
+First Name: <%FirstName%>
+Last Name: <%LastName%>
+Email: <%Email%>
+Phone: <%Phone%>
+Message: <%MessageBody%>

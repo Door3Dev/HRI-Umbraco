@@ -33,6 +33,7 @@
 
     IDictionary<string, IEnumerable<string>> categoriesAndEmails = ContactFormViewModel.GetCategoriesAndEmails(
         (string)CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
+
 }
 
 @Html.Raw(Html.RenderJsHere())
