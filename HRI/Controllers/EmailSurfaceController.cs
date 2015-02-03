@@ -77,7 +77,7 @@ namespace HRI.Controllers
                 {
                     try
                     {
-                        SendEmail(email, "Health Republic Insurance - Contact Us", BuildEmail((int)emailTemplateId, dynamicText));
+                        SendEmail(email, model.MessageType, BuildEmail((int)emailTemplateId, dynamicText)); 
                     }
                     catch (Exception ex)
                     {

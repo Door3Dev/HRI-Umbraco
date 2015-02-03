@@ -71,6 +71,44 @@ namespace HRI.Controllers
                 // SAML Parameter Configurations
                 /////////////////////////////////////////////////////////////////////////
 
+                // Attributes for StatDoctors
+                if (partnerSP == "StatDoctors")
+                {
+
+                    string AccountUniqueContactId = member.GetValue("yNumber").ToString();
+
+                    string AccountFamilyId = member.GetValue("yNumber").ToString();
+                    if (AccountFamilyId.Length > 7)
+                        AccountFamilyId = AccountFamilyId.Substring(0, 7);
+
+                    string FamilyDependentId = member.GetValue("yNumber").ToString();
+                    if (FamilyDependentId.Length > 7)
+                        FamilyDependentId = FamilyDependentId.Substring(7, 2);
+                    {
+                        // Create attribute list an populate with needed data
+                        var attrib = new Dictionary<string, string>
+                {
+                 
+                    {"AccountUniqueContactId", AccountUniqueContactId},
+                    {"AccountFamilyId", AccountFamilyId},
+                    {"FamilyDependentId", FamilyDependentId},
+                    {"PartnerId", "AC4134"},
+                    {"PartnerAccountId", ""},
+                   {"ReturnUrl", ""}
+
+                };
+
+
+                        // Send an IdP initiated SAML assertion
+                        SAMLIdentityProvider.InitiateSSO(
+                            Response,
+                            member.GetValue("yNumber").ToString(),
+                            attrib,
+                            "",
+                            partnerSP);
+                    }
+                }
+
                 // Attributes for US Script
                 if (partnerSP == "USScript")
                 {
