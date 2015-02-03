@@ -55,7 +55,7 @@ namespace HRI.Controllers
             return emailMessage;
         }
 
-        protected void SendEmail(string email, string title, string content)
+        protected void SendEmail(string email, string title, string content, string fromEmail = null)
         {
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
@@ -68,7 +68,7 @@ namespace HRI.Controllers
             // Get the SMTP Password
             string exchangeAccountPassword = root.GetProperty("exchangeAccountPassword").Value.ToString();
             // Get the SMTP email account
-            string smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
+            string smtpEmail = fromEmail != null ? fromEmail : root.GetProperty("smtpEmailAddress").Value.ToString();
 
             // Create a message
             MailMessage message = new MailMessage(smtpEmail, email, title, content);

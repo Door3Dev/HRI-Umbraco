@@ -65,19 +65,29 @@ namespace HRI.Controllers
 
                 //Get the Contact Us Email Template ID
                 object emailTemplateId = null;
+                string smtpEmail = null;
                 string template = CurrentPage.GetPropertyValue<string>("emailTemplate");
-                if(template == "Member")
+                if (template == "Member")
+                {
                     emailTemplateId = root.GetProperty("memberContactUsTemplate").Value;
+                    smtpEmail = root.GetProperty("smtpEmailAddress").Value.ToString();
+                }
                 if (template == "Provider")
+                {
                     emailTemplateId = root.GetProperty("providerContactUsTemplate").Value;
+                    smtpEmail = root.GetProperty("providerSmtpEmailAddress").Value.ToString();
+                }
                 if (template == "Broker")
+                {
                     emailTemplateId = root.GetProperty("brokerContactUsTemplate").Value;
+                    smtpEmail = root.GetProperty("brokerSmtpEmailAddress").Value.ToString();
+                }
 
                 foreach (string email in emails)
                 {
                     try
                     {
-                        SendEmail(email, model.MessageType, BuildEmail((int)emailTemplateId, dynamicText)); 
+                        SendEmail(email, model.MessageType, BuildEmail((int)emailTemplateId, dynamicText), smtpEmail); 
                     }
                     catch (Exception ex)
                     {
