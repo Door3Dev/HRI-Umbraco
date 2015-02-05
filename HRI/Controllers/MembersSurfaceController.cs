@@ -234,18 +234,21 @@ namespace HRI.Controllers
             }
         }        
 
-        public ActionResult ActivateUser(string userName, string guid)
+        public ActionResult ActivateUser(int id, string guid)
         {
             // Variable to hold status of registering user against HRI API
             bool regSuccess;
             var protocol = Request.IsSecureConnection ? "https" : "http";
             // String to api call to register the current user
-            string registerApiUrl = protocol + "://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
+            
             JObject json = new JObject();
             try
             {
                 // validate guid passed
-                IMember member = Services.MemberService.GetByUsername(userName);
+                //IMember member = Services.MemberService.GetByUsername(userName);
+                IMember member = Services.MemberService.GetById(id);
+                string userName = member.Username;
+                string registerApiUrl = protocol + "://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
                 string userGuid = member.GetValue("guid").ToString();
                 if (!string.Equals(userGuid, guid, StringComparison.OrdinalIgnoreCase))
                     throw new InvalidOperationException(string.Format("Guid '{0}' does not match user '{1}'", guid, userName));

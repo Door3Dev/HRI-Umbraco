@@ -308,6 +308,10 @@ namespace HRI.Controllers
 
                 // Get ahold of the root/home node
                 IPublishedContent root = Umbraco.ContentAtRoot().First();
+
+                // Get the id of the user
+
+
                 // Get the Verification Email Template ID
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;
 
@@ -320,7 +324,7 @@ namespace HRI.Controllers
                 {
                     "<%VerificationUrl%>",
                     protocol + "://" + Request.Url.Host + ":" + Request.Url.Port +
-                        "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" +
+                        "/umbraco/Surface/MembersSurface/ActivateUser?id=" + member.Id + "&guid=" +
                         key
                 }
             };
