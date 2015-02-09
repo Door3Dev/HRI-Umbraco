@@ -97,7 +97,7 @@ namespace HRI.Controllers
                         log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
                         // Log the error
                         logger.Error("Unable to complete Contact Us submission due to SMTP error", ex);
-                        logger.Error("Template: " + template + " - " + "templateID: " + emailTemplateId.ToString() + " : " + smtpEmail);
+                        logger.Error("Template: " + (template != null ? template : "error") + " - " + "templateID: " + (emailTemplateId != null ? emailTemplateId.ToString() : "error") + " : " + (smtpEmail != null ? smtpEmail : "error"));
                         // Set the sucess flag to true and post back to the same page
                         TempData["IsSuccessful"] = false;
                         return RedirectToCurrentUmbracoPage();
