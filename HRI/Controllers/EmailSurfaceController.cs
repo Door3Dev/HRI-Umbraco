@@ -82,7 +82,7 @@ namespace HRI.Controllers
                     emailTemplateId = root.GetProperty("brokerContactUsTemplate").Value;
                     smtpEmail = root.GetProperty("brokerSmtpEmailAddress").Value.ToString();
                 }
-
+                
                 foreach (string email in emails)
                 {
                     try
@@ -97,6 +97,10 @@ namespace HRI.Controllers
                         log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
                         // Log the error
                         logger.Error("Unable to complete Contact Us submission due to SMTP error", ex);
+                        logger.Error("Template: " + template + " - " + "templateID: " + emailTemplateId.ToString() + " : " + smtpEmail);
+                        // Set the sucess flag to true and post back to the same page
+                        TempData["IsSuccessful"] = false;
+                        return RedirectToCurrentUmbracoPage();
                     }
                 }
 
