@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
 using HRI.Models;
 using System;
 using System.Web.Mvc;
@@ -22,6 +23,10 @@ namespace HRI.Controllers
                 if (model.Username == model.Password)
                 {
                     ModelState.AddModelError("registerModel.Password", "Password cannot be the same as Username");
+                }
+                if (Regex.IsMatch(model.Username, "['\";!@#$%^&*]"))
+                {
+                    ModelState.AddModelError("registerModel.Username", "Username cannot contain next symbols ' \" ; ! @ # $ % ^ & * ");
                 }
 
                 // Save Plan Id for the view
