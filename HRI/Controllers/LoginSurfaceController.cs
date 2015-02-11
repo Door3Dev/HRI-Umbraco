@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HRI.Services;
 using log4net;
 using System;
 using System.Linq;
@@ -59,7 +60,9 @@ namespace HRI.Controllers
                             ModelState.AddModelError(
                                 "loginModel",
                                 string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
-                            SendVerificationLinkModel resendModel = new SendVerificationLinkModel();
+
+                            var userService = new UserService();
+                            userService.SendVerificationEmail(model.Username);
 
                             return CurrentUmbracoPage();
                         }

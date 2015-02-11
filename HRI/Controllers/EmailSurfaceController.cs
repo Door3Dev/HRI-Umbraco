@@ -386,7 +386,7 @@ namespace HRI.Controllers
                 // Get a handle on the member
                 var member = Services.MemberService.GetByUsername(model.UserName);
                 // Create a random Guid
-                Guid key = Guid.NewGuid();
+                var key = Guid.NewGuid();
                 // Update the user's Guid field
                 member.SetValue("guid", key.ToString());
                 // Save the updated information
@@ -398,10 +398,17 @@ namespace HRI.Controllers
                 var emailTemplateId = root.GetProperty("verificationEmailTemplate").Value;                
 
                 // Build a dictionary for all the dynamic text in the email template
-                var dynamicText = new Dictionary<string, string>();
-                dynamicText.Add("<%FirstName%>", member.GetValue("firstName").ToString());
-                dynamicText.Add("<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString());
-                dynamicText.Add("<%VerificationUrl%>", root.GetProperty("HostUrl").Value.ToString() + "/umbraco/Surface/MembersSurface/ActivateUser?username=" + model.UserName + "&guid=" + key.ToString());
+                var dynamicText = new Dictionary<string, string>
+                {
+                    {"<%FirstName%>", member.GetValue("firstName").ToString()},
+                    {"<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString()},
+                    {
+                        "<%VerificationUrl%>",
+                        root.GetProperty("HostUrl").Value.ToString() +
+                        "/umbraco/Surface/MembersSurface/ActivateUser?id=" + member.Id + "&guid=" +
+                        key.ToString()
+                    }
+                };
 
                 // Try to send the message
                 try
