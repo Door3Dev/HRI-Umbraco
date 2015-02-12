@@ -24,9 +24,9 @@ namespace HRI.Controllers
                 {
                     ModelState.AddModelError("registerModel.Password", "Password cannot be the same as Username");
                 }
-                if (Regex.IsMatch(model.Username, "['\";!@#$%^&*]"))
+                if (Regex.IsMatch(model.Username, "[ '\";!@#$%^&*]"))
                 {
-                    ModelState.AddModelError("registerModel.Username", "Username cannot contain next symbols ' \" ; ! @ # $ % ^ & * ");
+                    ModelState.AddModelError("registerModel.Username", "Username cannot contain space or next symbols: ' \" ; ! @ # $ % ^ & * ");
                 }
 
                 // Save Plan Id for the view
