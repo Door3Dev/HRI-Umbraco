@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\Dev\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentSpace.SAML2, Version=2.5.0.18, Culture=neutral, PublicKeyToken=7c51d97b3a0a8ff9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
