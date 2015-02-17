@@ -1986,6 +1986,7 @@ var preventCopyPaste = function (a) {
             serviceUrl: '/Umbraco/Surface/ComparePlansSurface/GetZipCodeList',
             onSelect: function (suggestion) {
                 $('#shop-county').text(suggestion.data).show();
+                $('#shop-zipcode').valid();
             },
             transformResult: function (response) {
                 response = JSON.parse(response);
