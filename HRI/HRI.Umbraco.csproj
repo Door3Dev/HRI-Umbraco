@@ -1222,6 +1222,7 @@
     <Content Include="media\2160\71644nytf11110-00.pdf" />
     <Content Include="media\2161\71644nytf21110-00.pdf" />
     <Content Include="media\2162\2015-1-5-hriny-new-board-appointments.pdf" />
+    <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
       <SubType>Code</SubType>
