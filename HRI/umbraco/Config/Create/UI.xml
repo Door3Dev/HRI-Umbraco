@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <createUI>
   <nodeType alias="nodeTypes">
     <header>Nodetype</header>
@@ -336,6 +336,14 @@
     <tasks>
       <create assembly="umbraco" type="PartialViewMacroTasks" />
       <delete assembly="umbraco" type="PartialViewMacroTasks" />
+    </tasks>
+  </nodeType>
+  <nodeType alias="revisions">
+    <header>Revisions</header>
+    <usercontrol>/create/simple.ascx</usercontrol>
+    <tasks>
+      <create assembly="Umbraco.Courier.UI" type="Tasks.RevisionTasks" />
+      <delete assembly="Umbraco.Courier.UI" type="Tasks.RevisionTasks" />
     </tasks>
   </nodeType>
 </createUI>
