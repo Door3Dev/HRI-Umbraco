@@ -4,8 +4,29 @@
     if (User.Identity.IsAuthenticated)
     {
         var pdfLink = "/";
-        var policyNumber = Members.GetCurrentMember().GetPropertyValue<string>("healthPlanId");
-        var pdfFolderId = Umbraco.ContentAtRoot().First().GetPropertyValue<string>("pdfFolder");
+        var member = Members.GetCurrentMember();
+        var policyNumber = member.GetPropertyValue<string>("healthPlanId");
+        var market = member.GetPropertyValue<string>("market");
+        var effectiveDate = member.GetPropertyValue<string>("effectiveYear");
+        var homeContent = Umbraco.ContentAtRoot().First();
+        string pdfFolderId = String.Empty;
+
+        if (string.Compare(market, "group", StringComparison.OrdinalIgnoreCase) == 0)
+        {
+            var year = Convert.ToDateTime(effectiveDate).Year;
+            if (year == 2015)
+            {
+                pdfFolderId = homeContent.GetPropertyValue<string>("PolicyFormsThisYear");
+            }
+            else if (year == 2014)
+            {
+                pdfFolderId = homeContent.GetPropertyValue<string>("PolicyFormsPreviousYear");
+            }
+        }
+        else
+        {
+            pdfFolderId = homeContent.GetPropertyValue<string>("pdfFolder");
+        }
         var docs = Umbraco.Media(pdfFolderId).Children;
         foreach (var n in docs)
         {

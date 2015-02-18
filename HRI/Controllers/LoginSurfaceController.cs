@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Models;
-using HRI.Models;
 
 namespace HRI.Controllers
 {
@@ -132,6 +131,7 @@ namespace HRI.Controllers
                 member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
                 member.Properties.First(p=>p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
                 member.Properties.First(p=>p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
+                member.Properties.First(p => p.Alias == "effectiveYear").Value = hriUser["PlanEffectiveDate"].ToString();
                 Services.MemberService.Save(member);
 
                 // User should pass enrollment process
