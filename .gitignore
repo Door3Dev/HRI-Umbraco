@@ -67,3 +67,5 @@ build/ApiDocs/Output/*
 
 HRI/idp.log
 HRI/idp.log
+
+HRI/App_Data/courier/revisions/*
