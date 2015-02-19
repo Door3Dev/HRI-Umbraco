@@ -69,3 +69,10 @@ Your license has been approved for the following IPs/Domains: - Domain: healthre
 - Domain: *.healthrepublicny.org
 - Domain: healthrepublicny.org.local
 - Domain: localhost
+Could not validate license:
+
+Your license has been approved for the following IPs/Domains: - Domain: healthrepublicny.org
+- Domain: www.healthrepublicny.org
+- Domain: *.healthrepublicny.org
+- Domain: healthrepublicny.org.local
+- Domain: localhost
