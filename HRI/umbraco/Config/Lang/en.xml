@@ -1027,4 +1027,6 @@ To manage your website, simply open the Umbraco back office and start adding con
   <key alias="transferCourierItem">Transfer</key>
   <key alias="transferCourierRevision">Transfer</key>
   <key alias="transferCourierItem">Transfer</key>
+  <key alias="transferCourierRevision">Transfer</key>
+  <key alias="transferCourierItem">Transfer</key>
 </language>

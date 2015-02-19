@@ -307,7 +307,9 @@
     <Content Include="config\trees.config" />
     <Content Include="config\log4net.config" />
     <Content Include="config\Dashboard.config" />
-    <Content Include="config\ClientDependency.config" />
+    <Content Include="config\ClientDependency.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config\applications.config" />
     <Content Include="Views\Partials\ChangeEmailForm.cshtml" />
     <Content Include="Views\Partials\ChangePasswordForm.cshtml" />
@@ -438,13 +440,13 @@
     <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="UmbracoCourier.lic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Dev.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="xslt\Web.config" />
@@ -492,6 +494,7 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\courier\revisions\" />
     <Folder Include="App_Data\Logs\" />
     <Folder Include="App_Data\NuGetBackup\20140630-143640\bin\" />
     <Folder Include="App_Data\NuGetBackup\20140630-143708\CopyLogs\" />

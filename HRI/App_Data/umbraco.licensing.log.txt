@@ -69,3 +69,14 @@ Your license has been approved for the following IPs/Domains: - Domain: healthre
 - Domain: *.healthrepublicny.org
 - Domain: healthrepublicny.org.local
 - Domain: localhost
+Could not validate license:
+
+Your license has been approved for the following IPs/Domains: - This license is *not* associated with any ips or domains at allCould not validate license:
+
+Your license has been approved for the following IPs/Domains: - This license is *not* associated with any ips or domains at allCould not validate license:
+
+Your license has been approved for the following IPs/Domains: - This license is *not* associated with any ips or domains at allCould not validate license:
+
+Your license has been approved for the following IPs/Domains: - This license is *not* associated with any ips or domains at allCould not validate license:
+
+Your license has been approved for the following IPs/Domains: - This license is *not* associated with any ips or domains at all
