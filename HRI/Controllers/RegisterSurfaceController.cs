@@ -74,11 +74,15 @@ namespace HRI.Controllers
                 }
 
                 // Validate Phone Length
-                var cleanPhone = model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
-                if (!String.IsNullOrWhiteSpace(cleanPhone) && (cleanPhone.Length != 10))
+                if (!String.IsNullOrWhiteSpace(model.Phone))
                 {
-                    ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
-                    error = true;
+                    var cleanPhone =
+                        model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
+                    if (cleanPhone.Length != 10)
+                    {
+                        ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
+                        error = true;
+                    }
                 }
 
                 // Verify no spaces in UserName
