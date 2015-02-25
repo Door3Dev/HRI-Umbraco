@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
@@ -53,6 +54,10 @@ namespace HRI.Controllers
         [HttpGet]
         public bool IsUserNameAvailable(string username)
         {
+            if (Regex.IsMatch(username, "['\";!@#$%^&*]"))
+            {
+                return false;
+            }
             var resultHri = MakeApiCall(new Dictionary<string, string> {{"isUserNameAvailable", username}});
             var hriAvailability = resultHri != null && Convert.ToBoolean(resultHri["isAvailable"]);
             var localUser = Services.MemberService.GetByUsername(username);
