@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Web;
-using System.Web.Script.Serialization;
+﻿using System.Web.Script.Serialization;
 using System.Xml;
 using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
@@ -38,7 +36,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "Error when user " + User.Identity.Name + " attempted to log out.";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 // Log the error
                 logger.Error("Log out erro", ex);
                 return Redirect("/");
@@ -241,7 +239,7 @@ namespace HRI.Controllers
             var protocol = Request.IsSecureConnection ? "https" : "http";
             // String to api call to register the current user
             
-            JObject json = new JObject();
+            var json = new JObject();
             try
             {
                 // validate guid passed

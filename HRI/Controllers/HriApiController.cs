@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Net.Http;
+﻿using System.Globalization;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
@@ -32,24 +32,17 @@ namespace HRI.Controllers
 
             string userNameCheckApiString = apiUri + "/Registration?" + String.Join("&", valuesList);
             // Create a web client to access the API
-            try
+            // Create a JSON object to hold the response 
+            JObject json;
+            using (var client = new WebClient())
             {
-                // Create a JSON object to hold the response 
-                JObject json;
-                using (var client = new WebClient())
-                {
-                    // Set the format to JSON
-                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    // Execute a GET and convert the response to a JSON object
-                    json = JObject.Parse(client.DownloadString(userNameCheckApiString));
-                }
-                // Return whether or not it is available
-                return json;
+                // Set the format to JSON
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                // Execute a GET and convert the response to a JSON object
+                json = JObject.Parse(client.DownloadString(userNameCheckApiString));
             }
-            catch
-            {
-                throw;
-            }
+            // Return whether or not it is available
+            return json;
         }
 
         /// <summary>
@@ -141,39 +134,41 @@ namespace HRI.Controllers
         /// <summary>
         /// Registers a user with the HRI web API
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="userName">User Name</param>
         /// <returns></returns>
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [AcceptVerbs("GET", "POST")]
         public string RegisterUser(string userName)
         {
             // Get an instance of the member
             var member = Services.MemberService.GetByUsername(userName);
             // Create a dictionary of the members info that we will convert to JSON and send to HRI API
-            Dictionary<string, string> jsonData = new Dictionary<string, string>();
-            jsonData.Add("RegId", null);
-            jsonData.Add("RegDate", DateTime.Now.ToString());
+            var jsonData = new Dictionary<string, string>
+            {
+                {"RegId", null},
+                {"RegDate", DateTime.Now.ToString(CultureInfo.InvariantCulture)},
+                {"MemberId", member.GetValue<string>("yNumber")},
+                {"UserName", member.Username},
+                {"FirstName", member.GetValue<string>("firstName")},
+                {"LastName", member.GetValue<string>("lastName")},
+                {"Ssn", member.GetValue<string>("ssn")},
+                {"EMail", member.Email},
+                {"ZipCode", member.GetValue<string>("zipCode")},
+                {"PhoneNumber", member.GetValue<string>("phoneNumber")},
+                {"RegVerified", "true"}
+            };
             // The MemberId is null for the new user
-            jsonData.Add("MemberId", member.GetValue("yNumber").ToString());
-            jsonData.Add("UserName", member.Username);
-            jsonData.Add("FirstName", member.GetValue("firstName").ToString());
-            jsonData.Add("LastName", member.GetValue("lastName").ToString());
-            jsonData.Add("Ssn", member.GetValue("ssn").ToString());
-            jsonData.Add("EMail", member.Email);
-            jsonData.Add("ZipCode", member.GetValue("zipCode").ToString());
-            jsonData.Add("PhoneNumber", member.GetValue("phoneNumber").ToString());
-            jsonData.Add("RegVerified", "true");
             // Convert the dictionary to JSON
-            string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
+            var myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
 
             // Get ahold of the root/home node
             IPublishedContent root = Umbraco.ContentAtRoot().First();
             // Get the API uri
-            string apiUri = root.GetProperty("apiUri").Value.ToString();
+            var apiUri = root.GetProperty("apiUri").Value.ToString();
             // Apend the command to invoke the register function
-            string registerUserApi = apiUri + "/Registration";                                   
+            var registerUserApi = apiUri + "/Registration";                                   
             
             // Create a JSON object to hold the response
-            JObject json = new JObject();
+            var json = new JObject();
 
             // Create a webclient object to post the user data
             using(var client = new WebClient())
@@ -263,20 +258,13 @@ namespace HRI.Controllers
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         public string GetEbixIdByUserName(string username)
         {
-            try
-            {
-                string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
-                JObject result = MakeApiCall(new Dictionary<string, string> {{"EbixMemberId", ynumber}});
-                JToken id = result["EBIXMemberId"];
-                if (id == null)
-                    throw new InvalidOperationException(string.Format("There is no EBIXMemberId for YNumber '{0}' (user '{1}').", ynumber, username));
+            string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
+            JObject result = MakeApiCall(new Dictionary<string, string> {{"EbixMemberId", ynumber}});
+            JToken id = result["EBIXMemberId"];
+            if (id == null)
+                throw new InvalidOperationException(string.Format("There is no EBIXMemberId for YNumber '{0}' (user '{1}').", ynumber, username));
 
-                return id.Value<string>();
-            }
-            catch
-            {
-                throw;
-            }
+            return id.Value<string>();
         }
 
         [HttpGet]
