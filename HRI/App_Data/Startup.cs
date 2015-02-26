@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using Umbraco.Core;
 
@@ -8,6 +9,11 @@ namespace HRI
     {
         public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
+            //Comment this out to control this setting via web.config compilation debug attribute
+            BundleTable.EnableOptimizations = true; 
+
+            RegisterJavaScript(BundleTable.Bundles);
+            RegisterStyles(BundleTable.Bundles);
 
             // SAML Controller
             RouteTable.Routes.MapRoute(
@@ -49,6 +55,22 @@ namespace HRI
                     action = "RegisterUser",
                     id = "0"
                 });
+        }
+
+        private void RegisterStyles(BundleCollection bundles)
+        {
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/css/bootstrap.css")
+                .Include("~/css/fonts.css")
+                .Include("~/css/styles.css"));
+        }
+
+        private void RegisterJavaScript(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/js")
+                .Include("~/Scripts/jquery-1.9.1.js")
+                .Include("~/Scripts/jquery.inputmask/jquery.inputmask.js")
+                .Include("~/scripts/jquery.inputmask/jquery.inputmask.regex.extensions.js"));
         }
 
         public void OnApplicationInitialized(
