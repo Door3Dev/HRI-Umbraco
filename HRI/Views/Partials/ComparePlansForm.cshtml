@@ -99,6 +99,7 @@
 </div>
 
 <script>
+    $('input[name="ChildrenAges"]').inputmask('Regex', { regex: '^[0-9]{1,3}$' });
     var ValidateAge = function (warningElementId) {
         return function() {
             var value = Number($(this).val());

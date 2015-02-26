@@ -93,7 +93,7 @@ namespace HRI.Controllers
             if (model.CoverSelf && !model.CustomerAge.HasValue
                 || model.CoverSpouse && !model.SpouseAge.HasValue
                 || model.CoverChildren && model.ChildrenAges != null
-                    && model.ChildrenAges.Any(x => !x.HasValue)
+                    && model.ChildrenAges.Any(x => !x.HasValue || x.Value <= 0)
                 || !model.CoverSelf && !model.CoverSpouse && !model.CoverChildren)
             {
                 // If the user does exist then it was a wrong password
@@ -103,7 +103,7 @@ namespace HRI.Controllers
             }
 
             // Children cannot be age 30 or above.
-            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 29))
+            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
             {
                 ModelState.AddModelError("viewModel", "Children cannot be age 30 or above.");
                 return CurrentUmbracoPage();
