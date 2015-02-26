@@ -346,6 +346,11 @@ namespace HRI.Controllers
                 {
                     ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
                 }
+                 // Verify that username and password arent the same.
+                if (user.UserName == model.NewPassword)
+                {
+                    ModelState.AddModelError("changePasswordViewModel.NewPassword", "Password cannot be the same as Username");
+                }
 
                 if (string.Compare(model.OldPassword, model.NewPassword, StringComparison.Ordinal) == 0)
                 {
