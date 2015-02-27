@@ -71,6 +71,9 @@
     }
 
     function validateMemberId() {
+        if ($('#memberId').val().length != 9)
+            return;
+
         $.ajax({
             url: "/umbraco/Surface/RegisterSurface/ValidateMemberId",
             data: {
@@ -275,7 +278,6 @@
     $('#memberId').blur(validateMemberId);
 
     $('#zipCode').blur(function() {
-        console.log('zip code length: ', $(this).val().length, "'" + $(this).val() + "'");
         // length is always 5 from input mask, so check if there are any _
             if ($(this).val().length == 5 && $(this).val().indexOf('_') < 0) {
                 $('#zipCodeCheck').html('');
