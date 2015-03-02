@@ -90,14 +90,14 @@ namespace HRI.Controllers
                 return CurrentUmbracoPage();
             }
             // Children cannot be age 30 or above.
-            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
+            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30 || x <= 0))
             {
                 for (int i = 0; i < model.ChildrenAges.Count; i++)
                 {
                     var age = model.ChildrenAges[i];
                     if (age >= 30)
                         ModelState.AddModelError("ChildrenAges[" + i + "]", "Children cannot be age 30 or above.");
-                    if (age <= 0)
+                    if (!age.HasValue || age <= 0)
                         ModelState.AddModelError("ChildrenAges[" + i + "]", "The information you have entered is incomplete.");
                 }
                 return CurrentUmbracoPage();
