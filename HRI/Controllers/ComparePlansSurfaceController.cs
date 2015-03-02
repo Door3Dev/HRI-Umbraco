@@ -85,11 +85,31 @@ namespace HRI.Controllers
             TempData["enrollment"] = Request["enrollment"] != null;
 
             // If the model is NOT valid
-            if (ModelState.IsValid == false)
+            if (!ModelState.IsValid)
             {
-                // Return the user to the page
                 return CurrentUmbracoPage();
             }
+            // Children cannot be age 30 or above.
+            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
+            {
+                for (int i = 0; i < model.ChildrenAges.Count; i++)
+                {
+                    var age = model.ChildrenAges[i];
+                    if (age >= 30)
+                        ModelState.AddModelError("ChildrenAges[" + i + "]", "Children cannot be age 30 or above.");
+                    if (age <= 0)
+                        ModelState.AddModelError("ChildrenAges[" + i + "]", "The information you have entered is incomplete.");
+                }
+                return CurrentUmbracoPage();
+            }
+
+            var zipCodeErrorMsg = ValidateZipCodeCore(model.ZipCode);
+            if (zipCodeErrorMsg != null)
+            {
+                ModelState.AddModelError("ZipCode", zipCodeErrorMsg);
+                return CurrentUmbracoPage();
+            }
+
             if (model.CoverSelf && !model.CustomerAge.HasValue
                 || model.CoverSpouse && !model.SpouseAge.HasValue
                 || model.CoverChildren && model.ChildrenAges != null
@@ -99,20 +119,6 @@ namespace HRI.Controllers
                 // If the user does exist then it was a wrong password
                 //don't add a field level error, just model level
                 ModelState.AddModelError("viewModel", "The information you have entered is incomplete. Please enter details of the person you want to cover and submit the form again.");
-                return CurrentUmbracoPage();
-            }
-
-            // Children cannot be age 30 or above.
-            if (model.CoverChildren && model.ChildrenAges.Any(x => x >= 30))
-            {
-                ModelState.AddModelError("viewModel", "Children cannot be age 30 or above.");
-                return CurrentUmbracoPage();
-            }
-
-            var zipCodeErrorMsg = ValidateZipCodeCore(model.ZipCode);
-            if (zipCodeErrorMsg != null)
-            {
-                ModelState.AddModelError("ZipCode", zipCodeErrorMsg);
                 return CurrentUmbracoPage();
             }
 

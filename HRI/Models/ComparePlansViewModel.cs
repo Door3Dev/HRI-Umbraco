@@ -21,7 +21,7 @@ namespace HRI.Models
         [Range(1, 110)]
         public int? SpouseAge { get; set; }
 
-        public List<int?> ChildrenAges { get; set; }
+        public List<float?> ChildrenAges { get; set; }
 
         public decimal? Income { get; set; }
         public int? NumberInHousehold { get; set; }

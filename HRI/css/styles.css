@@ -2520,6 +2520,14 @@ body {
   padding: 10px 0;
 }
 
+.hri-compare-plans .child input {
+    margin: 0;
+}
+
+.hri-compare-plans .child .validation-error {
+    margin-bottom: 5px;
+}
+
 .hri-compare-plans .template {
   display: none;
 }

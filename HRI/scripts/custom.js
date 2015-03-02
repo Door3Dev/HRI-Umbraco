@@ -2023,7 +2023,7 @@ var preventCopyPaste = function (a) {
             attachHandlers(template);
             
             template.appendTo('#shop-coverchild');
-            $('input[name="ChildrenAges"]').inputmask('Regex', { regex: '^[0-9]{1,3}$' });
+            $('input[name="ChildrenAges"]').inputmask('Regex', { regex: '^[0-9]{1,3}(\.[0-9])?$' });
             childAmmount++;
         };
 
