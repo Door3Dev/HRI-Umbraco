@@ -10,8 +10,6 @@ namespace HRI.Models
         private string _email;
         private string _confirmEmail;
 
-        [Required]
-        [StringLength(9, MinimumLength = 9, ErrorMessage = "The Member ID should have 9 characters.")]
         public string MemberId { get; set; }
 
         public string Ssn { get; set; }
@@ -39,7 +37,7 @@ namespace HRI.Models
         }
 
         [Required]
-        [System.ComponentModel.DataAnnotations.Compare("Email", ErrorMessage = "Confirm Email and Email do not match.")]
+        [Compare("Email", ErrorMessage = "Confirm Email and Email do not match.")]
         public string ConfirmEmail
         {
             set

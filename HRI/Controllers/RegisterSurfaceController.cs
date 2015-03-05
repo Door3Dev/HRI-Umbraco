@@ -28,6 +28,10 @@ namespace HRI.Controllers
                 {
                     ModelState.AddModelError("registerModel.Username", "Username cannot contain next symbols ' \" ; ! @ # $ % ^ & * ");
                 }
+                if (string.IsNullOrEmpty(model.PlanId) && model.MemberId.Length != 9)
+                {
+                    ModelState.AddModelError("registerModel.MemberId", "The Member ID should have 9 characters.");
+                }
 
                 // Save Plan Id for the view
                 ViewData["PlanId"] = model.PlanId;

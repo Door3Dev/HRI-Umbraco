@@ -219,7 +219,10 @@ namespace HRI.Controllers
             // Assign their Morneau Shapell Y Number
             member.SetValue("yNumber", hriUser["MemberId"].ToString());
             member.SetValue("market", hriUser["Market"].ToString());
-            member.SetValue("effectiveYear", hriUser["PlanEffectiveDate"].ToString());
+            if ((string)hriUser["PlanEffectiveDate"] != null)
+            {
+                member.SetValue("effectiveYear", hriUser["PlanEffectiveDate"].ToString());
+            }
             if ((string)hriUser["EbixId"] != null)
             {
                 member.SetValue("ebixId", hriUser["EbixId"].ToString());
