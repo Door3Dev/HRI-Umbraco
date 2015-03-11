@@ -411,9 +411,19 @@
     <Content Include="umbraco\assets\css\installer.css" />
     <Content Include="umbraco\assets\css\nonodes.style.min.css" />
     <Content Include="umbraco\assets\css\umbraco.css" />
+    <Content Include="umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="umbraco\assets\fonts\helveticons\helveticons.svg" />
+    <Content Include="umbraco\assets\fonts\helveticons\helveticons.ttf" />
+    <Content Include="umbraco\assets\fonts\helveticons\helveticons.woff" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.eot" />
     <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.svg" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.ttf" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.woff" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular.ttf" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.eot" />
     <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.svg" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.ttf" />
+    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.woff" />
     <Content Include="umbraco\assets\img\applicationIcons\content.png" />
     <Content Include="umbraco\assets\img\applicationIcons\default.png" />
     <Content Include="umbraco\assets\img\applicationIcons\developer.png" />
@@ -436,6 +446,17 @@
     <Content Include="umbraco\assets\img\mocks\big-image.jpg" />
     <Content Include="umbraco\assets\img\mocks\big-thumb.jpg" />
     <Content Include="umbraco\assets\img\nonodesbg.jpg" />
+    <Content Include="umbraco\assets\less\background.less" />
+    <Content Include="umbraco\assets\less\border.less" />
+    <Content Include="umbraco\assets\less\color.less" />
+    <Content Include="umbraco\assets\less\googlefontpicker.less" />
+    <Content Include="umbraco\assets\less\gridRow.less" />
+    <Content Include="umbraco\assets\less\layout.less" />
+    <Content Include="umbraco\assets\less\margin.less" />
+    <Content Include="umbraco\assets\less\padding.less" />
+    <Content Include="umbraco\assets\less\radius.less" />
+    <Content Include="umbraco\assets\less\shadow.less" />
+    <Content Include="umbraco\assets\less\slider.less" />
     <Content Include="umbraco\Channels\rsd.aspx" />
     <Content Include="umbraco\Channels\wlwmanifest.aspx" />
     <Content Include="umbraco\ClientRedirect.aspx" />
@@ -887,6 +908,8 @@
     <Content Include="umbraco\Images\Umbraco\userType.gif" />
     <Content Include="umbraco\installer.html" />
     <Content Include="umbraco\Install\Legacy\loadStarterKits.ascx" />
+    <Content Include="umbraco\Install\Views\Index.cshtml" />
+    <Content Include="umbraco\Install\Views\Web.config" />
     <Content Include="umbraco\Js\app.dev.js" />
     <Content Include="umbraco\Js\app.js" />
     <Content Include="umbraco\Js\canvasdesigner.config.js" />
@@ -1233,6 +1256,41 @@
     <Content Include="umbraco\lib\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="umbraco\lib\bootstrap\js\bootstrap.2.3.2.js" />
     <Content Include="umbraco\lib\bootstrap\js\bootstrap.2.3.2.min.js" />
+    <Content Include="umbraco\lib\bootstrap\less\accordion.less" />
+    <Content Include="umbraco\lib\bootstrap\less\alerts.less" />
+    <Content Include="umbraco\lib\bootstrap\less\bootstrap.less" />
+    <Content Include="umbraco\lib\bootstrap\less\breadcrumbs.less" />
+    <Content Include="umbraco\lib\bootstrap\less\button-groups.less" />
+    <Content Include="umbraco\lib\bootstrap\less\buttons.less" />
+    <Content Include="umbraco\lib\bootstrap\less\carousel.less" />
+    <Content Include="umbraco\lib\bootstrap\less\close.less" />
+    <Content Include="umbraco\lib\bootstrap\less\code.less" />
+    <Content Include="umbraco\lib\bootstrap\less\component-animations.less" />
+    <Content Include="umbraco\lib\bootstrap\less\dropdowns.less" />
+    <Content Include="umbraco\lib\bootstrap\less\forms.less" />
+    <Content Include="umbraco\lib\bootstrap\less\grid.less" />
+    <Content Include="umbraco\lib\bootstrap\less\hero-unit.less" />
+    <Content Include="umbraco\lib\bootstrap\less\labels-badges.less" />
+    <Content Include="umbraco\lib\bootstrap\less\layouts.less" />
+    <Content Include="umbraco\lib\bootstrap\less\media.less" />
+    <Content Include="umbraco\lib\bootstrap\less\mixins.less" />
+    <Content Include="umbraco\lib\bootstrap\less\modals.less" />
+    <Content Include="umbraco\lib\bootstrap\less\navbar.less" />
+    <Content Include="umbraco\lib\bootstrap\less\navs.less" />
+    <Content Include="umbraco\lib\bootstrap\less\pager.less" />
+    <Content Include="umbraco\lib\bootstrap\less\pagination.less" />
+    <Content Include="umbraco\lib\bootstrap\less\popovers.less" />
+    <Content Include="umbraco\lib\bootstrap\less\progress-bars.less" />
+    <Content Include="umbraco\lib\bootstrap\less\reset.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive-1200px-min.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive-767px-max.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive-768px-979px.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive-navbar.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive-utilities.less" />
+    <Content Include="umbraco\lib\bootstrap\less\responsive.less" />
+    <Content Include="umbraco\lib\bootstrap\less\scaffolding.less" />
+    <Content Include="umbraco\lib\bootstrap\less\sprites.less" />
+    <Content Include="umbraco\lib\bootstrap\less\tables.less" />
     <Content Include="umbraco\lib\bootstrap\less\tests\buttons.html" />
     <Content Include="umbraco\lib\bootstrap\less\tests\css-tests.css" />
     <Content Include="umbraco\lib\bootstrap\less\tests\css-tests.html" />
@@ -1241,6 +1299,12 @@
     <Content Include="umbraco\lib\bootstrap\less\tests\navbar-fixed-top.html" />
     <Content Include="umbraco\lib\bootstrap\less\tests\navbar-static-top.html" />
     <Content Include="umbraco\lib\bootstrap\less\tests\navbar.html" />
+    <Content Include="umbraco\lib\bootstrap\less\thumbnails.less" />
+    <Content Include="umbraco\lib\bootstrap\less\tooltip.less" />
+    <Content Include="umbraco\lib\bootstrap\less\type.less" />
+    <Content Include="umbraco\lib\bootstrap\less\utilities.less" />
+    <Content Include="umbraco\lib\bootstrap\less\variables.less" />
+    <Content Include="umbraco\lib\bootstrap\less\wells.less" />
     <Content Include="umbraco\lib\cssparser\cssparser.js" />
     <Content Include="umbraco\lib\datetimepicker\bootstrap-datetimepicker.js" />
     <Content Include="umbraco\lib\datetimepicker\bootstrap-datetimepicker.min.css" />
@@ -1279,6 +1343,7 @@
     <Content Include="umbraco\lib\jquery\jquery.upload\js\load-image.min.js" />
     <Content Include="umbraco\lib\jquery\jquery.upload\js\main.js" />
     <Content Include="umbraco\lib\jquery\jquery.upload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="umbraco\lib\jquery\jquery.upload\README.md" />
     <Content Include="umbraco\lib\lazyload\empty.js" />
     <Content Include="umbraco\lib\lazyload\lazyload.min.js" />
     <Content Include="umbraco\lib\less\less-1.7.0.min.js" />
@@ -1292,6 +1357,7 @@
     <Content Include="umbraco\lib\slider\slider.css" />
     <Content Include="umbraco\lib\spectrum\spectrum.css" />
     <Content Include="umbraco\lib\spectrum\spectrum.js" />
+    <Content Include="umbraco\lib\tinymce\langs\readme.md" />
     <Content Include="umbraco\lib\tinymce\license.txt" />
     <Content Include="umbraco\lib\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="umbraco\lib\tinymce\plugins\anchor\plugin.min.js" />
@@ -1436,10 +1502,23 @@
     <Content Include="umbraco\lib\tinymce\plugins\wordcount\plugin.min.js" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\content.inline.min.css" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.eot" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.svg" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.ttf" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.woff" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.eot" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.svg" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.ttf" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.woff" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\readme.md" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\img\anchor.gif" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\img\loader.gif" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\img\object.gif" />
@@ -1449,7 +1528,11 @@
     <Content Include="umbraco\lib\tinymce\skins\lightgray\skin.ie7.min.css" />
     <Content Include="umbraco\lib\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="umbraco\lib\tinymce\skins\umbraco\content.min.css" />
+    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.eot" />
     <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.svg" />
+    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.ttf" />
+    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.woff" />
+    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\readme.md" />
     <Content Include="umbraco\lib\tinymce\skins\umbraco\img\anchor.gif" />
     <Content Include="umbraco\lib\tinymce\skins\umbraco\img\loader.gif" />
     <Content Include="umbraco\lib\tinymce\skins\umbraco\img\object.gif" />
@@ -1471,11 +1554,34 @@
     <Content Include="umbraco\lib\underscore\underscore.js" />
     <Content Include="umbraco\Logout.aspx" />
     <Content Include="umbraco\macroResultWrapper.aspx" />
+    <Content Include="umbraco\Masterpages\default.Master" />
+    <Content Include="umbraco\Masterpages\umbracoDialog.Master" />
+    <Content Include="umbraco\Masterpages\umbracoPage.Master" />
     <Content Include="umbraco\Members\EditMemberGroup.aspx" />
     <Content Include="umbraco\Members\EditMemberType.aspx" />
     <Content Include="umbraco\Members\MemberSearch.ascx" />
     <Content Include="umbraco\Members\search.aspx" />
     <Content Include="umbraco\Members\ViewMembers.aspx" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Breadcrumb.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\EditProfile.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Empty %28ForUseWithCustomViews%29.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Empty.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Gallery.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListAncestorsFromCurrentPage.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesFromChangeableSource.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesFromCurrentPage.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByDate.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByName.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByProperty.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesWithDoctype.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListDescendantsFromCurrentPage.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\ListImagesFromMediaFolder.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Login.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\LoginStatus.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\MultinodeTree-picker.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\Navigation.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\RegisterMember.cshtml" />
+    <Content Include="umbraco\PartialViewMacros\Templates\SiteMap.cshtml" />
     <Content Include="umbraco\ping.aspx" />
     <Content Include="umbraco\Plugins\courier\CompareRevision.aspx" />
     <Content Include="umbraco\Plugins\courier\css\dialogs.css" />
@@ -1521,6 +1627,8 @@
     <Content Include="umbraco\Plugins\courier\images\warning.png" />
     <Content Include="umbraco\Plugins\courier\License.aspx" />
     <Content Include="umbraco\Plugins\courier\LicenseError.aspx" />
+    <Content Include="umbraco\Plugins\courier\masterpages\CourierDialog.Master" />
+    <Content Include="umbraco\Plugins\courier\masterpages\CourierPage.Master" />
     <Content Include="umbraco\Plugins\courier\pages\CompareRevision.aspx" />
     <Content Include="umbraco\Plugins\courier\pages\Debug.aspx" />
     <Content Include="umbraco\Plugins\courier\pages\deployRevision.aspx" />
@@ -1566,6 +1674,7 @@
     <Content Include="umbraco\Plugins\courier\ViewTaskManager.aspx" />
     <Content Include="umbraco\Plugins\courier\webservices\Courier.asmx" />
     <Content Include="umbraco\Plugins\courier\webservices\Repository.asmx" />
+    <Content Include="umbraco\Plugins\courier\webservices\TreeData.ashx" />
     <Content Include="umbraco\Plugins\Tinymce3\InsertAnchor.aspx" />
     <Content Include="umbraco\Plugins\Tinymce3\insertChar.aspx" />
     <Content Include="umbraco\Plugins\Tinymce3\insertImage.aspx" />
@@ -1585,8 +1694,24 @@
     <Content Include="umbraco\preview\editors\slider.html" />
     <Content Include="umbraco\preview\index.html" />
     <Content Include="umbraco\publishStatus.aspx" />
+    <Content Include="umbraco\Scripting\templates\cshtml\Breadcrumb.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\EmptyTemplate.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\Gallery.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListAncestorsFromCurrentPage.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesFromChangeableSource.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesFromCurrentPage.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByDate.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByName.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByProperty.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesWithDoctype.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListDescendantsFromCurrentPage.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\ListImagesFromMediaFolder.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\MultinodeTree-picker.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\Navigation.cshtml" />
+    <Content Include="umbraco\Scripting\templates\cshtml\SiteMap.cshtml" />
     <Content Include="umbraco\Search\QuickSearch.ascx" />
     <Content Include="umbraco\Search\quickSearch.js" />
+    <Content Include="umbraco\Search\QuickSearchHandler.ashx" />
     <Content Include="umbraco\Settings\DictionaryItemList.aspx" />
     <Content Include="umbraco\Settings\EditDictionaryItem.aspx" />
     <Content Include="umbraco\Settings\editLanguage.aspx" />
@@ -1611,6 +1736,7 @@
     <Content Include="umbraco\Users\PermissionEditor.aspx" />
     <Content Include="umbraco\Users\PermissionsEditor.js" />
     <Content Include="umbraco\Users\PermissionsHandler.asmx" />
+    <Content Include="umbraco\Views\AuthorizeUpgrade.cshtml" />
     <Content Include="umbraco\Views\common\dashboard.html" />
     <Content Include="umbraco\Views\common\dialogs\approvedcolorpicker.html" />
     <Content Include="umbraco\Views\common\dialogs\contentpicker.html" />
@@ -1665,6 +1791,7 @@
     <Content Include="umbraco\Views\dashboard\settings\settingsdashboardvideos.html" />
     <Content Include="umbraco\Views\datatype\delete.html" />
     <Content Include="umbraco\Views\datatype\edit.html" />
+    <Content Include="umbraco\Views\Default.cshtml" />
     <Content Include="umbraco\Views\directives\button-group.html" />
     <Content Include="umbraco\Views\directives\html\umb-control-group.html" />
     <Content Include="umbraco\Views\directives\html\umb-pane.html" />
@@ -1794,13 +1921,17 @@
     <Content Include="umbraco\Webservices\Developer.asmx" />
     <Content Include="umbraco\Webservices\legacyAjaxCalls.asmx" />
     <Content Include="umbraco\Webservices\MacroContainerService.asmx" />
+    <Content Include="umbraco\Webservices\MediaUploader.ashx" />
     <Content Include="umbraco\Webservices\nodeSorter.asmx" />
     <Content Include="umbraco\Webservices\progressStatus.asmx" />
     <Content Include="umbraco\Webservices\publication.asmx" />
     <Content Include="umbraco\Webservices\Settings.asmx" />
+    <Content Include="umbraco\Webservices\TagsAutoCompleteHandler.ashx" />
     <Content Include="umbraco\Webservices\templates.asmx" />
     <Content Include="umbraco\Webservices\trashcan.asmx" />
     <Content Include="umbraco\Webservices\TreeClientService.asmx" />
+    <Content Include="umbraco\Webservices\TreeDataService.ashx" />
+    <Content Include="umbraco\Webservices\UltimatePickerAutoCompleteHandler.ashx" />
     <Content Include="umbraco\Webservices\wsdl.xslt" />
     <Content Include="umbraco\Xslt\macroGetCurrent.xsl" />
     <Content Include="umbraco\Xslt\macroGetSubs.xsl" />
@@ -1836,6 +1967,7 @@
     <Content Include="umbraco\Xslt\Templates\Schema2\TablePrototype.xslt" />
     <Content Include="umbraco\Xslt\Templates\Sitemap.xslt" />
     <Content Include="umbraco\Xslt\Templates\TablePrototype.xslt" />
+    <Content Include="umbraco\Xslt\Web.config" />
     <Content Include="umbraco_client\Application\Extensions.js" />
     <Content Include="umbraco_client\Application\HistoryManager.js" />
     <Content Include="umbraco_client\Application\JQuery\jquery-fieldselection.js" />
@@ -3164,9 +3296,6 @@
     <Content Include="Views\MacroPartials\ImageSlideIndicator.cshtml" />
     <Content Include="Views\MacroPartials\UserHealthPolicyLink.cshtml" />
     <Content Include="Views\Partials\RegistrationConfirmation.cshtml" />
-    <Content Include="production.saml.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\MasterPageDev.cshtml" />
     <Content Include="Views\IndividualPlans2015.cshtml" />
     <Content Include="Views\SmallGroupPlans2015.cshtml" />
@@ -3183,138 +3312,18 @@
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
     <Content Include="umbraco_client\CodeMirror\Js\Mode\Razor\LICENSE" />
     <Content Include="umbraco_client\CodeMirror\Js\Mode\Sieve\LICENSE" />
-    <Content Include="umbraco\assets\fonts\helveticons\helveticons.eot" />
-    <Content Include="umbraco\assets\fonts\helveticons\helveticons.ttf" />
-    <Content Include="umbraco\assets\fonts\helveticons\helveticons.woff" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.eot" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.ttf" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular-webfont.woff" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Regular.ttf" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.eot" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.ttf" />
-    <Content Include="umbraco\assets\fonts\opensans\OpenSans-Semibold-webfont.woff" />
-    <Content Include="umbraco\assets\less\background.less" />
-    <Content Include="umbraco\assets\less\border.less" />
-    <Content Include="umbraco\assets\less\color.less" />
-    <Content Include="umbraco\assets\less\googlefontpicker.less" />
-    <Content Include="umbraco\assets\less\gridRow.less" />
-    <Content Include="umbraco\assets\less\layout.less" />
-    <Content Include="umbraco\assets\less\margin.less" />
-    <Content Include="umbraco\assets\less\padding.less" />
-    <Content Include="umbraco\assets\less\radius.less" />
-    <Content Include="umbraco\assets\less\shadow.less" />
-    <Content Include="umbraco\assets\less\slider.less" />
-    <Content Include="umbraco\Install\Views\Index.cshtml" />
-    <Content Include="umbraco\Install\Views\Web.config" />
-    <Content Include="umbraco\lib\bootstrap\less\accordion.less" />
-    <Content Include="umbraco\lib\bootstrap\less\alerts.less" />
-    <Content Include="umbraco\lib\bootstrap\less\bootstrap.less" />
-    <Content Include="umbraco\lib\bootstrap\less\breadcrumbs.less" />
-    <Content Include="umbraco\lib\bootstrap\less\button-groups.less" />
-    <Content Include="umbraco\lib\bootstrap\less\buttons.less" />
-    <Content Include="umbraco\lib\bootstrap\less\carousel.less" />
-    <Content Include="umbraco\lib\bootstrap\less\close.less" />
-    <Content Include="umbraco\lib\bootstrap\less\code.less" />
-    <Content Include="umbraco\lib\bootstrap\less\component-animations.less" />
-    <Content Include="umbraco\lib\bootstrap\less\dropdowns.less" />
-    <Content Include="umbraco\lib\bootstrap\less\forms.less" />
-    <Content Include="umbraco\lib\bootstrap\less\grid.less" />
-    <Content Include="umbraco\lib\bootstrap\less\hero-unit.less" />
-    <Content Include="umbraco\lib\bootstrap\less\labels-badges.less" />
-    <Content Include="umbraco\lib\bootstrap\less\layouts.less" />
-    <Content Include="umbraco\lib\bootstrap\less\media.less" />
-    <Content Include="umbraco\lib\bootstrap\less\mixins.less" />
-    <Content Include="umbraco\lib\bootstrap\less\modals.less" />
-    <Content Include="umbraco\lib\bootstrap\less\navbar.less" />
-    <Content Include="umbraco\lib\bootstrap\less\navs.less" />
-    <Content Include="umbraco\lib\bootstrap\less\pager.less" />
-    <Content Include="umbraco\lib\bootstrap\less\pagination.less" />
-    <Content Include="umbraco\lib\bootstrap\less\popovers.less" />
-    <Content Include="umbraco\lib\bootstrap\less\progress-bars.less" />
-    <Content Include="umbraco\lib\bootstrap\less\reset.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive-1200px-min.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive-767px-max.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive-768px-979px.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive-navbar.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive-utilities.less" />
-    <Content Include="umbraco\lib\bootstrap\less\responsive.less" />
-    <Content Include="umbraco\lib\bootstrap\less\scaffolding.less" />
-    <Content Include="umbraco\lib\bootstrap\less\sprites.less" />
-    <Content Include="umbraco\lib\bootstrap\less\tables.less" />
-    <Content Include="umbraco\lib\bootstrap\less\thumbnails.less" />
-    <Content Include="umbraco\lib\bootstrap\less\tooltip.less" />
-    <Content Include="umbraco\lib\bootstrap\less\type.less" />
-    <Content Include="umbraco\lib\bootstrap\less\utilities.less" />
-    <Content Include="umbraco\lib\bootstrap\less\variables.less" />
-    <Content Include="umbraco\lib\bootstrap\less\wells.less" />
-    <Content Include="umbraco\lib\jquery\jquery.upload\README.md" />
-    <Content Include="umbraco\lib\tinymce\langs\readme.md" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.eot" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.ttf" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon-small.woff" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.eot" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.ttf" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\icomoon.woff" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\readme.md" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <Content Include="umbraco\lib\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.eot" />
-    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.ttf" />
-    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\icomoon.woff" />
-    <Content Include="umbraco\lib\tinymce\skins\umbraco\fonts\readme.md" />
-    <Content Include="umbraco\Masterpages\default.Master" />
-    <Content Include="umbraco\Masterpages\umbracoDialog.Master" />
-    <Content Include="umbraco\Masterpages\umbracoPage.Master" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Breadcrumb.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\EditProfile.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Empty %28ForUseWithCustomViews%29.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Empty.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Gallery.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListAncestorsFromCurrentPage.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesFromChangeableSource.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesFromCurrentPage.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByDate.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByName.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesOrderedByProperty.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListChildPagesWithDoctype.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListDescendantsFromCurrentPage.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\ListImagesFromMediaFolder.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Login.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\LoginStatus.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\MultinodeTree-picker.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\Navigation.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\RegisterMember.cshtml" />
-    <Content Include="umbraco\PartialViewMacros\Templates\SiteMap.cshtml" />
-    <Content Include="umbraco\Plugins\courier\masterpages\CourierDialog.Master" />
-    <Content Include="umbraco\Plugins\courier\masterpages\CourierPage.Master" />
-    <Content Include="umbraco\Plugins\courier\webservices\TreeData.ashx" />
-    <Content Include="umbraco\Scripting\templates\cshtml\Breadcrumb.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\EmptyTemplate.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\Gallery.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListAncestorsFromCurrentPage.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesFromChangeableSource.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesFromCurrentPage.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByDate.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByName.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesOrderedByProperty.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListChildPagesWithDoctype.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListDescendantsFromCurrentPage.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\ListImagesFromMediaFolder.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\MultinodeTree-picker.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\Navigation.cshtml" />
-    <Content Include="umbraco\Scripting\templates\cshtml\SiteMap.cshtml" />
-    <Content Include="umbraco\Search\QuickSearchHandler.ashx" />
-    <Content Include="umbraco\Views\AuthorizeUpgrade.cshtml" />
-    <Content Include="umbraco\Views\Default.cshtml" />
-    <Content Include="umbraco\Webservices\MediaUploader.ashx" />
-    <Content Include="umbraco\Webservices\TagsAutoCompleteHandler.ashx" />
-    <Content Include="umbraco\Webservices\TreeDataService.ashx" />
-    <Content Include="umbraco\Webservices\UltimatePickerAutoCompleteHandler.ashx" />
-    <Content Include="umbraco\Xslt\Web.config" />
+    <None Include="saml.Prod.config">
+      <DependentUpon>saml.config</DependentUpon>
+    </None>
+    <None Include="saml.Debug.config">
+      <DependentUpon>saml.config</DependentUpon>
+    </None>
+    <None Include="saml.Dev.config">
+      <DependentUpon>saml.config</DependentUpon>
+    </None>
+    <None Include="saml.UAT.config">
+      <DependentUpon>saml.config</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3322,7 +3331,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="xslt\Web.config" />
-    <None Include="Web.Prod.config" />
+    <None Include="Web.Prod.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.UAT.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3430,8 +3441,8 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>
+  </Target>-->
   <Target Name="AfterBuild">
+    <TransformXml Source="saml.config" Transform="saml.$(Configuration).config" Destination="$(OutputPath)\saml.config" />
   </Target>
-  -->
 </Project>
