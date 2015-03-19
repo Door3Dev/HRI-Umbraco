@@ -3218,7 +3218,7 @@
     <Content Include="umbraco\assets\less\shadow.less" />
     <Content Include="umbraco\assets\less\slider.less" />
     <Content Include="umbraco\Install\Views\Index.cshtml" />
-    <Content Include="umbraco\Install\Views\Web.config" />
+    <None Include="umbraco\Install\Views\Web.config" />
     <Content Include="umbraco\lib\bootstrap\less\accordion.less" />
     <Content Include="umbraco\lib\bootstrap\less\alerts.less" />
     <Content Include="umbraco\lib\bootstrap\less\bootstrap.less" />
@@ -3327,7 +3327,7 @@
     <Content Include="umbraco\Webservices\TagsAutoCompleteHandler.ashx" />
     <Content Include="umbraco\Webservices\TreeDataService.ashx" />
     <Content Include="umbraco\Webservices\UltimatePickerAutoCompleteHandler.ashx" />
-    <Content Include="umbraco\Xslt\Web.config" />
+    <None Include="umbraco\Xslt\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
