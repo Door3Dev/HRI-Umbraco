@@ -29,8 +29,10 @@ namespace HRI.Controllers
             {
                 // This code will create a Document of type Contact Submission and add it to the Contact Us Submissions list in the Umbraco Back end
                 // This is done in case there are any issues with the emailer.
+                // Get Submissions List Node ID
+                var submissionsNodeId = Umbraco.TypedContentAtRoot().First(_ => _.Name == "Contact Us Submissions").Id;
                 // Create a new ContactSubmission document and title it the users name
-                IContent doc = ApplicationContext.Services.ContentService.CreateContent(model.FirstName + " " + model.LastName, 37326, "ContactSubmission");
+                IContent doc = ApplicationContext.Services.ContentService.CreateContent(model.FirstName + " " + model.LastName, submissionsNodeId, "ContactSubmission");
                 // Populate all the data                
                 doc.Properties["messageTopic"].Value = model.MessageType;
                 doc.Properties["firstName"].Value = model.FirstName;
