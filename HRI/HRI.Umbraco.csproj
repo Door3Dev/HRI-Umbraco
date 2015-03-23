@@ -3041,9 +3041,6 @@
     <Content Include="App_Data\NuGetBackup\20140630-143640\CopyLogs\UmbracoBinBackup.log" />
     <Content Include="App_Data\NuGetBackup\20140630-143708\Web.config" />
     <Content Include="App_Data\packages\installed\installedPackages.config" />
-    <Content Include="App_Data\umbraco.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Partials\RegisterMemberForm.cshtml">
       <SubType>Code</SubType>
     </Content>
