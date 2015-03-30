@@ -1,52 +1,0 @@
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Thursday, February 19, 2015 4:25:10 PM
-   Source : C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\Config\
-     Dest : C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\App_Data\NuGetBackup\20150219-162510\Config\
-
-    Files : *.*
-	    
-  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-	                  19	C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\Config\
-	    New File  		     305	404handlers.config  0%  100%  
-	    New File  		     760	applications.config  0%  100%  
-	    New File  		     739	BaseRestExtensions.config  0%  100%  
-	    New File  		    3898	ClientDependency.config  0%  100%  
-	    New File  		   10015	courier.config  0%  100%  
-	    New File  		    2393	Dashboard.config  0%  100%  
-	    New File  		    4032	EmbeddedMedia.config  0%  100%  
-	    New File  		    1260	ExamineIndex.config  0%  100%  
-	    New File  		    1833	ExamineSettings.config  0%  100%  
-	    New File  		     429	feedProxy.config  0%  100%  
-	    New File  		     286	FileSystemProviders.config  0%  100%  
-	    New File  		    1070	grid.editors.config.js  0%  100%  
-	    New File  		     951	log4net.config  0%  100%  
-	    New File  		      72	metablogConfig.config  0%  100%  
-	    New File  		     837	scripting.config  0%  100%  
-	    New File  		   11921	tinyMceConfig.config  0%  100%  
-	    New File  		    6650	trees.config  0%  100%  
-	    New File  		    7233	umbracoSettings.config  0%  100%  
-	    New File  		    1337	UrlRewriting.config  0%  100%  
-	  New Dir          2	C:\Users\Eugene\Source\Repos\HRI-Umbraco\HRI\Config\splashes\
-	    New File  		    1145	booting.aspx  0%  100%  
-	    New File  		    6787	noNodes.aspx  0%  100%  
-
-------------------------------------------------------------------------------
-
-               Total    Copied   Skipped  Mismatch    FAILED    Extras
-    Dirs :         2         1         0         0         0         0
-   Files :        21        21         0         0         0         0
-   Bytes :    62.4 k    62.4 k         0         0         0         0
-   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-
-   Speed :              110263 Bytes/sec.
-   Speed :               6.309 MegaBytes/min.
-   Ended : Thursday, February 19, 2015 4:25:11 PM
-
