@@ -2725,6 +2725,11 @@ button.disabled {
     margin-top: 20px;
 }
 
+.fatal-error,
+.fatal-error a {
+    font-size: 16pt;
+}
+
 
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
