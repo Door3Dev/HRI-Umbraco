@@ -95,26 +95,24 @@ namespace HRI.Controllers
                     ModelState.AddModelError("registerModel.Username", "Username may not contain spaces");
                 }
 
-                
-
                 if (ModelState.IsValid == false || error)
                     return CurrentUmbracoPage();
 
                 // Create registration model and bind it with view model
                 var registerModel = RegisterModel.CreateModel();
-                registerModel.Name = model.Username;
+                registerModel.Name = model.Username.Trim();
                 registerModel.UsernameIsEmail = false;
-                registerModel.Email = model.Email;
-                registerModel.Username = model.Username;
-                registerModel.Password = model.Password;
+                registerModel.Email = model.Email.Trim();
+                registerModel.Username = model.Username.Trim();
+                registerModel.Password = model.Password.Trim();
                 registerModel.RedirectUrl = "for-members/verify-account/";
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName.Trim() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName.Trim() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn.TrimNullable() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode.Trim() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone.TrimNullable() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId.TrimNullable() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId.TrimNullable() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = enrollAfterLogin });
 
                 MembershipCreateStatus status;

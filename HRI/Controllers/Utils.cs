@@ -19,5 +19,10 @@ namespace HRI.Controllers
         {
             return Helper.MemberHasAccess(content.Id, content.Path);
         }
+
+        public static string TrimNullable(this string value)
+        {
+            return value == null ? null : value.Trim();
+        }
     }
 }
