@@ -2730,6 +2730,13 @@ button.disabled {
     font-size: 16pt;
 }
 
+.mc-announce {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.mc-announce .content {
+    padding: 10px 15px 0;
+}
 
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

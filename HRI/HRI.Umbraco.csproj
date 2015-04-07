@@ -3352,6 +3352,7 @@
     <Compile Include="Models\ContactFormViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ForgotUserNameViewModel.cs" />
+    <Compile Include="Models\MemberAnnouncement.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\LoginFormViewModel.cs">
       <SubType>Code</SubType>
@@ -3367,6 +3368,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SendVerificationLinkModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MemberAnnouncementsService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
