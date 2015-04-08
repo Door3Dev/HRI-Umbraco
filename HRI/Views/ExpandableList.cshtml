@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
     Layout = "Templates.cshtml";
 }
@@ -14,7 +14,7 @@
           <div class="span9">
             <h3>@Umbraco.Field("PageTitle")</h3>
             <ul class="unstyled inline breadcrumbs">
-              <li><a href="/">Home</a></li> › <li>@Umraco.Field("PageTitle")</li>
+              <li><a href="/">Home</a></li> › <li>@Umbraco.Field("PageTitle")</li>
             </ul>
           </div>
 

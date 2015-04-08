@@ -22,6 +22,7 @@ namespace HRI.Services
                         Title = _.GetPropertyValue<string>("title"),
                         ShortMessage = _.GetPropertyValue<string>("shortMessage"),
                         FullMessage = _.GetPropertyValue<string>("fullMessage"),
+                        Url = _.Url
                     });
 
             return result;

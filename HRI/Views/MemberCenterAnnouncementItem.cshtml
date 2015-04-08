@@ -1,0 +1,18 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+}
+<div id="hri-content" class="hri-member-center">
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span10 offset1">
+                        <h3>@Umbraco.Field("title")</h3>
+                        @Umbraco.Field("fullMessage")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

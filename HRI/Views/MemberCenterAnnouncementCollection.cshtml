@@ -1,0 +1,30 @@
+﻿@using HRI.Services
+@inherits UmbracoTemplatePage
+@{
+    Layout = "MasterPage.cshtml";
+    var announcements = new MemberAnnouncementsService().GetList();
+}
+<div id="hri-content" class="hri-member-center">
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="content">
+                <div class="offset1">
+                    <h2 class="page-title">Announcements</h2><br>
+                </div>
+            </div>
+            <div class="content">
+            @foreach (var item in announcements)
+            {
+                <div class="row-fluid">
+                    <div class="span10 offset1">
+                        <h3>@item.Title</h3>
+                        @Html.Raw(item.ShortMessage)
+                        <p><a href="@item.Url">Read more</a></p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
