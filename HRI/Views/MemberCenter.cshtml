@@ -2,7 +2,7 @@
 @inherits UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
-    var announcements = new MemberAnnouncementsService().GetList();
+    var announcements = new MemberAnnouncementsService().GetList().ToList();
 }
 <div id="hri-content" class="hri-member-center">
     <div class="row-fluid">
@@ -16,7 +16,11 @@
                 <div class="row-fluid">
                     <div class="span10 offset1">
                         @Umbraco.Field("Row1Content")
-
+                        
+                        @if (announcements.Any())
+                        {
+                            <p><span class="lead">Important Messages and Announcements</span></p>
+                        }
                         @foreach (var item in announcements)
                         {
                             <div class="mc-announce">
