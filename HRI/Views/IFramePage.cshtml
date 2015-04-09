@@ -1,6 +1,6 @@
 ﻿@using HRI.Controllers
 
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@inherits UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
 
@@ -34,9 +34,17 @@
 
 <div class="hri-common-hp row-fluid">
     <div class="span12">
-        @if(Umbraco.Field("sendSamlAssertion").ToString().ToLower() == "true")
+        <div class="row-fluid" id="samlLoader" style="height: @frameHeight">
+            <div class="span3 status">
+                <span>Loading...</span>
+            </div>
+            <div class="span7 loader">
+                <img src="/images/saml-loader.gif" />
+            </div>
+        </div>
+        @if (Umbraco.Field("sendSamlAssertion").ToString().ToLower() == "true")
         {
-            <iframe name="serviceProviderIFrame" src='#' width='99%' height='1000px' style='margin-left: 3px'></iframe>
+            <iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src="#" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>
             <script type="text/javascript">
                 function loadIFrame() {
                     document.getElementById("urlLoader").click();
@@ -53,30 +61,37 @@
                         url: "/umbraco/api/HriApi/GetEbixIdByUserName?username=@Membership.GetUser().UserName",
                         success: function (data) {
                             var url = '@url' + '&amp;uid=' + data.replace(/\"/g, "");
-                            console.log(url);
-                            $('<iframe name="iframe" src="' + url + '" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>').appendTo('.hri-common-hp div');
+                            $('<iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src="' + url + '" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>').appendTo('.hri-common-hp div');
                         },
                         dataType: 'html'
                     });
                 </script>
-             }
+            }
             else
             {
-                <iframe name="iframe" src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
+                <iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
             }
         }
-	</div>
-
-    
-    <br />
-    
-   
-    <br />
+    </div>
     
     @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = @formTarget }))
     {
         <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
     }
+    
+    <script type="text/javascript">
+        $('#serviceProviderIFrame').load(function () {
+            function hideLoader() {
+                $('#serviceProviderIFrame').show();
+                $('#samlLoader').hide();
+            }
 
-	
+            try {
+                if (this.contentWindow.location.href.indexOf(location.host) == -1)
+                    hideLoader();
+            } catch (err) {
+                hideLoader();
+            }
+        });
+    </script>
 </div>		

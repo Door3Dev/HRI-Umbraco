@@ -330,6 +330,7 @@
     <Content Include="images\plans-logos-sprite.png" />
     <Content Include="images\radio-checked.png" />
     <Content Include="images\radio.png" />
+    <Content Include="images\saml-loader.GIF" />
     <Content Include="js\config.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="js\jquery.min.js" />

@@ -2738,5 +2738,22 @@ button.disabled {
     padding: 10px 15px 0;
 }
 
+#serviceProviderIFrame {
+    display: none;
+}
+
+#samlLoader .status span {
+    position: absolute;
+    top: 350px;
+    margin-left: 80px;
+    color: #752b8f;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#samlLoader .loader img {
+    margin-left: 40px;
+    margin-top: 160px;
+}
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
