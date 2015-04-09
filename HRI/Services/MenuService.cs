@@ -12,21 +12,32 @@ namespace HRI.Services
 {
     public class MenuService
     {
-        /// <summary>
-        /// Umbraco page access radio button list values.
-        /// The values are come from the database.
-        /// </summary>
-        private enum NodeAccess { Public = 9, Members = 10, PublicAndMembers = 11 }
-
-        /// <summary>
-        /// Umbraco page visibility radio button list.
-        /// The values are come from the database.
-        /// </summary>
-        private enum NodeVisibility { Header = 12, Footer = 13,  HeaderAndFooter = 14, NotVisible = 15 }
+        private readonly NodeAccess _nodeAccess;
+        private readonly NodeVisibility _nodeVisibility;
 
         private readonly UmbracoHelper _helper = new UmbracoHelper(UmbracoContext.Current);
         private MenuType _menuType;
         private string[] _currentMemberRoles;
+
+        public MenuService()
+        {
+            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;
+
+            var accessDataType = dataTypeService.GetDataTypeDefinitionByName("Radio Access Availability");
+            var accessStatuses = dataTypeService.GetPreValuesCollectionByDataTypeId(accessDataType.Id).PreValuesAsDictionary;
+            var accessPublic = accessStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Public").Value.Id;
+            var accessMembers = accessStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Members").Value.Id;
+            var accessPublicAndMembers = accessStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Public + Members").Value.Id;
+            _nodeAccess = new NodeAccess(accessPublic, accessMembers, accessPublicAndMembers);
+
+            var visibilityDataType = dataTypeService.GetDataTypeDefinitionByName("Radio Navigation Visibility");
+            var visibilityStatuses = dataTypeService.GetPreValuesCollectionByDataTypeId(visibilityDataType.Id).PreValuesAsDictionary;
+            var visibilityNotVisible = visibilityStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Not Visible").Value.Id;
+            var visibilityHeader = visibilityStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Top Navigation Only").Value.Id;
+            var visibilityFooter = visibilityStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Footer Only").Value.Id;
+            var visibilityHeaderAndFooter = visibilityStatuses.FirstOrDefault(g => g.Value.Value.ToString() == "Top Navigation + Footer").Value.Id;
+            _nodeVisibility = new NodeVisibility(visibilityHeader, visibilityFooter, visibilityHeaderAndFooter, visibilityNotVisible);   
+        }
 
         /// <summary>
         /// List menu items
@@ -90,9 +101,9 @@ namespace HRI.Services
             var access = content.GetPropertyValue<int>("accessAvailability");
             // Choose what is restricted for the current user (member or anonymous)
             // Nodes(pages) that are accessible for all will be always included
-            var resctrictedAccess = _helper.MemberIsLoggedOn() ? (int)NodeAccess.Public : (int)NodeAccess.Members;
+            var resctrictedAccess = _helper.MemberIsLoggedOn() ? _nodeAccess.Public : _nodeAccess.Members;
             // Choose allowed page visibility requered during listing
-            var allowedVisibility = _menuType == MenuType.Header ? NodeVisibility.Header : NodeVisibility.Footer;
+            var allowedVisibility = _menuType == MenuType.Header ? _nodeVisibility.Header : _nodeVisibility.Footer;
             // Check is page protected
             var isProtected = Access.IsProtected(content.Id, content.Path); 
             // Get page access roles
@@ -105,7 +116,45 @@ namespace HRI.Services
             // Page should have a proper visibility (header or footer menu)
             return access != resctrictedAccess
                     && hasAccess
-                    && (visibility == (int) allowedVisibility || visibility == (int)NodeVisibility.HeaderAndFooter);
+                    && (visibility == allowedVisibility || visibility == _nodeVisibility.HeaderAndFooter);
+        }
+
+        /// <summary>
+        /// Umbraco page access radio button list values.
+        /// The values are come from the database.
+        /// </summary>
+        private class NodeAccess
+        {
+            public int Public { get; private set; }
+            public int Members { get; private set; }
+            public int PublicAndMembers { get; private set; }
+
+            public NodeAccess(int publicId, int membersId, int publicAndMembersId)
+            {
+                Public = publicId;
+                Members = membersId;
+                PublicAndMembers = publicAndMembersId;
+            }
+        }
+
+        /// <summary>
+        /// Umbraco page visibility radio button list.
+        /// The values are come from the database.
+        /// </summary>
+        private class NodeVisibility
+        {
+            public int Header { get; private set; }
+            public int Footer { get; private set; }
+            public int HeaderAndFooter { get; private set; }
+            public int NotVisible { get; private set; }
+
+            public NodeVisibility(int headerId, int footerId, int headerAndFooterId, int notVisibleId)
+            {
+                Header = headerId;
+                Footer = footerId;
+                HeaderAndFooter = headerAndFooterId;
+                NotVisible = notVisibleId;
+            }
         }
     }
 }
