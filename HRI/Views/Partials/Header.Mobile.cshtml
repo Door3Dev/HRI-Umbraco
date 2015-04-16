@@ -1,0 +1,16 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+}
+
+<div id="header" class="row-fluid">
+    <div id="masthead" class="row-fluid">
+        <div class="span12">
+            <a href="@homePage.Url">
+                <div class="logo-sm">
+                    <h1>Health Republic Insurance of New York</h1>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

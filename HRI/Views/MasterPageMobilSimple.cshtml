@@ -7,11 +7,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        @if (library.IsLoggedOn())
-        {
-            <meta http-equiv="Refresh" content="920;URL=/for-members/login?autologoff=true">
-        }
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Health Republic Insurance of New York @(pageTitle.HasValue ? "- " + pageTitle.Value : String.Empty)</title>
         <meta http-equiv="cache-control" content="public">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,6 +33,7 @@
               content="Health Republic Insurance of New York is a non-profit consumer operated and oriented health insurance plan serving the people of New York State.">
         <link rel="shortcut icon" href="/images/favicon.ico">
         @Styles.Render("~/bundles/css")
+        @Styles.Render("~/bundles/css/mobile")
         @Scripts.Render("~/bundles/js")
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -49,16 +47,12 @@
         </script>
     </head>
 <body lang="en" class="hri hri-common hri-newyork">
-    @Html.Partial("RegistrationConfirmation")
-
     <div class="container">
-        @Html.Partial("TopBar")
         <div class="row-fluid">
             <div class="span12">
                 <div id="main">
                     @Html.Partial("Header")
                     @RenderBody()
-                    @Html.Partial("Footer")
                 </div>
             </div>
         </div>

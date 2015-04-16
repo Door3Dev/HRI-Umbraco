@@ -63,6 +63,9 @@ namespace HRI
                 .Include("~/css/bootstrap.css")
                 .Include("~/css/fonts.css")
                 .Include("~/css/styles.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/css/mobile")
+                .Include("~/css/mobile.css"));
         }
 
         private void RegisterJavaScript(BundleCollection bundles)

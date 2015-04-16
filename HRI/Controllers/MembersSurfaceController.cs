@@ -19,7 +19,7 @@ namespace HRI.Controllers
     public class MembersSurfaceController : SurfaceController
     {
         static readonly ILog logger = LogManager.GetLogger(typeof(MembersSurfaceController));
-        
+
         private const string IncorrectPassword = "The password you entered does not match our records, please try again.";
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace HRI.Controllers
                 FormsAuthentication.SignOut();
                 return Redirect("/");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "Error when user " + User.Identity.Name + " attempted to log out.";
@@ -85,16 +85,16 @@ namespace HRI.Controllers
                     {
                         // Create attribute list an populate with needed data
                         var attrib = new Dictionary<string, string>
-                {
+                        {
                  
-                    {"AccountUniqueContactId", AccountUniqueContactId},
-                    {"AccountFamilyId", AccountFamilyId},
-                    {"FamilyDependentId", FamilyDependentId},
-                    {"PartnerId", "AC4134"},
-                    {"PartnerAccountId", ""},
-                   {"ReturnUrl", ""}
+                            {"AccountUniqueContactId", AccountUniqueContactId},
+                            {"AccountFamilyId", AccountFamilyId},
+                            {"FamilyDependentId", FamilyDependentId},
+                            {"PartnerId", "AC4134"},
+                            {"PartnerAccountId", ""},
+                           {"ReturnUrl", ""}
 
-                };
+                        };
 
 
                         // Send an IdP initiated SAML assertion
@@ -115,14 +115,14 @@ namespace HRI.Controllers
                         yNumber = yNumber.Substring(0, 7);
 
                     var samlAttributes = new Dictionary<string, string>
-                {
-                    {"urn:uss:saml:attrib::id", yNumber},
-                    {"urn:uss:saml:attrib::firstname", member.GetValue("msFirstName").ToString()},
-                    {"urn:uss:saml:attrib::lastname", member.GetValue("msLastName").ToString()},
-                    {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
-                    {"urn:uss:saml:attrib::dateofbirth", Convert.ToDateTime(member.GetValue("birthday")).ToString("yyyy-MM-dd")},
-                    {"urn:uss:saml:attrib::email", member.Email}
-                };
+                    {
+                        {"urn:uss:saml:attrib::id", yNumber},
+                        {"urn:uss:saml:attrib::firstname", member.GetValue("msFirstName").ToString()},
+                        {"urn:uss:saml:attrib::lastname", member.GetValue("msLastName").ToString()},
+                        {"urn:uss:saml:attrib::groupid", member.GetValue("groupId").ToString()},
+                        {"urn:uss:saml:attrib::dateofbirth", Convert.ToDateTime(member.GetValue("birthday")).ToString("yyyy-MM-dd")},
+                        {"urn:uss:saml:attrib::email", member.Email}
+                    };
 
                     PgpSAML20Assertion.GuideSSO(Response, partnerSP, String.Empty, samlAttributes);
                 }
@@ -131,44 +131,45 @@ namespace HRI.Controllers
                 if (partnerSP == "MagnaCare")
                 {
                     var samlAttributes = new Dictionary<string, string>
-                {
-                    {"member:id", member.GetValue("yNumber").ToString()},
-                    {"member:first_name", member.GetValue("msFirstName").ToString()},
-                    {"member:last_name", member.GetValue("msLastName").ToString()},
-                    {"member:product", member.GetValue("healthPlanName").ToString()}
-                };
+                    {
+                        {"member:id", member.GetValue("yNumber").ToString()},
+                        {"member:first_name", member.GetValue("msFirstName").ToString()},
+                        {"member:last_name", member.GetValue("msLastName").ToString()},
+                        {"member:product", member.GetValue("healthPlanName").ToString()}
+                    };
 
                     SAML20Assertion.GuideSSO(Response, partnerSP, member.GetValue("yNumber").ToString(), samlAttributes);
                 }
 
                 // Attributes for HealthX
-                if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx")
+                if (partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx"
+                    || partnerSP == "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx?mobile=1")
                 {
                     // Create attribute list an populate with needed data
                     var attrib = new List<SAMLAttribute>
-                {
-                    // Version 1 is constant value set by HealthX 
-                    new SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version",
-                        "xs:string", "1"),
-                    // This is the site ID and is redundant since it is in the Assertion consumer url. I added this for completeness
-                    new SAMLAttribute("ServiceId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "ServiceID",
-                        "xs:string", "d99bfe58-3896-4eb6-9586-d2f9ae673052"),
-                    // This is the service ID and is redundant since it is in the Assertion consumer url. I added this for completeness
-                    new SAMLAttribute("SiteId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "SiteId", "xs:string",
-                        "e6fa832c-fbd3-48c7-860f-e4f04b22bab7"),
-                    new SAMLAttribute("RelationshipCode", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "RelationshipCode", "xs:string", "18"),
-                    new SAMLAttribute("UserId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserId", "xs:string",
-                        member.GetValue("yNumber").ToString().ToUpper()),
-                    new SAMLAttribute("MemberLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "MemberLastName", "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
-                    new SAMLAttribute("MemberFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "MemberFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper()),
-                    new SAMLAttribute("UserLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserLastName",
-                        "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
-                    new SAMLAttribute("UserFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
-                        "UserFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper())
-                };
+                    {
+                        // Version 1 is constant value set by HealthX 
+                        new SAMLAttribute("Version", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "Version",
+                            "xs:string", "1"),
+                        // This is the site ID and is redundant since it is in the Assertion consumer url. I added this for completeness
+                        new SAMLAttribute("ServiceId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "ServiceID",
+                            "xs:string", "d99bfe58-3896-4eb6-9586-d2f9ae673052"),
+                        // This is the service ID and is redundant since it is in the Assertion consumer url. I added this for completeness
+                        new SAMLAttribute("SiteId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "SiteId", "xs:string",
+                            "e6fa832c-fbd3-48c7-860f-e4f04b22bab7"),
+                        new SAMLAttribute("RelationshipCode", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
+                            "RelationshipCode", "xs:string", "18"),
+                        new SAMLAttribute("UserId", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserId", "xs:string",
+                            member.GetValue("yNumber").ToString().ToUpper()),
+                        new SAMLAttribute("MemberLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
+                            "MemberLastName", "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
+                        new SAMLAttribute("MemberFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
+                            "MemberFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper()),
+                        new SAMLAttribute("UserLastName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", "UserLastName",
+                            "xs:string", member.GetValue("msLastName").ToString().ToUpper()),
+                        new SAMLAttribute("UserFirstName", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
+                            "UserFirstName", "xs:string", member.GetValue("msFirstName").ToString().ToUpper())
+                    };
 
                     // Nest a node named ServiceId in the RedirectInfo attribute 
                     // Add a serializer to allow the nesting of the serviceid attribute without it being url encoded    
@@ -219,10 +220,10 @@ namespace HRI.Controllers
                 // Return an empty response since we wait for the SAML consumer to send us the requested page
                 return new EmptyResult();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Create an error message with sufficient info to contact the user
-                string additionalInfo = "SSO Error for user " + User.Identity.Name + ". Partner: " + partnerSP + ". TargetUrl: " + targetUrl + ".";                                
+                string additionalInfo = "SSO Error for user " + User.Identity.Name + ". Partner: " + partnerSP + ". TargetUrl: " + targetUrl + ".";
                 // Add the error message to the log4net output
                 log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 // Log the error
@@ -230,7 +231,7 @@ namespace HRI.Controllers
 
                 return new EmptyResult();
             }
-        }        
+        }
 
         public ActionResult ActivateUser(int id, string guid)
         {
@@ -238,7 +239,7 @@ namespace HRI.Controllers
             bool regSuccess;
             var protocol = Request.IsSecureConnection ? "https" : "http";
             // String to api call to register the current user
-            
+
             var json = new JObject();
             try
             {
@@ -269,7 +270,7 @@ namespace HRI.Controllers
                 {
                     member = Services.MemberService.GetByUsername(userName);
                     // Set the user to be approved
-                    member.IsApproved = true;                    
+                    member.IsApproved = true;
                     // Add the registered role to the user
                     Roles.AddUserToRole(userName, "Registered");
                     // Add the enrolled role to the user, if "enrollmentpageafterlogin" != 1
@@ -278,7 +279,7 @@ namespace HRI.Controllers
                         Roles.AddUserToRole(userName, "Enrolled");
                     }
                     // Save the member
-                    Services.MemberService.Save(member);                    
+                    Services.MemberService.Save(member);
                     // Send the user to the login page
                     TempData["IsUserSuccessfullyRegistered"] = true;
                     return Redirect("/for-members/login");
@@ -328,7 +329,7 @@ namespace HRI.Controllers
                 TempData["IsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex);
                 TempData["IsSuccessful"] = false;
@@ -346,7 +347,7 @@ namespace HRI.Controllers
                 {
                     ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
                 }
-                 // Verify that username and password arent the same.
+                // Verify that username and password arent the same.
                 if (user.UserName == model.NewPassword)
                 {
                     ModelState.AddModelError("changePasswordViewModel.NewPassword", "Password cannot be the same as Username");
@@ -380,7 +381,7 @@ namespace HRI.Controllers
                     return CurrentUmbracoPage();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "User " + User.Identity.Name + " was unable to change their password.";
@@ -394,18 +395,19 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangeUserName(ChangeUserNameViewModel model)
         {
-            try { 
-            // TO-DO: Either extend the membership provider to support username changes
-            // or create a new user and copy all the data as per 
-            // http://stackoverflow.com/questions/1001491/is-it-possible-to-change-the-username-with-the-membership-api
-            //
-            var user = Membership.GetUser();
-            //user.UserName = model.UserName;
-            // Update the User profile in the database
-            Membership.UpdateUser((System.Web.Security.MembershipUser)user);
-            return RedirectToCurrentUmbracoPage();
+            try
+            {
+                // TO-DO: Either extend the membership provider to support username changes
+                // or create a new user and copy all the data as per 
+                // http://stackoverflow.com/questions/1001491/is-it-possible-to-change-the-username-with-the-membership-api
+                //
+                var user = Membership.GetUser();
+                //user.UserName = model.UserName;
+                // Update the User profile in the database
+                Membership.UpdateUser((System.Web.Security.MembershipUser)user);
+                return RedirectToCurrentUmbracoPage();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex);
                 return RedirectToCurrentUmbracoPage();
@@ -431,7 +433,7 @@ namespace HRI.Controllers
                 SetUserNameAndGuide(userName, guid);
                 return Redirect("/for-members/reset-password/");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex);
                 return Redirect("/for-members/reset-password/");
@@ -440,7 +442,7 @@ namespace HRI.Controllers
 
         [HttpPost]
         public ActionResult ResetPassword([Bind(Prefix = "resetPasswordViewModel")] ResetPasswordViewModel model)
-        {            
+        {
             if (!ModelState.IsValid)
             {
                 SetUserNameAndGuide(model.UserName, model.Guid);
@@ -458,9 +460,9 @@ namespace HRI.Controllers
                 var tempPassword = member.ResetPassword();
                 member.ChangePassword(tempPassword, model.NewPassword);
                 Membership.UpdateUser(member);
-                if(!Roles.IsUserInRole(model.UserName, "Registered"))
+                if (!Roles.IsUserInRole(model.UserName, "Registered"))
                     Roles.AddUserToRole(model.UserName, "Registered"); // This is needed to end security upgrade process
-                
+
                 TempData["ResetPasswordIsSuccessful"] = true;
                 return RedirectToCurrentUmbracoPage();
             }
@@ -505,7 +507,7 @@ namespace HRI.Controllers
                     client.UploadString(registerUserApi, myJsonString);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex);
             }

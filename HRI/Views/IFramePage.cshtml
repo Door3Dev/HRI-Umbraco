@@ -9,19 +9,22 @@
     var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
     var pageType = @Umbraco.Field("pageType").ToString();
     var formTarget = (pageType == "Redirect into same tab") ? "" : "serviceProviderIFrame";
+    var serviceProvider = @Umbraco.Field("serviceProvider").ToString();
     
-    var sp = "";
-    if (@Umbraco.Field("serviceProvider").ToString() == "Morneau Shepell")
+    string sp;
+    if (serviceProvider == "Morneau Shepell")
         sp = "SBCSystems";
-    else if (@Umbraco.Field("serviceProvider").ToString() == "MagnaCare")
+    else if (serviceProvider == "MagnaCare")
         sp = "MagnaCare";
-    else if (@Umbraco.Field("serviceProvider").ToString() == "US Script")
+    else if (serviceProvider == "US Script")
         sp = "USScript";
-    else if (@Umbraco.Field("serviceProvider").ToString() == "Adam / Ebix")
+    else if (serviceProvider == "Adam / Ebix")
         sp = "AdamEbix";
-    else if (@Umbraco.Field("serviceProvider").ToString() == "HealthX")
+    else if (serviceProvider == "HealthX")
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
-    else if (@Umbraco.Field("serviceProvider").ToString() == "StatDoctors")
+    else if (serviceProvider == "HealthX Mobile")
+        sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx?mobile=1";
+    else if (serviceProvider == "StatDoctors")
         sp = "StatDoctors";
     else 
         throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));

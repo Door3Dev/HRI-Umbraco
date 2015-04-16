@@ -127,6 +127,9 @@
     <Reference Include="MiniProfiler">
       <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
+    <Reference Include="MobileViewEngines.MVC3">
+      <HintPath>packages\MobileViewEngines.2.0.0\lib\net40\MobileViewEngines.MVC3.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.6.5\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
@@ -272,11 +275,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\UmbracoCms.Core.7.2.4\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>packages\WebActivator.1.4.2\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <HintPath>packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\mobile.css" />
     <Content Include="error.aspx" />
     <Content Include="error.html" />
     <Content Include="App_Data\eldos-key.txt" />
@@ -3019,11 +3026,6 @@
     <Content Include="Views\Partials\SiteMapPartial.cshtml" />
     <Content Include="Views\Partials\TopBar.cshtml" />
     <Content Include="Views\MacroPartials\Breadcrumb.cshtml" />
-    <Content Include="Views\AboutSurface\Careers.cshtml" />
-    <Content Include="Views\AboutSurface\OurBoard.cshtml" />
-    <Content Include="Views\AboutSurface\OurStaff.cshtml" />
-    <Content Include="Views\AboutSurface\WhyWeAreDifferent.cshtml" />
-    <Content Include="Views\Shared\MasterPage.cshtml" />
     <Content Include="config\saml.config">
       <SubType>Designer</SubType>
     </Content>
@@ -3317,6 +3319,9 @@
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
     <Content Include="Views\MemberCenterAnnouncementCollection.cshtml" />
     <Content Include="Views\MemberCenterAnnouncementItem.cshtml" />
+    <Content Include="Views\Login.Mobile.cshtml" />
+    <Content Include="Views\Partials\Header.Mobile.cshtml" />
+    <Content Include="Views\MasterPageMobilSimple.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3338,6 +3343,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
+    <Compile Include="App_Start\MobileViewEnginesBootstrapper.cs" />
     <Compile Include="Controllers\HriSurfaceController.cs" />
     <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
@@ -3348,6 +3354,7 @@
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Controllers\Utils.cs" />
+    <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
@@ -3382,7 +3389,7 @@
     <Folder Include="App_Data\packages\created\" />
     <Folder Include="App_Data\preview\" />
     <Folder Include="media\" />
-    <Folder Include="Views\AccountSurface\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CMMSAMLLibrary\CMMSAMLLibrary.csproj">

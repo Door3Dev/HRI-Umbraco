@@ -1,0 +1,55 @@
+﻿@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 1024px) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+    .container {
+        width: 100%;
+        max-width: 375px;
+    }
+    .hri-login .login-form {
+        margin-left: 0!important;
+        padding: 0 20px 20px 20px;
+    }
+    .hri-login .login-description {
+        width: auto;
+        height: auto!important;
+        margin-left: 0!important;
+        padding: 20px;
+    }
+    .hri-login .login-footer {
+        margin-left: 0 !important;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    #masthead a {
+        margin: 0 auto;
+        width: 190px;
+        display: block;
+    }
+
+    .hri-common .logo-sm {
+        float: none;
+        padding: 0 0;
+    }
+    .hri-login input {
+        width: 95.5%;
+    }
+    .hri-login .separator {
+        border-top: 1px solid #e3e3e3;
+        height: 1px;
+        margin: 0 5%;
+        max-width: 89%;
+    }
+    
+    .well {
+        padding: 0;
+    }
+    .well > div {
+        margin: 19px
+    }
+    .well .row {
+        margin-left: auto;
+    }
+
+}

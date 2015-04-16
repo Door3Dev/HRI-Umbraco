@@ -167,6 +167,10 @@ namespace HRI.Controllers
 
                 //redirect to current page by default
                 TempData["LoginSuccess"] = true;
+
+                if (Request.Browser.IsMobileDevice)
+                    return Redirect("/member-center/index-mobile");
+
                 return Redirect("/member-center/index");
             }
             catch(Exception ex)

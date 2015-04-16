@@ -1,0 +1,38 @@
+﻿
+@inherits UmbracoTemplatePage
+@{
+    Layout = "MasterPageMobilSimple.cshtml";
+}
+
+@if(User.Identity.IsAuthenticated)
+{
+    <script>window.location.replace("/");</script>  
+}
+
+<div id="hri-content" class="hri-login">
+    <div class="row-fluid well">
+        <div class="login">
+            <div class="row">
+                <div class="span12 login-form">
+                    @{Html.RenderPartial("LoginForm");}
+                </div>
+            </div>
+            <div class="row">
+                <div class="separator"></div>
+                <div class="span12 login-description">
+                    <h3>Need to register?</h3>
+                    <a href="~/for-members/register">Click here</a> to register for an online account.
+                    <br>
+                    <i>*Requires a valid Member ID</i>
+                    <br><br>
+                    Need Us to Resend the Verification Email?
+                    <br>
+                    <a href="~/for-members/resend-email">Click here</a> (and be sure to check your SPAM or Promotions folder)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 login-footer">If you are having trouble logging in or registering, call us at <b>888-990-5702</b> or send us an <a href="/about-us/contact-us/">email</a>.</div>
+    </div>
+</div>
