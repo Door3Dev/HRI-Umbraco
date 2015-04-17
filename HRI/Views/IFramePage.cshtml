@@ -5,7 +5,7 @@
     Layout = "MasterPage.cshtml";
 
     <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
-    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString().ToString()); 
+    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString()); 
     var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
     var pageType = @Umbraco.Field("pageType").ToString();
     var formTarget = (pageType == "Redirect into same tab") ? "" : "serviceProviderIFrame";

@@ -227,7 +227,7 @@ namespace HRI.Controllers
                 // Add the error message to the log4net output
                 log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 // Log the error
-                logger.Error("Unable to send verification link.", ex);
+                logger.Error("Unable to use SSO", ex);
 
                 return new EmptyResult();
             }

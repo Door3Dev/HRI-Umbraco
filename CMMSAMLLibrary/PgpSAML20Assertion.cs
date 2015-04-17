@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Web;
 using System.Xml;
@@ -13,7 +14,6 @@ using System.Xml.Serialization;
 using System.IO;
 using ComponentSpace.SAML2.Configuration;
 using CoverMyMeds.SAML.Library.Schema;
-using NLog;
 using SBPGPKeys;
 using SBX509;
 using SBXMLAdESIntf;
@@ -35,7 +35,6 @@ namespace CoverMyMeds.SAML.Library
     /// </remarks>
     public class PgpSAML20Assertion
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
         private static TElXMLDOMDocument FXMLDocument = new TElXMLDOMDocument();
         /// <summary>
         /// Build a signed XML SAML Response string to be inlcuded in an HTML Form
@@ -63,7 +62,7 @@ namespace CoverMyMeds.SAML.Library
             {
                 ID = "_" + Guid.NewGuid(),
                 Version = "2.0",
-                IssueInstant = System.DateTime.UtcNow,
+                IssueInstant = DateTime.UtcNow,
                 Destination = Recipient.Trim(),
                 Issuer = new NameIDType() { Value = Issuer.Trim() },
                 Status = new StatusType() { StatusCode = new StatusCodeType() { Value = "urn:oasis:names:tc:SAML:2.0:status:Success" } }
@@ -74,14 +73,20 @@ namespace CoverMyMeds.SAML.Library
 
             byte[] binaryResponse = SerializeAndSignSAMLResponse(response, partnerSP);
 
+            Trace.TraceInformation(DateTime.Now.ToShortTimeString() + ": Sending SAML assertion: partner provider=" + partnerSP + ", SAML assertion=" + Encoding.UTF8.GetString(binaryResponse));
+
             return Convert.ToBase64String(binaryResponse);
         }
 
         public static void GuideSSO(HttpResponseBase httpResponse, string partnerSp, string subject, Dictionary<string, string> samlAttributes)
         {
+            Trace.TraceInformation("Initiation of SSO to the partner service provider " + partnerSp + " has completed successfully.");
+           
             SAMLConfiguration.Load();
             var issuer = SAMLConfiguration.Current.IdentityProviderConfiguration.Name;
             var partner = SAMLConfiguration.Current.GetPartnerServiceProvider(partnerSp);
+
+            Trace.TraceInformation(DateTime.Now.ToShortTimeString() + ": Initiating SSO to the partner service provider " + partnerSp);
 
             var saml = CreateSAML20ResponseAsBase64(issuer, 5, partnerSp,
                     subject,
@@ -96,11 +101,14 @@ namespace CoverMyMeds.SAML.Library
             + "<div>"
             + "<input type=\"hidden\" name=\"SAMLResponse\" value=\"{1}\" />"
             + "<input type=\"hidden\" name=\"clientId\" value=\"900D3C06-C63C-4F49-B3D2-54A91C771A43\" />"
-//            + "<input type=\"hidden\" name=\"RelayState\" value=\"\" />"
+//          + "<input type=\"hidden\" name=\"RelayState\" value=\"\" />"
             + "</div><noscript><div><input type=\"submit\" value=\"Continue\" /></div></noscript>"
             + "</form>"
             + "</body>"
             + "</html>", partner.AssertionConsumerServiceUrl, saml);
+
+            Trace.TraceInformation(DateTime.Now.ToShortTimeString() + ": Sending SAML form: " + responseContent);
+
             httpResponse.Write(responseContent);
 
         }
@@ -137,6 +145,7 @@ namespace CoverMyMeds.SAML.Library
             // Assertion signature
             var assertionToSign = FXMLDocument.FindNode("saml2:Assertion", true);
             SignElement(signatureCertificatePath, signaruteCertificatePassword, assertionToSign);
+            Trace.Write(DateTime.Now.ToShortTimeString() + ": SAML plain body:" + assertionToSign.OwnerDocument.OuterXML);
             // Assertion encryption
             EncryptAssertion(encryptionKeyPath, assertionToSign);
             // Response signature
@@ -270,28 +279,16 @@ namespace CoverMyMeds.SAML.Library
             FileStream F;
             TElXMLDOMNode EncNode;
 
-            /* partner side:
-             * Encryptor.EncryptKey = true;
-                Encryptor.EncryptionMethod = SBXMLSec.Unit.xemAES;
-                Encryptor.EncryptedDataType = SBXMLSec.Unit.xedtElement;
-
-                Encryptor.KeyEncryptionType = SBXMLSec.Unit.xetKeyTransport;
-                Encryptor.KeyTransportMethod = SBXMLSec.Unit.xktRSAOAEP;
-
-                SymKeyData = new TElXMLKeyInfoSymmetricData(true);
-                SymKeyData.Key.Generate(32 * 8);
-                SymKeyData.Key.GenerateIV(16 * 8);
-                Encryptor.KeyData = SymKeyData;
-             */
-
-            Encryptor = new TElXMLEncryptor();
-            Encryptor.EncryptKey = true;
-            Encryptor.EncryptionMethod = 1;
-            Encryptor.KeyName = String.Empty;
-            Encryptor.EncryptedDataType = 0;
-            Encryptor.KeyEncryptionType = 0;
-            Encryptor.KeyTransportMethod = 1;
-            Encryptor.KeyWrapMethod = 0;
+            Encryptor = new TElXMLEncryptor
+            {
+                EncryptKey = true,
+                EncryptionMethod = 1,
+                KeyName = String.Empty,
+                EncryptedDataType = 0,
+                KeyEncryptionType = 0,
+                KeyTransportMethod = 1,
+                KeyWrapMethod = 0
+            };
 
             SymKeyData = new TElXMLKeyInfoSymmetricData(true);
             // generate random Key & IV
@@ -309,71 +306,20 @@ namespace CoverMyMeds.SAML.Library
             certificate = HostingEnvironment.MapPath("~/App_Data/ussitsps_test_pub.asc");
             F = new FileStream(certificate, FileMode.Open, FileAccess.Read);
 
-            //try
-            //{
-                //RSAKeyData.RSAKeyMaterial.LoadPublic(F, 0);
-            //}
-            //catch { }
-
-            //if (!RSAKeyData.RSAKeyMaterial.PublicKey)
-            //{
-            //    F.Position = 0;
-            //    try
-            //    {
-            //        RSAKeyData.RSAKeyMaterial.LoadSecret(F, 0);
-            //    }
-            //    catch { }
-            //}
-
-            //if (!RSAKeyData.RSAKeyMaterial.PublicKey)
-            //{
-            //    F.Position = 0;
-            //    LoadCertificate(F, String.Empty, X509KeyData);
-            //}
-
-                //if (!RSAKeyData.RSAKeyMaterial.PublicKey &&
-                //    (X509KeyData.Certificate == null))
+            PGPKeyData.PublicKey = new TElPGPPublicKey();
+            try
             {
-                //F.Position = 0;
-                PGPKeyData.PublicKey = new TElPGPPublicKey();
-                try
-                {
-                    ((TElPGPPublicKey)PGPKeyData.PublicKey).LoadFromStream(F);
-                }
-                catch
-                {
-                    PGPKeyData.PublicKey.Dispose();
-                    PGPKeyData.PublicKey = null;
-                }
-
-                //if (PGPKeyData.PublicKey == null)
-                //{
-                //    F.Position = 0;
-                //    PGPKeyData.SecretKey = new TElPGPSecretKey();
-                //    PGPKeyData.SecretKey.Passphrase = String.Empty;
-                //    try
-                //    {
-                //        ((TElPGPSecretKey)PGPKeyData.SecretKey).LoadFromStream(F);
-                //    }
-                //    catch
-                //    {
-                //        PGPKeyData.SecretKey = null;
-                //    }
-                //}
+                ((TElPGPPublicKey) PGPKeyData.PublicKey).LoadFromStream(F);
+            }
+            catch
+            {
+                PGPKeyData.PublicKey.Dispose();
+                PGPKeyData.PublicKey = null;
             }
 
             F.Close();
 
-            //if (RSAKeyData.RSAKeyMaterial.PublicKey)
-            //    Encryptor.KeyEncryptionKeyData = RSAKeyData;
-            //else
-            //    if (X509KeyData.Certificate != null)
-            //        Encryptor.KeyEncryptionKeyData = X509KeyData;
-
-            //    else
-            //        if ((PGPKeyData.PublicKey != null) ||
-            //        (PGPKeyData.SecretKey != null))
-                        Encryptor.KeyEncryptionKeyData = PGPKeyData;
+            Encryptor.KeyEncryptionKeyData = PGPKeyData;
 
             //Encrypt Node
             Encryptor.Encrypt(nodeToEnrypt);
