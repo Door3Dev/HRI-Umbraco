@@ -84,6 +84,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Examine.0.1.60.2941\lib\Examine.dll</HintPath>
     </Reference>
+    <Reference Include="FiftyOne.Foundation">
+      <HintPath>packages\51Degrees.mobi.3.1.11.1\lib\NET40\FiftyOne.Foundation.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -343,6 +346,7 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="js\skel-panels.min.js" />
     <Content Include="js\skel.min.js" />
+    <Content Include="Mobile\Default.aspx" />
     <Content Include="NHibernate.ByteCode.Castle.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3104,6 +3108,8 @@
     <Content Include="config\EmbeddedMedia.config" />
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\404handlers.config" />
+    <Content Include="51Degrees.config" />
+    <Content Include="App_Data\51Degrees-LiteV3_1.dat" />
     <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
@@ -3355,6 +3361,10 @@
     <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Controllers\Utils.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
+    <Compile Include="Mobile\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
@@ -3383,7 +3393,7 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
+    <Folder Include=".nuget\App_Code\" />
     <Folder Include="App_Data\courier\revisions\" />
     <Folder Include="App_Data\Logs\" />
     <Folder Include="App_Data\packages\created\" />
