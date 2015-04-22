@@ -3326,7 +3326,7 @@
     <Content Include="Views\MemberCenterAnnouncementItem.cshtml" />
     <Content Include="Views\Login.Mobile.cshtml" />
     <Content Include="Views\Partials\Header.Mobile.cshtml" />
-    <Content Include="Views\MasterPageMobilSimple.cshtml" />
+    <Content Include="Views\MasterPageMobileSimple.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
