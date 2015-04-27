@@ -22,6 +22,22 @@
               </div><br><br>
 
             <iframe class="hri-iframe" width="100%" height="800" src="https://clm.magnacare.com/ProviderLocator/hr.aspx"></iframe>
-          </div>
+          <div id="hosUgc" class="container-hospital-urgenctcare-list">
+            <div class="hospital-urgentcare-list">
+              
+                        <div class="left">
+                            @Umbraco.Field("hospitalList")
+                        </div>
+                    
+                    
+                        <div class="right">
+                            @Umbraco.Field("urgentCareCenters")
+                        </div>
+                    
+            </div>
+            </div>
+
         </div>
+    </div>
+  
       </div>
