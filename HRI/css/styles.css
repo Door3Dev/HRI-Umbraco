@@ -2725,49 +2725,6 @@ button.disabled {
     margin-top: 20px;
 }
 
-.hri-common .container-hospital-urgentcare-list {
-    margin-top: 70px; border-top: 2px dotted #be9bcb; padding-top: 50px;
-   
-}
-
-.hri-common .hospital-urgentcare-list .right p em {
-    word-wrap: break-word;
-}
-
-.hri-common .hospital-urgentcare-list {
-    
-    border-top: 2px dotted #be9bcb;  
-    padding-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
- 
-}
-
-
-.hri-common .hospital-urgentcare-list .left {
-       float: left;
-       padding-right: 5%;
-    
-  
-}
-
-.hri-common .hospital-urgentcare-list .right {
-    border-left: 2px dotted #be9bcb;
-    float: right;
-    padding-left: 5%;
-    width: 50%;
-    word-wrap: break-word;
-    
-}
-
-.sso-unavailable h3 {
-	line-height: 200%;
-	text-align: center;
-	padding-top: 50px;
-	padding-bottom: 200px;
-}
-
 
 
 /* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
