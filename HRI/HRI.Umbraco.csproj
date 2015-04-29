@@ -34,8 +34,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Prod|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
@@ -3029,7 +3030,7 @@
     <Content Include="Views\Partials\SiteMapPartial.cshtml" />
     <Content Include="Views\Partials\TopBar.cshtml" />
     <Content Include="Views\MacroPartials\Breadcrumb.cshtml" />
-    <Content Include="config\saml.config">
+    <Content Include="saml.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\access.config">
@@ -3109,6 +3110,7 @@
     <Content Include="config\404handlers.config" />
     <Content Include="51Degrees.config" />
     <Content Include="App_Data\51Degrees-LiteV3_1.dat" />
+    <Content Include="HRI.Umbraco.wpp.targets" />
     <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
@@ -3169,18 +3171,8 @@
     <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <Content Include="umbraco_client\CodeMirror\Js\Mode\Razor\LICENSE" />
     <Content Include="umbraco_client\CodeMirror\Js\Mode\Sieve\LICENSE" />
-    <None Include="config\saml.Prod.config">
-      <DependentUpon>config\saml.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="config\saml.Debug.config">
-      <DependentUpon>config\saml.config</DependentUpon>
-    </None>
-    <None Include="config\saml.Dev.config">
-      <DependentUpon>config\saml.config</DependentUpon>
-    </None>
-    <None Include="config\saml.UAT.config">
-      <DependentUpon>config\saml.config</DependentUpon>
+    <None Include="saml.Prod.config">
+      <DependentUpon>saml.config</DependentUpon>
     </None>
     <Content Include="umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="umbraco\assets\fonts\helveticons\helveticons.ttf" />
@@ -3450,8 +3442,5 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <Target Name="AfterBuild">
-    <TransformXml Source="config/saml.config" Transform="config/saml.$(Configuration).config" Destination="saml.config" />
-  </Target>
   <Import Project="packages\UmbracoCms.7.2.4\build\UmbracoCms.targets" Condition="Exists('packages\UmbracoCms.7.2.4\build\UmbracoCms.targets')" />
 </Project>
