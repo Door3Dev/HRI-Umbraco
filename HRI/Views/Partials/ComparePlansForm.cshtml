@@ -6,9 +6,6 @@
 @{
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
-    
-    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
-    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
 
     var backToEnrollment = Request["enrollment"] != null;
 }

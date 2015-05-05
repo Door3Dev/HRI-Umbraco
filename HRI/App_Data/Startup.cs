@@ -73,7 +73,9 @@ namespace HRI
             bundles.Add(new ScriptBundle("~/bundles/js")
                 .Include("~/Scripts/jquery-1.9.1.js")
                 .Include("~/Scripts/jquery.inputmask/jquery.inputmask.js")
-                .Include("~/scripts/jquery.inputmask/jquery.inputmask.regex.extensions.js"));
+                .Include("~/scripts/jquery.inputmask/jquery.inputmask.regex.extensions.js")
+                .Include("~/scripts/jquery.validate.min.js")
+                .Include("~/scripts/jquery.validate.unobtrusive.min.js"));
         }
 
         public void OnApplicationInitialized(

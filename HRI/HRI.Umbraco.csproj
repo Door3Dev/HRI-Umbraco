@@ -354,6 +354,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\jquery-1.9.1.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Umbraco.Courier.Core.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3196,6 +3197,7 @@
     <Content Include="umbraco\assets\less\shadow.less" />
     <Content Include="umbraco\assets\less\slider.less" />
     <Content Include="umbraco\Install\Views\Index.cshtml" />
+    <Content Include="scripts\jquery.validate.min.js" />
     <None Include="umbraco\Install\Views\Web.config" />
     <Content Include="umbraco\lib\bootstrap\less\accordion.less" />
     <Content Include="umbraco\lib\bootstrap\less\alerts.less" />
@@ -3375,6 +3377,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SendVerificationLinkModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HriApiService.cs" />
     <Compile Include="Services\MemberAnnouncementsService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\UserService.cs" />

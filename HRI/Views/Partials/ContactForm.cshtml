@@ -14,9 +14,6 @@
     Html.EnableClientValidation(true);
     Html.EnableUnobtrusiveJavaScript(true);
 
-    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
-    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
-
     var model = new ContactFormViewModel();
     if (User.Identity.IsAuthenticated)
     {
