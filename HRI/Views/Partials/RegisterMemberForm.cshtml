@@ -239,7 +239,7 @@
             </div>
         </div>
         <div class="row-fuild">
-            <div class="span2 offset5"><button class="btn cta cta-centered disable-after-click">Submit</button></div>
+            <div class="span2 offset5"><button class="btn cta cta-centered disable-after-click" id="submit-form" disabled="disabled">Submit</button></div>
             <div class="span4 submit-idle-helper"><span>Please Wait a Moment while we process your Registration</span></div>
         </div>
         @Html.HiddenFor(m => registerModel.PlanId, new { value = registerModel.PlanId })
@@ -328,6 +328,28 @@
         // Prevent paste in confirm email text box
         $('.nopaste').bind('paste', function (e) {
             e.preventDefault();
+        });
+
+        var validator = $('form').first().validate();
+        @if (string.IsNullOrEmpty(registerModel.PlanId)) 
+        {
+            <text>
+            $('#memberId').rules('add', {
+                required: true,
+                messages: {
+                    required: 'Member ID is required'
+                }
+            });
+            </text>
+        }
+
+        $("#register-form").bind('change keyup', function () {
+            
+            var isValid = validator.checkForm();
+            validator.submitted = {}; // hack to reset validation behavior as a side effect of checkForm call 
+            if (isValid) {
+                $("#submit-form").removeAttr('disabled');
+            }
         });
     });
 

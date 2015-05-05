@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlTypes;
-using System.Text.RegularExpressions;
 using HRI.Models;
 using System;
 using System.Web.Mvc;
@@ -11,7 +10,7 @@ namespace HRI.Controllers
 {
     public class RegisterSurfaceController : HriSufraceController
     {
-        public const string PasswordNotStrongEnough = "The password is not strong enough";
+        public const string PasswordNotStrongEnough = "";
 
         [HttpPost]
         [AllowAnonymous]
@@ -19,23 +18,8 @@ namespace HRI.Controllers
         {
             try
             {
-                // Verify that username and password arent the same.
-                if (model.Username == model.Password)
-                {
-                    ModelState.AddModelError("registerModel.Password", "Password cannot be the same as Username");
-                }
-                if (Regex.IsMatch(model.Username, "['\";!@#$%^&*]"))
-                {
-                    ModelState.AddModelError("registerModel.Username", "Username cannot contain next symbols ' \" ; ! @ # $ % ^ & * ");
-                }
-                if (string.IsNullOrEmpty(model.PlanId) && model.MemberId.Length != 9)
-                {
-                    ModelState.AddModelError("registerModel.MemberId", "The Member ID should have 9 characters.");
-                }
-
                 // Save Plan Id for the view
                 ViewData["PlanId"] = model.PlanId;
-                var error = false;
 
                 var enrollAfterLogin = Convert.ToInt32(model.PlanId != null).ToString();
 
@@ -47,7 +31,6 @@ namespace HRI.Controllers
                     if (errorMessage != null)
                     {
                         ModelState.AddModelError("registerModel.MemberId", errorMessage);
-                        error = true;
                     }
 
                     // if there's no error, try to get plan ID from api
@@ -66,36 +49,10 @@ namespace HRI.Controllers
                     if (!ComparePlansSurfaceController.IsValidZipCodeInternal(model.Zipcode))
                     {
                         ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
-                        error = true;
                     }
                 }
 
-                // Validate ZipCode Length, mask from front-end might have 5 characters, but contains "_" so check for that
-                if (!String.IsNullOrWhiteSpace(model.Zipcode) && (model.Zipcode.Length != 5 || model.Zipcode.Contains("_")))
-                {
-                    ModelState.AddModelError("registerModel.Zipcode", "Invalid Zip Code");
-                    error = true;
-                }
-
-                // Validate Phone Length
-                if (!String.IsNullOrWhiteSpace(model.Phone))
-                {
-                    var cleanPhone =
-                        model.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("_", "");
-                    if (cleanPhone.Length != 10)
-                    {
-                        ModelState.AddModelError("registerModel.Phone", "Invalid phone number");
-                        error = true;
-                    }
-                }
-
-                // Verify no spaces in UserName
-                if(model.Username.Contains(" "))
-                {
-                    ModelState.AddModelError("registerModel.Username", "Username may not contain spaces");
-                }
-
-                if (ModelState.IsValid == false || error)
+                if (!ModelState.IsValid)
                     return CurrentUmbracoPage();
 
                 // Create registration model and bind it with view model
