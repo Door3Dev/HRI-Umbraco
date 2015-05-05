@@ -2251,10 +2251,11 @@ body {
 
 .hri-login .login-form {
     margin-left: 15%!important;
+    height: 305px;
 }
 
 .hri-login .login-description {
-    height: 284px !important;
+    height: 305px !important;
     margin-left: 6%;
     width: 33%;
 }
