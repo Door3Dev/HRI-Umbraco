@@ -240,7 +240,7 @@ namespace HRI.Controllers
                 // Save the updated information
                 Services.MemberService.Save(member);
 
-                SendResetPasswordEmail(member.Email, member.Username, key.ToString());
+                SendResetPasswordEmail(member);
 
                 TempData["ForgotPasswordIsSuccessful"] = true;
                 TempData["memberEmail"] = member.Email;

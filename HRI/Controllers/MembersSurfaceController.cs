@@ -415,22 +415,17 @@ namespace HRI.Controllers
         }
 
         [HttpGet]
-        public ActionResult ResetPassword(string userName, string guid)
+        public ActionResult ResetPassword(int id, string guid)
         {
             try
             {
                 // Verify the member exists
-                var member = Membership.GetUser(userName);
-                if (member == null)
-                    return Redirect("/");
-
                 // Verify the user provided the correct guid
-                if (Services.MemberService.GetByUsername(userName).GetValue("guid").ToString() != guid.ToString())
-                {
+                var member = Services.MemberService.GetById(id);
+                if (member == null || member.GetValue<string>("guid") != guid)
                     return Redirect("/");
-                }
 
-                SetUserNameAndGuide(userName, guid);
+                SetUserNameAndGuide(member.Username, guid);
                 return Redirect("/for-members/reset-password/");
             }
             catch (Exception ex)

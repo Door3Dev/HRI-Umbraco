@@ -80,7 +80,7 @@ namespace HRI.Controllers
             smtp.Send(message);
         }
 
-        protected void SendResetPasswordEmail(string email, string username, string guid)
+        protected void SendResetPasswordEmail(IMember member)
         {
             // Get the Umbraco root node to access dynamic information (phone numbers, emails, ect)
             IPublishedContent root = Umbraco.TypedContentAtRoot().First();
@@ -89,12 +89,12 @@ namespace HRI.Controllers
             // Build a dictionary for all the dynamic text in the email template
             var dynamicText = new Dictionary<string, string>
             {
-                {"<%FirstName%>", username},
+                {"<%FirstName%>", member.Username},
                 {"<%PhoneNumber%>", root.GetProperty("phoneNumber").Value.ToString()},
                 {
                     "<%ResetPasswordLink%>",
                     protocol + "://" + Request.Url.Host + ":" + Request.Url.Port +
-                    "/umbraco/Surface/MembersSurface/ResetPassword?userName=" + username + "&guid=" + guid
+                    "/umbraco/Surface/MembersSurface/ResetPassword?id=" + member.Id + "&guid=" + member.GetValue<string>("guid")
                 }
             };
 
@@ -102,7 +102,7 @@ namespace HRI.Controllers
             var emailTemplateId = root.GetProperty("resetPasswordEmailTemplate").Value;
 
             // Send the email with the new password
-            SendEmail(email,
+            SendEmail(member.Email,
                         "Health Republic Insurance - Password Reset Link",
                         BuildEmail((int)emailTemplateId, dynamicText));
         }
@@ -291,7 +291,7 @@ namespace HRI.Controllers
             Services.MemberService.Save(member);
 
             // Reset the password and send an email to the user
-            SendResetPasswordEmail(member.Email, username, key.ToString());
+            SendResetPasswordEmail(member);
 
             return Redirect("/for-members/security-upgrade/");
         }
