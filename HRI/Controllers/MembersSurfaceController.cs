@@ -4,6 +4,7 @@ using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
 using CoverMyMeds.SAML.Library;
 using HRI.Models;
+using HRI.Services;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -305,7 +306,7 @@ namespace HRI.Controllers
             var user = Membership.GetUser();
             var member = Services.MemberService.GetByUsername(user.UserName);
 
-            if (user == null || !Membership.ValidateUser(user.UserName, model.Password))
+            if (!Membership.ValidateUser(user.UserName, model.Password))
             {
                 ModelState.AddModelError("changeEmailViewModel", IncorrectPassword);
             }
@@ -317,13 +318,17 @@ namespace HRI.Controllers
 
             try
             {
-                // Set the user's email address to the new supplied email address.
-                user.Email = model.Email;
-                // Update the User profile in the database
-                Membership.UpdateUser(user);
-
                 // Update Email with API
-                SyncEmail(member.GetValue("yNumber").ToString(), model.Email);
+                var hriService = new HriApiService();
+                var apiUpdateSuccess = hriService.UpdateUserEmail(member, model.Email);
+                // CMS should be updated only if API returns success
+                if (apiUpdateSuccess)
+                {
+                    // Set the user's email address to the new supplied email address.
+                    user.Email = model.Email;
+                    // Update the User profile in the database
+                    Membership.UpdateUser(user);
+                }
 
                 // Set the success flag to true
                 TempData["IsSuccessful"] = true;
@@ -477,35 +482,6 @@ namespace HRI.Controllers
             // Set the username and guid
             TempData["username"] = userName;
             TempData["guid"] = guid;
-        }
-
-        protected void SyncEmail(string memberId, string email)
-        {
-            try
-            {
-                var jsonData = new Dictionary<string, string> { { "MemberId", memberId }, { "EmailAddress", email } };
-                // Convert the dictionary to JSON
-                string myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
-
-                // Get ahold of the root/home node
-                IPublishedContent root = Umbraco.ContentAtRoot().First();
-                // Get the API uri
-                string apiUri = root.GetProperty("apiUri").Value.ToString();
-                // Apend the command to invoke the register function
-                string registerUserApi = apiUri + "/Registration?p1=" + email;
-
-                // Create a webclient object to post the user data
-                using (var client = new WebClient())
-                {
-                    // Set the format to JSON
-                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    client.UploadString(registerUserApi, myJsonString);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-            }
         }
     }
 }
