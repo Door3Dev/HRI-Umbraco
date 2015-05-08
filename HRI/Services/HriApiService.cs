@@ -20,7 +20,7 @@ namespace HRI.Services
             _contentService = ApplicationContext.Current.Services.ContentService;
         }
 
-        public bool UpdateUserEmail(IMember member)
+        public bool UpdateUserEmail(IMember member, string newEmail)
         {
             using (var client = new WebClient())
             {
@@ -28,7 +28,7 @@ namespace HRI.Services
                 var values = new Dictionary<string, string>
                 {
                     { "MemberId", member.GetValue<string>("yNumber") }, 
-                    { "EmailAddress", member.Email }
+                    { "EmailAddress", newEmail }
                 };
 
                 var jsonContent = new JavaScriptSerializer().Serialize(values);
