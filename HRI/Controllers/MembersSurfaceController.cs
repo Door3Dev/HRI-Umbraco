@@ -61,6 +61,7 @@ namespace HRI.Controllers
 
                 // get the member id (was IWS number) from the database 
                 var member = Services.MemberService.GetByUsername(User.Identity.Name);
+                logger.Info(string.Format("---------------------USER '{0}' initiated the SSO---------------------", member.Username));
 
                 // Create a dictionary of attributes to add to the SAML assertion
                 var attribs = new Dictionary<string, string>();
