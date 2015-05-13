@@ -3354,6 +3354,8 @@
     <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Controllers\Utils.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
+    <Compile Include="Helpers\RegistrationNotificationType.cs" />
+    <Compile Include="Helpers\RequireRouteValuesAttribute.cs" />
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />

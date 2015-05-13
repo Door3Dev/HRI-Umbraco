@@ -1,8 +1,8 @@
-﻿using System.Web.Script.Serialization;
-using System.Xml;
+﻿using System.Xml;
 using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
 using CoverMyMeds.SAML.Library;
+using HRI.Helpers;
 using HRI.Models;
 using HRI.Services;
 using Newtonsoft.Json.Linq;
@@ -235,10 +235,9 @@ namespace HRI.Controllers
             }
         }
 
+        [RequireRouteValues(new[] { "id", "guid" })]
         public ActionResult ActivateUser(int id, string guid)
         {
-            // Variable to hold status of registering user against HRI API
-            bool regSuccess;
             var protocol = Request.IsSecureConnection ? "https" : "http";
             // String to api call to register the current user
 
@@ -254,6 +253,8 @@ namespace HRI.Controllers
                 if (!string.Equals(userGuid, guid, StringComparison.OrdinalIgnoreCase))
                     throw new InvalidOperationException(string.Format("Guid '{0}' does not match user '{1}'", guid, userName));
 
+                // Variable to hold status of registering user against HRI API
+                bool regSuccess;
                 using (var client = new WebClient())
                 {
                     // Call the register function (Registers user with HRI API)
@@ -283,7 +284,7 @@ namespace HRI.Controllers
                     // Save the member
                     Services.MemberService.Save(member);
                     // Send the user to the login page
-                    TempData["IsUserSuccessfullyRegistered"] = true;
+                    TempData["RegistrationResult"] = RegistrationNotificationType.Success;
                     return Redirect("/for-members/login");
                 }
             }
@@ -292,7 +293,14 @@ namespace HRI.Controllers
                 logger.Error(ex);
             }
 
-            TempData["IsUserSuccessfullyRegistered"] = false;
+            TempData["RegistrationResult"] = RegistrationNotificationType.Error;
+            return Redirect("/for-members/login");
+        }
+
+        [RequireRouteValues(new[] { "username", "guid" }), ActionName("ActivateUser")]
+        public ActionResult DeprecatedActivateUser(string username, string guid)
+        {
+            TempData["RegistrationResult"] = RegistrationNotificationType.DeprecatedUrlError;
             return Redirect("/for-members/login");
         }
 

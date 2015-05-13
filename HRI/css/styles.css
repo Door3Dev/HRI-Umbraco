@@ -804,6 +804,10 @@ ul.plan-fineprint li p {
     text-align: center;
 }
 
+.flowbar .container a {
+    color: white;
+}
+
 /* END Flow Bar */
 
 li.dashlink {

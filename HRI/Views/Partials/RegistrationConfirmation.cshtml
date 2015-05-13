@@ -1,9 +1,10 @@
-﻿@inherits UmbracoTemplatePage
+﻿@using HRI.Helpers
+@inherits UmbracoTemplatePage
 
 @{
-    var registeredSuccessfully = (bool?)TempData["IsUserSuccessfullyRegistered"];
+    var type = (RegistrationNotificationType?)TempData["RegistrationResult"];
 
-    if (!registeredSuccessfully.HasValue)
+    if (!type.HasValue)
     {
         return;
     }
@@ -11,11 +12,15 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top flowbar" data-flowseconds="0">
     <div class="container">
-        @if (registeredSuccessfully.Value)
+        @if (type.Value == RegistrationNotificationType.Success)
         {
             <p>Your new Health Republic Insurance of New York account has been verified successfully, <br />you may now login using the user name and password set during registration.</p>
         }
-        else
+        else if (type.Value == RegistrationNotificationType.DeprecatedUrlError)
+        {
+            <p>There was an error validating your account. The link is no longer valid.<br /> Please <a href="/for-members/resend-email">click here</a> to resend email verification link again. </p>
+        }
+        else if (type.Value == RegistrationNotificationType.Error)
         {
             <p>There was an error validating your account. Your account may have already been validated. <br />Please try logging in at the site or contact Health Republic New York.</p>
         }
