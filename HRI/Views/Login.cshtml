@@ -1,7 +1,9 @@
 ﻿
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@inherits UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
+    var autoLogOff = Request["autologoff"] != null;
+    var enlargeColumn = !ViewData.ModelState.IsValid || autoLogOff ? "large" : String.Empty;
 }
 
 @if(User.Identity.IsAuthenticated)
@@ -12,11 +14,11 @@
 <div id="hri-content" class="hri-login">
     <div class="row-fluid">
         <div class="row-fluid">
-            <div class="span4 well login-form">
+            <div class="span4 well login-form @(enlargeColumn)">
                 @{Html.RenderPartial("LoginForm");}
             </div>
 
-            <div class="span5 well login-description">
+            <div class="span5 well login-description @(enlargeColumn)">
                 <h3>Need to register?</h3>
                 <a href="~/for-members/register">Click here</a> to register for an online account.
                 <br>

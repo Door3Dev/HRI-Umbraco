@@ -2264,6 +2264,11 @@ body {
     width: 33%;
 }
 
+.hri-login .login-description.large,
+.hri-login .login-form.large {
+    height: 350px !important;
+}
+
 .hri-login .login-footer {
     margin-left: 15%!important;
 }
