@@ -90,7 +90,8 @@
             }
 
             try {
-                if (this.contentWindow.location.href.indexOf(location.host) == -1)
+                var currentUrl = this.contentWindow.location.href;
+                if (currentUrl.indexOf('sso/unavailable') != -1 || currentUrl.indexOf(location.host) == -1)
                     hideLoader();
             } catch (err) {
                 hideLoader();
