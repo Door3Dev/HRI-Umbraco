@@ -971,6 +971,10 @@ li.dashlink form button {
     border-right: 1px solid #999;
 }
 
+
+.border-left {
+    border-left: 1px solid #999;
+}
 /* END Borders */
 
 .centered {
