@@ -3321,6 +3321,8 @@
     <Content Include="Views\Login.Mobile.cshtml" />
     <Content Include="Views\Partials\Header.Mobile.cshtml" />
     <Content Include="Views\MasterPageMobileSimple.cshtml" />
+    <Content Include="Views\MembershipProfile.cshtml" />
+    <Content Include="Views\Partials\MembershipInformationPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3349,6 +3351,7 @@
     <Compile Include="Controllers\EmailSurfaceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginSurfaceController.cs" />
+    <Compile Include="Controllers\MemberInformationSurfaceController.cs" />
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\SAMLController.cs" />
@@ -3361,9 +3364,12 @@
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
     <Compile Include="Models\ComparePlansViewModel.cs" />
     <Compile Include="Models\ContactFormViewModel.cs" />
+    <Compile Include="Models\DependentInformation.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ForgotUserNameViewModel.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberAnnouncement.cs" />
+    <Compile Include="Models\MembershipInformationViewModel.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\LoginFormViewModel.cs">
       <SubType>Code</SubType>
@@ -3378,9 +3384,11 @@
     <Compile Include="Models\RegisterFormViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SendVerificationLinkModel.cs" />
+    <Compile Include="Models\SubscriberInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HriApiService.cs" />
     <Compile Include="Services\MemberAnnouncementsService.cs" />
+    <Compile Include="Services\MemberInformationService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
