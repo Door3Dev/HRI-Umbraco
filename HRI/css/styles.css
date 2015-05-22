@@ -2253,24 +2253,36 @@ body {
   background-color: #451d5c;
 }
 
-.hri-login .login-form {
-    margin-left: 15%!important;
-    height: 305px;
+.hri-login .container {
+    padding: 0 11%;
+}
+.hri-login .top,
+.hri-login .bottom {
+    display: inline-block;
+    width: 255px;
+    vertical-align: top;
+    padding: 20px;
 }
 
-.hri-login .login-description {
-    height: 305px !important;
-    margin-left: 6%;
-    width: 33%;
+.hri-login .bottom {
+    vertical-align: bottom;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    height: 250px;
+    margin-bottom: -1px;
+    margin-left: 40px;
 }
 
-.hri-login .login-description.large,
-.hri-login .login-form.large {
-    height: 350px !important;
+.hri-login .top {
+    margin-left: -301px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-bottom: none;
 }
 
 .hri-login .login-footer {
     margin-left: 15%!important;
+    padding-top: 30px;
 }
 
 
