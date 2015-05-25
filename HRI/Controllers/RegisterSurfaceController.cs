@@ -10,7 +10,7 @@ namespace HRI.Controllers
 {
     public class RegisterSurfaceController : HriSufraceController
     {
-        public const string PasswordNotStrongEnough = "";
+        public const string PasswordNotStrongEnough = "The password is not strong enough";
 
         [HttpPost]
         [AllowAnonymous]
