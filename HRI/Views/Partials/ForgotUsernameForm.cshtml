@@ -1,7 +1,7 @@
 ﻿@using ClientDependency.Core.Mvc
 @using HRI.Models
 @using HRI.Controllers
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@inherits UmbracoTemplatePage
 
 @{
     Layout = null;
@@ -10,7 +10,6 @@
     Html.EnableUnobtrusiveJavaScript(true);
 
 	var forgotUserNameViewModel = new ForgotUserNameViewModel();
-
     var homePage = CurrentPage.AncestorsOrSelf(1).First(); 
 }
 
@@ -20,15 +19,17 @@
 {
     if(Convert.ToBoolean(TempData["ForgotUsernameIsSuccessful"]))
     {
-        <h3>Membership information found!</h3>
+        <h4>Membership information found!</h4>
         <p>@Umbraco.Field("SuccessMessage")</p>
+        <br>
+        <p style="text-align:center"><a href="/for-members/login">Click Here</a> to login.</p>
     }
     else
     {
         if (Convert.ToBoolean(TempData["EmailNotFound"]))
         {
             @Html.ValidationSummary(true)
-            <h3 class="purple">Member not found</h3>
+            <h4>Member not found</h4>
             <p>No member with that email was able to be found. Please make sure the email address you entered was correct.</p>
             <p>If you believe this is an error, please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
             <p>@Html.ValidationSummary("forgotUserNameViewModel", false)</p>
@@ -36,7 +37,7 @@
         else
         {
             @Html.ValidationSummary(true)
-            <h3>Membership look up failed.</h3>
+            <h4>Membership look up failed.</h4>
             <p>We apologize, but something seems to have gone wrong with looking up your username. Our site administrator has been notified.</p>
             <p>Please contact us directly on our telephone help line: @Html.Raw(homePage.phoneNumber).</p>
             <p>@Html.ValidationSummary("forgotUserNameViewModel", false)</p>

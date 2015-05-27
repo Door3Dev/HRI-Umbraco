@@ -1,23 +1,17 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
 }
 <div id="hri-content">
-        <div class="row-fluid">
+    <div class="row-fluid">
 
-          <div class="span4 offset4 well regular-form">
+        <div class="span4 offset4 well regular-form">
 
-            <h3>@Umbraco.Field("FormTitle")</h3>
+        <h3>@Umbraco.Field("FormTitle")</h3>
 
-            @{Html.RenderPartial("ForgotUsernameForm", Model.Content);}
+        @{Html.RenderPartial("ForgotUsernameForm", Model.Content);}
 
-            <div id="change_confirmation"></div>
-
-            <!-- major-col-content -->
-          </div>
-          <!-- major-col -->
-
-          <!-- blank -->
-          <!-- minor-col -->
+        <div id="change_confirmation"></div>
         </div>
-      </div>
+    </div>
+</div>
