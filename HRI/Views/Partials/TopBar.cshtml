@@ -13,7 +13,7 @@
       {
           if (@Members.GetByUsername(User.Identity.Name) != null)
           { 
-              <span>Hello, @Members.GetByUsername(User.Identity.Name).GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
+              <span>Hello, @Members.GetCurrentMember().GetPropertyValue("firstName", User.Identity.Name) | @Html.ActionLink("Log out", "Logout", "MembersSurface")</span>
           }
           else
           {

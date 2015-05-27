@@ -1,8 +1,20 @@
-﻿@using HRI.Services
+﻿@using HRI.Services;
 @inherits UmbracoTemplatePage
 @{
     Layout = "MasterPage.cshtml";
     var announcements = new MemberAnnouncementsService().GetList().ToList();
+    var member = Members.GetCurrentMember();
+    var firstName = member.GetPropertyValue<string>("msFirstName");
+    var lastName = member.GetPropertyValue<string>("msLastName");
+    string welcomeMessage = "Welcome!";
+    if (!firstName.IsNullOrWhiteSpace() && !lastName.IsNullOrWhiteSpace())
+    {
+        welcomeMessage = string.Format("Welcome, {0} {1}!", firstName, lastName);
+    }
+    else if (!firstName.IsNullOrWhiteSpace() && lastName.IsNullOrWhiteSpace())
+    {
+        welcomeMessage = string.Format("Welcome, {0}!", firstName);
+    }
 }
 <div id="hri-content" class="hri-member-center">
     <div class="row-fluid">
@@ -15,6 +27,7 @@
             <div id="member-center" class="content">
                 <div class="row-fluid">
                     <div class="span10 offset1">
+                        <span class="lead">@welcomeMessage</span>
                         @Umbraco.Field("Row1Content")
                         
                         @if (announcements.Any())
