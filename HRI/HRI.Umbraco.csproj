@@ -301,19 +301,6 @@
     <Content Include="config\splashes\noNodes.aspx" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\fonts.css" />
-    <Content Include="css\ie7.css" />
-    <Content Include="css\ie8.css" />
-    <Content Include="css\ie9.css" />
-    <Content Include="css\images\highlight.png" />
-    <Content Include="css\images\icons-contact.png" />
-    <Content Include="css\images\icons-meta.png" />
-    <Content Include="css\images\icons-special.png" />
-    <Content Include="css\images\overlay.png" />
-    <Content Include="css\skel-noscript.css" />
-    <Content Include="css\style-1000px.css" />
-    <Content Include="css\style-desktop.css" />
-    <Content Include="css\style-mobile.css" />
-    <Content Include="css\style.css" />
     <Content Include="default.aspx" />
     <Content Include="FluentNHibernate.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -342,11 +329,6 @@
     <Content Include="images\radio-checked.png" />
     <Content Include="images\radio.png" />
     <Content Include="images\saml-loader.GIF" />
-    <Content Include="js\config.js" />
-    <Content Include="js\html5shiv.js" />
-    <Content Include="js\jquery.min.js" />
-    <Content Include="js\skel-panels.min.js" />
-    <Content Include="js\skel.min.js" />
     <Content Include="NHibernate.ByteCode.Castle.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
