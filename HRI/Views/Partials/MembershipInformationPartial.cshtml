@@ -203,7 +203,10 @@
                             @Html.LabelFor(m => m.CoverageStartDate)
                         </div>
                         <div class="span8 text-left">
-                            @Model.CoverageStartDate.ToString("MM/dd/yyyy")
+                            @if (Model.CoverageStartDate.Year != 1900)
+                            {
+                                @Model.CoverageStartDate.ToString("MM/dd/yyyy")    
+                            }
                         </div>
                     </div>
 
@@ -212,7 +215,11 @@
                             @Html.LabelFor(m => m.MonthlyPremiumAmount)
                         </div>
                         <div class="span8 text-left">
-                            @Model.MonthlyPremiumAmount.ToString("C")
+                            @if (Model.MonthlyPremiumAmount != 0.0M)
+                            {
+                                @Model.MonthlyPremiumAmount.ToString("C")
+                                @Html.Label("change")    
+                            }
                         </div>
                     </div>
                 </div>
