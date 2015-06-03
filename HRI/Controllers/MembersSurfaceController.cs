@@ -31,6 +31,10 @@ namespace HRI.Controllers
             {
                 Session.Clear();
                 FormsAuthentication.SignOut();
+
+                if (Request.Browser.IsMobileDevice)
+                    return Redirect("/for-members/login");
+
                 return Redirect("/");
             }
             catch (Exception ex)
