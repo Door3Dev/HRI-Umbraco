@@ -31,6 +31,10 @@ namespace HRI.Controllers
             {
                 Session.Clear();
                 FormsAuthentication.SignOut();
+
+                if (Request.Browser.IsMobileDevice)
+                    return Redirect("/for-members/login");
+
                 return Redirect("/");
             }
             catch (Exception ex)
@@ -40,7 +44,7 @@ namespace HRI.Controllers
                 // Add the error message to the log4net output
                 GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 // Log the error
-                logger.Error("Log out erro", ex);
+                logger.Error("Log out error", ex);
                 return Redirect("/");
             }
         }
