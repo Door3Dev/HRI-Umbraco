@@ -83,19 +83,34 @@
     }
     
     <script type="text/javascript">
+        var lastUrlUpdate;
+        var shouldCheckPage = true;
         $('#serviceProviderIFrame').load(function () {
             function hideLoader() {
                 $('#serviceProviderIFrame').show();
                 $('#samlLoader').hide();
+                shouldCheckPage = false;
             }
 
             try {
                 var currentUrl = this.contentWindow.location.href;
+                lastUrlUpdate = new Date();
                 if (currentUrl.indexOf('sso/unavailable') != -1 || currentUrl.indexOf(location.host) == -1)
                     hideLoader();
             } catch (err) {
                 hideLoader();
             }
         });
+
+        var pageCheckInterval = setInterval(function () {
+            if (!shouldCheckPage) {
+                clearInterval(pageCheckInterval);
+                return;
+            }
+            var currentTime = new Date();
+            var diff = (currentTime - lastUrlUpdate) / 1000;
+            if (diff > 35)
+                window.location.replace('/sso/unavailable');
+        }, 5000);
     </script>
 </div>		
