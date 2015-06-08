@@ -323,6 +323,7 @@
     <Content Include="images\icon_facebook.png" />
     <Content Include="images\icon_linkedin.png" />
     <Content Include="images\icon_twitter.png" />
+    <Content Include="images\icon_youtube.png" />
     <Content Include="images\mobileUI-site-nav-opener-bg.svg" />
     <Content Include="images\mobileUI-site-nav.svg" />
     <Content Include="images\nav-user.png" />
