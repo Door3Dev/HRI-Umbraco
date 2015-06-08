@@ -57,4 +57,9 @@
     $('#focus').keydown(function() {
         $('#autologoff-message').hide();
     });
+    $('form').submit(function () {
+        if ($(this).valid && $(this).valid()) {
+            $(this).find('button').text('One moment please...');
+        }
+    });
 </script>
