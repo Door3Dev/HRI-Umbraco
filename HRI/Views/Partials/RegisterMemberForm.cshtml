@@ -308,7 +308,7 @@
 
     // Check user uniqueness
     $("#username").keyup(function() {
-        if ($('#username').val().length > 0) {
+        if ($('#username').val().length >= 6) {
             if ($('#username').val().indexOf(' ') > -1) {
                 $('#userNameCheck').html("<span class='error'>Username may not contain spaces</span>");
             }
@@ -327,7 +327,7 @@
                 });
             }
         } else
-            $('#userNameCheck').html('');
+            $('#userNameCheck').html('<span class="error">Username must be at least 6 characters</span>');
     });
 
     $(document).ready(function () {
