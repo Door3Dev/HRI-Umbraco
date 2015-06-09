@@ -33,6 +33,7 @@ namespace HRI.Models
         public DateTime EnrolledOn { get; set; }
         public DateTime LastChange { get; set; }
         public string Relationship { get; set; }
+        public string CoverageType { get; set; }
         public List<DependentInformation> Dependents { get; set; }
     }
 }

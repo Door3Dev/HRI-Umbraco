@@ -34,11 +34,13 @@ namespace HRI.Controllers
                 }
                 else
                 {
+                    logger.Error("No information for the member was available in the WEB ODS for member id: " + memberId);
                     return PartialView("MembershipInformationPartial", new MembershipInformationViewModel());
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                logger.Error("No Member profile information for member id: " + memberId + ", because of error: " + ex.Message);
                 return PartialView("MembershipInformationPartial", new MembershipInformationViewModel());
             }            
             
