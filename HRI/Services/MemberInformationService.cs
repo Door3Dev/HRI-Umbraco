@@ -160,6 +160,7 @@ namespace HRI.Services
             model.Market = subInfo.Market;
             model.CoverageStartDate = subInfo.EnrolledOn;
             model.MonthlyPremiumAmount = (decimal)subInfo.PremiumAmount;
+            model.CoverageType = subInfo.CoverageType;
 
             if (subInfo.Dependents.Count > 0)
             {
