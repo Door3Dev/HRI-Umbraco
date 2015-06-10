@@ -99,7 +99,10 @@ namespace HRI.Models
         [Display(Name = "Plan Name: ")]
         public string PlanName { get; set; }
 
-        [Display(Name="Coverage Level")]
+        [Display(Name = "Coverage Type: ")]
+        public string CoverageType { get; set; }
+
+        [Display(Name="Market: ")]
         public string Market { get; set; }
 
         [Display(Name = "Coverage Start Date:")]
@@ -108,6 +111,8 @@ namespace HRI.Models
         [Display(Name = "Monthly Cost: ")]
         public decimal MonthlyPremiumAmount { get; set; }
 
+
+        
         public List<DependentInformation> Dependents { get; set; }
     }
 }
