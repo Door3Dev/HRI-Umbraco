@@ -5,12 +5,12 @@
     Layout = "MasterPage.cshtml";
 
     <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
-    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString()); 
+    var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString());
     var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
     var pageType = @Umbraco.Field("pageType").ToString();
     var formTarget = (pageType == "Redirect into same tab") ? "" : "serviceProviderIFrame";
     var serviceProvider = @Umbraco.Field("serviceProvider").ToString();
-    
+
     string sp;
     if (serviceProvider == "Morneau Shepell")
         sp = "SBCSystems";
@@ -26,13 +26,13 @@
         sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx?mobile=1";
     else if (serviceProvider == "StatDoctors")
         sp = "StatDoctors";
-    else 
+    else
         throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
-    
-    <!-- If the url needs the Ebix Id parameter added to it-->          
-	var frameHeight = Umbraco.Field("frameHeight").ToString();
-	if(frameHeight==""){ frameHeight = "900px";}
-	
+
+    <!-- If the url needs the Ebix Id parameter added to it-->
+    var frameHeight = Umbraco.Field("frameHeight").ToString();
+    if (frameHeight == "") { frameHeight = "900px"; }
+
 }
 
 <div class="hri-common-hp row-fluid">
@@ -58,7 +58,7 @@
         else
         {
             if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
-            {            
+            {
                 <script>
                     $.ajax({
                         url: "/umbraco/api/HriApi/GetEbixIdByUserName?username=@Membership.GetUser().UserName",
@@ -76,12 +76,12 @@
             }
         }
     </div>
-    
+
     @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = @formTarget }))
     {
         <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
     }
-    
+
     <script type="text/javascript">
         var lastUrlUpdate;
         var shouldCheckPage = true;
