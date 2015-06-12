@@ -2478,7 +2478,7 @@ body {
     color: red;
 }
 
-.hri-registration .validation-summary-errors ul {
+.hri-registration .validation-summary-errors ul { 
     list-style-type: disc;
 }
 
