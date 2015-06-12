@@ -108,7 +108,6 @@ namespace HRI.Controllers
                 if (string.Compare(member.GetValue<string>("market"), market, StringComparison.OrdinalIgnoreCase) != 0)
                 {
                     member.SetValue("market", market);
-                    Services.MemberService.Save(member);
                 }
 
                 if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
@@ -126,13 +125,28 @@ namespace HRI.Controllers
                     }
                 }
 
+                if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) ==
+                    0)
+                {
+                    if (!Roles.IsUserInRole("Subscriber"))
+                    {
+                        Roles.AddUserToRole(model.Username, "Subscriber");
+                    }
+                }
+                else
+                {
+                    if (Roles.IsUserInRole(model.Username, "Subscriber"))
+                    {
+                        Roles.RemoveUserFromRole(model.Username, "Subscriber");
+                    }
+                }
+
                 // Keep Ms First Name and Last Name always up to date
                 member.Properties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
                 member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
                 member.Properties.First(p=>p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
                 member.Properties.First(p=>p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
                 member.Properties.First(p => p.Alias == "effectiveYear").Value = hriUser["PlanEffectiveDate"].ToString();
-                Services.MemberService.Save(member);
 
                 // User should pass enrollment process
                 if (member.GetValue<string>("enrollmentpageafterlogin") == "1")
@@ -149,15 +163,12 @@ namespace HRI.Controllers
                     // Save Group Id, Birthday, Plan Id, Plan Name, add user as enrolled
                     member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
                     member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
-                    member.Properties.First(p => p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
-                    member.Properties.First(p => p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
-                    member.Properties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
-                    member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
                     Roles.AddUserToRole(model.Username, "Enrolled");
 
                     member.SetValue("enrollmentpageafterlogin", String.Empty);
-                    Services.MemberService.Save(member);
                 }
+
+                Services.MemberService.Save(member);
 
                 //if there is a specified path to redirect to then use it
                 if (!string.IsNullOrEmpty(model.RedirectUrl))

@@ -115,16 +115,17 @@
 
         <div class="span4 navigation">
             <ul class="unstyled expand-list">
-                <li class="expand-group">
-                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Profile & Benefits</span></h3>
-                    <div class="expand-content" style="display: none;">
-                        <ul>
-							<li><a href="/your-account/membership-profile/">My Membership Profile</a></li>
-                            @*<li><a href="/your-account/my-profile/">My Profile</a></li>
-                            <li><a href="/your-account/my-current-plan/">My Current Plan</a></li>*@
-                        </ul>
-                    </div>
-                </li>
+                @if (Roles.IsUserInRole("Subscriber"))
+                {
+                    <li class="expand-group">
+                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Profile & Benefits</span></h3>
+                        <div class="expand-content" style="display: none;">
+                            <ul>
+                                <li><a href="/your-account/membership-profile/">My Membership Profile</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                }
 
                 <li class="expand-group">
                     <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Account Info</span></h3>
@@ -148,13 +149,15 @@
                         </div>
                     </li>
                 }
-
-                <li class="expand-group">
-                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Claims</span></h3>
-                    <div class="expand-content" style="display: none;">
-                        <p><a href="/your-account/my-claims/">View claims</a> for services received from your provider.</p>
-                    </div>
-                </li>
+                @if (Roles.IsUserInRole("Subscriber"))
+                {
+                    <li class="expand-group">
+                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Claims</span></h3>
+                        <div class="expand-content" style="display: none;">
+                            <p><a href="/your-account/my-claims/">View claims</a> for services received from your provider.</p>
+                        </div>
+                    </li>
+                }
 
                 <li class="expand-group">
                     <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Pharmacy</span></h3>
@@ -162,21 +165,15 @@
                         <p><a href="/your-account/pharmacy/" target="_blank">Search for a pharmacy, get information on prescribed drugs and their costs, and more.</a></p>
                     </div>
                 </li>
-
-                <li class="expand-group">
-                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Temporary ID Card</span></h3>
-                    <div class="expand-content" style="display: none;">
-                        <p><a href="/your-account/temporary-id-card/">Print</a> a temporary copy of your Member ID card.</p>
-                    </div>
-                </li>
-
-                @*<li class="expand-group">
-                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Eligibility</span></h3>
-                    <div class="expand-content" style="display: none;">
-                        <p><a href="/your-account/eligibility/">View Coverage information</a>: See who's covered, the coverage dates, and the Member IDs for your plan.</a></p>
-                    </div>
-                </li>*@
-
+                @if (Roles.IsUserInRole("Subscriber"))
+                {
+                    <li class="expand-group">
+                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Temporary ID Card</span></h3>
+                        <div class="expand-content" style="display: none;">
+                            <p><a href="/your-account/temporary-id-card/">Print</a> a temporary copy of your Member ID card.</p>
+                        </div>
+                    </li>
+                }
                 <li class="expand-group">
                     <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Resourcess</span></h3>
                     <div class="expand-content" style="display: none;">
