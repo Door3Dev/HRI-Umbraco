@@ -231,23 +231,23 @@
                 @Html.ValidationMessageFor(m => registerModel.Password)
             </div>
         </div>
+        <div class="row-fluid block">
         @if (isNewUser)
         {
-            <div class="row-fluid block">
-                <div class="span5 desc">				
-                    <h3>@Umbraco.Field("OptionalHeader")</h3>
-                    @Umbraco.Field("OptionalContent")
-                </div>
-                <div class="span7">
-                    @Html.Label("Phone Number")
-                    @Html.TextBoxFor(
-                        m => registerModel.Phone,
-                        new {data_inputmask = string.Format("'mask': '{0}'", RegisterFormViewModel.PhoneInputMask)})
-                    @Html.ValidationMessageFor(m => registerModel.Phone)
-                    <div id="phoneNumberCheck"></div>
-                </div>
+            <div class="span5 desc">				
+                <h3>@Umbraco.Field("OptionalHeader")</h3>
+                @Umbraco.Field("OptionalContent")
+            </div>
+            <div class="span7">
+                @Html.Label("Phone Number")
+                @Html.TextBoxFor(
+                    m => registerModel.Phone,
+                    new {data_inputmask = string.Format("'mask': '{0}'", RegisterFormViewModel.PhoneInputMask)})
+                @Html.ValidationMessageFor(m => registerModel.Phone)
+                <div id="phoneNumberCheck"></div>
             </div>
         }
+        </div>
         <div class="row-fuild">
             <div class="span2 offset5"><button class="btn cta cta-centered disable-after-click" id="submit-form" disabled="disabled">Submit</button></div>
             <div class="span4 submit-idle-helper"><span>Please Wait a Moment while we process your Registration</span></div>

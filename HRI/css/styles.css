@@ -2487,6 +2487,10 @@ body {
     margin: -5px 0 10px 0;
 }
 
+#register-form .btn {
+    padding: 11px 35px;
+}
+
 /* ------------ COMPARE PLANS ------------ */
 
 .hri-compare-plans h3 {
