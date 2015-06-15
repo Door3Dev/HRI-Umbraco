@@ -10,7 +10,7 @@
     if (!firstName.IsNullOrWhiteSpace() && !lastName.IsNullOrWhiteSpace())
     {
         welcomeMessage = string.Format("Welcome, {0} {1}!", firstName, lastName);
-    }
+}
     else if (!firstName.IsNullOrWhiteSpace() && lastName.IsNullOrWhiteSpace())
     {
         welcomeMessage = string.Format("Welcome, {0}!", firstName);
@@ -117,14 +117,16 @@
             <ul class="unstyled expand-list">
                 @if (Roles.IsUserInRole("Subscriber"))
                 {
-                    <li class="expand-group">
-                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Profile & Benefits</span></h3>
-                        <div class="expand-content" style="display: none;">
-                            <ul>
-                                <li><a href="/your-account/membership-profile/">My Membership Profile</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                <li class="expand-group">
+                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Profile & Benefits</span></h3>
+                    <div class="expand-content" style="display: none;">
+                        <ul>
+							<li><a href="/your-account/membership-profile/">My Membership Profile</a></li>
+                            <li><a href="/your-account/my-profile/">My Profile</a></li>
+                            <li><a href="/your-account/my-current-plan/">My Current Plan</a></li>
+                        </ul>
+                    </div>
+                </li>
                 }
 
                 <li class="expand-group">
@@ -151,12 +153,12 @@
                 }
                 @if (Roles.IsUserInRole("Subscriber"))
                 {
-                    <li class="expand-group">
-                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Claims</span></h3>
-                        <div class="expand-content" style="display: none;">
-                            <p><a href="/your-account/my-claims/">View claims</a> for services received from your provider.</p>
-                        </div>
-                    </li>
+                <li class="expand-group">
+                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Claims</span></h3>
+                    <div class="expand-content" style="display: none;">
+                        <p><a href="/your-account/my-claims/">View claims</a> for services received from your provider.</p>
+                    </div>
+                </li>
                 }
 
                 <li class="expand-group">
@@ -167,12 +169,12 @@
                 </li>
                 @if (Roles.IsUserInRole("Subscriber"))
                 {
-                    <li class="expand-group">
-                        <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Temporary ID Card</span></h3>
-                        <div class="expand-content" style="display: none;">
-                            <p><a href="/your-account/temporary-id-card/">Print</a> a temporary copy of your Member ID card.</p>
-                        </div>
-                    </li>
+                <li class="expand-group">
+                    <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>Temporary ID Card</span></h3>
+                    <div class="expand-content" style="display: none;">
+                        <p><a href="/your-account/temporary-id-card/">Print</a> a temporary copy of your Member ID card.</p>
+                    </div>
+                </li>
                 }
                 <li class="expand-group">
                     <h3 class="expand-link"><span class="expand-toggle">[ + ]</span><span>My Resourcess</span></h3>
