@@ -4,32 +4,47 @@
 @{
     Layout = "MasterPage.cshtml";
 
-    <!-- These if statements are used to associate a service providers name with their SAML name in the SAML.config file -->
     var url = HttpUtility.HtmlDecode(Umbraco.Field("IframeUrl").ToHtmlString());
-    var targetUrl = @Umbraco.Field("samlTargetUrl").ToString();
-    var pageType = @Umbraco.Field("pageType").ToString();
+    var targetUrl = Model.Content.GetPropertyValue<string>("samlTargetUrl");
+    var pageType = Model.Content.GetPropertyValue<string>("pageType");
     var formTarget = (pageType == "Redirect into same tab") ? "" : "serviceProviderIFrame";
-    var serviceProvider = @Umbraco.Field("serviceProvider").ToString();
+    var serviceProvider = Model.Content.GetPropertyValue<string>("serviceProvider");
+    var useSSO = Model.Content.GetPropertyValue<bool>("sendSamlAssertion");
 
-    string sp;
-    if (serviceProvider == "Morneau Shepell")
-        sp = "SBCSystems";
-    else if (serviceProvider == "MagnaCare")
-        sp = "MagnaCare";
-    else if (serviceProvider == "US Script")
-        sp = "USScript";
-    else if (serviceProvider == "Adam / Ebix")
-        sp = "AdamEbix";
-    else if (serviceProvider == "HealthX")
-        sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
-    else if (serviceProvider == "HealthX Mobile")
-        sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx?mobile=1";
-    else if (serviceProvider == "StatDoctors")
-        sp = "StatDoctors";
-    else
-        throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
+    string sp = string.Empty;
 
-    <!-- If the url needs the Ebix Id parameter added to it-->
+    if (useSSO)
+    {
+        @* These statements are used to associate a service providers name
+            with their SAML name in the SAML.config file *@
+        switch (serviceProvider)
+        {
+            case "Morneau Shepell":
+                sp = "SBCSystems";
+                break;
+            case "MagnaCare":
+                sp = "MagnaCare";
+                break;
+            case "US Script":
+                sp = "USScript";
+                break;
+            case "Adam / Ebix":
+                sp = "AdamEbix";
+                break;
+            case "HealthX":
+                sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx";
+                break;
+            case "HealthX Mobile":
+                sp = "https://secure.healthx.com/PublicService/SSO/AutoLogin.aspx?mobile=1";
+                break;
+            case "StatDoctors":
+                sp = "StatDoctors";
+                break;
+            default:
+                throw new NotImplementedException(string.Format("Unknown service provider: '{0}'.", Umbraco.Field("serviceProvider")));
+        }
+    }
+
     var frameHeight = Umbraco.Field("frameHeight").ToString();
     if (frameHeight == "") { frameHeight = "900px"; }
 
@@ -37,34 +52,67 @@
 
 <div class="hri-common-hp row-fluid">
     <div class="span12">
-        <div class="row-fluid" id="samlLoader" style="height: @frameHeight">
-            <div class="span5 status">
-                <span>Fetching your information...</span>
-            </div>
-            <div class="span7 loader">
-                <img src="/images/saml-loader.gif" />
-            </div>
-        </div>
-        @if (Umbraco.Field("sendSamlAssertion").ToString().ToLower() == "true")
+        @if (useSSO)
         {
+            <div class="row-fluid" id="samlLoader" style="height: @frameHeight">
+                <div class="span5 status">
+                    <span>Fetching your information...</span>
+                </div>
+                <div class="span7 loader">
+                    <img src="/images/saml-loader.gif" />
+                </div>
+            </div>
             <iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src="#" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>
+            using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl, partnerSP = sp }, new { target = @formTarget }))
+            {
+                <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
+            }
             <script type="text/javascript">
-                function loadIFrame() {
-                    document.getElementById("urlLoader").click();
-                };
-                window.onload = function () { loadIFrame(); };
+                document.getElementById("urlLoader").click();
+            </script>
+
+            <script type="text/javascript">
+                var lastUrlUpdate;
+                var shouldCheckPage = true;
+                $('#serviceProviderIFrame').load(function () {
+                    function hideLoader() {
+                        $('#serviceProviderIFrame').show();
+                        $('#samlLoader').hide();
+                        shouldCheckPage = false;
+                    }
+
+                    try {
+                        var currentUrl = this.contentWindow.location.href;
+                        lastUrlUpdate = new Date();
+                        if (currentUrl.indexOf('sso/unavailable') != -1 || currentUrl.indexOf(location.host) == -1)
+                            hideLoader();
+                    } catch (err) {
+                        hideLoader();
+                    }
+                });
+
+                var pageCheckInterval = setInterval(function () {
+                    if (!shouldCheckPage) {
+                        clearInterval(pageCheckInterval);
+                        return;
+                    }
+                    var currentTime = new Date();
+                    var diff = (currentTime - lastUrlUpdate) / 1000;
+                    if (diff > 35)
+                        window.location.replace('/sso/unavailable');
+                }, 5000);
             </script>
         }
         else
         {
-            if (@Umbraco.Field("sendEbixId").ToString().ToLower() == "true")
+            if (Model.Content.GetPropertyValue<bool>("sendEbixId"))
             {
                 <script>
                     $.ajax({
                         url: "/umbraco/api/HriApi/GetEbixIdByUserName?username=@Membership.GetUser().UserName",
                         success: function (data) {
                             var url = '@url' + '&amp;uid=' + data.replace(/\"/g, "");
-                            $('<iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src="' + url + '" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>').appendTo('.hri-common-hp div');
+                            $('<iframe src="' + url + '" width="99%" height="@frameHeight" style="margin-left: 3px"></iframe>').appendTo('.hri-common-hp div');
                         },
                         dataType: 'html'
                     });
@@ -72,45 +120,8 @@
             }
             else
             {
-                <iframe name="serviceProviderIFrame" id="serviceProviderIFrame" src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
+                <iframe src='@Umbraco.Field("IframeUrl")' width='99%' height='@frameHeight' style='margin-left: 3px'></iframe>
             }
         }
     </div>
-
-    @using (Html.BeginUmbracoForm<MembersSurfaceController>("SingleSignOn", new { attributes = "-1", targetUrl = targetUrl, partnerSP = sp }, new { target = @formTarget }))
-    {
-        <button style="display: none;" id="urlLoader" type="submit" class="btn hri-btn"></button>
-    }
-
-    <script type="text/javascript">
-        var lastUrlUpdate;
-        var shouldCheckPage = true;
-        $('#serviceProviderIFrame').load(function () {
-            function hideLoader() {
-                $('#serviceProviderIFrame').show();
-                $('#samlLoader').hide();
-                shouldCheckPage = false;
-            }
-
-            try {
-                var currentUrl = this.contentWindow.location.href;
-                lastUrlUpdate = new Date();
-                if (currentUrl.indexOf('sso/unavailable') != -1 || currentUrl.indexOf(location.host) == -1)
-                    hideLoader();
-            } catch (err) {
-                hideLoader();
-            }
-        });
-
-        var pageCheckInterval = setInterval(function () {
-            if (!shouldCheckPage) {
-                clearInterval(pageCheckInterval);
-                return;
-            }
-            var currentTime = new Date();
-            var diff = (currentTime - lastUrlUpdate) / 1000;
-            if (diff > 35)
-                window.location.replace('/sso/unavailable');
-        }, 5000);
-    </script>
 </div>		
