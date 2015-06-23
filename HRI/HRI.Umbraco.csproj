@@ -3309,6 +3309,7 @@
     <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Views\MemberCenterRightMenuCollection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3373,6 +3374,7 @@
     <Compile Include="Models\SubscriberInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HriApiService.cs" />
+    <Compile Include="Services\MemberCenterService.cs" />
     <Compile Include="Services\MemberAnnouncementsService.cs" />
     <Compile Include="Services\MemberInformationService.cs" />
     <Compile Include="Services\MenuService.cs" />
