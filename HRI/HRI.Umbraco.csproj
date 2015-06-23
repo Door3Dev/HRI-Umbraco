@@ -3356,6 +3356,7 @@
     <Compile Include="Models\ForgotUserNameViewModel.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberAnnouncement.cs" />
+    <Compile Include="Models\MemberCenterMenuItem.cs" />
     <Compile Include="Models\MembershipInformationViewModel.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\LoginFormViewModel.cs">

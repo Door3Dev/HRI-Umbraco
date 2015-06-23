@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
+using HRI.Models;
 using umbraco.cms.businesslogic.web;
 using Umbraco.Core;
 using Umbraco.Core.Models;
@@ -21,12 +22,18 @@ namespace HRI.Services
             _currentMemberRoles = Roles.GetRolesForUser();
         }
 
+        /// <summary>
+        /// Returns user right menu
+        /// </summary>
+        /// <returns>Hierarchical menu list</returns>
         public IEnumerable<MemberCenterMenuItem> GetRightMenu()
         {
-            // Get the list of right menu items
+            // Get menu collection root node
             var rootNode =
                 ((DynamicPublishedContent) _helper.ContentAtRoot().First())
                 .DescendantsOrSelf("MemberCenterRightMenuCollection").First();
+            // Get the list of all menu items that have proper user rights
+            // List has flat structure, next step is to build hierarchy
             var flatList =
                 ((DynamicPublishedContent) _helper.ContentAtRoot().First())
                     .Descendants("MemberCenterRightMenuItem")
@@ -39,7 +46,9 @@ namespace HRI.Services
                         Url = _helper.NiceUrl(_.GetPropertyValue<int>("pageLink")),
                         Description = _.GetPropertyValue<string>("description")
                     });
+            // Build hierarchical menu
             // Show items that have subitems or description
+            // Empty items will be skiped
             var result = BuildMenuTree(rootNode.Id, flatList)
                             .Where(_ => _.Items.Any() || !String.IsNullOrEmpty(_.Description));
             return result;
@@ -61,7 +70,13 @@ namespace HRI.Services
             
             return hasAccess;
         }
-
+        
+        /// <summary>
+        /// Recursive menu builder
+        /// </summary>
+        /// <param name="parentId">Parent node ID</param>
+        /// <param name="originalList">Original flat menu items list</param>
+        /// <returns>Hierarchical menu list</returns>
         private IEnumerable<MemberCenterMenuItem> BuildMenuTree(int parentId, IEnumerable<MemberCenterMenuItem> originalList)
         {
             var list = new List<MemberCenterMenuItem>();
@@ -69,16 +84,5 @@ namespace HRI.Services
             list.ForEach(x => x.Items = BuildMenuTree(x.Id, originalList));
             return list;
         }
-    }
-
-
-    public class MemberCenterMenuItem
-    {
-        public int Id { get; set; }
-        public int ParentId { get; set; }
-        public string Title { get; set; }
-        public string Url { get; set; }
-        public string Description { get; set; }
-        public IEnumerable<MemberCenterMenuItem> Items;
     }
 }
