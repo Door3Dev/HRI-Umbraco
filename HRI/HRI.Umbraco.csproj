@@ -3331,7 +3331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
-    <Compile Include="App_Start\MobileViewEnginesBootstrapper.cs" />
     <Compile Include="Controllers\HriSurfaceController.cs" />
     <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
@@ -3387,6 +3386,7 @@
     <Folder Include="App_Data\Logs\" />
     <Folder Include="App_Data\packages\created\" />
     <Folder Include="App_Data\preview\" />
+    <Folder Include="App_Start\" />
     <Folder Include="media\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
