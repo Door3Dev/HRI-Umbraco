@@ -3319,7 +3319,6 @@
     <Content Include="Views\MemberCenterAnnouncementCollection.cshtml" />
     <Content Include="Views\MemberCenterAnnouncementItem.cshtml" />
     <Content Include="Views\Login.Mobile.cshtml" />
-    <Content Include="Views\Partials\Header.Mobile.cshtml" />
     <Content Include="Views\MasterPageMobileSimple.cshtml" />
     <Content Include="Views\MembershipProfile.cshtml" />
     <Content Include="Views\Partials\MembershipInformationPartial.cshtml" />
@@ -3344,7 +3343,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Startup.cs" />
-    <Compile Include="App_Start\MobileViewEnginesBootstrapper.cs" />
     <Compile Include="Controllers\HriSurfaceController.cs" />
     <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
@@ -3398,6 +3396,7 @@
     <Folder Include="App_Data\Logs\" />
     <Folder Include="App_Data\packages\created\" />
     <Folder Include="App_Data\preview\" />
+    <Folder Include="App_Start\" />
     <Folder Include="media\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
