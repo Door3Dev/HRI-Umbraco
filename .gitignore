@@ -26,6 +26,8 @@ umbraco.config
 *.vs10x
 HRI/App_Data/TEMP/*
 HRI/App_data/Logs/*
+HRI/App_Data/DeviceDetectionLog.txt
+HRI/App_Data/51Degrees-LiteV3_1.dat.*.tmp
 [Uu]mbraco/[Pp]resentation/[Uu]mbraco/[Pp]lugins/*
 [Uu]mbraco/[Pp]resentation/[Uu]ser[Cc]ontrols/*
 [Uu]mbraco/[Pp]resentation/[Ss]cripts/*
