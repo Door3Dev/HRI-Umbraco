@@ -147,6 +147,8 @@ namespace HRI.Controllers
                 member.Properties.First(p=>p.Alias == "healthplanid").Value = hriUser["PlanId"].ToString();
                 member.Properties.First(p=>p.Alias == "healthPlanName").Value = hriUser["PlanName"].ToString();
                 member.Properties.First(p => p.Alias == "effectiveYear").Value = hriUser["PlanEffectiveDate"].ToString();
+                member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
+
 
                 // User should pass enrollment process
                 if (member.GetValue<string>("enrollmentpageafterlogin") == "1")
