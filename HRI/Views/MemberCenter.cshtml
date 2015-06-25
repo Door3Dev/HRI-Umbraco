@@ -3,20 +3,10 @@
 @{
     Layout = "MasterPage.cshtml";
     var announcements = new MemberAnnouncementsService().GetList().ToList();
-    var rightMenu = new MemberCenterService().GetRightMenu().ToList();
-    
-    var member = Members.GetCurrentMember();
-    var firstName = member.GetPropertyValue<string>("msFirstName");
-    var lastName = member.GetPropertyValue<string>("msLastName");
-    string welcomeMessage = "Welcome!";
-    if (!firstName.IsNullOrWhiteSpace() && !lastName.IsNullOrWhiteSpace())
-    {
-        welcomeMessage = string.Format("Welcome, {0} {1}!", firstName, lastName);
-    }
-    else if (!firstName.IsNullOrWhiteSpace() && lastName.IsNullOrWhiteSpace())
-    {
-        welcomeMessage = string.Format("Welcome, {0}!", firstName);
-    }
+    var memberService = new MemberCenterService();
+    var rightMenu = memberService.GetRightMenu();
+    var welcomeMessage = memberService.GetWelcomeMessage();
+
 }
 <div id="hri-content" class="hri-member-center">
     <div class="row-fluid">
@@ -55,14 +45,7 @@
                                 @Umbraco.Field("Row2Column1Content")
                             </div>
                             <div class="span6">
-                                @if (Roles.IsUserInRole("Billing"))
-                                {
-                                    @Umbraco.Field("Row2Column2Content")
-                                }
-                                else
-                                {
-                                    @Umbraco.Field("Row2Column2ContentNonBilling")
-                                }
+                                @(Roles.IsUserInRole("Billing") ? Umbraco.Field("Row2Column2Content") : Umbraco.Field("Row2Column2ContentNonBilling"))
                             </div>
                         </div><br>
                         <div class="row-fluid">

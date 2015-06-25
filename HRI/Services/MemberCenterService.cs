@@ -8,18 +8,41 @@ using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
+using Umbraco.Web.Security;
 
 namespace HRI.Services
 {
     public class MemberCenterService
     {
-        private readonly UmbracoHelper _helper = new UmbracoHelper(UmbracoContext.Current);
+        private readonly UmbracoHelper _umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
+        private readonly MembershipHelper _membershipHelper = new MembershipHelper(UmbracoContext.Current);
         private readonly string[] _currentMemberRoles;
 
         public MemberCenterService()
         {
             // Get current member roles
             _currentMemberRoles = Roles.GetRolesForUser();
+        }
+
+        /// <summary>
+        /// Returns Welcome message
+        /// </summary>
+        /// <returns>Welcome message</returns>
+        public string GetWelcomeMessage()
+        {
+            var member = _membershipHelper.GetCurrentMember();
+            var firstName = member.GetPropertyValue<string>("msFirstName");
+            var lastName = member.GetPropertyValue<string>("msLastName");
+            string welcomeMessage = "Welcome!";
+            if (!firstName.IsNullOrWhiteSpace() && !lastName.IsNullOrWhiteSpace())
+            {
+                welcomeMessage = string.Format("Welcome, {0} {1}!", firstName, lastName);
+            }
+            else if (!firstName.IsNullOrWhiteSpace() && lastName.IsNullOrWhiteSpace())
+            {
+                welcomeMessage = string.Format("Welcome, {0}!", firstName);
+            }
+            return welcomeMessage;
         }
 
         /// <summary>
@@ -30,12 +53,12 @@ namespace HRI.Services
         {
             // Get menu collection root node
             var rootNode =
-                ((DynamicPublishedContent) _helper.ContentAtRoot().First())
+                ((DynamicPublishedContent) _umbracoHelper.ContentAtRoot().First())
                 .DescendantsOrSelf("MemberCenterRightMenuCollection").First();
             // Get the list of all menu items that have proper user rights
             // List has flat structure, next step is to build hierarchy
             var flatList =
-                ((DynamicPublishedContent) _helper.ContentAtRoot().First())
+                ((DynamicPublishedContent) _umbracoHelper.ContentAtRoot().First())
                     .Descendants("MemberCenterRightMenuItem")
                     .Where(UserHasAccess)
                     .Select(_ => new MemberCenterMenuItem()
@@ -43,7 +66,7 @@ namespace HRI.Services
                         Id = _.Id,
                         ParentId = _.Parent.Id,
                         Title = _.Name,
-                        Url = _helper.NiceUrl(_.GetPropertyValue<int>("pageLink")),
+                        Url = _umbracoHelper.NiceUrl(_.GetPropertyValue<int>("pageLink")),
                         Description = _.GetPropertyValue<string>("description")
                     });
             // Build hierarchical menu
