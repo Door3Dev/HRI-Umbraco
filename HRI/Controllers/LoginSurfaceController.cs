@@ -113,32 +113,27 @@ namespace HRI.Controllers
                 if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (Roles.IsUserInRole(model.Username, "Billing"))
-                    {
                         Roles.RemoveUserFromRole(model.Username, "Billing");
-                    }
                 }
                 else
                 {
                     if (!Roles.IsUserInRole(model.Username, "Billing") && Roles.IsUserInRole(model.Username, "Enrolled"))
-                    {
                         Roles.AddUserToRole(model.Username, "Billing");
-                    }
                 }
 
-                if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) ==
-                    0)
+                if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (!Roles.IsUserInRole("Subscriber"))
-                    {
                         Roles.AddUserToRole(model.Username, "Subscriber");
-                    }
+                    if (Roles.IsUserInRole("Dependent"))
+                        Roles.RemoveUserFromRole(model.Username, "Dependent");
                 }
                 else
                 {
                     if (Roles.IsUserInRole(model.Username, "Subscriber"))
-                    {
                         Roles.RemoveUserFromRole(model.Username, "Subscriber");
-                    }
+                    if (!Roles.IsUserInRole(model.Username, "Dependent"))
+                        Roles.AddUserToRole(model.Username, "Dependent");
                 }
 
                 // Keep Ms First Name and Last Name always up to date
@@ -162,8 +157,7 @@ namespace HRI.Controllers
                     {
                         return Redirect("/your-account/enrollment-plan-confirmation/");
                     }
-                    // Save Group Id, Birthday, Plan Id, Plan Name, add user as enrolled
-                    member.Properties.First(p => p.Alias == "groupId").Value = hriUser["RxGrpId"].ToString();
+                    // Save Birthday, add user as enrolled
                     member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
                     Roles.AddUserToRole(model.Username, "Enrolled");
 
