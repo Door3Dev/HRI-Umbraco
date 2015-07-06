@@ -21,6 +21,7 @@ namespace HRI.Models
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression(@"^\(\d{3}\) \d{3}\-\d{4}$", ErrorMessage = "Invalid phone number format")]
         public string PhoneNumber { get; set; }
 
         [Required]
