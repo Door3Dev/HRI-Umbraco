@@ -2,8 +2,10 @@
 using System.Data.SqlTypes;
 using HRI.Models;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Examine;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers
@@ -31,6 +33,13 @@ namespace HRI.Controllers
                     if (errorMessage != null)
                     {
                         ModelState.AddModelError("registerModel.MemberId", errorMessage);
+                    }
+
+                    // check if yNumber is already registered in umbraco
+                    var registeredUsername = GetMemberRegisteredUsernameWithYNumber(model.MemberId);
+                    if (registeredUsername != null)
+                    {
+                        ModelState.AddModelError("registerModel.MemberId", "The Member ID you have entered is registered with existing user name: " + registeredUsername);
                     }
 
                     // if there's no error, try to get plan ID from api
@@ -173,6 +182,20 @@ namespace HRI.Controllers
                 : ((dob == null)
                     ? "This Member ID is not enrolled."
                     : "Our records don't match this Member ID with this DOB, please be sure these are accurate. This verification is necessary to protect the identity of our members.");
+        }
+
+        private string GetMemberRegisteredUsernameWithYNumber(string yNumber)
+        {
+            var memberSearcher = ExamineManager.Instance.SearchProviderCollection["InternalMemberSearcher"];
+
+            var criteria = memberSearcher.CreateSearchCriteria("member").Field("yNumber", yNumber).Compile();
+
+            var members = memberSearcher.Search(criteria);
+
+            var registeredMember = members.FirstOrDefault();
+
+            // Fields["nodeName"] = username of the member
+            return registeredMember != null ? registeredMember.Fields["nodeName"] : null;
         }
     }
 }
