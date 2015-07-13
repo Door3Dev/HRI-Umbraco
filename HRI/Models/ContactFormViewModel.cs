@@ -17,7 +17,8 @@ namespace HRI.Models
         public string LastName { get; set; }
 
         [Required]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Please enter a valid e-mail address")]
         public string Email { get; set; }
 
         [Required]
