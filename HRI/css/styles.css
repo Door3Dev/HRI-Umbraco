@@ -2618,10 +2618,14 @@ body {
 
 .error {
     color: red;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .success {
     color: green;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .warning {

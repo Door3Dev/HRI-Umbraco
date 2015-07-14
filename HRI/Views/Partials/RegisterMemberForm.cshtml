@@ -259,7 +259,7 @@
 
 <script>
     // Check valid zipCode
-    @{if (isNewUser) 
+    @{if (isNewUser)
     {
         <text>
         $('#zipCode').blur(function() {
@@ -269,7 +269,7 @@
                 success: function(data) {
                     if (data == 'true')
                         $('#zipCodeCheck').html('');
-                    else 
+                    else
                         $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
                 },
                 error: function() {
@@ -292,42 +292,35 @@
             } else {
                 $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
             }
-        });    
-        
+        });
+
     </text>
     }}
 
-    $('#registerModel_Phone').blur(function () {
+    $('#registerModel_Phone').blur(function() {
         // If the phone number is not blank and less than 10 digits
         if ($(this).val().indexOf('_') > -1) {
             $('#phoneNumberCheck').html('<span class="error">Invalid Phone Number</span>');
         } else {
             $('#phoneNumberCheck').html('');
         }
-    })
+    });
 
     // Check user uniqueness
     $("#username").keyup(function() {
-        if ($('#username').val().length >= 6) {
-            if ($('#username').val().indexOf(' ') > -1) {
-                $('#userNameCheck').html("<span class='error'>Username may not contain spaces</span>");
-            }
-            else {
-                $.ajax({
-                    url: "/umbraco/api/HriApi/IsUserNameAvailable",
-                    data: { username: $('#username').val() },
-                    success: function (data) {
-                        if (data == 'true' && $('#username').val().length > 5)
-                            $('#userNameCheck').html("<span class='success'>Username is available</span>");
-                        else
-                            $('#userNameCheck').html("<span class='error'>Username not available</span>");
-                    },
-                    error: function () { $('#userNameCheck').html("<span class='error'>Username not available</span>"); },
-                    dataType: 'html'
-                });
-            }
-        } else
-            $('#userNameCheck').html('<span class="error">Username must be at least 6 characters</span>');
+        if ($('#username').valid()) {
+            $.ajax({
+                url: "/umbraco/api/HriApi/IsUserNameAvailable",
+                data: { username: $('#username').val() },
+                success: function (data) {
+                    var message = data == 'true' ? "<span class='success'>Username is available</span>"
+                                                 : "<span class='error'>Username not available</span>";
+                    $('#userNameCheck').html(message);
+                },
+                error: function () { $('#userNameCheck').html("<span class='error'>Username not available</span>"); },
+                dataType: 'html'
+            });
+        }
     });
 
     $(document).ready(function () {
@@ -341,7 +334,7 @@
         });
 
         var validator = $('form').first().validate();
-        @if (string.IsNullOrEmpty(registerModel.PlanId)) 
+        @if (string.IsNullOrEmpty(registerModel.PlanId))
         {
             <text>
             $('#memberId').rules('add', {
@@ -354,9 +347,9 @@
         }
 
         $("#register-form").bind('change keyup', function () {
-            
+
             var isValid = validator.checkForm();
-            validator.submitted = {}; // hack to reset validation behavior as a side effect of checkForm call 
+            validator.submitted = {}; // hack to reset validation behavior as a side effect of checkForm call
             if (isValid && !memberCheckError) {
                 $("#submit-form").removeAttr('disabled');
             }

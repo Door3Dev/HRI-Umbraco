@@ -54,6 +54,8 @@ namespace HRI.Models
         public string Zipcode { get; set; }
 
         [Required]
+        [StringLength(50, ErrorMessage = "Username must be at least 6 characters.", MinimumLength = 6)]
+        [RegularExpression("^[^ ]+$", ErrorMessage = "Username may not contain space")]
         public string Username { get; set; }
 
         [Required]
