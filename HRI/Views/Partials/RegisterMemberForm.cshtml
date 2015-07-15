@@ -22,6 +22,12 @@
     var isNewUser = !string.IsNullOrEmpty(registerModel.PlanId);
     var formClass = isNewUser || !ViewData.ModelState.IsValid ? string.Empty : "display: none;";
     var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : string.Empty;
+    registerModel.Zipcode = isNewUser ? TempData["ZipCode"].ToString() : string.Empty;
+    // Remove Zipcode field for existed user
+    if (!isNewUser)
+    {
+        ViewData.ModelState.Remove("Zipcode");
+    }
 }
 
 <script>
@@ -199,14 +205,17 @@
                 @Html.ValidationMessageFor(m => registerModel.ConfirmEmail)
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span7 offset5">
-                @Html.Label("Zip Code")
-                @Html.TextBoxFor(m => registerModel.Zipcode, new { @id = "zipCode", maxlength = 5, data_inputmask = "'mask': '99999'" })
-                @Html.ValidationMessageFor(m => registerModel.Zipcode)
-                <div id="zipCodeCheck"></div>
+        @if (isNewUser)
+        {
+            <div class="row-fluid">
+                <div class="span7 offset5">
+                    @Html.Label("Zip Code")
+                    @Html.TextBoxFor(m => registerModel.Zipcode, new {@id = "zipCode", maxlength = 5, data_inputmask = "'mask': '99999'"})
+                    @Html.ValidationMessageFor(m => registerModel.Zipcode)
+                    <div id="zipCodeCheck"></div>
+                </div>
             </div>
-        </div>
+        }
         <div class="row-fluid block">
             <div class="span5 desc">				
 				<h3>@Umbraco.Field("UsernameHeader")</h3>

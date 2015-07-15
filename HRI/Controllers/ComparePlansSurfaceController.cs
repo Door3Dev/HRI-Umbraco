@@ -332,12 +332,12 @@ namespace HRI.Controllers
                 member.SetValue("healthplanid", planId);
                 ApplicationContext.Services.MemberService.Save(member);
                 // Redirect to the Enrollment Plan Confirmation
-                return RedirectToUmbracoPage(31568);
+                return Redirect("/your-account/enrollment-plan-confirmation/");
             }
             TempData["ZipCode"] = zipCode;
             TempData["PlanId"] = planId;
             // Redirect to the registration page
-            return RedirectToUmbracoPage(1343);
+            return Redirect("/for-members/register/");
 
         }
 
