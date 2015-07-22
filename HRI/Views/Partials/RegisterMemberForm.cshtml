@@ -23,11 +23,6 @@
     var formClass = isNewUser || !ViewData.ModelState.IsValid ? string.Empty : "display: none;";
     var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : string.Empty;
     registerModel.Zipcode = isNewUser ? TempData["ZipCode"].ToString() : string.Empty;
-    // Remove Zipcode field for existed user
-    if (!isNewUser)
-    {
-        ViewData.ModelState.Remove("Zipcode");
-    }
 }
 
 <script>

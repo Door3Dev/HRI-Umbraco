@@ -28,6 +28,8 @@ namespace HRI.Controllers
                 // Check the Member Id (Y number)
                 if (model.PlanId == null) // Enrolled user
                 {
+                    ModelState.Remove("registerModel.Zipcode");
+
                     var errorMessage = ValidateMemberIdCore(model.MemberId, model.DateOfBirth, true);
 
                     if (errorMessage != null)
@@ -75,7 +77,7 @@ namespace HRI.Controllers
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "firstName", Value = model.FirstName.Trim() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "lastName", Value = model.LastName.Trim() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "ssn", Value = model.Ssn.TrimNullable() });
-                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode.Trim() });
+                registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "zipCode", Value = model.Zipcode.TrimNullable() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "phoneNumber", Value = model.Phone.TrimNullable() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "yNumber", Value = model.MemberId.TrimNullable() });
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "healthplanid", Value = model.PlanId.TrimNullable() });
