@@ -24,6 +24,7 @@ _NCrunch_*/
 [sS]andbox
 umbraco.config
 *.vs10x
+HRI/App_Data/Elmah/*
 HRI/App_Data/TEMP/*
 HRI/App_data/Logs/*
 HRI/App_Data/DeviceDetectionLog.txt
