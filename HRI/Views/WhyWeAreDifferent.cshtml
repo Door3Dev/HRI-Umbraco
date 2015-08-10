@@ -7,23 +7,23 @@
   <div class="row-fluid">
     <div class="main-lead">
         <div class="span4">
-            <h3>OUR STORY</h3>
-            <ul class="unstyled inline breadcrumbs">
-                <li><a href="/">Home</a></li> ›
-                <li>Provider</li>
-            </ul>
-        </div>
+            @*<h3>OUR STORY</h3>
+    <ul class="unstyled inline breadcrumbs">
+        <li><a href="/">Home</a></li> ›
+        <li>Provider</li>
+        </ul>*@
+            </div>
 
-      <div class="span7 offset1">
-        @Umbraco.Field("Header")
+          <div class="span7 offset1">
+            @Umbraco.Field("Header")
+          </div>
+
+        </div>
       </div>
 
+      <div class="row-fluid">
+        <div class="span10 offset1">
+          @Umbraco.Field("Content")
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="row-fluid">
-    <div class="span10 offset1">
-      @Umbraco.Field("Content")
-    </div>
-  </div>
-</div>
