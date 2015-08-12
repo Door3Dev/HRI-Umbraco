@@ -35,7 +35,7 @@
 
         if (startDOB.indexOf('1/1/0001') != 0) {
             var startDate = new Date(startDOB);
-            setMonth = startDate.getMonth();
+            setMonth = startDate.getMonth() + 1;
             setDay = startDate.getDate();
             setYear = startDate.getFullYear();
         }
