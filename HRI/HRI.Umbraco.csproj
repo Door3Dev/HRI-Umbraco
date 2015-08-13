@@ -3027,9 +3027,6 @@
     <Content Include="saml.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\access.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\packages\installed\installedPackages.config" />
     <Content Include="Views\Partials\RegisterMemberForm.cshtml">
       <SubType>Code</SubType>
@@ -3105,6 +3102,7 @@
     <Content Include="config\EmbeddedMedia.config" />
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\404handlers.config" />
+    <Content Include="App_Data\umbracoAccess.config" />
     <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\To a folder.pubxml" />
     <Content Include="Views\Login.cshtml">
@@ -3384,6 +3382,7 @@
     <Compile Include="Services\MemberAnnouncementsService.cs" />
     <Compile Include="Services\MemberInformationService.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\NodeAccessService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

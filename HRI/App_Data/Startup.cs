@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using HRI.Services;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Umbraco.Core;
@@ -14,6 +15,10 @@ namespace HRI
 
             RegisterJavaScript(BundleTable.Bundles);
             RegisterStyles(BundleTable.Bundles);
+
+            // Generate access.config
+            var accessService = new NodeAccessService();
+            accessService.GenerateConfigFile();
 
             // SAML Controller
             RouteTable.Routes.MapRoute(
@@ -77,6 +82,8 @@ namespace HRI
                 .Include("~/scripts/jquery.validate.min.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.min.js"));
         }
+
+        
 
         public void OnApplicationInitialized(
             UmbracoApplicationBase umbracoApplication,
