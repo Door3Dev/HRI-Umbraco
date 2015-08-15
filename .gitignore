@@ -23,6 +23,7 @@ _NCrunch_*/
 [sS]ource
 [sS]andbox
 umbraco.config
+access.config
 *.vs10x
 HRI/App_Data/Elmah/*
 HRI/App_Data/TEMP/*
