@@ -3383,6 +3383,8 @@
     <Compile Include="Services\MemberInformationService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\NodeAccessService.cs" />
+    <Compile Include="Models\SiteMapItem.cs" />
+    <Compile Include="Services\SiteMapService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
