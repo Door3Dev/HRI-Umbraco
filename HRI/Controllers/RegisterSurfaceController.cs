@@ -21,7 +21,9 @@ namespace HRI.Controllers
             try
             {
                 // Save Plan Id for the view
-                ViewData["PlanId"] = model.PlanId;
+
+                TempData["PlanId"] = model.PlanId;
+                TempData["ZipCode"] = model.Zipcode;
 
                 var enrollAfterLogin = Convert.ToInt32(model.PlanId != null).ToString();
 
@@ -49,7 +51,7 @@ namespace HRI.Controllers
                         new Dictionary<string, string> { { "memberId", model.MemberId } });
                     if (planId != null)
                     {
-                        ViewData["PlanId"] = model.PlanId;
+                        TempData["PlanId"] = model.PlanId;
                         model.PlanId = planId;
                     }
                 }
@@ -84,7 +86,7 @@ namespace HRI.Controllers
                 registerModel.MemberProperties.Add(new UmbracoProperty { Alias = "enrollmentpageafterlogin", Value = enrollAfterLogin });
 
                 MembershipCreateStatus status;
-                Members.RegisterMember(registerModel, out status, false);
+                var registeredUser = Members.RegisterMember(registerModel, out status, false);
 
                 switch (status)
                 {
@@ -93,13 +95,13 @@ namespace HRI.Controllers
                         Session.Clear();
                         FormsAuthentication.SignOut();
                         // Set the user to be not approved
-                        var memb = Membership.GetUser(model.Username);
-                        memb.IsApproved = false;
-                        Membership.UpdateUser(memb);
+                        registeredUser.IsApproved = false;
+                        Membership.UpdateUser(registeredUser);
                         // Send the user a verification link to activate their account     
                         var sendVerificationLinkModel = new SendVerificationLinkModel();
                         sendVerificationLinkModel.UserName = model.Username;
                         sendVerificationLinkModel.RedirectUrl = "/for-members/verify-account/";
+                        TempData.Clear();
                         return RedirectToAction("SendVerificationLink_GET", "EmailSurface", sendVerificationLinkModel);
 
                     case MembershipCreateStatus.InvalidUserName:

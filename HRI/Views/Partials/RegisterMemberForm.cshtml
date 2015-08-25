@@ -1,28 +1,22 @@
 ﻿@using System.Web.Mvc.Html
+@using AutoMapper.Internal
 @using ClientDependency.Core.Mvc
 @using HRI.Models
-@using Umbraco.Web
 @using HRI.Controllers
-@inherits UmbracoTemplatePage
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
-    var registerModel = new RegisterFormViewModel();
-
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 
-    if (TempData["PlanId"] != null)
-    {
-        registerModel.PlanId = TempData["PlanId"].ToString();
-    }
-    else if (ViewData["PlanId"] != null)
-    {
-        registerModel.PlanId = ViewData["PlanId"].ToString();
-    }
+    var registerModel = new RegisterFormViewModel();
+    registerModel.Zipcode = TempData["ZipCode"].ToNullSafeString() ?? string.Empty;
+    registerModel.PlanId = TempData["PlanId"].ToNullSafeString() ?? string.Empty;
+
     var isNewUser = !string.IsNullOrEmpty(registerModel.PlanId);
     var formClass = isNewUser || !ViewData.ModelState.IsValid ? string.Empty : "display: none;";
     var selectTypeClass = isNewUser || !ViewData.ModelState.IsValid ? "hri-hide" : string.Empty;
-    registerModel.Zipcode = isNewUser ? TempData["ZipCode"].ToString() : string.Empty;
+
 }
 
 <script>
