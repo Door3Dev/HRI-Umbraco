@@ -50,16 +50,6 @@ namespace HRI
                     action = "SLO",
                     id = "2"
                 });
-
-            RouteTable.Routes.MapRoute(
-                "",
-                "RegisterUser",
-                new
-                {
-                    controller = "HriApiController",
-                    action = "RegisterUser",
-                    id = "0"
-                });
         }
 
         private void RegisterStyles(BundleCollection bundles)

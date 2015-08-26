@@ -1,16 +1,13 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Web.Script.Serialization;
-using Umbraco.Web.WebApi;
 using Umbraco.Core.Models;
-using Newtonsoft.Json;
+using Umbraco.Web.WebApi;
 
 namespace HRI.Controllers
 {
@@ -137,133 +134,11 @@ namespace HRI.Controllers
         }
 
         /// <summary>
-        /// Registers a user with the HRI web API
-        /// </summary>
-        /// <param name="userName">User Name</param>
-        /// <returns></returns>
-        [AcceptVerbs("GET", "POST")]
-        public string RegisterUser(string userName)
-        {
-            // Get an instance of the member
-            var member = Services.MemberService.GetByUsername(userName);
-            // Create a dictionary of the members info that we will convert to JSON and send to HRI API
-            var jsonData = new Dictionary<string, string>
-            {
-                {"RegId", null},
-                {"RegDate", DateTime.Now.ToString(CultureInfo.InvariantCulture)},
-                {"MemberId", member.GetValue<string>("yNumber")},
-                {"UserName", member.Username},
-                {"FirstName", member.GetValue<string>("firstName")},
-                {"LastName", member.GetValue<string>("lastName")},
-                {"Ssn", member.GetValue<string>("ssn")},
-                {"EMail", member.Email},
-                {"ZipCode", member.GetValue<string>("zipCode")},
-                {"PhoneNumber", member.GetValue<string>("phoneNumber")},
-                {"RegVerified", "true"}
-            };
-            // The MemberId is null for the new user
-            // Convert the dictionary to JSON
-            var myJsonString = (new JavaScriptSerializer()).Serialize(jsonData);
-
-            // Get ahold of the root/home node
-            IPublishedContent root = Umbraco.ContentAtRoot().First();
-            // Get the API uri
-            var apiUri = root.GetProperty("apiUri").Value.ToString();
-            // Apend the command to invoke the register function
-            var registerUserApi = apiUri + "/Registration";                                   
-            
-            // Create a JSON object to hold the response
-            var json = new JObject();
-
-            // Create a webclient object to post the user data
-            using(var client = new WebClient())
-            {
-                // Set the format to JSON
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                
-                // Get the response when posting the member
-                try
-                {
-                    string response = client.UploadString(registerUserApi, myJsonString);
-                    json = JObject.Parse(response);
-                }
-                catch(WebException ex)
-                {
-
-                    // If there was an error, return an error and message in the JSON string
-                    json.Add("error", "true");
-                    json.Add("message", ex.Message + ". " + ex.InnerException);                    
-                }
-            }
-
-            // If the user was created
-            if (json["MemberId"] != null)
-            {
-                SetMemberProperties(member);
-                Services.MemberService.Save(member);
-                // Return successful registration
-                json.Add("error", "false");
-                return json.ToString(Formatting.None);
-            }
-
-            // Member was not registered with HRI           
-            return json.ToString(Formatting.None);
-        }
-
-        private void SetMemberProperties(IMember member)
-        {
-            var hriUser = GetRegisteredUserByUsername(member.Username);
-
-            // Assign this user their member id                
-            member.SetValue("memberId", hriUser["RegId"].ToString());
-            // Assign their Morneau Shapell Y Number
-            member.SetValue("yNumber", hriUser["MemberId"].ToString());
-            member.SetValue("market", hriUser["Market"].ToString());
-            if ((string)hriUser["PlanEffectiveDate"] != null)
-            {
-                member.SetValue("effectiveYear", hriUser["PlanEffectiveDate"].ToString());
-            }
-            if ((string)hriUser["EbixId"] != null)
-            {
-                member.SetValue("ebixId", hriUser["EbixId"].ToString());
-            }
-            if ((string)hriUser["RxGrpId"] != null)
-            {
-                member.SetValue("groupId", hriUser["RxGrpId"].ToString());
-            }
-            // Birthday
-            if ((string)hriUser["DOB"] != null)
-            {
-                member.SetValue("birthday", hriUser["DOB"].ToString());
-            }
-            // Plan Id
-            if ((string)hriUser["PlanId"] != null)
-            {
-                member.SetValue("healthplanid", hriUser["PlanId"].ToString());
-            }
-            // Plan Name
-            if ((string)hriUser["PlanName"] != null)
-            {
-                member.SetValue("healthPlanName", hriUser["PlanName"].ToString());
-            }
-            // Morneau Shepell First Name
-            if ((string)hriUser["MSFirstName"] != null)
-            {
-                member.SetValue("msFirstName", hriUser["MSFirstName"].ToString());
-            }
-            // Morneau Shepell Last Name
-            if ((string)hriUser["MSLastName"] != null)
-            {
-                member.SetValue("msLastName", hriUser["MSLastName"].ToString());
-            }
-        }
-
-        /// <summary>
         /// Get the given users ebix id.
         /// </summary>
         /// <param name="username">Name of the user to retrieve Ebix Id for</param>
         /// <returns></returns>
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [AcceptVerbs("GET", "POST")]
         public string GetEbixIdByUserName(string username)
         {
             string ynumber = Services.MemberService.GetByUsername(username).GetValue("yNumber").ToString();
