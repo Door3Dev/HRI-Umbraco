@@ -3339,12 +3339,10 @@
     <Compile Include="Controllers\HriApiController.cs" />
     <Compile Include="Controllers\ComparePlansSurfaceController.cs" />
     <Compile Include="Controllers\EmailSurfaceController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginSurfaceController.cs" />
     <Compile Include="Controllers\MemberInformationSurfaceController.cs" />
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
-    <Compile Include="Controllers\SAMLController.cs" />
     <Compile Include="Controllers\Utils.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Helpers\RegistrationNotificationType.cs" />

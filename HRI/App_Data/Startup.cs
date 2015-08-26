@@ -19,37 +19,6 @@ namespace HRI
             // Generate access.config
             var accessService = new NodeAccessService();
             accessService.GenerateConfigFile();
-
-            // SAML Controller
-            RouteTable.Routes.MapRoute(
-                "",
-                "SAML",
-                new
-                {
-                    controller = "SAML",
-                    action = "Index",
-                    id = "0"
-                });
-
-            RouteTable.Routes.MapRoute(
-                "",
-                "SAML/SSO",
-                new
-                {
-                    controller = "News",
-                    action = "SSO",
-                    id = "1"
-                });
-
-            RouteTable.Routes.MapRoute(
-                "",
-                "SAML/SLO",
-                new
-                {
-                    controller = "News",
-                    action = "SLO",
-                    id = "2"
-                });
         }
 
         private void RegisterStyles(BundleCollection bundles)
