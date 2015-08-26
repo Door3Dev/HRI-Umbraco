@@ -22,11 +22,7 @@
     {
         <div class="span9">
             <div class="navigation pull-right">
-                <ul class="nav-site unstyled inline">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li class="menu-item short"><a href="@homePage.Url">Home</a></li>
-                    }           
+                <ul class="nav-site unstyled inline">          
                     @foreach (var item in menu)
                     {
                         // if the number of non-hidden items is greater than 0
