@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Web.Mvc;
+using System.Web.Security;
 using System.Xml;
 using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
@@ -6,15 +10,10 @@ using CoverMyMeds.SAML.Library;
 using HRI.Helpers;
 using HRI.Models;
 using HRI.Services;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Web.Mvc;
-using System.Web.Security;
-using Umbraco.Web.Mvc;
-using Umbraco.Core.Models;
 using log4net;
+using umbraco.cms.presentation.create.controls;
+using Umbraco.Core.Models;
+using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers
 {
@@ -232,7 +231,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "SSO Error for user " + User.Identity.Name + ". Partner: " + partnerSP + ". TargetUrl: " + targetUrl + ".";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 // Log the error
                 logger.Error("Unable to use SSO", ex);
 
@@ -240,68 +239,58 @@ namespace HRI.Controllers
             }
         }
 
+        /// <summary>
+        /// Activate user
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <param name="guid">User guid</param>
+        /// <returns></returns>
         [RequireRouteValues(new[] { "id", "guid" })]
         public ActionResult ActivateUser(int id, string guid)
         {
-            var protocol = Request.IsSecureConnection ? "https" : "http";
-            // String to api call to register the current user
-
-            var json = new JObject();
+            string username = string.Empty;
             try
             {
-                // validate guid passed
-                //IMember member = Services.MemberService.GetByUsername(userName);
                 IMember member = Services.MemberService.GetById(id);
-                string userName = member.Username;
-                string registerApiUrl = protocol + "://" + Request.Url.Host + ":" + Request.Url.Port + "/umbraco/api/HriApi/RegisterUser?userName=" + userName;
-                string userGuid = member.GetValue("guid").ToString();
+                var apiService = new HriApiService();
+                string userGuid = member.GetValue<string>("guid");
+                username = member.Username;
+                // validate passed guid
                 if (!string.Equals(userGuid, guid, StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidOperationException(string.Format("Guid '{0}' does not match user '{1}'", guid, userName));
+                    throw new InvalidOperationException(string.Format("Guid '{0}' does not match user '{1}'", guid, member.Username));
 
-                // Variable to hold status of registering user against HRI API
-                bool regSuccess;
-                using (var client = new WebClient())
+                member = apiService.RegisterUser(id);
+                
+                // Set the user to be approved
+                member.IsApproved = true;
+                // Add the registered role to the user
+                Roles.AddUserToRole(member.Username, "Registered");
+                // Add the enrolled role to the user, if "enrollmentpageafterlogin" != 1
+                if (member.GetValue<string>("enrollmentpageafterlogin") != "1")
                 {
-                    // Call the register function (Registers user with HRI API)
-                    string result = client.DownloadString(registerApiUrl);
-                    // Remove the leading and trailing quotes and remove the \ that are used to escape in ToString() from API call
-                    result = result.Substring(1, result.Length - 2);
-                    result = result.Replace("\\", "");
-                    json = JObject.Parse(result);
-                    // Determine the result of the registration
-                    regSuccess = !Convert.ToBoolean(json["error"]);
-                    if (!regSuccess)
-                        logger.ErrorFormat("User '{0}' Activation API error: {1}", json, userName);
+                    Roles.AddUserToRole(member.Username, "Enrolled");
                 }
-                // If a success
-                if (regSuccess)
-                {
-                    member = Services.MemberService.GetByUsername(userName);
-                    // Set the user to be approved
-                    member.IsApproved = true;
-                    // Add the registered role to the user
-                    Roles.AddUserToRole(userName, "Registered");
-                    // Add the enrolled role to the user, if "enrollmentpageafterlogin" != 1
-                    if (member.GetValue<string>("enrollmentpageafterlogin") != "1")
-                    {
-                        Roles.AddUserToRole(userName, "Enrolled");
-                    }
-                    // Save the member
-                    Services.MemberService.Save(member);
-                    // Send the user to the login page
-                    TempData["RegistrationResult"] = RegistrationNotificationType.Success;
-                    return Redirect("/for-members/login");
-                }
+                // Save the member
+                Services.MemberService.Save(member);
+                // Send the user to the login page
+                TempData["RegistrationResult"] = RegistrationNotificationType.Success;
+                return Redirect("/for-members/login");
             }
             catch (Exception ex)
             {
-                logger.Error(ex);
+                logger.ErrorFormat("User '{0}' Activation API error: {1}", username, ex.Message);
             }
 
             TempData["RegistrationResult"] = RegistrationNotificationType.Error;
             return Redirect("/for-members/login");
         }
 
+        /// <summary>
+        /// Backward compatibility with old style links
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="guid">User guid</param>
+        /// <returns></returns>
         [RequireRouteValues(new[] { "username", "guid" }), ActionName("ActivateUser")]
         public ActionResult DeprecatedActivateUser(string username, string guid)
         {
@@ -405,7 +394,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "User " + User.Identity.Name + " was unable to change their password.";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 logger.Error(ex);
                 return CurrentUmbracoPage();
             }
@@ -423,7 +412,7 @@ namespace HRI.Controllers
                 var user = Membership.GetUser();
                 //user.UserName = model.UserName;
                 // Update the User profile in the database
-                Membership.UpdateUser((System.Web.Security.MembershipUser)user);
+                Membership.UpdateUser((MembershipUser)user);
                 return RedirectToCurrentUmbracoPage();
             }
             catch (Exception ex)
