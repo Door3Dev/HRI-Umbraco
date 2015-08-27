@@ -799,7 +799,26 @@
         })
     })
 })(jQuery);
-
+(function () {
+    $(document).ready(function () {
+        var a = {
+            $flowbar: $(".flowbar"), flowmessage: false, flowseconds: 0, flowtimer: "", init: function () {
+                a.flowmessage = a.$flowbar.find("div.container").html();
+                a.hasMessage = /<[^<]+?>/g.test(a.flowmessage);
+                a.flowseconds = parseInt(a.$flowbar.data("flowseconds")) || 0;
+                if (a.hasMessage) {
+                    a.$flowbar.slideDown(500);
+                    if (a.flowseconds) {
+                        a.flowtimer = setTimeout(function () {
+                            a.$flowbar.slideUp(500)
+                        }, a.flowseconds * 1e3)
+                    }
+                }
+            }
+        };
+        a.init()
+    })
+})();
 /**
  *  Ajax Autocomplete for jQuery, version 1.2.9
  *  (c) 2013 Tomas Kirda
