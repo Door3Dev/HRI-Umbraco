@@ -17,7 +17,9 @@
 
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
-    Umbraco.Field("successMessage").ToHtmlString().Replace("@userEmail", Membership.GetUser().Email);
+    var email = string.Format("<span id = \"currentEmail\" class=\"avenir-heavy purple\">{0}</span>", Membership.GetUser().Email);
+    var message = Umbraco.Field("successMessage").ToString().Replace("@userEmail", email);
+    @Html.Raw(message);
     return;
 }
 
