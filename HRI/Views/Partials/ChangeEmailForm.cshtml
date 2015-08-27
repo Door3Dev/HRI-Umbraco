@@ -13,8 +13,6 @@
     Html.EnableUnobtrusiveJavaScript();    
 }
 
-@Html.Raw(Html.RenderJsHere())
-
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
     var email = string.Format("<span id = \"currentEmail\" class=\"avenir-heavy purple\">{0}</span>", Membership.GetUser().Email);
