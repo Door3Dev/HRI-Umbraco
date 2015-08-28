@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web.Hosting;
+using System.Web.Security;
+using umbraco.cms.businesslogic;
 using Umbraco.Core;
 using Umbraco.Core.Services;
 
@@ -22,6 +24,30 @@ namespace HRI.Services
             _memberService = ApplicationContext.Current.Services.MemberService;
             _contentService = ApplicationContext.Current.Services.ContentService;
             _mediaService = ApplicationContext.Current.Services.MediaService;
+        }
+
+        /// <summary>
+        /// Add user to the role
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="role">User role</param>
+        public void AddToRole(string username, string role)
+        {
+            // Check should be always performed or exception will be fired
+            if (!Roles.IsUserInRole(username, role))
+                Roles.AddUserToRole(username, "role");
+        }
+
+        /// <summary>
+        /// Remove user from the role
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="role">User role</param>
+        public void RemoveFromRole(string username, string role)
+        {
+            // Check should be always performed or exception will be fired
+            if (Roles.IsUserInRole(username, role))
+                Roles.RemoveUserFromRole(username, role);
         }
 
         public bool SendVerificationEmail(string userName)
