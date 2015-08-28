@@ -359,7 +359,6 @@
     <Content Include="images\radio-checked.png" />
     <Content Include="images\radio.png" />
     <Content Include="images\saml-loader.GIF" />
-    <Content Include="Mobile\Default.aspx" />
     <Content Include="NHibernate.ByteCode.Castle.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3369,10 +3368,6 @@
     <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Helpers\RegistrationNotificationType.cs" />
     <Compile Include="Helpers\RequireRouteValuesAttribute.cs" />
-    <Compile Include="Mobile\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Models\ChangeEmailViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeUserNameViewModel.cs" />
