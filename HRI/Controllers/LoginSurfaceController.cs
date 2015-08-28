@@ -43,6 +43,7 @@ namespace HRI.Controllers
         {
             try
             {
+                var userService = new UserService();
                 var member = Services.MemberService.GetByUsername(model.Username);
 
                 // If the user is unable to login
@@ -59,8 +60,7 @@ namespace HRI.Controllers
                             ModelState.AddModelError(
                                 "loginModel",
                                 string.Format("One more step! To ensure your privacy, we need to verify your email before you can log in - please check your email inbox for {0} and follow the directions to validate your account.", member.Email));
-
-                            var userService = new UserService();
+                            
                             userService.SendVerificationEmail(model.Username);
 
                             return CurrentUmbracoPage();
@@ -112,28 +112,24 @@ namespace HRI.Controllers
 
                 if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (Roles.IsUserInRole(model.Username, "Billing"))
-                        Roles.RemoveUserFromRole(model.Username, "Billing");
+                    userService.RemoveFromRole(member.Username, "Billing");
                 }
                 else
                 {
                     if (!Roles.IsUserInRole(model.Username, "Billing") && Roles.IsUserInRole(model.Username, "Enrolled"))
-                        Roles.AddUserToRole(model.Username, "Billing");
+                        userService.AddToRole(member.Username, "Billing");
                 }
 
                 if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (!Roles.IsUserInRole("Subscriber"))
-                        Roles.AddUserToRole(model.Username, "Subscriber");
-                    if (Roles.IsUserInRole("Dependent"))
-                        Roles.RemoveUserFromRole(model.Username, "Dependent");
+                    userService.AddToRole(member.Username, "Subscriber");
+                    userService.RemoveFromRole(member.Username, "Dependent");
                 }
                 else
                 {
-                    if (Roles.IsUserInRole(model.Username, "Subscriber"))
-                        Roles.RemoveUserFromRole(model.Username, "Subscriber");
-                    if (!Roles.IsUserInRole(model.Username, "Dependent"))
-                        Roles.AddUserToRole(model.Username, "Dependent");
+                    userService.AddToRole(member.Username, "Dependent");
+                    userService.RemoveFromRole(member.Username, "Subscriber");
+                    userService.RemoveFromRole(member.Username, "Billing");
                 }
 
                 // Keep Ms First Name and Last Name always up to date
@@ -159,7 +155,7 @@ namespace HRI.Controllers
                     }
                     // Save Birthday, add user as enrolled
                     member.Properties.First(p => p.Alias == "birthday").Value = hriUser["DOB"].ToString();
-                    Roles.AddUserToRole(model.Username, "Enrolled");
+                    userService.AddToRole(model.Username, "Enrolled");
 
                     member.SetValue("enrollmentpageafterlogin", String.Empty);
                 }
@@ -175,6 +171,7 @@ namespace HRI.Controllers
                 //redirect to current page by default
                 TempData["LoginSuccess"] = true;
 
+                // Redirect mobile requests to specific page
                 if (Request.Browser.IsMobileDevice)
                     return Redirect("/member-center/index-mobile");
 
