@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Security;
-using umbraco.cms.businesslogic;
 using Umbraco.Core;
 using Umbraco.Core.Services;
 
@@ -24,6 +24,27 @@ namespace HRI.Services
             _memberService = ApplicationContext.Current.Services.MemberService;
             _contentService = ApplicationContext.Current.Services.ContentService;
             _mediaService = ApplicationContext.Current.Services.MediaService;
+        }
+
+        /// <summary>
+        /// Save username to cookie file
+        /// </summary>
+        /// <param name="username">Username</param>
+        public void RememberUsername(string username)
+        {
+            var userCookie = new HttpCookie("RememberUsername", username);
+            userCookie.Expires.AddDays(60);
+            HttpContext.Current.Response.SetCookie(userCookie);
+        }
+
+        /// <summary>
+        /// Get saved username from cookie file
+        /// </summary>
+        /// <returns>Username</returns>
+        public string GetRememberedUsername()
+        {
+            return HttpContext.Current.Request.Cookies["RememberUsername"] != null 
+                    ? HttpContext.Current.Request.Cookies.Get("RememberUsername").Value : string.Empty;
         }
 
         /// <summary>

@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using Umbraco.Web.Models;
 
 namespace HRI.Models
 {
-    public class LoginFormViewModel
+    public class LoginFormViewModel: LoginModel
     {
-        [Required]
-        public string UserName { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
         public bool RememberMe { get; set; }
     }
 }

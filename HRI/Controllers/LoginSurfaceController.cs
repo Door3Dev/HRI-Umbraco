@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using HRI.Models;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers
@@ -14,7 +15,7 @@ namespace HRI.Controllers
         private static readonly ILog Logger = LogManager.GetLogger(typeof(LoginSurfaceController));
 
         [HttpPost]
-        public ActionResult HandleLogin([Bind(Prefix = "loginModel")] LoginModel model)
+        public ActionResult HandleLogin([Bind(Prefix = "loginModel")] LoginFormViewModel model)
         {
             // If the model is NOT valid
             if (!ModelState.IsValid)
@@ -39,7 +40,7 @@ namespace HRI.Controllers
             }
         }
 
-        private ActionResult HandleLoginCore(LoginModel model)
+        private ActionResult HandleLoginCore(LoginFormViewModel model)
         {
             try
             {
@@ -164,9 +165,10 @@ namespace HRI.Controllers
 
                 //if there is a specified path to redirect to then use it
                 if (!string.IsNullOrEmpty(model.RedirectUrl))
-                {
                     return Redirect(model.RedirectUrl);
-                }
+
+                if (model.RememberMe)
+                    userService.RememberUsername(member.Username);
 
                 //redirect to current page by default
                 TempData["LoginSuccess"] = true;

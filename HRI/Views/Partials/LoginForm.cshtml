@@ -3,18 +3,20 @@
 @using Umbraco.Web
 @using Umbraco.Web.Models
 @using HRI.Controllers
+@using HRI.Models
+@using HRI.Services
 
 @inherits UmbracoTemplatePage
 
 @{
-    var loginModel = new LoginModel();
+    var userService = new UserService();
+    var loginModel = new LoginFormViewModel();
+    loginModel.Username = userService.GetRememberedUsername();
     var autoLogOff = Request["autologoff"] != null;
     
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 }
-
-@Html.Raw(Html.RenderJsHere())
 
 @using (Html.BeginUmbracoForm<LoginSurfaceController>("HandleLogin"))
 {
@@ -42,11 +44,16 @@
         <br />
         <div class="row-fluid">
             <div class="span5">@Html.LabelFor(m => loginModel.Password)</div>
-            <div class="span7 text-right"><a href="~/for-members/forgot-password">Forgot Password?</a></div>
+            <div class="span7 text-right"><a href="~/for-members/forgot-password">Forgot Password?</a>
+            </div>
             @Html.PasswordFor(m => loginModel.Password)
             @Html.ValidationMessageFor(m => loginModel.Password)
-
         </div>
+        <div class="row-fluid remember-me">
+            <div class="span1">@Html.CheckBoxFor(m => loginModel.RememberMe)</div>
+            <div class="span11 desc"><label for="loginModel_RememberMe">Save username for future visits</label></div>
+        </div>
+        <br />
 
         <button class="btn hri-btn disable-after-click">Login</button>
     </fieldset>

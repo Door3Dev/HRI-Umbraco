@@ -2237,7 +2237,7 @@ body {
   text-transform: uppercase;
 }
 
-.hri-login input {
+.hri-login input[type="text"], .hri-login input[type="password"] {
   width: 245px;
 }
 
@@ -2287,6 +2287,9 @@ body {
 .hri-login .login-footer {
     margin-left: 15%!important;
     padding-top: 30px;
+}
+.hri-login .remember-me .desc label {
+    line-height: 27px;
 }
 
 
