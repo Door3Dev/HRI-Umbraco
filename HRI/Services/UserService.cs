@@ -86,7 +86,7 @@ namespace HRI.Services
                     // Reads Change Password page node
                     var page = ((DynamicPublishedContent)_helper.ContentAtRoot().First())
                         .Descendant("ChangePassword");
-                    var message = page.GetPropertyValue<string>("expirationValidationMessage");
+                    var message = page.GetPropertyValue<string>("lastPasswordsValidationMessage");
                     throw new Exception(message);
                 }
             }
