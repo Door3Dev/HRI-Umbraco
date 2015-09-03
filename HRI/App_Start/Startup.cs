@@ -1,8 +1,7 @@
-﻿using HRI.Services;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
+﻿using System.Web.Optimization;
+using HRI.Services;
 using Umbraco.Core;
+using Umbraco.Web.Routing;
 
 namespace HRI
 {
@@ -19,6 +18,10 @@ namespace HRI
             // Generate access.config
             var accessService = new NodeAccessService();
             accessService.GenerateConfigFile();
+
+            // Prepare DB with new updates
+            var deployService = new DeployService();
+            deployService.Install();
         }
 
         private void RegisterStyles(BundleCollection bundles)
@@ -54,6 +57,9 @@ namespace HRI
             UmbracoApplicationBase umbracoApplication,
             ApplicationContext applicationContext)
         {
+            ContentFinderResolver.Current.InsertTypeBefore<ContentFinderByNiceUrl, HriContentFinder>();
+            // Remove standart ContentFinderByNiceUrl
+            ContentFinderResolver.Current.RemoveType<ContentFinderByNiceUrl>();
         }
     }
 }

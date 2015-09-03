@@ -3355,7 +3355,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\Startup.cs" />
+    <Compile Include="App_Start\HriContentFinder.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\MobileViewEnginesBootstrapper.cs" />
     <Compile Include="Controllers\HriSurfaceController.cs" />
     <Compile Include="Controllers\HriApiController.cs" />
@@ -3363,6 +3364,7 @@
     <Compile Include="Controllers\EmailSurfaceController.cs" />
     <Compile Include="Controllers\LoginSurfaceController.cs" />
     <Compile Include="Controllers\MemberInformationSurfaceController.cs" />
+    <Compile Include="Controllers\PasswordsHistoryService.cs" />
     <Compile Include="Controllers\RegisterSurfaceController.cs" />
     <Compile Include="Controllers\MembersSurfaceController.cs" />
     <Compile Include="Controllers\Utils.cs" />
@@ -3387,6 +3389,7 @@
     </Compile>
     <Compile Include="Models\MemberProfile.cs" />
     <Compile Include="Models\MenuType.cs" />
+    <Compile Include="Models\PasswordHistory.cs" />
     <Compile Include="Models\PlanDescription.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\PlansDescriptioData.cs" />
@@ -3397,6 +3400,7 @@
     <Compile Include="Models\SendVerificationLinkModel.cs" />
     <Compile Include="Models\SubscriberInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DeployService.cs" />
     <Compile Include="Services\HriApiService.cs" />
     <Compile Include="Services\MemberCenterService.cs" />
     <Compile Include="Services\MemberAnnouncementsService.cs" />

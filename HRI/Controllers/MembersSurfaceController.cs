@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Xml;
@@ -11,7 +12,6 @@ using HRI.Helpers;
 using HRI.Models;
 using HRI.Services;
 using log4net;
-using umbraco.cms.presentation.create.controls;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
 
@@ -348,56 +348,28 @@ namespace HRI.Controllers
         [HttpPost]
         public ActionResult ChangePassword([Bind(Prefix = "changePasswordViewModel")] ChangePasswordViewModel model)
         {
+            var member = Membership.GetUser();
+            var userService = new UserService();
             try
             {
-                var user = Membership.GetUser();
-                if (user == null || !Membership.ValidateUser(user.UserName, model.OldPassword))
-                {
-                    ModelState.AddModelError("changePasswordViewModel", IncorrectPassword);
-                }
-                // Verify that username and password arent the same.
-                if (user.UserName == model.NewPassword)
-                {
-                    ModelState.AddModelError("changePasswordViewModel.NewPassword", "Password cannot be the same as Username");
-                }
+                TempData["IsSuccessful"] = userService.ChangePassword(member, model.OldPassword, model.NewPassword);
+                // Update the User profile in the database
+                userService.AddToRole(member.UserName, "Registered"); // This is needed to end security upgrade process
 
-                if (string.Compare(model.OldPassword, model.NewPassword, StringComparison.Ordinal) == 0)
+                if (Session["ForcePasswordChange"] != null)
                 {
-                    ModelState.AddModelError("changePasswordViewModel.NewPassword", "Your new password cannot be the same as your current password.");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return CurrentUmbracoPage();
-                }
-
-                try
-                {
-                    TempData["IsSuccessful"] = user.ChangePassword(model.OldPassword, model.NewPassword);
-                    // Update the User profile in the database
-                    Membership.UpdateUser(user);
-                    if (!Roles.IsUserInRole(user.UserName, "Registered"))
-                        Roles.AddUserToRole(user.UserName, "Registered"); // This is needed to end security upgrade process
-                    return RedirectToCurrentUmbracoPage();
-                }
-                catch (MembershipPasswordException)
-                {
-                    ModelState.AddModelError(
-                        "changePasswordViewModel.NewPassword",
-                        RegisterSurfaceController.PasswordNotStrongEnough);
-
-                    return CurrentUmbracoPage();
+                    Session.Clear();
+                    FormsAuthentication.SignOut();
+                    return Redirect("/for-members/login");
                 }
             }
             catch (Exception ex)
             {
-                // Create an error message with sufficient info to contact the user
-                string additionalInfo = "User " + User.Identity.Name + " was unable to change their password.";
-                // Add the error message to the log4net output
-                GlobalContext.Properties["additionalInfo"] = additionalInfo;
-                logger.Error(ex);
+                ModelState.AddModelError("changePasswordViewModel.NewPassword", ex.Message);
                 return CurrentUmbracoPage();
             }
+
+            return RedirectToCurrentUmbracoPage();
         }
 
         [HttpPost]

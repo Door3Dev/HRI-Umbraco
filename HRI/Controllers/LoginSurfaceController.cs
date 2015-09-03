@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using HRI.Services;
-using log4net;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using HRI.Models;
-using Umbraco.Web.Models;
+using HRI.Services;
+using log4net;
 
 namespace HRI.Controllers
 {
@@ -33,7 +32,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "Could not login user " + model.Username + ".";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 Logger.Error("Exception during login", ex);
                 ModelState.AddModelError("loginModel", "Oops, we ran into a problem, please try again or contact Member Services for assistance.");
                 return CurrentUmbracoPage();
@@ -167,8 +166,16 @@ namespace HRI.Controllers
                 if (!string.IsNullOrEmpty(model.RedirectUrl))
                     return Redirect(model.RedirectUrl);
 
+                // if user asked to save a username
                 if (model.RememberMe)
                     userService.RememberUsername(member.Username);
+                
+                // 180 day Password Expiration Policy
+                if ((DateTime.Now - member.LastLoginDate).TotalDays >= 180)
+                {
+                    Session["ForcePasswordChange"] = true;
+                    return Redirect("/your-account/change-password/");
+                }
 
                 //redirect to current page by default
                 TempData["LoginSuccess"] = true;
@@ -184,7 +191,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "Could not log in user " + model.Username + ".";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 Logger.Error(ex);
                 //redirect to current page by default
                 TempData["LoginSuccess"] = false;

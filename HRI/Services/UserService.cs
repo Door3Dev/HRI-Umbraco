@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Text;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Security;
+using HRI.Controllers;
+using log4net;
 using Umbraco.Core;
 using Umbraco.Core.Services;
 
@@ -15,15 +18,52 @@ namespace HRI.Services
 {
     public class UserService
     {
-        private readonly IMemberService _memberService;
-        private readonly IContentService _contentService;
-        private readonly IMediaService _mediaService;
+        private readonly IMemberService _memberService = ApplicationContext.Current.Services.MemberService;
+        private readonly IContentService _contentService = ApplicationContext.Current.Services.ContentService;
+        private readonly IMediaService _mediaService = ApplicationContext.Current.Services.MediaService;
+        static readonly ILog logger = LogManager.GetLogger(typeof(UserService));
 
-        public UserService()
+        public bool ChangePassword(MembershipUser member, string oldPassword, string newPassword)
         {
-            _memberService = ApplicationContext.Current.Services.MemberService;
-            _contentService = ApplicationContext.Current.Services.ContentService;
-            _mediaService = ApplicationContext.Current.Services.MediaService;
+            bool changeSucceed = false;
+            var passwordHistoryService = new PasswordsHistoryService();
+      
+            if (member == null || !Membership.ValidateUser(member.UserName, oldPassword))
+                throw new Exception("The password you entered does not match our records, please try again.");
+            // Verify that username and password arent the same.
+            if (member.UserName == newPassword)
+                throw new Exception("Password cannot be the same as Username");
+            if (string.Compare(oldPassword, newPassword, StringComparison.Ordinal) == 0)
+                throw new Exception("Your new password cannot be the same as your current password.");
+
+            try
+            {
+                var memberId = (int) member.ProviderUserKey;
+                if (passwordHistoryService.CheckUserPassword(memberId, newPassword))
+                {
+                    changeSucceed = member.ChangePassword(oldPassword, newPassword);
+                    if (changeSucceed)
+                        passwordHistoryService.Add(memberId, newPassword);
+                    // Update the User profile in the database
+                    Membership.UpdateUser(member);
+                }
+                else
+                    throw new Exception("You can't use your old passwords");
+            }
+            catch (MembershipPasswordException)
+            {
+                throw new Exception("The password is not strong enough");
+            }
+            catch(Exception ex)
+            {
+                // Create an error message with sufficient info to contact the user
+                string additionalInfo = "User " + member.UserName + " was unable to change their password.";
+                // Add the error message to the log4net output
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                logger.Error(ex);
+                throw;
+            }
+            return changeSucceed;
         }
 
         /// <summary>
@@ -117,7 +157,7 @@ namespace HRI.Services
         /// <param name="emailTemplateId">The template file located in the ~/EmailTemplates folder</param>
         /// <param name="values">A dictionary that contains the dynamic placeholder as a key, and has the text to insert as the value. (ex item["<%UserName%>", model.UserName])</param>
         /// <returns>A string representation of the email with all the dynamic text replaced by the provided values</returns>
-        protected string BuildEmail(int emailTemplateId, IDictionary<string, string> values)
+        private string BuildEmail(int emailTemplateId, IDictionary<string, string> values)
         {
             // Create a string to hold the email text
             string emailMessage;
@@ -143,7 +183,7 @@ namespace HRI.Services
             return emailMessage;
         }
 
-        protected void SendEmail(string email, string title, string content, string fromEmail = null)
+        private void SendEmail(string email, string title, string content, string fromEmail = null)
         {
             // Get ahold of the root/home node
             var root = _contentService.GetRootContent().First();
