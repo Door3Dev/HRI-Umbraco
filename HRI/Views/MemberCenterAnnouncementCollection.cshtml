@@ -3,6 +3,8 @@
 @{
     Layout = "MasterPage.cshtml";
     var announcements = new MemberAnnouncementsService().GetList();
+    var userService = new UserService();
+    var passwordExpirationMessage = userService.GetPasswordExpirationMessage();
 }
 <div id="hri-content" class="hri-member-center">
     <div class="row-fluid">
@@ -13,17 +15,28 @@
                 </div>
             </div>
             <div class="content">
-            @foreach (var item in announcements)
-            {
-                <div class="row-fluid">
-                    <div class="span10 offset1">
-                        <h3>@item.Title</h3>
-                        @Html.Raw(item.ShortMessage)
-                        <p><a href="@item.Url">Read more</a></p>
+                @if (passwordExpirationMessage != null)
+                {
+                    <div class="row-fluid">
+                        <div class="span10 offset1">
+                            <h3>@passwordExpirationMessage.Title</h3>
+                            @Html.Raw(passwordExpirationMessage.Message)
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix"></div>
-            }
+                    <div class="clearfix"></div>
+                }
+                @foreach (var item in announcements)
+                {
+                    <div class="row-fluid">
+                        <div class="span10 offset1">
+                            <h3>@item.Title</h3>
+                            @Html.Raw(item.ShortMessage)
+                            <p><a href="@item.Url">Read more</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                }
             </div>
         </div>
     </div>

@@ -171,7 +171,7 @@ namespace HRI.Controllers
                     userService.RememberUsername(member.Username);
                 
                 // 180 day Password Expiration Policy
-                if ((DateTime.Now - member.LastLoginDate).TotalDays >= 180)
+                if ((DateTime.Now - member.LastPasswordChangeDate).TotalDays >= 180)
                 {
                     Session["ForcePasswordChange"] = true;
                     return Redirect("/your-account/change-password/");

@@ -10,7 +10,7 @@ namespace HRI
         {
             // 180 day Password Expiration Policy
             var member = Membership.GetUser();
-            if (member != null && (DateTime.Now - member.LastLoginDate).TotalDays >= 180
+            if (member != null && (DateTime.Now - member.LastPasswordChangedDate).TotalDays >= 180
                 && !contentRequest.Uri.AbsoluteUri.Contains("your-account/change-password"))
             {
                 contentRequest.SetRedirect("/your-account/change-password/");

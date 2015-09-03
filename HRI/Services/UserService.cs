@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,9 +9,12 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Security;
 using HRI.Controllers;
+using HRI.Models;
 using log4net;
 using Umbraco.Core;
 using Umbraco.Core.Services;
+using Umbraco.Web;
+using Umbraco.Web.Models;
 
 namespace HRI.Services
 {
@@ -21,11 +23,42 @@ namespace HRI.Services
         private readonly IMemberService _memberService = ApplicationContext.Current.Services.MemberService;
         private readonly IContentService _contentService = ApplicationContext.Current.Services.ContentService;
         private readonly IMediaService _mediaService = ApplicationContext.Current.Services.MediaService;
+        private readonly UmbracoHelper _helper = new UmbracoHelper(UmbracoContext.Current);
         static readonly ILog logger = LogManager.GetLogger(typeof(UserService));
 
+        /// <summary>
+        /// Returns password expiration message if user needs to change it in 30 days
+        /// </summary>
+        /// <returns>Expiration message</returns>
+        public PasswordExpirationMessage GetPasswordExpirationMessage()
+        {
+            var member = Membership.GetUser();
+            PasswordExpirationMessage message = null;
+            // Read message only if user needs to update it in 30 days
+            if ((DateTime.Now - member.LastPasswordChangedDate).TotalDays >= 150)
+            {
+                // Reads Change Password page node
+                var page = ((DynamicPublishedContent) _helper.ContentAtRoot().First())
+                    .Descendant("ChangePassword");
+                message = new PasswordExpirationMessage()
+                {
+                    Title = page.GetPropertyValue<string>("expirationAnnouncementMessageTitle"),
+                    Message = page.GetPropertyValue<string>("expirationAnnouncementMessage")
+                };
+            }
+            return message;
+        }
+
+        /// <summary>
+        /// Change user password
+        /// </summary>
+        /// <param name="member">Member</param>
+        /// <param name="oldPassword">Old password</param>
+        /// <param name="newPassword">New Password</param>
+        /// <returns>Success status</returns>
         public bool ChangePassword(MembershipUser member, string oldPassword, string newPassword)
         {
-            bool changeSucceed = false;
+            bool changeSucceed;
             var passwordHistoryService = new PasswordsHistoryService();
       
             if (member == null || !Membership.ValidateUser(member.UserName, oldPassword))
@@ -42,13 +75,20 @@ namespace HRI.Services
                 if (passwordHistoryService.CheckUserPassword(memberId, newPassword))
                 {
                     changeSucceed = member.ChangePassword(oldPassword, newPassword);
+                    // if password was changed save it to the history
                     if (changeSucceed)
                         passwordHistoryService.Add(memberId, newPassword);
                     // Update the User profile in the database
                     Membership.UpdateUser(member);
                 }
                 else
-                    throw new Exception("You can't use your old passwords");
+                {
+                    // Reads Change Password page node
+                    var page = ((DynamicPublishedContent)_helper.ContentAtRoot().First())
+                        .Descendant("ChangePassword");
+                    var message = page.GetPropertyValue<string>("expirationValidationMessage");
+                    throw new Exception(message);
+                }
             }
             catch (MembershipPasswordException)
             {
