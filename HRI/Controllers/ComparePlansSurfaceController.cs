@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using HRI.ViewModels;
 using Umbraco.Web.Mvc;
 
 namespace HRI.Controllers

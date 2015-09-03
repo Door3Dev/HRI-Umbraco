@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Examine;
+using HRI.ViewModels;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers

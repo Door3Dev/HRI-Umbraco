@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using HRI.Models;
 using HRI.Services;
+using HRI.ViewModels;
 using log4net;
 
 namespace HRI.Controllers

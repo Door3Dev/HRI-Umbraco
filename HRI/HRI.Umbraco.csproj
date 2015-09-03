@@ -3371,20 +3371,20 @@
     <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Helpers\RegistrationNotificationType.cs" />
     <Compile Include="Helpers\RequireRouteValuesAttribute.cs" />
-    <Compile Include="Models\ChangeEmailViewModel.cs" />
-    <Compile Include="Models\ChangePasswordViewModel.cs" />
-    <Compile Include="Models\ChangeUserNameViewModel.cs" />
-    <Compile Include="Models\ComparePlansViewModel.cs" />
-    <Compile Include="Models\ContactFormViewModel.cs" />
+    <Compile Include="ViewModels\ChangeEmailViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\ChangeUserNameViewModel.cs" />
+    <Compile Include="ViewModels\ComparePlansViewModel.cs" />
+    <Compile Include="ViewModels\ContactFormViewModel.cs" />
     <Compile Include="Models\DependentInformation.cs" />
-    <Compile Include="Models\ForgotPasswordViewModel.cs" />
-    <Compile Include="Models\ForgotUserNameViewModel.cs" />
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ForgotUserNameViewModel.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberAnnouncement.cs" />
     <Compile Include="Models\MemberCenterMenuItem.cs" />
-    <Compile Include="Models\MembershipInformationViewModel.cs" />
+    <Compile Include="ViewModels\MembershipInformationViewModel.cs" />
     <Compile Include="Models\MenuItem.cs" />
-    <Compile Include="Models\LoginFormViewModel.cs">
+    <Compile Include="ViewModels\LoginFormViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\MemberProfile.cs" />
@@ -3395,8 +3395,8 @@
     <Compile Include="Models\PlansDescriptioData.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsData.cs" />
-    <Compile Include="Models\RegisterFormViewModel.cs" />
-    <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\RegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SendVerificationLinkModel.cs" />
     <Compile Include="Models\SubscriberInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

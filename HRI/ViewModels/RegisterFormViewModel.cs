@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace HRI.Models
+namespace HRI.ViewModels
 {
     public class RegisterFormViewModel: IValidatableObject
     {

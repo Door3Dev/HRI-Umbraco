@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Web.Mvc;
+using HRI.ViewModels;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using log4net;

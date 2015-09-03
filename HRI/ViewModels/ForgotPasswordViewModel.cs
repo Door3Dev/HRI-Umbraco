@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HRI.Models
+namespace HRI.ViewModels
 {
     public class ForgotPasswordViewModel
     {

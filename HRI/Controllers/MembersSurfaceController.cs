@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Xml;
@@ -9,8 +8,8 @@ using ComponentSpace.SAML2;
 using ComponentSpace.SAML2.Assertions;
 using CoverMyMeds.SAML.Library;
 using HRI.Helpers;
-using HRI.Models;
 using HRI.Services;
+using HRI.ViewModels;
 using log4net;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;

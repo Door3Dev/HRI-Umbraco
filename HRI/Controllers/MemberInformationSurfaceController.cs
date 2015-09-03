@@ -8,6 +8,7 @@ using Umbraco.Web.Mvc;
 using log4net;
 using HRI.Models;
 using HRI.Services;
+using HRI.ViewModels;
 
 namespace HRI.Controllers
 {

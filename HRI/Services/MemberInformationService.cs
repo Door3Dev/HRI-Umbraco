@@ -11,6 +11,7 @@ using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
 using HRI.Models;
+using HRI.ViewModels;
 
 namespace HRI.Services
 {
