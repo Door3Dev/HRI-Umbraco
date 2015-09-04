@@ -947,6 +947,12 @@
             
             template.appendTo('#shop-coverchild');
             $('input[name="ChildrenAges"]').inputmask('Regex', { regex: '^[0-9]{1,3}(\.[0-9])?$' });
+            template.find('.child-age').change(function () {
+                if ($('#shop-coverself-check')[0].checked && $(this).val() > $('#customer-age').val())
+                    $(this).parent().find('.age-warning').removeClass('hri-hide');
+                else
+                    $(this).parent().find('.age-warning').addClass('hri-hide');
+            });
             childAmmount++;
         };
 
