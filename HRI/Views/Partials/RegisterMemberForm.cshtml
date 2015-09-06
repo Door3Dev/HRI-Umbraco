@@ -1,8 +1,8 @@
 ﻿@using System.Web.Mvc.Html
 @using AutoMapper.Internal
 @using ClientDependency.Core.Mvc
-@using HRI.Models
 @using HRI.Controllers
+@using HRI.Models
 @using HRI.ViewModels
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
@@ -228,6 +228,10 @@
                 @Html.LabelFor(m => registerModel.Password)
                 @Html.PasswordFor(m => registerModel.Password)
                 @Html.ValidationMessageFor(m => registerModel.Password)
+
+                @Html.LabelFor(m => registerModel.ConfirmPassword)
+                @Html.PasswordFor(m => registerModel.ConfirmPassword)
+                @Html.ValidationMessageFor(m => registerModel.ConfirmPassword)
             </div>
         </div>
         <div class="row-fluid block">
@@ -352,6 +356,11 @@
             if (isValid && !memberCheckError) {
                 $("#submit-form").removeAttr('disabled');
             }
+        });
+
+        $('#registerModel_Password').bind('change', function () {
+            if ($('#registerModel_Password').valid())
+                $('#registerModel_Password').addClass('valid');
         });
     });
 

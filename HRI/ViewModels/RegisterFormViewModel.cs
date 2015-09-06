@@ -59,7 +59,12 @@ namespace HRI.ViewModels
         public string Username { get; set; }
 
         [Required]
+        [RegularExpression(@"^((?=.*\d)|(?=.*[^a-zA-Z]))(?=.*[a-z])(?=.*[A-Z])\S{8,}", ErrorMessage = "The password is not strong enough")]
         public string Password { get; set; }
+
+        [Required]
+        [Compare("Password", ErrorMessage = "Confirm Password and Password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         public string PlanId { get; set; }
 
