@@ -345,6 +345,7 @@
     <Content Include="images\faqs-banner.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\flowbar-stripes.png" />
+    <Content Include="images\green-check-mark.png" />
     <Content Include="images\health-body.png" />
     <Content Include="images\hri-logo-sm.png" />
     <Content Include="images\icon_facebook.png" />
