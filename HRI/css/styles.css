@@ -2493,12 +2493,11 @@ body {
 #register-form .btn {
     padding: 11px 35px;
 }
-#registerModel_Password:after {
-    content: "";
-    display: block;
+#register-form span.valid {
+    display: inline-block;
     background: url('../images/green-check-mark.png');
-    width: 10px;
-    height:10px; 
+    width: 20px;
+    height:20px; 
 }
 
 /* ------------ COMPARE PLANS ------------ */

@@ -227,6 +227,7 @@
             <div class="span7">
                 @Html.LabelFor(m => registerModel.Password)
                 @Html.PasswordFor(m => registerModel.Password)
+                <span id="password-valid" class="valid hri-hide"></span>
                 @Html.ValidationMessageFor(m => registerModel.Password)
 
                 @Html.LabelFor(m => registerModel.ConfirmPassword)
@@ -349,7 +350,7 @@
             </text>
         }
 
-        $("#register-form").bind('change keyup', function () {
+        $('#register-form').bind('change keyup', function () {
 
             var isValid = validator.checkForm();
             validator.submitted = {}; // hack to reset validation behavior as a side effect of checkForm call
@@ -358,9 +359,8 @@
             }
         });
 
-        $('#registerModel_Password').bind('change', function () {
-            if ($('#registerModel_Password').valid())
-                $('#registerModel_Password').addClass('valid');
+        $('#registerModel_Password').bind('change keyup', function () {
+            $('#password-valid').toggleClass('hri-hide', !$('#registerModel_Password').valid());
         });
     });
 
