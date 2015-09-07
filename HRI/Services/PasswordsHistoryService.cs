@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -6,7 +6,7 @@ using HRI.Models;
 using Umbraco.Core;
 using Umbraco.Core.Persistence;
 
-namespace HRI.Controllers
+namespace HRI.Services
 {
     public class PasswordsHistoryService
     {
@@ -21,7 +21,7 @@ namespace HRI.Controllers
         public bool CheckUserPassword(int memberId, string password)
         {
             //Get last 3 passwords from the history
-            var lastPasswords = _dbContext.Query<PasswordHistory>("SELECT TOP 3 * FROM PasswordsHistory WHERE MemberId=@0 ORDER BY ChangeDate DESC ", memberId).ToList();
+            var lastPasswords = _dbContext.Query<PasswordHistory>("SELECT TOP 3 * FROM hriPasswordsHistory WHERE MemberId=@0 ORDER BY ChangeDate DESC ", memberId).ToList();
             var result = lastPasswords.All(p => p.EncryptedPassword != HashPassword(password));
             return result;
         }
