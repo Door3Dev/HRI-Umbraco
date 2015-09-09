@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
-using HRI.Models;
-using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Examine;
+using HRI.Models;
 using HRI.ViewModels;
+using log4net;
 using Umbraco.Web.Models;
 
 namespace HRI.Controllers
@@ -141,7 +142,7 @@ namespace HRI.Controllers
                 // Create an error message with sufficient info to contact the user
                 string additionalInfo = "Could not register user " + model.Username + ".";
                 // Add the error message to the log4net output
-                log4net.GlobalContext.Properties["additionalInfo"] = additionalInfo;
+                GlobalContext.Properties["additionalInfo"] = additionalInfo;
                 return CurrentUmbracoPage();
             }
         }

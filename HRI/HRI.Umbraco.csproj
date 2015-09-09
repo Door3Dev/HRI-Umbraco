@@ -3356,6 +3356,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\RegistrationApiController.cs" />
     <Compile Include="App_Start\HriContentFinder.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\MobileViewEnginesBootstrapper.cs" />

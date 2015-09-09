@@ -19,6 +19,24 @@ namespace HRI.Services
         private readonly IMemberService _memberService = ApplicationContext.Current.Services.MemberService;
         private readonly UmbracoHelper _umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
 
+
+        /// <summary>
+        /// Check if email is in use
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool EmailIsInUse(string email)
+        {
+            var checkResult = Get("Registration", new Dictionary<string, string> {{"isEMailAddressInUse", email}});
+            return (bool) checkResult.EmaiInUse;
+        }
+
+        /// <summary>
+        /// Update user email
+        /// </summary>
+        /// <param name="member">Member</param>
+        /// <param name="newEmail">New email</param>
+        /// <returns></returns>
         public bool UpdateUserEmail(IMember member, string newEmail)
         {
             using (var client = new WebClient())
@@ -152,7 +170,7 @@ namespace HRI.Services
         /// <param name="action">Action</param>
         /// <param name="values">Query parameters</param>
         /// <returns></returns>
-        private JObject Get(string action, Dictionary<string, string> values)
+        private dynamic Get(string action, Dictionary<string, string> values)
         {
             // Get ahold of the root/home node
             IPublishedContent root = _umbracoHelper.ContentAtRoot().First();
@@ -165,7 +183,7 @@ namespace HRI.Services
             string apiFullUrl = string.Format("{0}/{1}?{2}", apiUri, action, String.Join("&", valuesList));
             // Create a web client to access the API
             // Create a JSON object to hold the response 
-            JObject json;
+            dynamic json;
             using (var client = new WebClient())
             {
                 // Set the format to JSON

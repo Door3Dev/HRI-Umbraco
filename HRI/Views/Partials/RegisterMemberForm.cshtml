@@ -350,6 +350,25 @@
             </text>
         }
 
+        jQuery.validator.addMethod('uniqueEmail', function (value, element) {
+            var error = false;
+            $.ajax({
+                url: "/umbraco/api/RegistrationApi/EmailIsInUse",
+                data: { email: value },
+                async: false,
+                success: function (isInUse) {
+                    error = isInUse != 'true';
+                }
+            });
+            return error;
+        });
+        $('#registerModel_Email').rules('add', {
+            uniqueEmail: true,
+            messages: {
+                uniqueEmail: 'A member with this e-mail address already exists'
+            }
+        });
+
         $('#register-form').bind('change keyup', function () {
 
             var isValid = validator.checkForm();
