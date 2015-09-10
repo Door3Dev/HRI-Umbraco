@@ -1,5 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 using HRI.Services;
 using Umbraco.Web.WebApi;
 
@@ -9,15 +12,11 @@ namespace HRI.Api
     {
         [HttpGet]
         [AllowAnonymous]
-        public bool EmailIsInUse(string email)
+        public bool EmailIsInUse([EmailAddress]string email)
         {
-            var regex = new Regex(@"^((?=.*\d)|(?=.*[^a-zA-Z]))(?=.*[a-z])(?=.*[A-Z])\S{8,}");
-            if (regex.IsMatch(email))
-            {
-                var hriService = new HriApiService();
-                return hriService.EmailIsInUse(email);
-            }
-            return false;
+           var hriService = new HriApiService();
+            return hriService.EmailIsInUse(email);
         }
+
     }
 }

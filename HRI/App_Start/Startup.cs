@@ -45,8 +45,6 @@ namespace HRI
                 .Include("~/scripts/jquery.validate.unobtrusive.min.js"));
         }
 
-        
-
         public void OnApplicationInitialized(
             UmbracoApplicationBase umbracoApplication,
             ApplicationContext applicationContext)

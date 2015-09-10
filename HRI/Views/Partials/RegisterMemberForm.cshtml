@@ -351,13 +351,17 @@
         }
 
         jQuery.validator.addMethod('uniqueEmail', function (value, element) {
+            if (element.previousValue == value)
+                return element.previousError;
+
             var error = false;
             $.ajax({
                 url: "/umbraco/api/RegistrationApi/EmailIsInUse",
                 data: { email: value },
                 async: false,
                 success: function (isInUse) {
-                    error = isInUse != 'true';
+                    element.previousValue = value;
+                    element.previousError = error = !isInUse;
                 }
             });
             return error;
