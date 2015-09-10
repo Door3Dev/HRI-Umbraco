@@ -42,7 +42,7 @@ namespace HRI.Services
                     .Descendant("ChangePassword");
                 message = new PasswordExpirationMessage()
                 {
-                    Title = page.GetPropertyValue<string>("expirationAnnouncementMessageTitle"),
+                    Title = page.GetPropertyValue<string>("expirationAnnouncementMessageHeader"),
                     Message = page.GetPropertyValue<string>("expirationAnnouncementMessage")
                 };
             }
