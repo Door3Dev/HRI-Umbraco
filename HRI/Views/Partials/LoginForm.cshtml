@@ -26,7 +26,7 @@
         }
         @if (!ViewData.ModelState.IsValid)
         {
-            @Html.ValidationSummary("loginModel", true)
+            @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary("loginModel", true).ToHtmlString()))
         }
         @Html.AntiForgeryToken()
 
