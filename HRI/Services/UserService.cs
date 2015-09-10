@@ -136,7 +136,7 @@ namespace HRI.Services
         {
             // Check should be always performed or exception will be fired
             if (!Roles.IsUserInRole(username, role))
-                Roles.AddUserToRole(username, "role");
+                Roles.AddUserToRole(username, role);
         }
 
         /// <summary>
