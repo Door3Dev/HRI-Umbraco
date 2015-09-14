@@ -110,6 +110,25 @@ namespace HRI.Controllers
                     member.SetValue("market", market);
                 }
 
+                // Split users on Subscribers and Dependents
+                if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    userService.AddToRole(member.Username, "Subscriber");
+                    userService.RemoveFromRole(member.Username, "Dependent");
+                    // Group Subscriber should NOT see Billing options
+                    if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
+                        userService.RemoveFromRole(member.Username, "Billing");
+                    else
+                        userService.AddToRole(member.Username, "Billing");
+                }
+                else
+                {
+                    userService.AddToRole(member.Username, "Dependent");
+                    userService.RemoveFromRole(member.Username, "Subscriber");
+                    userService.RemoveFromRole(member.Username, "Billing");
+                }
+
+                // Group users should not be able to see Billing options
                 if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     userService.RemoveFromRole(member.Username, "Billing");
@@ -118,18 +137,6 @@ namespace HRI.Controllers
                 {
                     if (!Roles.IsUserInRole(model.Username, "Billing") && Roles.IsUserInRole(model.Username, "Enrolled"))
                         userService.AddToRole(member.Username, "Billing");
-                }
-
-                if (string.Compare(hriUser["SubscriberFlag"].ToString(), "Y", StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    userService.AddToRole(member.Username, "Subscriber");
-                    userService.RemoveFromRole(member.Username, "Dependent");
-                }
-                else
-                {
-                    userService.AddToRole(member.Username, "Dependent");
-                    userService.RemoveFromRole(member.Username, "Subscriber");
-                    userService.RemoveFromRole(member.Username, "Billing");
                 }
 
                 // Keep Ms First Name and Last Name always up to date
