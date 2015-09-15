@@ -128,17 +128,6 @@ namespace HRI.Controllers
                     userService.RemoveFromRole(member.Username, "Billing");
                 }
 
-                // Group users should not be able to see Billing options
-                if (string.Compare(member.GetValue<string>("market"), "group", StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    userService.RemoveFromRole(member.Username, "Billing");
-                }
-                else
-                {
-                    if (!Roles.IsUserInRole(model.Username, "Billing") && Roles.IsUserInRole(model.Username, "Enrolled"))
-                        userService.AddToRole(member.Username, "Billing");
-                }
-
                 // Keep Ms First Name and Last Name always up to date
                 member.Properties.First(p => p.Alias == "msFirstName").Value = hriUser["MSFirstName"].ToString();
                 member.Properties.First(p => p.Alias == "msLastName").Value = hriUser["MSLastName"].ToString();
