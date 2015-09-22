@@ -375,6 +375,7 @@
     <Content Include="scripts\jquery.inputmask\jquery.inputmask.phone.extensions.js" />
     <Content Include="scripts\jquery.inputmask\jquery.inputmask.regex.extensions.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\validation.js" />
     <Content Include="Umbraco.Courier.Core.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -3376,6 +3377,7 @@
     <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Helpers\RegistrationNotificationType.cs" />
     <Compile Include="Helpers\RequireRouteValuesAttribute.cs" />
+    <Compile Include="Helpers\SpecialCharactersAttribute.cs" />
     <Compile Include="Services\PasswordsHistoryService.cs" />
     <Compile Include="ViewModels\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />

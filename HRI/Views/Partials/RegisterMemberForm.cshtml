@@ -372,6 +372,9 @@
                 uniqueEmail: 'A member with this e-mail address already exists'
             }
         });
+        $('#registerModel_FirstName').rules('add', { specialCharacters: true });
+        $('#registerModel_LastName').rules('add', { specialCharacters: true });
+        $('#username').rules('add', { specialCharacters: true });
 
         $('#register-form').bind('change keyup', function () {
 

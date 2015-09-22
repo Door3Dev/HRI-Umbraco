@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
@@ -17,9 +18,11 @@ namespace HRI.ViewModels
         public string Ssn { get; set; }
 
         [Required]
+        [SpecialCharacters]
         public string FirstName { get; set; }
 
         [Required]
+        [SpecialCharacters]
         public string LastName { get; set; }
 
         [Required]
@@ -56,6 +59,7 @@ namespace HRI.ViewModels
         [Required]
         [StringLength(50, ErrorMessage = "Username must be at least 6 characters.", MinimumLength = 6)]
         [RegularExpression("^[^ ]+$", ErrorMessage = "Username may not contain space")]
+        [SpecialCharacters]
         public string Username { get; set; }
 
         [Required]

@@ -42,7 +42,8 @@ namespace HRI
                 .Include("~/Scripts/jquery.inputmask/jquery.inputmask.js")
                 .Include("~/scripts/jquery.inputmask/jquery.inputmask.regex.extensions.js")
                 .Include("~/scripts/jquery.validate.min.js")
-                .Include("~/scripts/jquery.validate.unobtrusive.min.js"));
+                .Include("~/scripts/jquery.validate.unobtrusive.min.js")
+                .Include("~/scripts/validation.js"));
         }
 
         public void OnApplicationInitialized(

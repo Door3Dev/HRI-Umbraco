@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,9 +12,11 @@ namespace HRI.ViewModels
         public string MessageType { get; set; }
 
         [Required]
+        [SpecialCharacters]
         public string FirstName { get; set; }
 
         [Required]
+        [SpecialCharacters]
         public string LastName { get; set; }
 
         [Required]
@@ -26,6 +29,7 @@ namespace HRI.ViewModels
         public string PhoneNumber { get; set; }
 
         [Required]
+        [SpecialCharacters]
         public string Message { get; set; }
 
         public string Username { get; set; }

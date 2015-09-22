@@ -12,8 +12,8 @@
 }
 
 @{
-    Html.EnableClientValidation(true);
-    Html.EnableUnobtrusiveJavaScript(true);
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
 
     var model = new ContactFormViewModel();
     if (User.Identity.IsAuthenticated)
@@ -33,8 +33,6 @@
         (string)CurrentPage.GetPropertyValue<string>("categoriesAndEmails"));
 
 }
-
-@Html.Raw(Html.RenderJsHere())
     
 @if (Convert.ToBoolean(TempData["IsSuccessful"]))
 {
@@ -96,5 +94,8 @@
 <script>
     $(document).ready(function () {
         $("#PhoneNumber").inputmask();
+        $('#FirstName').rules('add', { specialCharacters: true });
+        $('#LastName').rules('add', { specialCharacters: true });
+        $('#Message').rules('add', { specialCharacters: true });
     });
 </script>
