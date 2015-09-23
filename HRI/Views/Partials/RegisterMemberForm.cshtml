@@ -262,53 +262,12 @@
 }
 
 <script>
-    // Check valid zipCode
-    @{if (isNewUser)
+    @{if (!isNewUser)
     {
         <text>
-        $('#zipCode').blur(function() {
-            $.ajax({
-                url: '/Umbraco/Surface/ComparePlansSurface/ValidateZipCode',
-                data: { ZipCode: $('#zipCode').val() },
-                success: function(data) {
-                    if (data == 'true')
-                        $('#zipCodeCheck').html('');
-                    else
-                        $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
-                },
-                error: function() {
-                    $('#zipCodeCheck').html('<span class="error">There was an error validating the Zip Code</span>');
-                },
-                dataType: 'html'
-            });
-        });
+        $('#memberId').blur(validateMemberId);
         </text>
-    }
-    else
-    {
-        <text>
-    $('#memberId').blur(validateMemberId);
-
-    $('#zipCode').blur(function() {
-        // length is always 5 from input mask, so check if there are any _
-            if ($(this).val().length == 5 && $(this).val().indexOf('_') < 0) {
-                $('#zipCodeCheck').html('');
-            } else {
-                $('#zipCodeCheck').html('<span class="error">Invalid Zip Code</span>');
-            }
-        });
-
-    </text>
     }}
-
-    $('#registerModel_Phone').blur(function() {
-        // If the phone number is not blank and less than 10 digits
-        if ($(this).val().indexOf('_') > -1) {
-            $('#phoneNumberCheck').html('<span class="error">Invalid Phone Number</span>');
-        } else {
-            $('#phoneNumberCheck').html('');
-        }
-    });
 
     // Check user uniqueness
     $("#username").keyup(function() {
@@ -331,6 +290,19 @@
         $("#registerModel_Ssn").inputmask();
         $("#zipCode").inputmask();
         $("#registerModel_Phone").inputmask();
+        @if (isNewUser)
+        {
+            <text>
+            $('#registerModel_Phone').rules('add', { phone: true });
+            $('#zipCode').rules('add', { zipCode: true });
+            </text>
+        }
+        else
+        {
+            <text>
+            //$('#zipCode').rules('add', { simpleZipCode: true });
+            </text>
+        }
 
         // Prevent paste in confirm email text box
         $('.nopaste').bind('paste', function (e) {
@@ -350,28 +322,7 @@
             </text>
         }
 
-        jQuery.validator.addMethod('uniqueEmail', function (value, element) {
-            if (element.previousValue == value)
-                return element.previousError;
-
-            var error = false;
-            $.ajax({
-                url: "/umbraco/api/RegistrationApi/EmailIsInUse",
-                data: { email: value },
-                async: false,
-                success: function (isInUse) {
-                    element.previousValue = value;
-                    element.previousError = error = !isInUse;
-                }
-            });
-            return error;
-        });
-        $('#registerModel_Email').rules('add', {
-            uniqueEmail: true,
-            messages: {
-                uniqueEmail: 'A member with this e-mail address already exists'
-            }
-        });
+        $('#registerModel_Email').rules('add', { uniqueEmail: true });
         $('#registerModel_FirstName').rules('add', { specialCharacters: true });
         $('#registerModel_LastName').rules('add', { specialCharacters: true });
         $('#username').rules('add', { specialCharacters: true });
