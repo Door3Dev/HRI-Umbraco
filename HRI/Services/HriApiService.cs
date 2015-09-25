@@ -159,7 +159,7 @@ namespace HRI.Services
         private JObject GetRegisteredUserByUsername(string username)
         {
             var result = Get("Registration", new Dictionary<string, string> { { "userName", username } });
-            var hasRegId = result.Value<int?>("RegId").HasValue;
+            var hasRegId = result.RegId != null;
 
             return hasRegId ? result : null;
         }
@@ -177,7 +177,7 @@ namespace HRI.Services
             // Get the API uri
             string apiUri = root.GetProperty("apiUri").Value.ToString();
 
-            // Apend the command to determine user availability
+            // Generate GET parameters
             var valuesList = values.Select(_ => string.Format("{0}={1}", HttpUtility.UrlEncode(_.Key), HttpUtility.UrlEncode(_.Value)));
 
             string apiFullUrl = string.Format("{0}/{1}?{2}", apiUri, action, String.Join("&", valuesList));
